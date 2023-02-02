@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --max-width: 1100px;
+  --max-width: 1200px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  /* FIXME: 크롬에선 잘 작동되는데 사파리에선 안 됨 */
+  /* --background-color: #f4e1ff;
+  --accent-color: #9242c0; */
 }
 
 * {
@@ -19,9 +23,18 @@
 html,
 body {
   max-width: 100vw;
+  color: inherit;
+}
+
+body {
+  position: relative;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
