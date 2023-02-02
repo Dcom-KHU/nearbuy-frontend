@@ -15,6 +15,7 @@ const FooterBox = styled.div`
   }
 `;
 
+// 하단 footer
 const Footer = () => {
   return (
     <FooterBox>

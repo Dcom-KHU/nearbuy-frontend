@@ -8,6 +8,7 @@ import { RootState } from '@/store/store';
 
 const HeaderBox = styled.div`
   // 큰 화면
+  background-color: rgb(255, 255, 255);
   position: fixed;
   top: 0;
   left: 50%;
