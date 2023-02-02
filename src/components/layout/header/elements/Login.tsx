@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import '../../../app/globals.css';
+import '../../../../app/globals.css';
 
 const LoginBox = styled.div`
   button:hover {

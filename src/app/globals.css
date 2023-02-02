@@ -9,9 +9,21 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --font-color: #121212;
-  --background-color: #f4e1ff;
-  --accent-color: #9242c0;
+  --font-color: rgb(33, 33, 36);
+  --background-color: #e3dafe;
+  --accent-color: #8361e8;
+
+  /* --seed-scale-color-purple-0: #f6f4fe;
+  --seed-scale-color-purple-100: #e3dafe;
+  --seed-scale-color-purple-200: #d5c7ff;
+  --seed-scale-color-purple-300: #cfbfff;
+  --seed-scale-color-purple-400: #b69eff;
+  --seed-scale-color-purple-500: #9675fa;
+  --seed-scale-color-purple-600: #8361e8;
+  --seed-scale-color-purple-700: #6748c7;
+  --seed-scale-color-purple-800: #4f3699;
+  --seed-scale-color-purple-900: #3f2687;
+  --seed-scale-color-purple-950: #331e70; */
 }
 
 * {
@@ -24,10 +36,6 @@ html,
 body {
   max-width: 100vw;
   color: var(--font-color);
-}
-
-body {
-  position: relative;
 }
 
 a {

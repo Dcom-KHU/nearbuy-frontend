@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import styled from 'styled-components';
-import '../../../app/globals.css';
+import '../../../../app/globals.css';
 
 const Nav = styled.nav`
   width: 70%;
