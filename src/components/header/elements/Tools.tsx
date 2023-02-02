@@ -23,16 +23,36 @@ const Tools = () => {
   return (
     <ToolsBox>
       <button>
-        <Image src='/images/search.svg' alt='search' width={24} height={21} />
+        <Image
+          src='/images/header/search.svg'
+          alt='search'
+          width={24}
+          height={21}
+        />
       </button>
       <Link href='#'>
-        <Image src='/images/heart.svg' alt='heart' width={24} height={21} />
+        <Image
+          src='/images/header/heart.svg'
+          alt='heart'
+          width={24}
+          height={21}
+        />
       </Link>
       <button>
-        <Image src='/images/message.svg' alt='message' width={24} height={21} />
+        <Image
+          src='/images/header/message.svg'
+          alt='message'
+          width={24}
+          height={21}
+        />
       </button>
       <Link href='#'>
-        <Image src='/images/user.svg' alt='user' width={24} height={21} />
+        <Image
+          src='/images/header/user.svg'
+          alt='user'
+          width={24}
+          height={21}
+        />
       </Link>
     </ToolsBox>
   );

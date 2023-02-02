@@ -4,7 +4,7 @@ import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
 import { useDispatch } from 'react-redux';
 
 const MenuBox = styled.div`
-  position: absolute;
+  position: fixed;
   top: 45px;
   right: 20px;
   display: flex;
@@ -16,6 +16,8 @@ const MenuBox = styled.div`
   button:hover {
     transform: scale(1.2);
   }
+
+  // 작은 화면
   @media screen and (min-width: 707px) {
     display: none;
   }
@@ -30,10 +32,20 @@ const MenuForSmallWindow = () => {
   return (
     <MenuBox>
       <button>
-        <Image src='/images/search.svg' alt='search' width={24} height={21} />
+        <Image
+          src='/images/header/search.svg'
+          alt='search'
+          width={24}
+          height={21}
+        />
       </button>
       <button onClick={menuToggleHandler}>
-        <Image src='/images/menu.svg' alt='menu' width={24} height={21} />
+        <Image
+          src='/images/header/menu.svg'
+          alt='menu'
+          width={24}
+          height={21}
+        />
       </button>
     </MenuBox>
   );
