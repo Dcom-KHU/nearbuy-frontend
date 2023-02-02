@@ -12,12 +12,13 @@ const ToolsBox = styled.div`
     transform: scale(1.2);
   }
 
-  @media screen and (max-width: 695px) {
+  // 작은 화면
+  @media screen and (max-width: 707px) {
     display: none;
   }
 `;
 
-// 상단 헤더 도구들 (검색 ~ 유저 + 로그인/로그아웃)
+// 상단 헤더 도구들 (검색 ~ 유저)
 const Tools = () => {
   return (
     <ToolsBox>

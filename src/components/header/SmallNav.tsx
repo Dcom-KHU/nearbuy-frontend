@@ -1,0 +1,49 @@
+import Login from './elements/Login';
+import Logo from './elements/Logo';
+import MenuForSmallWindow from './elements/MenuForSmallWindow';
+import Navigation from './elements/Navigation';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+
+const HeaderBox = styled.div`
+  // 큰 화면
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 18px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px 20px;
+  display: none;
+
+  // 중간 화면
+  @media screen and (max-width: 748px) {
+    gap: 15px;
+  }
+
+  // 작은 화면
+  @media screen and (max-width: 707px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+  }
+`;
+
+// 상단 헤더 (작은 화면)
+const SmallNav = () => {
+  const toggle = useSelector((state: RootState) => state.menuToggle.toggle);
+  return (
+    <>
+      <HeaderBox>
+        <Logo />
+        {toggle && <Navigation />}
+        {toggle && <Login />}
+      </HeaderBox>
+      <MenuForSmallWindow />
+    </>
+  );
+};
+export default SmallNav;

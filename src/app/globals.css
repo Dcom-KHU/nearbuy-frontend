@@ -10,8 +10,8 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   /* FIXME: 크롬에선 잘 작동되는데 사파리에선 안 됨 */
-  /* --background-color: #f4e1ff;
-  --accent-color: #9242c0; */
+  --background-color: #f4e1ff;
+  --accent-color: #9242c0;
 }
 
 * {

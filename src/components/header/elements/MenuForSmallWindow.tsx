@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import styled from 'styled-components';
+import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
+import { useDispatch } from 'react-redux';
 
 const MenuBox = styled.div`
   position: absolute;
-  top: 6%;
-  right: 5%;
+  top: 45px;
+  right: 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -14,19 +16,23 @@ const MenuBox = styled.div`
   button:hover {
     transform: scale(1.2);
   }
-  @media screen and (min-width: 696px) {
+  @media screen and (min-width: 707px) {
     display: none;
   }
 `;
 
 // 상단 헤더 메뉴바 (작은 창일 때)
 const MenuForSmallWindow = () => {
+  const dispatch = useDispatch();
+  const menuToggleHandler = () => {
+    dispatch(menuToggleActions.menuToggle());
+  };
   return (
     <MenuBox>
       <button>
         <Image src='/images/search.svg' alt='search' width={24} height={21} />
       </button>
-      <button>
+      <button onClick={menuToggleHandler}>
         <Image src='/images/menu.svg' alt='menu' width={24} height={21} />
       </button>
     </MenuBox>

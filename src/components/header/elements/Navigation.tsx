@@ -1,11 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import styled from 'styled-components';
-import Login from './Login';
+import '../../../app/globals.css';
 
 const Nav = styled.nav`
   width: 70%;
 
-  @media screen and (max-width: 695px) {
+  // 작은 화면
+  @media screen and (max-width: 707px) {
     width: 100%;
     padding: 0 20px;
   }
@@ -17,12 +20,13 @@ const NavList = styled.ul`
   gap: 30px;
 
   a:hover {
-    color: #9242c0;
+    color: var(--accent-color);
     font-weight: bold;
   }
 
-  @media screen and (max-width: 695px) {
-    background-color: #f4e1ff;
+  // 작은 화면
+  @media screen and (max-width: 707px) {
+    background-color: var(--background-color);
     justify-content: space-evenly;
   }
 `;

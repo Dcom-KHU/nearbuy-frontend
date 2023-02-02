@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import '../../../app/globals.css';
 
 const LoginBox = styled.div`
   button:hover {
-    color: #9242c0;
+    color: var(--accent-color);
     transform: scale(1.1);
   }
-  @media screen and (max-width: 695px) {
+
+  // 작은 화면
+  @media screen and (max-width: 707px) {
     width: 100%;
     display: flex;
     justify-content: center;
