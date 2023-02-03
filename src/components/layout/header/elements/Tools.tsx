@@ -13,9 +13,6 @@ const ToolsBox = styled.div`
   img:hover {
     transform: scale(1.2);
   }
-  button {
-    position: relative;
-  }
 
   // 작은 화면
   @media screen and (max-width: 707px) {

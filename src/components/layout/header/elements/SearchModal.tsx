@@ -55,7 +55,7 @@ const OverlayForm = styled.form`
 const BackDropPortal = () => {
   return <BackDropBox />;
 };
-const OverlayPortal: React.FC<{ onClick: any }> = (props) => {
+const OverlayPortal: React.FC<{ onClick: () => void }> = (props) => {
   return (
     <OverlayForm>
       <input type='search' placeholder='검색어를 입력해주세요.' />
@@ -74,11 +74,11 @@ const SearchModal = () => {
     <>
       {ReactDOM.createPortal(
         <BackDropPortal />,
-        document.getElementById('backdrop-root')
+        document.getElementById('backdrop-root') as HTMLElement
       )}
       {ReactDOM.createPortal(
         <OverlayPortal onClick={searchToggleHandler} />,
-        document.getElementById('overlay-root')
+        document.getElementById('overlay-root') as HTMLElement
       )}
     </>
   );
