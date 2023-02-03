@@ -37,22 +37,22 @@ const Navigation = () => {
     <Nav>
       <NavList>
         <li>
-          <Link href='#'>전체</Link>
+          <Link href='/board'>전체</Link>
         </li>
         <li>
-          <Link href='#'>판매</Link>
+          <Link href='/sale'>판매</Link>
         </li>
         <li>
-          <Link href='#'>교환</Link>
+          <Link href='/exchange'>교환</Link>
         </li>
         <li>
-          <Link href='#'>나눔</Link>
+          <Link href='/free'>나눔</Link>
         </li>
         <li>
-          <Link href='#'>경매</Link>
+          <Link href='/auction'>경매</Link>
         </li>
         <li>
-          <Link href='#'>공구</Link>
+          <Link href='/group'>공구</Link>
         </li>
       </NavList>
     </Nav>

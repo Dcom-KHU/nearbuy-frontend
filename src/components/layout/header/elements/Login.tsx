@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 import '../../../../app/globals.css';
 
 const LoginBox = styled.div`
-  button:hover {
+  a:hover {
     color: var(--accent-color);
     transform: scale(1.1);
   }
@@ -12,7 +13,7 @@ const LoginBox = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    button:hover {
+    a:hover {
       font-weight: bold;
     }
   }
@@ -22,7 +23,7 @@ const LoginBox = styled.div`
 const Login = () => {
   return (
     <LoginBox>
-      <button>Login</button>
+      <Link href='/login'>Login</Link>
     </LoginBox>
   );
 };
