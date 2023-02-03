@@ -1,5 +1,6 @@
 'use client';
 
+import ReactDOM from 'react-dom';
 import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -50,6 +51,20 @@ const OverlayForm = styled.form`
   /* } */
 `;
 
+// 포탈
+const BackDropPortal = () => {
+  return <BackDropBox />;
+};
+const OverlayPortal: React.FC<{ onClick: any }> = (props) => {
+  return (
+    <OverlayForm>
+      <input type='search' placeholder='검색어를 입력해주세요.' />
+      <button onClick={props.onClick}>취소</button>
+    </OverlayForm>
+  );
+};
+
+// 검색창
 const SearchModal = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
@@ -57,11 +72,14 @@ const SearchModal = () => {
   };
   return (
     <>
-      <BackDropBox />
-      <OverlayForm>
-        <input type='search' placeholder='검색어를 입력해주세요.' />
-        <button onClick={searchToggleHandler}>취소</button>
-      </OverlayForm>
+      {ReactDOM.createPortal(
+        <BackDropPortal />,
+        document.getElementById('backdrop-root')
+      )}
+      {ReactDOM.createPortal(
+        <OverlayPortal onClick={searchToggleHandler} />,
+        document.getElementById('overlay-root')
+      )}
     </>
   );
 };

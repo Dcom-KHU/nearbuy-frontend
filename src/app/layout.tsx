@@ -25,6 +25,8 @@ export default function RootLayout({
     <html lang='ko'>
       <head />
       <body>
+        <div id='backdrop-root'></div>
+        <div id='overlay-root'></div>
         <Providers>
           <Header />
           <Box>{children}</Box>
