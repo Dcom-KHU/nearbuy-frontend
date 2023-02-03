@@ -15,7 +15,7 @@ const Logo = () => {
     dispatch(menuToggleActions.menuToggle());
   };
   return (
-    <LogoLink href='#' onClick={menuToggleHandler}>
+    <LogoLink href='/' onClick={menuToggleHandler}>
       NEARBUY
     </LogoLink>
   );

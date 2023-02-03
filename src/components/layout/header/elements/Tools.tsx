@@ -39,7 +39,7 @@ const Tools = () => {
           height={21}
         />
       </button>
-      <Link href='#'>
+      <Link href='/like'>
         <Image
           src='/images/header/heart.svg'
           alt='heart'
@@ -47,7 +47,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='#'>
+      <Link href='/chat'>
         <Image
           src='/images/header/message.svg'
           alt='message'
@@ -55,7 +55,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='#'>
+      <Link href='/my'>
         <Image
           src='/images/header/user.svg'
           alt='user'
