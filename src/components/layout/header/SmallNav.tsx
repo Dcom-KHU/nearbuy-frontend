@@ -57,10 +57,3 @@ const SmallNav = () => {
   );
 };
 export default SmallNav;
-
-function AA<T>(array: T[], value: T) {
-  return array;
-}
-
-const aa = [1, 2, 3];
-const ss = AA(aa, 1);
