@@ -5,6 +5,7 @@ import Navigation from './elements/Navigation';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import SearchModal from './elements/SearchModal';
 
 const HeaderBox = styled.div`
   // 큰 화면
@@ -35,15 +36,23 @@ const HeaderBox = styled.div`
 
 // 상단 헤더 (작은 화면)
 const SmallNav = () => {
-  const toggle = useSelector((state: RootState) => state.menuToggle.toggle);
+  const searchToggle = useSelector(
+    (state: RootState) => state.searchToggle.toggle
+  );
+  const menuToggle = useSelector((state: RootState) => state.menuToggle.toggle);
   return (
     <>
-      <HeaderBox>
-        <Logo />
-        {toggle && <Navigation />}
-        {toggle && <Login />}
-      </HeaderBox>
-      <MenuForSmallWindow />
+      {searchToggle && <SearchModal />}
+      {!searchToggle && (
+        <>
+          <HeaderBox>
+            <Logo />
+            {menuToggle && <Navigation />}
+            {menuToggle && <Login />}
+          </HeaderBox>
+          <MenuForSmallWindow />
+        </>
+      )}
     </>
   );
 };

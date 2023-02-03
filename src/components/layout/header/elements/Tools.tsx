@@ -1,5 +1,7 @@
+import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 const ToolsBox = styled.div`
@@ -11,6 +13,9 @@ const ToolsBox = styled.div`
   img:hover {
     transform: scale(1.2);
   }
+  button {
+    position: relative;
+  }
 
   // 작은 화면
   @media screen and (max-width: 707px) {
@@ -20,9 +25,13 @@ const ToolsBox = styled.div`
 
 // 상단 헤더 도구들 (검색 ~ 유저)
 const Tools = () => {
+  const dispatch = useDispatch();
+  const searchToggleHandler = () => {
+    dispatch(searchToggleActions.searchToggle());
+  };
   return (
     <ToolsBox>
-      <button>
+      <button onClick={searchToggleHandler}>
         <Image
           src='/images/header/search.svg'
           alt='search'
@@ -30,7 +39,7 @@ const Tools = () => {
           height={21}
         />
       </button>
-      <Link href='/like'>
+      <Link href='#'>
         <Image
           src='/images/header/heart.svg'
           alt='heart'
@@ -38,7 +47,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/chat'>
+      <Link href='#'>
         <Image
           src='/images/header/message.svg'
           alt='message'
@@ -46,7 +55,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/my'>
+      <Link href='#'>
         <Image
           src='/images/header/user.svg'
           alt='user'

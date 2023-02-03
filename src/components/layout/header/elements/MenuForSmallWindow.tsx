@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
 import { useDispatch } from 'react-redux';
+import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
 
 const MenuBox = styled.div`
   position: fixed;
@@ -29,9 +30,12 @@ const MenuForSmallWindow = () => {
   const menuToggleHandler = () => {
     dispatch(menuToggleActions.menuToggle());
   };
+  const searchToggleHandler = () => {
+    dispatch(searchToggleActions.searchToggle());
+  };
   return (
     <MenuBox>
-      <button>
+      <button onClick={searchToggleHandler}>
         <Image
           src='/images/header/search.svg'
           alt='search'
