@@ -20,6 +20,7 @@ const HeaderBox = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 30px;
+  z-index: 10;
 
   // 중간 화면
   @media screen and (max-width: 748px) {

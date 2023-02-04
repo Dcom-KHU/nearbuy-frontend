@@ -15,6 +15,7 @@ const MenuBox = styled.div`
   align-items: center;
   gap: 10px;
   width: 10%;
+  z-index: 11;
 
   button:hover {
     transform: scale(1.2);
