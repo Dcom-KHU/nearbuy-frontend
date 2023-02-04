@@ -1,6 +1,7 @@
 'use client';
 
 import './globals.css';
+import StyledComponentsRegistry from './lib/registry';
 import Header from '@/components/layout/header/Header';
 import { Providers } from './providers';
 import Footer from '@/components/layout/footer/Footer';
@@ -28,9 +29,11 @@ export default function RootLayout({
         <div id='backdrop-root'></div>
         <div id='overlay-root'></div>
         <Providers>
-          <Header />
-          <Box>{children}</Box>
-          <Footer />
+          <StyledComponentsRegistry>
+            <Header />
+            <Box>{children}</Box>
+            <Footer />
+          </StyledComponentsRegistry>
         </Providers>
       </body>
     </html>
