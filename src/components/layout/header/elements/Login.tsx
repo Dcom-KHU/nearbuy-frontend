@@ -1,3 +1,5 @@
+'use client';
+
 import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';

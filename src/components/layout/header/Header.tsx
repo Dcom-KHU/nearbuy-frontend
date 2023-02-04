@@ -1,5 +1,3 @@
-'use client';
-
 import LargeNav from './LargeNav';
 import SmallNav from './SmallNav';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';

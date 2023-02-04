@@ -1,9 +1,4 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
-import SearchModal from '../layout/header/elements/SearchModal';
-
 export default function MainPage() {
-  const toggle = useSelector((state: RootState) => state.menuToggle.toggle);
   return (
     <>
       <h1>Hello World1</h1>

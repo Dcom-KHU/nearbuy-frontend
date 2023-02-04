@@ -1,3 +1,5 @@
+'use client';
+
 import Login from './elements/Login';
 import Logo from './elements/Logo';
 import MenuForSmallWindow from './elements/MenuForSmallWindow';
