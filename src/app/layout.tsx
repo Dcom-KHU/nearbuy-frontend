@@ -5,6 +5,7 @@ import Header from '@/components/layout/header/Header';
 import { Providers } from './providers';
 import Footer from '@/components/layout/footer/Footer';
 import styled from 'styled-components';
+import StyledComponentsRegistry from './lib/registry';
 
 // main 부분 내용 잘림 방지, 위에 header 만큼 margin-top
 const Box = styled.div`
@@ -28,9 +29,11 @@ export default function RootLayout({
         <div id='backdrop-root'></div>
         <div id='overlay-root'></div>
         <Providers>
-          <Header />
-          <Box>{children}</Box>
-          <Footer />
+          <StyledComponentsRegistry>
+            <Header />
+            <Box>{children}</Box>
+            <Footer />
+          </StyledComponentsRegistry>
         </Providers>
       </body>
     </html>
