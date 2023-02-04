@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 import Menu from './menu/Menu';
 import User from './user/User';
-import UserInfo from './user/UserInfo';
 
 const MyPageBox = styled.div`
   display: flex;
@@ -13,8 +12,16 @@ const MyPageBox = styled.div`
   max-width: 1000px;
   padding: 40px 5%;
   gap: 7%;
+
+  // 작은 화면
+  @media screen and (max-width: 707px) {
+    padding: 20px 5%;
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
 
+// mypage
 const MyPage = () => {
   return (
     <MyPageBox>

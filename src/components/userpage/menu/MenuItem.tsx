@@ -24,8 +24,12 @@ const GoToSeeButton = styled.button`
   right: 5%;
   font-size: 12px;
   color: rgb(182, 158, 255);
+  &:hover {
+    font-weight: 700;
+  }
 `;
 
+// 메뉴 틀 (판매상품 / 같이사요 / 구매상품 / 거래후기)
 const MenuItem: React.FC<{ src: string; title: string; count: number }> = (
   props
 ) => {

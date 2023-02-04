@@ -15,6 +15,7 @@ const MenuBox = styled.div`
   column-gap: 20px;
 `;
 
+// 마이 페이지 오른쪽 부분 (판내상품 ~ 거래후기)
 const Menu = () => {
   return (
     <MenuBox>

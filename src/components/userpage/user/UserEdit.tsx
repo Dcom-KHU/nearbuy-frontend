@@ -18,12 +18,13 @@ const UserEdit = () => {
   return (
     <UserEditBox>
       <Link href='#'>
-        <div className='hover:scale-150'>
+        {/* tailwind hover 작동 안 함 */}
+        <div className='hover:scale-110'>
           <Image
             src='/images/setting.svg'
             alt='setting'
             width={20}
-            height={21}
+            height={20}
           />
         </div>
       </Link>

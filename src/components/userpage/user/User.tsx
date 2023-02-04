@@ -6,7 +6,6 @@ import UserInfo from './UserInfo';
 import UserTemp from './UserTemp';
 
 const UserBox = styled.div`
-  /* width: 40%; */
   width: 50%;
   min-width: 183px;
   max-width: 243px;
@@ -16,6 +15,7 @@ const UserBox = styled.div`
   gap: 10px;
 `;
 
+//
 const User = () => {
   return (
     <UserBox>
