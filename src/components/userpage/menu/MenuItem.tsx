@@ -1,13 +1,18 @@
 'use client';
 
+import Image from 'next/image';
 import styled from 'styled-components';
 
 const MenuItemBox = styled.div`
+  width: 100%;
   max-width: 225px;
-  padding: 10px;
+  padding: 10px 10px 20px 10px;
   display: flex;
   flex-direction: column;
   position: relative;
+  gap: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 
   div:nth-child(3) {
     font-size: 12px;
@@ -15,22 +20,27 @@ const MenuItemBox = styled.div`
 `;
 const GoToSeeButton = styled.button`
   position: absolute;
-  bottom: 0;
+  bottom: 3%;
   right: 5%;
   font-size: 12px;
-  color: #b69eff;
+  color: rgb(182, 158, 255);
 `;
 
-const MenuItem = () => {
+const MenuItem: React.FC<{ src: string; title: string; count: number }> = (
+  props
+) => {
   return (
-    <>
-      <MenuItemBox>
-        <div>사진</div>
-        <div>판매상품</div>
-        <div>32개</div>
-        <GoToSeeButton>보러가기&gt;</GoToSeeButton>
-      </MenuItemBox>
-    </>
+    <MenuItemBox>
+      <Image
+        src={`/images/userpage/${props.src}.svg`}
+        alt={props.src}
+        width={24}
+        height={21}
+      />
+      <div>{props.title}</div>
+      <div>{props.count}개</div>
+      <GoToSeeButton>보러가기&gt;</GoToSeeButton>
+    </MenuItemBox>
   );
 };
 export default MenuItem;

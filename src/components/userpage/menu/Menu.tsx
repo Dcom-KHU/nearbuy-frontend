@@ -5,8 +5,10 @@ import MenuItem from './MenuItem';
 
 const MenuBox = styled.div`
   width: 100%;
+  height: 100%;
   padding: 0 30px;
   display: grid;
+  justify-items: end;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   row-gap: 20px;
@@ -16,10 +18,10 @@ const MenuBox = styled.div`
 const Menu = () => {
   return (
     <MenuBox>
-      <MenuItem />
-      <MenuItem />
-      <MenuItem />
-      <MenuItem />
+      <MenuItem src='menu' title='판매상품' count={32} />
+      <MenuItem src='share' title='같이사요' count={32} />
+      <MenuItem src='shopping' title='구매상품' count={32} />
+      <MenuItem src='comment' title='거래후기' count={32} />
     </MenuBox>
   );
 };
