@@ -1,5 +1,7 @@
 'use client';
 
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import List from '../list/List';
 import Menu from './menu/Menu';
@@ -24,13 +26,16 @@ const MyPageBox = styled.div`
 
 // mypage
 const MyPage = () => {
+  const toggle = useSelector(
+    (state: RootState) => state.myPageMenuToggle.toggle
+  );
   return (
     <>
       <MyPageBox>
         <User />
         <Menu />
       </MyPageBox>
-      <List />
+      {toggle && <List />}
     </>
   );
 };
