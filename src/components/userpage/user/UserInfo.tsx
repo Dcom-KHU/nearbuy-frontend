@@ -26,6 +26,7 @@ const ImageDeco = styled(Image)`
   overflow: hidden;
 `;
 
+// 유저 프로필
 const UserInfo = () => {
   return (
     <UserInfoBox>

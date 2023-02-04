@@ -15,7 +15,7 @@ const UserBox = styled.div`
   gap: 10px;
 `;
 
-//
+// 마이페이지 왼쪽 부분
 const User = () => {
   return (
     <UserBox>

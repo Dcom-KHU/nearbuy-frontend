@@ -1,6 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
+import List from '../list/List';
 import Menu from './menu/Menu';
 import User from './user/User';
 
@@ -24,10 +25,13 @@ const MyPageBox = styled.div`
 // mypage
 const MyPage = () => {
   return (
-    <MyPageBox>
-      <User />
-      <Menu />
-    </MyPageBox>
+    <>
+      <MyPageBox>
+        <User />
+        <Menu />
+      </MyPageBox>
+      <List />
+    </>
   );
 };
 export default MyPage;

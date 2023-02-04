@@ -37,6 +37,8 @@ const OuterBox = styled.div`
     font-size: 12px;
   }
 `;
+
+// 매너 온도
 const InnerBox = styled.div`
   width: 36%;
   height: 5px;

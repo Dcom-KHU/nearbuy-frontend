@@ -23,7 +23,7 @@ const GoToSeeButton = styled.button`
   bottom: 3%;
   right: 5%;
   font-size: 12px;
-  color: rgb(182, 158, 255);
+  color: #b69eff;
   &:hover {
     font-weight: 700;
   }
