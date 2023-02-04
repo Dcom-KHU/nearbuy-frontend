@@ -68,7 +68,7 @@ const UserTemp = () => {
           width={18}
           height={18}
         />
-        <p>36도</p>
+        <p>36&deg;</p>
       </OuterBox>
     </div>
   );
