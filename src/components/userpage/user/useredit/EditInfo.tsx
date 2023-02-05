@@ -29,7 +29,7 @@ const UserInfoBox = styled.div`
   width: 50%;
   gap: 10px;
   input {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     padding-left: 5px;
   }
