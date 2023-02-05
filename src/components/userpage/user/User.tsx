@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import UserEdit from './UserEdit';
-import UserInfo from './UserInfo';
+import UserInfo from './userinfo/UserInfo';
 import UserTemp from './UserTemp';
 
 const UserBox = styled.div`

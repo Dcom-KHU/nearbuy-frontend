@@ -18,7 +18,7 @@ const UserEditBox = styled.div`
 const UserEdit = () => {
   return (
     <UserEditBox>
-      <Link href='#'>
+      <Link href='/my/edit'>
         {/* tailwind hover 작동 안 함 */}
         <div className='hover:scale-110'>
           <Image
@@ -29,7 +29,7 @@ const UserEdit = () => {
           />
         </div>
       </Link>
-      <div>수정하기</div>
+      <Link href='/my/edit'>수정하기</Link>
     </UserEditBox>
   );
 };

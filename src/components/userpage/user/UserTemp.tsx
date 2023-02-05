@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const OuterBox = styled.div`
   margin: 20px 0;
   width: 100%;
+  max-width: 150px;
   height: 5px;
   border: 1px solid #b69eff;
   border-radius: 8px;
