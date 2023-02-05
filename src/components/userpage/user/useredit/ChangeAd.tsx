@@ -17,10 +17,15 @@ const AdForm = styled.form`
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: var(--border-radius);
   }
-  button {
+  img {
+    position: absolute;
+    top: 55%;
+    right: 3%;
+  }
+  button:last-child {
     position: absolute;
     bottom: -230%;
-    right: -5%;
+    right: -10%;
   }
 `;
 
@@ -29,7 +34,9 @@ const ChangeAd = () => {
   return (
     <div className='flex flex-col justify-center items-center gap-8 mb-8'>
       <AdForm>
-        <label htmlFor='ad'>주소</label>
+        <label htmlFor='ad' className='ml-2.5'>
+          주소
+        </label>
         <input id='ad' type='search' />
         <button>
           <Image
