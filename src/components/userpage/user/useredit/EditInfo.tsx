@@ -47,6 +47,7 @@ const NameForm = styled.form`
   }
 `;
 
+// 마이페이지 수정하기 - 프로필 편집
 const EditInfo = () => {
   return (
     <Main>

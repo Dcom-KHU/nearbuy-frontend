@@ -7,10 +7,12 @@ import '../../../../app/globals.css';
 const Nav = styled.nav`
   width: 200px;
   min-width: 150px;
+  height: 274px;
   border: 1px solid #b69eff;
   border-radius: 8px;
   padding: 50px 10px;
   @media screen and (max-width: 707px) {
+    height: auto;
     width: 500px;
     padding: 10px;
   }
