@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/ui/Button';
 import styled from 'styled-components';
 import UserPic from '../userinfo/UserPic';
 import UserTemp from '../UserTemp';
@@ -33,12 +34,18 @@ const UserInfoBox = styled.div`
     padding-left: 5px;
   }
 `;
-const NameBox = styled.div`
+const NameForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  position: relative;
+
+  button {
+    position: absolute;
+    bottom: -200%;
+    right: -20%;
+  }
 `;
-const Paragraph = styled.p``;
 
 const EditInfo = () => {
   return (
@@ -48,10 +55,11 @@ const EditInfo = () => {
         <button>프로필 사진 바꾸기</button>
       </UserPicBox>
       <UserInfoBox>
-        <NameBox>
+        <NameForm>
           <label htmlFor='name'>닉네임</label>
           <input id='name' type='text' placeholder='키티키티키틱' />
-        </NameBox>
+          <Button>수정 완료</Button>
+        </NameForm>
         <UserTemp />
       </UserInfoBox>
     </Main>
