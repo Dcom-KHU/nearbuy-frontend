@@ -19,8 +19,8 @@ const AdForm = styled.form`
   }
   button {
     position: absolute;
-    bottom: -300%;
-    right: -10%;
+    bottom: -230%;
+    right: -5%;
   }
 `;
 
