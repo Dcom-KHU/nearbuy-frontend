@@ -3,6 +3,7 @@
 
 "use client";
 
+import Image from "next/image";
 import styled from "styled-components";
 // 나중에 여기서 레이아웃 설정 한거 ../components에 sell page 관련 폴더 만들어서 거기로 옮길 예정
 
@@ -62,6 +63,7 @@ const CardsContainerBlock = styled.div`
       background: linear-gradient(45deg, pink, skyblue);
       max-width: 280px; // .a-card의 maxwidth 이하로 유지
       height: 200px;
+      position: relative; // 이게 있어야 사진이 layout="fill"로 돼있었을때 요 안으로 잘 들어감
     }
 
     .card-info {
@@ -84,7 +86,13 @@ export default function Board() {
         <CardsContainerBlock>
           <div className="container">
             <div className="a-card">
-              <div className="card-image-holder">Image</div>
+              <div className="card-image-holder">
+                <Image
+                  src="/images/for-demo/kitty.jpg"
+                  alt="kitty"
+                  layout="fill"
+                />
+              </div>
               <div className="card-info">
                 <div className="item-name">상품 이름</div>
                 <div className="item-price">상품 가격</div>
@@ -92,7 +100,13 @@ export default function Board() {
               </div>
             </div>
             <div className="a-card">
-              <div className="card-image-holder">Image</div>
+              <div className="card-image-holder">
+                <Image
+                  src="/images/for-demo/gloves.jpg"
+                  alt="kitty"
+                  layout="fill"
+                />
+              </div>
               <div className="card-info">
                 <div className="item-name">상품 이름</div>
                 <div className="item-price">상품 가격</div>
