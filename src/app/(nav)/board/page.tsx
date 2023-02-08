@@ -11,19 +11,19 @@ import gloves from "../public/images/for-demo/gloves.jpg";
 
 const CardsContainerBlock = styled.div`
   // 아이템들 배치해줌
+  //background: gray;
+
   display: flex;
-  justify-content: center;
   width: 100%;
-  background: gray;
   margin: 100px;
+  justify-content: center;
 
   .container {
     // 나중에 없앨수도 있는 class
-    justify-self: center;
-    background-color: pink;
+    //background-color: pink;
     // grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     //grid-column-gap: 50px;
-    inline-size: 70vw;
+    inline-size: 85vw;
     max-width: 1500px;
     //margin-inline: auto;
     text-align: center; // 카드들을 중앙 정렬 해줌
@@ -31,25 +31,34 @@ const CardsContainerBlock = styled.div`
 
   .a-card {
     // 그냥 card는 예약어더라구요,,?
-    background-color: plum;
+    //background-color: lightgreen;
+
     display: inline-block;
     max-width: 300px;
     width: 300px;
-    padding: 10px;
-    margin: 8px;
+    padding: 14px;
+    margin: 10px;
     position: relative;
     text-align: left;
+
+    &:hover {
+      transition: 0.125s ease-in;
+
+      //transform: scale(1.01);
+      //transform: scale(0.99);
+      box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.08); // 이거 0.1 대신 0.04정도로도 바꿔보기
+    }
   }
 
   .card-image-holder {
-    background-color: lightgreen;
+    background: linear-gradient(45deg, pink, skyblue);
     max-width: 300px; // .a-card의 maxwidth 이하로 유지
     height: 200px;
   }
 
   .card-info {
-    background-color: lemonchiffon;
-    padding: 6px 15px 10px; // 상 좌 하
+    //background-color: lemonchiffon;
+    padding: 10px 15px 10px; // 상 좌 하
   }
 `;
 
@@ -61,51 +70,123 @@ export default function Board() {
         <div className="container">
           <div className="a-card">
             <div className="card-image-holder">Image1</div>
-            <div className="card-info">Info</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image2</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
           <div className="a-card">
-            <div className="card-image-holder">Image</div>
-            <div className="card-info">Info</div>
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
+          </div>
+          <div className="a-card">
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
+          </div>
+          <div className="a-card">
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
+          </div>
+          <div className="a-card">
+            <div className="card-image-holder">Image1</div>
+            <div className="card-info">
+              <div className="item-name">상품 이름</div>
+              <div className="item-price">상품 가격</div>
+              <div className="item-place">거래 장소?</div>
+            </div>
           </div>
         </div>
       </CardsContainerBlock>
