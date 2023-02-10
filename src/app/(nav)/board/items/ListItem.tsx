@@ -34,7 +34,7 @@ const ListItem = () => {
     <>
       <ListItemBox>
         <Image
-          src="/images/for-demo/kitty.jpg"
+          src="/images/for-demo/gloves.jpg"
           alt="kitty"
           width={200}
           height={200}

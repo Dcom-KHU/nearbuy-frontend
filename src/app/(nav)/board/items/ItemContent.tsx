@@ -29,8 +29,8 @@ const ItemContentBox = styled.div`
 const ItemContent = () => {
   return (
     <ItemContentBox>
-      <p>귀여운 고양이</p>
-      <p>1,000,000,000</p>
+      <p>따수운 겨울 장갑</p>
+      <p>1,000,000</p>
       <p>경희대학교</p>
     </ItemContentBox>
   );
