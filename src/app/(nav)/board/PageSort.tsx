@@ -3,8 +3,9 @@
 import styled from "styled-components";
 
 const PageSortBlock = styled.select`
-  float: right;
-  margin-right: 150px;
+  //margin-right: 150px;
+  align-self: end;
+  margin-right: 10vw;
   width: 180px;
   border: solid 2px gray;
 `;
