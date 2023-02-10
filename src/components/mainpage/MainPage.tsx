@@ -1,24 +1,21 @@
+"use client";
+
 import styled from "styled-components";
+import Image from "next/image";
 
 const MainPageBlock = styled.div`
+  // background: lightblue;
+
   display: flex;
   width: 90%;
   padding: 40px;
   justify-content: center;
   align-items: center;
-  background: lightblue;
-
-  #temp-pic {
-    background-color: pink;
-    width: 300px;
-    height: 450px;
-    margin: 20px;
-  }
 
   #temp-par {
-    padding: 50px;
-    background-color: gold;
-    width: 500px;
+    //background-color: gold;
+    padding: 0 60px;
+    width: 450px;
     height: auto;
   }
 `;
@@ -27,7 +24,12 @@ export default function MainPage() {
   return (
     <>
       <MainPageBlock>
-        <div id="temp-pic">Temp Picture</div>
+        <Image
+          src="/images/for-demo/icecream.jpg"
+          alt="kitty"
+          width={380}
+          height={500}
+        />
         <div id="temp-par">
           If you're looking for random paragraphs, you've come to the right
           place. When a random word or a random sentence isn't quite enough, the
