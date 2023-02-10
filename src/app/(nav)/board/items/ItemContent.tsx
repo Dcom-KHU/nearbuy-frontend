@@ -12,19 +12,16 @@ const ItemContentBox = styled.div`
 
   p:first-child {
     // 제목
-    border: solid 2px red;
   }
 
   p:nth-child(2) {
     // 가격
     font-weight: 700;
-    border: solid 2px blue;
   }
   p:last-child {
     // 위치
     font-size: 12px;
     color: rgba(33, 33, 36, 0.5);
-    border: solid 2px green;
   }
 `;
 

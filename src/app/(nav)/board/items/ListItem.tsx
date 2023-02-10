@@ -9,8 +9,16 @@ const ListItemBox = styled.div`
   flex-direction: column;
   gap: 10px;
   position: relative;
-  border: solid 2px black;
   padding: 15px;
+
+  &:hover {
+    transition: 0.125s ease-in;
+
+    //transform: scale(0.99);
+    transform: scale(1.01); // 없어도됨
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+  }
 `;
 const ImageDeco = styled(Image)`
   // 하트~

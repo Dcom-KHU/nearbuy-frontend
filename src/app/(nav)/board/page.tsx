@@ -8,9 +8,12 @@ import CardsContainer from "./CardsContainer";
 import PageSort from "./PageSort";
 
 const BoardPageBlock = styled.div`
-  //background: lavender;
+  // background: lavender;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default function Board() {
