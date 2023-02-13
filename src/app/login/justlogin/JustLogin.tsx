@@ -1,6 +1,8 @@
 "use client";
 
+import LoginForm from "./LoginForm";
 import styled from "styled-components";
+// 일단 단순한 로그인 틀만 구현...
 
 const JustLoginBlock = styled.div`
   // background: lightgreen;
@@ -16,10 +18,7 @@ const JustLoginBlock = styled.div`
 export default function JustLogin() {
   return (
     <JustLoginBlock>
-      <div>아이디(이메일)</div>
-      <div>비밀번호</div>
-      <div>로그인 버튼</div>
-      <div>회원가입 페이지 연결?</div>
+      <LoginForm />
     </JustLoginBlock>
   );
 }
