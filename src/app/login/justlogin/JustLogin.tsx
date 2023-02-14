@@ -6,11 +6,12 @@ import LoginFormContainer from "./LoginFormContainer";
 
 const JustLoginBlock = styled.div`
   //background: lightgreen;
-  height: 100%;
+  height: 300px;
   width: 470px;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   padding: 20px 50px;
 `;

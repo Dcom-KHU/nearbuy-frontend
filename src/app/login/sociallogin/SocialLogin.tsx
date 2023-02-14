@@ -1,32 +1,34 @@
 "use client";
 
+import GoogleLogin from "./GoogleLogin";
+import NaverLogin from "./NaverLogin";
+import KakaoLogin from "./KakaoLogin";
 import styled from "styled-components";
 
 const SocialLoginBlock = styled.div`
-  // background: skyblue;
-  width: 100%;
-  height: 100%;
+  //background: skyblue;
+  height: 300px;
+  width: 470px;
 
   display: flex;
   flex-direction: column;
-
-  padding: 20px;
-  border-left: solid 1.5px lightgray;
+  padding: 20px 50px;
 
   button {
-    border: solid 1px gainsboro;
-    padding: 10px;
-    margin-bottom: 20px;
+    border: solid 1px #929292;
+    padding: 12px;
+    margin-bottom: 24px;
+    width: 340px;
+    border-radius: 5px;
   }
 `;
 
 export default function SocialLogin() {
   return (
     <SocialLoginBlock>
-      <button>정확히 뭐였는지 나중에 확인</button>
-      <button>Google...?</button>
-      <button>Naver...?</button>
-      <button>Kakao...?</button>
+      <GoogleLogin />
+      <NaverLogin />
+      <KakaoLogin />
     </SocialLoginBlock>
   );
 }

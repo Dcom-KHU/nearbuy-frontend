@@ -7,9 +7,10 @@ const LoginFormContainerBlock = styled.div`
 
   .login-input {
     padding: 10px;
+    margin-left: 2px;
     margin-bottom: 20px;
     border: 1px solid gray;
-    width: 369px;
+    width: 365px;
   }
 
   .login-button {
