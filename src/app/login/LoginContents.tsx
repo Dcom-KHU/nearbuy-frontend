@@ -12,12 +12,18 @@ const LoginContentsBlock = styled.div`
 
   display: flex;
   justify-content: center;
+
+  .vertical-line {
+    background-color: lightgray;
+    width: 1px;
+  }
 `;
 
 export default function LoginContents() {
   return (
     <LoginContentsBlock>
       <JustLogin />
+      <div className="vertical-line"></div>
       <SocialLogin />
     </LoginContentsBlock>
   );

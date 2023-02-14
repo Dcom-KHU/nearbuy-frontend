@@ -17,24 +17,6 @@ interface LoginFormValue {
   password: string;
 }
 
-const LoginFormBlock = styled.div`
-  padding: 20px;
-
-  .login-input {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid gray;
-    width: 100%;
-  }
-
-  .login-button {
-    padding: 10px;
-    margin: 20px 0;
-    border: 1px solid gray;
-    width: 100%;
-  }
-`;
-
 /* 참고로 <Formik> 컴포넌트에서 initialValues와 onSubmit은 필수값.
    <Form> 아래에 <Field>를 두고 props로 name을 initialValues의 키값으로 세팅하면 
    setState과 유효성 검사가 자동 설정됨. 
@@ -44,9 +26,8 @@ export default function LoginForm() {
   const handleSubmit = (values: LoginFormValue) => {
     console.log(values);
   };
-
   return (
-    <LoginFormBlock>
+    <>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={ValidationSchema}
@@ -68,7 +49,7 @@ export default function LoginForm() {
           <ErrorMessage
             name="password"
             component="div"
-            className="text-xs text-red-500 py-1"
+            className="error-m text-xs text-red-500 py-1"
           />
           <Field
             name="password"
@@ -82,7 +63,6 @@ export default function LoginForm() {
           </button>
         </Form>
       </Formik>
-      <a href="">회원가입</a>
-    </LoginFormBlock>
+    </>
   );
 }
