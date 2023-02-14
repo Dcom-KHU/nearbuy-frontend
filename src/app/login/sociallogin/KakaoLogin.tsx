@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 const KakaoLoginBlock = styled.button`
   background: #fee500;
+  &:active {
+    background-color: #efd911;
+  }
 `;
 
 export default function KakaoLogin() {

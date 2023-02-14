@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 const NaverLoginBlock = styled.button`
   background: #03c75a;
+  &:active {
+    background-color: #11b65b;
+  }
 `;
 
 export default function NaverLogin() {

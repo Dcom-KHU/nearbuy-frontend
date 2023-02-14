@@ -21,6 +21,10 @@ const LoginFormContainerBlock = styled.div`
     border-radius: 5px;
     color: white;
     background-color: #1e1e1e;
+
+    &:active {
+      background-color: #373737;
+    }
   }
 `;
 

@@ -7,8 +7,12 @@ const GoogleLoginBlock = styled.button`
 
   display: flex;
 
-  .tee {
+  .button-txt {
     padding-left: 82px;
+  }
+
+  &:active {
+    background-color: #f6f6f6;
   }
 `;
 
@@ -35,7 +39,7 @@ export default function GoogleLogin() {
           ></path>
         </g>
       </svg>
-      <div className="tee">Google 로그인</div>
+      <div className="button-txt">Google 로그인</div>
     </GoogleLoginBlock>
   );
 }
