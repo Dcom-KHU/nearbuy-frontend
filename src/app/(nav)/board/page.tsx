@@ -1,12 +1,12 @@
 // 전체 페이지
 // our-domain.com/board
 
-"use client";
+'use client';
 
-import styled from "styled-components";
-import CardsContainer from "./CardsContainer";
-import PageSort from "./PageSort";
-import WriteToggle from "@/components/write/WriteToggle";
+import styled from 'styled-components';
+import CardsContainer from './CardsContainer';
+import PageSort from './PageSort';
+import WriteToggle from '@/components/write/WriteToggle';
 
 const BoardPageBlock = styled.div`
   // background: lavender;
