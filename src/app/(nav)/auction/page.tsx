@@ -5,6 +5,7 @@
 import styled from "styled-components";
 import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
+import WriteButton from "@/components/ui/WriteButton";
 
 const SalePageBlock = styled.div`
   //background: lavender;
@@ -23,6 +24,7 @@ export default function Auction() {
         <PageSort />
         <CardsContainer />
       </SalePageBlock>
+      <WriteButton />
     </>
   );
 }

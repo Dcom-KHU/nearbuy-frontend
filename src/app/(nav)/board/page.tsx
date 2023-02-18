@@ -6,6 +6,7 @@
 import styled from "styled-components";
 import CardsContainer from "./CardsContainer";
 import PageSort from "./PageSort";
+import WriteButton from "@/components/ui/WriteButton";
 
 const BoardPageBlock = styled.div`
   // background: lavender;
@@ -24,6 +25,7 @@ export default function Board() {
         <PageSort />
         <CardsContainer />
       </BoardPageBlock>
+      <WriteButton />
     </>
   );
 }
