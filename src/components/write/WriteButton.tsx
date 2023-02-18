@@ -1,11 +1,10 @@
 "use client";
 
 import styled from "styled-components";
+import React from "react";
 
-const WriteButtonBlock = styled.div`
-  position: fixed;
-  bottom: 4vw;
-  right: 10vw;
+const WriteButtonBlock = styled.button`
+  //background-color: #c0e1ff;
 
   width: 75px;
   height: 75px;
@@ -13,9 +12,6 @@ const WriteButtonBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  cursor: pointer;
-  background-color: #c0e1ff;
 
   .cross-icon {
     background: #fff;
@@ -35,10 +31,16 @@ const WriteButtonBlock = styled.div`
   }
 `;
 
-export default function WriteButton() {
+function WriteButton(props: { onClick: () => void }) {
   return (
-    <WriteButtonBlock>
+    <WriteButtonBlock
+      className="shadow-md bg-[#c0e1ff] hover:bg-[#b4dbff] transition duration-150"
+      type="button"
+      onClick={props.onClick}
+    >
       <div className="cross-icon"></div>
     </WriteButtonBlock>
   );
 }
+
+export default WriteButton;

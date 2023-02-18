@@ -5,7 +5,7 @@
 import styled from "styled-components";
 import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
-import WriteButton from "@/components/ui/WriteButton";
+import WriteToggle from "@/components/write/WriteToggle";
 
 const SalePageBlock = styled.div`
   //background: lavender;
@@ -24,7 +24,7 @@ export default function Group() {
         <PageSort />
         <CardsContainer />
       </SalePageBlock>
-      <WriteButton />
+      <WriteToggle />
     </>
   );
 }
