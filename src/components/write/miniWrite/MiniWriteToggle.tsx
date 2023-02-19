@@ -9,9 +9,9 @@ const MiniWriteToggleBlock = styled.div`
   //background-color: pink;
 
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
-  width: 100px;
+  width: 50px;
 `;
 
 function MiniWriteToggle(props: { onClick?: () => void }) {
