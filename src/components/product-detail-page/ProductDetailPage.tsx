@@ -1,36 +1,34 @@
+'use client';
+
+import PdpLeft from './pdp-left/PdpLeft';
+import PdpRight from './pdp-right/PdpRight';
+import PdpBottom from './pdp-bottom/PdpBottom';
+import styled from 'styled-components';
+// bg-gray-700
+
+const Box = styled.article`
+  margin: 0 auto;
+  width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`;
+const PdpBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  padding: 50px 20px;
+`;
+
+// 상세 페이지 전체 (PDP)
 export default function ProductDetailPage() {
   return (
-    <div>
-      <div>
-        <div>
-          <div>큰 사진</div>
-          <div>
-            <div>작은 사진1</div>
-            <div>작은 사진2</div>
-            <div>작은 사진3</div>
-          </div>
-          <div>채팅하기</div>
-        </div>
-        <div>
-          <div>
-            <div>시간, 채팅, 관심, 조회</div>
-            <div>
-              <div>이름</div>
-              <div>도구들</div>
-            </div>
-            <div>가격</div>
-          </div>
-          <div>
-            <div>유저정보</div>
-            <div>태그들</div>
-          </div>
-          <div>
-            <div>거래희망장소</div>
-            <div>지도</div>
-          </div>
-        </div>
-      </div>
-      <div>본문 내용</div>
-    </div>
+    <Box>
+      <PdpBox>
+        <PdpLeft />
+        <PdpRight />
+      </PdpBox>
+      <PdpBottom />
+    </Box>
   );
 }

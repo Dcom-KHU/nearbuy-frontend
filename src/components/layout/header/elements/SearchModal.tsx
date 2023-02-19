@@ -51,7 +51,7 @@ const OverlayForm = styled.form`
   /* } */
 `;
 
-// 포탈
+// 검색창
 const BackDropPortal = () => {
   return <BackDropBox />;
 };
@@ -64,7 +64,7 @@ const OverlayPortal: React.FC<{ onClick: () => void }> = (props) => {
   );
 };
 
-// 검색창
+// 포탈
 const SearchModal = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
