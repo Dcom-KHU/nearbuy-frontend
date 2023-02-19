@@ -15,10 +15,6 @@ const PageSortBlock = styled.select`
   border: solid 2px gray;
 `;
 
-const MiniWriteBlock = styled.button`
-  // background-color: lime;
-`;
-
 function PageSort() {
   return (
     <Container>
