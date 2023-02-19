@@ -5,7 +5,7 @@ import styled from "styled-components";
 import LikeList from "./LikeList";
 
 const LikePageBlock = styled.div`
-  background: pink;
+  //background: pink;
   display: flex;
   flex-direction: column;
   width: 90%;
