@@ -1,3 +1,5 @@
+'use client';
+
 import Logo from './elements/Logo';
 import styled from 'styled-components';
 import Navigation from './elements/Navigation';
