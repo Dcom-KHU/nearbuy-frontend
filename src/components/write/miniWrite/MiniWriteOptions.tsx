@@ -3,6 +3,7 @@
 import styled from "styled-components";
 
 const MiniWriteOptionsBlock = styled.ul`
+<<<<<<< HEAD
   background-color: #f4f4f4;
 
   display: flex;
@@ -25,10 +26,22 @@ const MiniWriteOptionsBlock = styled.ul`
   .sero {
     border: solid 1px lightgray;
   }
+=======
+  background-color: lavender;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+
+  a {
+    padding: 10px;
+    display: block; // li 전체에 href 줌
+  }
+>>>>>>> ad9f05d ([Feat/Write] 페이지 필터(pagesort) 옆에 write icon과 토글 추가)
 `;
 
 export default function MiniWriteOptions() {
   return (
+<<<<<<< HEAD
     <MiniWriteOptionsBlock className="shadow">
       <li>
         <a href="#">경매</a>
@@ -38,6 +51,15 @@ export default function MiniWriteOptions() {
         <a href="#">공구</a>
       </li>
       <div className="sero"></div>
+=======
+    <MiniWriteOptionsBlock>
+      <li>
+        <a href="#">경매</a>
+      </li>
+      <li>
+        <a href="#">공구</a>
+      </li>
+>>>>>>> ad9f05d ([Feat/Write] 페이지 필터(pagesort) 옆에 write icon과 토글 추가)
       <li>
         <a href="#">
           <div>판/교/나</div>
