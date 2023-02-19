@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import MiniWriteToggle from "@/components/write/miniWrite/MiniWriteToggle";
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const PageSortBlock = styled.select`
 
 const MiniWriteBlock = styled.button`
   // 여기에 글쓰기 아이콘 올 예정
-  background-color: lime;
+  //background-color: lime;
 `;
 
 function PageSort() {
@@ -27,7 +28,9 @@ function PageSort() {
         <option value="sort-low">낮은가격순</option>
         <option value="sort-high">높은가격순</option>
       </PageSortBlock>
-      <MiniWriteBlock>+</MiniWriteBlock>
+      <MiniWriteBlock>
+        <MiniWriteToggle />
+      </MiniWriteBlock>
     </Container>
   );
 }
