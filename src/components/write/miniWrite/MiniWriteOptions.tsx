@@ -9,7 +9,7 @@ const MiniWriteOptionsBlock = styled.ul`
   position: absolute;
   justify-content: space-around;
 
-  width: 300px;
+  width: 380px;
   margin-top: 37px;
   margin-right: -10px;
 
@@ -40,7 +40,7 @@ export default function MiniWriteOptions() {
       <div className="sero"></div>
       <li>
         <a href="#">
-          <div>판/교/나</div>
+          <div>판매/교환/나눔</div>
         </a>
       </li>
     </MiniWriteOptionsBlock>
