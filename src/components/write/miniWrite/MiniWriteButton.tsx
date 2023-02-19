@@ -25,12 +25,11 @@ function MiniWriteButton(props: { onClick: () => void }) {
 const MiniWriteButtonBlock = styled.button`
   //background-color: #c0e1ff;
 
-  width: 75px;
-  height: 75px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 function MiniWriteButton(props: { onClick: () => void }) {

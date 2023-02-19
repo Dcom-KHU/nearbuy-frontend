@@ -33,7 +33,8 @@ const MiniWriteOptionsBlock = styled.ul`
   background-color: lavender;
   font-size: 20px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-top: 32px;
+  position: absolute;
 
   a {
     padding: 10px;

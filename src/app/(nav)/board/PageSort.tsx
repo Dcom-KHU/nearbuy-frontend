@@ -16,8 +16,7 @@ const PageSortBlock = styled.select`
 `;
 
 const MiniWriteBlock = styled.button`
-  // 여기에 글쓰기 아이콘 올 예정
-  //background-color: lime;
+  // background-color: lime;
 `;
 
 function PageSort() {
@@ -28,6 +27,7 @@ function PageSort() {
         <option value="sort-low">낮은가격순</option>
         <option value="sort-high">높은가격순</option>
       </PageSortBlock>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -45,6 +45,9 @@ function PageSort() {
         <MiniWriteToggle />
       </MiniWriteBlock>
 >>>>>>> 916b97e ([Feat/Write] 페이지 필터(pagesort) 옆에 write icon과 토글 추가)
+=======
+      <MiniWriteToggle />
+>>>>>>> 307e869 ([Fix/Write] write 버튼 클릭시 토글에 의해 레이아웃 깨지는 현상  수정)
     </Container>
   );
 }
