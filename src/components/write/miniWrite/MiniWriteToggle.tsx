@@ -6,12 +6,12 @@ import MiniWriteButton from "./MiniWriteButton";
 import MiniWriteOptions from "./MiniWriteOptions";
 
 const MiniWriteToggleBlock = styled.div`
-  //background-color: pink;
+  // background-color: pink;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 50px;
+  align-items: flex-end;
+  width: 35px;
 `;
 
 function MiniWriteToggle(props: { onClick?: () => void }) {
