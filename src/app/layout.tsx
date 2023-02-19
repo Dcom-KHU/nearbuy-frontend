@@ -1,6 +1,7 @@
 'use client';
 
 import './globals.css';
+import StyledComponentsRegistry from './lib/registry';
 import Header from '@/components/layout/header/Header';
 import { Providers } from './providers';
 import Footer from '@/components/layout/footer/Footer';
