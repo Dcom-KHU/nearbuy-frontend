@@ -30,6 +30,7 @@ function PageSort() {
       </PageSortBlock>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <MiniWriteToggle />
 =======
       <MiniWriteBlock>+</MiniWriteBlock>
@@ -39,6 +40,11 @@ function PageSort() {
         <MiniWriteToggle />
       </MiniWriteBlock>
 >>>>>>> ad9f05d ([Feat/Write] 페이지 필터(pagesort) 옆에 write icon과 토글 추가)
+=======
+      <MiniWriteBlock>
+        <MiniWriteToggle />
+      </MiniWriteBlock>
+>>>>>>> 916b97e ([Feat/Write] 페이지 필터(pagesort) 옆에 write icon과 토글 추가)
     </Container>
   );
 }
