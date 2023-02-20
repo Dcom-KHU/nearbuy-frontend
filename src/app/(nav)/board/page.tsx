@@ -6,7 +6,7 @@
 import styled from "styled-components";
 import CardsContainer from "./CardsContainer";
 import PageSort from "./PageSort";
-import WriteToggle from "@/components/write/writeToggles/roundWrite/WriteToggle";
+// 없는게 나을것같대서 일단 지움 import WriteToggle from "@/components/write/writeToggles/roundWrite/WriteToggle";
 
 const BoardPageBlock = styled.div`
   // background: lavender;
@@ -25,7 +25,6 @@ export default function Board() {
         <PageSort />
         <CardsContainer />
       </BoardPageBlock>
-      <WriteToggle />
     </>
   );
 }

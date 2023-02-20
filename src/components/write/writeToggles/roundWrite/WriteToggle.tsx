@@ -1,3 +1,5 @@
+// 없는게 나을것같다 해서 지움
+
 "use client";
 
 import { useState } from "react";
