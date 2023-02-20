@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Image from "next/image";
+import WriteToggle from "../write/WriteToggle";
 
 const MainPageBlock = styled.div`
   // background: lightblue;
@@ -42,6 +43,7 @@ export default function MainPage() {
           creating random paragraphs can be useful. A few examples of how some
           people use this generator are listed in the following paragraphs.
         </div>
+        <WriteToggle />
       </MainPageBlock>
     </>
   );
