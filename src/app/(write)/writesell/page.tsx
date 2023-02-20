@@ -8,7 +8,7 @@ import ProductImage from "@/components/write/writepage/ProductImage";
 import WriteForm from "@/components/write/writepage/WriteForms";
 
 const WriteSellBlock = styled.div`
-  background-color: aliceblue;
+  // background-color: aliceblue;
 
   width: 75%;
   padding: 10px;

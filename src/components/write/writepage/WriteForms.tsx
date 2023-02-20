@@ -1,16 +1,16 @@
 "use client";
 
 import styled from "styled-components";
-import LeftForm from "./leftform/LeftForm";
+import LeftFormContainer from "./leftform/LeftFormContainer";
 import RightForm from "./rightform/RightForm";
 
 const WriteFormBlock = styled.div`
-  background-color: gainsboro;
+  //background-color: gainsboro;
 
   display: flex;
   justify-content: center;
 
-  gap: 21px;
+  gap: 30px;
   padding: 10px;
   padding-top: 20px;
 `;
@@ -18,7 +18,7 @@ const WriteFormBlock = styled.div`
 export default function WriteForm() {
   return (
     <WriteFormBlock>
-      <LeftForm />
+      <LeftFormContainer />
       <RightForm />
     </WriteFormBlock>
   );
