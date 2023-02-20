@@ -2,10 +2,10 @@
 
 import styled from "styled-components";
 import LeftFormContainer from "./leftform/LeftFormContainer";
-import RightForm from "./rightform/RightForm";
+import RightFormContainer from "./rightform/RightFormContainer";
 
 const WriteFormBlock = styled.div`
-  //background-color: gainsboro;
+  // background-color: gainsboro;
 
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ export default function WriteForm() {
   return (
     <WriteFormBlock>
       <LeftFormContainer />
-      <RightForm />
+      <RightFormContainer />
     </WriteFormBlock>
   );
 }

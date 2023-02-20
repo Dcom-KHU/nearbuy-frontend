@@ -3,9 +3,10 @@
 import styled from "styled-components";
 
 const ProductImageBlock = styled.div`
-  background-color: #fff;
+  // background-color: pink;
 
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 10px;
 
