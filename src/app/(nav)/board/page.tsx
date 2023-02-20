@@ -6,7 +6,7 @@
 import styled from "styled-components";
 import CardsContainer from "./CardsContainer";
 import PageSort from "./PageSort";
-import WriteToggle from "@/components/write/WriteToggle";
+import WriteToggle from "@/components/write/writeToggles/roundWrite/WriteToggle";
 
 const BoardPageBlock = styled.div`
   // background: lavender;

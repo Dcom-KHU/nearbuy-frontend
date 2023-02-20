@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import MiniWriteToggle from "@/components/write/miniWrite/MiniWriteToggle";
+import MiniWriteToggle from "@/components/write/writeToggles/miniWrite/MiniWriteToggle";
 
 const Container = styled.div`
   display: flex;
