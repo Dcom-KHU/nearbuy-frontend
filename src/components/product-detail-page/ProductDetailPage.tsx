@@ -4,17 +4,12 @@ import PdpLeft from './pdp-left/PdpLeft';
 import PdpRight from './pdp-right/PdpRight';
 import PdpBottom from './pdp-bottom/PdpBottom';
 import styled from 'styled-components';
-// bg-gray-700
 
 const Box = styled.article`
   margin: 0 auto;
   width: 980px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  .haHa {
-    background-color: red;
-  }
 `;
 const PdpBox = styled.div`
   display: flex;
