@@ -12,6 +12,9 @@ const Box = styled.article`
   display: flex;
   flex-direction: column;
   gap: 50px;
+  .haHa {
+    background-color: red;
+  }
 `;
 const PdpBox = styled.div`
   display: flex;
@@ -23,7 +26,7 @@ const PdpBox = styled.div`
 // 상세 페이지 전체 (PDP)
 export default function ProductDetailPage() {
   return (
-    <Box>
+    <Box id='haHa'>
       <PdpBox>
         <PdpLeft />
         <PdpRight />
