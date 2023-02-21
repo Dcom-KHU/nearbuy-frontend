@@ -26,7 +26,7 @@ const PdpBox = styled.div`
 // 상세 페이지 전체 (PDP)
 export default function ProductDetailPage() {
   return (
-    <Box id='haHa'>
+    <Box>
       <PdpBox>
         <PdpLeft />
         <PdpRight />
