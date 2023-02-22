@@ -39,7 +39,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   // 작은 nav 일때, 햄버거 버튼 토글
   const menuToggleHandler = () => {
-    dispatch(menuToggleActions.menuToggle());
+    dispatch(menuToggleActions.closeMenu());
   };
   // 판매 페이지 상태
   const isBoardHandler = () => {

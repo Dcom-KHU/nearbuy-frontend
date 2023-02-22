@@ -7,6 +7,9 @@ const menuToggleSlice = createSlice({
     menuToggle(state) {
       state.toggle = !state.toggle;
     },
+    closeMenu(state) {
+      state.toggle = false;
+    },
   },
 });
 
