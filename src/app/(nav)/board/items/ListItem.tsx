@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import styled from "styled-components";
-import ItemContent from "./ItemContent";
+import Image from 'next/image';
+import Link from 'next/link';
+import styled from 'styled-components';
+import ItemContent from './ItemContent';
 
 const ListItemBox = styled.div`
   display: flex;
@@ -31,25 +32,25 @@ const ImageDeco = styled(Image)`
 // TODO: SVG 색칠 하기
 const ListItem = () => {
   return (
-    <>
+    <Link href='/board/detail'>
       <ListItemBox>
         <Image
-          src="/images/for-demo/gloves.jpg"
-          alt="kitty"
+          src='/images/for-demo/gloves.jpg'
+          alt='kitty'
           width={200}
           height={200}
         />
         <ItemContent />
         <button>
           <ImageDeco
-            src="/images/header/heart.svg"
-            alt="like"
+            src='/images/header/heart.svg'
+            alt='like'
             width={24}
             height={24}
           />
         </button>
       </ListItemBox>
-    </>
+    </Link>
   );
 };
 export default ListItem;
