@@ -6,7 +6,7 @@ export default function GroupDetail() {
   const members = useSelector((state: RootState) => state.price.members);
   return (
     <div>
-      <div className='flex justify-end gap-3 mt-4 mb-2'>
+      <div className='flex justify-end gap-3 mt-4 text-gray-500'>
         <p>1 / {members}</p>
         <p>모집중</p>
       </div>
@@ -14,7 +14,7 @@ export default function GroupDetail() {
         <p className='text-2xl'>
           {price}원 (총 {price * members}원)
         </p>
-        <p>마감까지 2일 20시간</p>
+        <p className='text-gray-500'>마감까지 2일 20시간</p>
       </div>
     </div>
   );

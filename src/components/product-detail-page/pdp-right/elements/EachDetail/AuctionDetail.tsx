@@ -44,7 +44,7 @@ export default function AuctionDetail() {
       <PriceBox>
         <p>현재 최고가</p>
         <Price />
-        <p>마감까지 2일 20시간</p>
+        <p className='text-gray-500'>마감까지 2일 20시간</p>
       </PriceBox>
     </div>
   );
