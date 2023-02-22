@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// 검색창 토글
 const searchToggleSlice = createSlice({
   name: 'searchToggle',
   initialState: { toggle: false },

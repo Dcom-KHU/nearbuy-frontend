@@ -21,6 +21,7 @@ const HeaderBox = styled.div`
   max-width: 1200px;
   padding: 30px 20px;
   display: none;
+  z-index: 10;
 
   // 중간 화면
   @media screen and (max-width: 748px) {

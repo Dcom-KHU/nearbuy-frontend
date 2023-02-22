@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import menuToggleSlice from './menuToggle/menuToggleSlice';
+import myPageMenuToggleSlice from './mypageMenuToggle/myPageMenuToggleSlice';
 import searchToggleSlice from './searchToggle/searchToggleSlice';
 
 const store = configureStore({
   reducer: {
     menuToggle: menuToggleSlice.reducer,
     searchToggle: searchToggleSlice.reducer,
+    myPageMenuToggle: myPageMenuToggleSlice.reducer,
   },
 });
 
