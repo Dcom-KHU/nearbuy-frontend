@@ -17,6 +17,7 @@ const MainPageBlock = styled.div`
     padding: 0 60px;
     width: 450px;
     height: auto;
+    min-width: 380px;
   }
 `;
 
