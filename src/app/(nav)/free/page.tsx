@@ -5,6 +5,7 @@
 import styled from "styled-components";
 import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
+import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
   //background: lavender;
@@ -23,6 +24,8 @@ export default function Free() {
         <PageSort />
         <CardsContainer />
       </SalePageBlock>
+      \
+      <ScrollTop />
     </>
   );
 }
