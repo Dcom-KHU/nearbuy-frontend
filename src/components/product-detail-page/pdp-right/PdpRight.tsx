@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import AuctionDetail from './elements/EachDetail/AuctionDetail';
 import Price from './elements/EachDetail/Price';
+import GroupDetail from './elements/EachDetail/GroupDetail';
 
 const RightBox = styled.section`
   width: 489px;
@@ -34,6 +35,7 @@ export default function PdpRight() {
   const auction = useSelector((state: RootState) => state.detailPage.auction); // 경매
   const group = useSelector((state: RootState) => state.detailPage.group); // 공구
 
+  // FIXME: 해당 상세 페이지에서 새로고침 누르면, 상태 사라져서, 내용물 사라짐
   return (
     <RightBox>
       <div className='w-full'>
@@ -47,6 +49,7 @@ export default function PdpRight() {
               <div className='text-base py-3 text-gray-500'>무료 나눔</div>
             )}
             {auction && <AuctionDetail />}
+            {group && <GroupDetail />}
             <Location />
           </>
         </div>

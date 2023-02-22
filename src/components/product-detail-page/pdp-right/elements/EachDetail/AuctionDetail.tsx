@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 
-const InputPriceBox = styled.div`
+const InputPriceForm = styled.form`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -25,9 +25,10 @@ const PriceBox = styled.div`
 export default function AuctionDetail() {
   const price = useSelector((state: RootState) => state.price.price); // 현재 최고가
   const increment = useSelector((state: RootState) => state.price.increment); // 최소 증가액
+
   return (
     <div>
-      <InputPriceBox>
+      <InputPriceForm>
         <select name='price' required>
           <option value='placeholder' selected disabled>
             가격 입력하기 (단위: {increment}원)
@@ -39,7 +40,7 @@ export default function AuctionDetail() {
           <option value='increment5'>{price + increment * 5}원</option>
         </select>
         <button>입력</button>
-      </InputPriceBox>
+      </InputPriceForm>
       <PriceBox>
         <p>현재 최고가</p>
         <Price />
