@@ -14,6 +14,7 @@ const Box = styled.article`
 const PdpBox = styled.div`
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 40px;
   padding: 50px 20px;
 `;
