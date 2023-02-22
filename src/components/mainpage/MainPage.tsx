@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Image from "next/image";
+import WriteToggle from "../write/writeToggles/roundWrite/WriteToggle";
 
 const MainPageBlock = styled.div`
   // background: lightblue;
@@ -44,6 +45,7 @@ export default function MainPage() {
           following paragraphs.
         </div>
       </MainPageBlock>
+      <WriteToggle />
     </>
   );
 }
