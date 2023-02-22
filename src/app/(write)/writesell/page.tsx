@@ -5,7 +5,7 @@
 
 import styled from "styled-components";
 import ProductImage from "@/components/write/writepage/ProductImage";
-import WriteForm from "@/components/write/writepage/WriteForms";
+import SellWriteForm from "@/components/write/writepage/writesell/SellWriteForms";
 
 const WriteSellBlock = styled.div`
   // background-color: aliceblue;
@@ -22,7 +22,7 @@ export default function WriteSell() {
           판매/교환/나눔 글쓰기 페이지
         </div>
         <ProductImage />
-        <WriteForm />
+        <SellWriteForm />
       </WriteSellBlock>
     </>
   );

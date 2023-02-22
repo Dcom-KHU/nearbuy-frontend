@@ -1,18 +1,15 @@
 "use client";
 
 import styled from "styled-components";
-import LeftForm from "./LeftForm";
 
 const Container = styled.div`
-  //background-color: pink;
-  //border: solid 1px gray;
+  // background-color: lightgreen;
 
-  width: 600px;
-
-  min-width: 460px;
+  min-width: 240px;
   min-height: 200px;
 
   .form-input {
+    background-color: lavender;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid lightgray;
@@ -33,10 +30,10 @@ const Container = styled.div`
   }
 `;
 
-export default function LeftFormContainer() {
-  return (
-    <Container>
-      <LeftForm />
-    </Container>
-  );
+export default function RightFormContainer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <Container>{children}</Container>;
 }

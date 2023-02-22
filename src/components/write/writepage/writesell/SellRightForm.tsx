@@ -32,7 +32,7 @@ const initialValues = {
    setState과 유효성 검사가 자동 설정됨. 
    <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
-export default function RightForm() {
+export default function SellRightForm() {
   const handleSubmit = (values: LeftFormValue) => {
     console.log(values);
   };
