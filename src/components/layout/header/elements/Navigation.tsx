@@ -1,11 +1,10 @@
 'use client';
 
-import { setIsType } from '@/store/detailPage/detailPageSlice';
+import { DetailPageState, setIsType } from '@/store/detailPage/detailPageSlice';
 import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { DetailPageState } from '@/store/detailPage/detailPageSlice';
 
 const Nav = styled.nav`
   width: 70%;
@@ -49,7 +48,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 // 상단 헤더 네비 (전체 ~ 공구)
-const Navigation = () => {
+export default function Navigation() {
   const dispatch = useDispatch();
   // 작은 nav 일때, 햄버거 버튼 토글
   const menuToggleHandler = () => {
@@ -68,5 +67,4 @@ const Navigation = () => {
       </NavList>
     </Nav>
   );
-};
-export default Navigation;
+}
