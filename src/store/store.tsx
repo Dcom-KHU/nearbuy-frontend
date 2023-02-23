@@ -7,11 +7,11 @@ import searchToggleSlice from './searchToggle/searchToggleSlice';
 
 const store = configureStore({
   reducer: {
-    menuToggle: menuToggleSlice.reducer,
-    searchToggle: searchToggleSlice.reducer,
-    myPageMenuToggle: myPageMenuToggleSlice.reducer,
-    detailPage: detailPageSlice.reducer,
-    price: priceSlice.reducer,
+    menuToggle: menuToggleSlice,
+    searchToggle: searchToggleSlice,
+    myPageMenuToggle: myPageMenuToggleSlice,
+    detailPage: detailPageSlice,
+    price: priceSlice,
   },
 });
 

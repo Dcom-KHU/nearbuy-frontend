@@ -44,23 +44,23 @@ const Navigation = () => {
   };
   // 판매 페이지 상태
   const isSaleHandler = () => {
-    dispatch(detailPageActions.isSale());
+    dispatch(detailPageActions.setIsType('sale'));
   };
   // 교환 페이지 상태
   const isExchangeHandler = () => {
-    dispatch(detailPageActions.isExchange());
+    dispatch(detailPageActions.setIsType('exchange'));
   };
   // 나눔 페이지 상태
   const isFreeHandler = () => {
-    dispatch(detailPageActions.isFree());
+    dispatch(detailPageActions.setIsType('free'));
   };
   // 경매 페이지 상태
   const isAuctionHandler = () => {
-    dispatch(detailPageActions.isAuction());
+    dispatch(detailPageActions.setIsType('auction'));
   };
   // 공구 페이지 상태
   const isGroupHandler = () => {
-    dispatch(detailPageActions.isGroup());
+    dispatch(detailPageActions.setIsType('group'));
   };
   return (
     <Nav>
