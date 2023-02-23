@@ -19,13 +19,11 @@ const ImageDeco = styled(Image)`
 
 export default function UserPic({ size = 150 }: Props) {
   return (
-    <Link href='#'>
-      <ImageDeco
-        src='/images/for-demo/kitty.jpg'
-        alt='kitty'
-        width={size}
-        height={size}
-      />
-    </Link>
+    <ImageDeco
+      src='/images/for-demo/kitty.jpg'
+      alt='kitty'
+      width={size}
+      height={size}
+    />
   );
 }

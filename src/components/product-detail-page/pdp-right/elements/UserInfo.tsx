@@ -5,6 +5,7 @@ import UserPic from '@/components/userpage/userinfo/UserPic';
 import UserName from '@/components/userpage/userinfo/UserName';
 import UserTemp from '@/components/userpage/UserTemp';
 import UserAd from '@/components/userpage/userinfo/UserAd';
+import Link from 'next/link';
 
 const UserInfoBox = styled.div`
   display: flex;
@@ -20,9 +21,13 @@ const UserInfoBox = styled.div`
 export default function UserInfo() {
   return (
     <UserInfoBox>
-      <UserPic size={70} />
+      <Link href='/my'>
+        <UserPic size={70} />
+      </Link>
       <div>
-        <UserName />
+        <Link href='/my'>
+          <UserName />
+        </Link>
         <UserAd />
       </div>
       <UserTemp />
