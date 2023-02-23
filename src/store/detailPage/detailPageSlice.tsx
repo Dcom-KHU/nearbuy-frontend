@@ -91,5 +91,5 @@ const detailPageSlice = createSlice({
   },
 });
 
-export const detailPageActions = detailPageSlice.actions;
-export default detailPageSlice;
+export const { setIsType } = detailPageSlice.actions;
+export default detailPageSlice.reducer;

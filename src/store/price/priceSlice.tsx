@@ -21,5 +21,5 @@ const priceSlice = createSlice({
   },
 });
 
-export const priceActions = priceSlice.actions;
-export default priceSlice;
+export const { getPrice, getIncrement, getMembers } = priceSlice.actions;
+export default priceSlice.reducer;

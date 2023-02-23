@@ -1,7 +1,7 @@
 'use client';
 
-import { detailPageActions } from '@/store/detailPage/detailPageSlice';
-import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
+import { setIsType } from '@/store/detailPage/detailPageSlice';
+import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -40,27 +40,27 @@ const Navigation = () => {
   const dispatch = useDispatch();
   // 작은 nav 일때, 햄버거 버튼 토글
   const menuToggleHandler = () => {
-    dispatch(menuToggleActions.closeMenu());
+    dispatch(closeMenu());
   };
   // 판매 페이지 상태
   const isSaleHandler = () => {
-    dispatch(detailPageActions.setIsType('sale'));
+    dispatch(setIsType('sale'));
   };
   // 교환 페이지 상태
   const isExchangeHandler = () => {
-    dispatch(detailPageActions.setIsType('exchange'));
+    dispatch(setIsType('exchange'));
   };
   // 나눔 페이지 상태
   const isFreeHandler = () => {
-    dispatch(detailPageActions.setIsType('free'));
+    dispatch(setIsType('free'));
   };
   // 경매 페이지 상태
   const isAuctionHandler = () => {
-    dispatch(detailPageActions.setIsType('auction'));
+    dispatch(setIsType('auction'));
   };
   // 공구 페이지 상태
   const isGroupHandler = () => {
-    dispatch(detailPageActions.setIsType('group'));
+    dispatch(setIsType('group'));
   };
   return (
     <Nav>

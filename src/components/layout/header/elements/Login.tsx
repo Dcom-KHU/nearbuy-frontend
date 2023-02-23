@@ -1,6 +1,6 @@
 'use client';
 
-import { menuToggleActions } from '@/store/menuToggle/menuToggleSlice';
+import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -31,7 +31,7 @@ const Login = () => {
   //       작은 창에서만 toggleHandler 작동 시키게 할 순 없을까?
   const dispatch = useDispatch();
   const menuToggleHandler = () => {
-    dispatch(menuToggleActions.menuToggle());
+    dispatch(menuToggle());
   };
   return (
     <LoginBox>

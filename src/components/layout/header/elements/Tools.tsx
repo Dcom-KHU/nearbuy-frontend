@@ -1,6 +1,6 @@
 'use client';
 
-import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
+import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -26,7 +26,7 @@ const ToolsBox = styled.div`
 const Tools = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
-    dispatch(searchToggleActions.searchToggle());
+    dispatch(searchToggle());
   };
   return (
     <ToolsBox>

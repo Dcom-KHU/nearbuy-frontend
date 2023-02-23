@@ -1,7 +1,7 @@
 'use client';
 
 import ReactDOM from 'react-dom';
-import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
+import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import '../../../../app/globals.css';
@@ -68,7 +68,7 @@ const OverlayPortal: React.FC<{ onClick: () => void }> = (props) => {
 const SearchModal = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
-    dispatch(searchToggleActions.searchToggle());
+    dispatch(searchToggle());
   };
   return (
     <>

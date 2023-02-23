@@ -1,6 +1,6 @@
 'use client';
 
-import { myPageMenuToggleActions } from '@/store/mypageMenuToggle/myPageMenuToggleSlice';
+import { myPageMenuToggle } from '@/store/mypageMenuToggle/myPageMenuToggleSlice';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -37,7 +37,7 @@ const MenuItem: React.FC<{ src: string; title: string; count: number }> = (
 ) => {
   const dispatch = useDispatch();
   const goToSeeHandler = () => {
-    dispatch(myPageMenuToggleActions.myPageMenuToggle());
+    dispatch(myPageMenuToggle());
   };
   return (
     <MenuItemBox>

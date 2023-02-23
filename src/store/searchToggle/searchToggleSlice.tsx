@@ -11,5 +11,5 @@ const searchToggleSlice = createSlice({
   },
 });
 
-export const searchToggleActions = searchToggleSlice.actions;
-export default searchToggleSlice;
+export const { searchToggle } = searchToggleSlice.actions;
+export default searchToggleSlice.reducer;
