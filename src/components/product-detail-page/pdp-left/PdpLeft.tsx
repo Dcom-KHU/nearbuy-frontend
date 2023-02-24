@@ -34,7 +34,7 @@ export default function PdpLeft() {
   const group = useSelector((state: RootState) => state.detailPage.group);
   return (
     <section className='flex flex-col w-2/5 gap-5'>
-      <div className='relative border'>
+      <div className='relative'>
         <Image src={images[isHover].url} alt='Image' width={400} height={400} />
         {auction && <Time />}
         {group && <MemberCount />}

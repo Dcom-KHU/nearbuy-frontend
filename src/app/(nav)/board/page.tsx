@@ -4,9 +4,9 @@
 'use client';
 
 import styled from 'styled-components';
-import CardsContainer from './CardsContainer';
 import PageSort from './PageSort';
 import WriteToggle from '@/components/write/WriteToggle';
+import List from '@/components/list/List';
 
 const BoardPageBlock = styled.div`
   // background: lavender;
@@ -23,7 +23,7 @@ export default function Board() {
       <h1>전체 페이지</h1>
       <BoardPageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </BoardPageBlock>
       <WriteToggle />
     </>

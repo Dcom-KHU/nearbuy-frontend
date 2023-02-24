@@ -1,11 +1,11 @@
 // 나눔 페이지
 // our-domain.com/free
-"use client";
+'use client';
 
-import styled from "styled-components";
-import CardsContainer from "../board/CardsContainer";
-import PageSort from "../board/PageSort";
-import WriteToggle from "@/components/write/WriteToggle";
+import styled from 'styled-components';
+import PageSort from '../board/PageSort';
+import WriteToggle from '@/components/write/WriteToggle';
+import List from '@/components/list/List';
 
 const SalePageBlock = styled.div`
   //background: lavender;
@@ -22,7 +22,7 @@ export default function Free() {
       <h1>나눔 페이지</h1>
       <SalePageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </SalePageBlock>
       <WriteToggle />
     </>
