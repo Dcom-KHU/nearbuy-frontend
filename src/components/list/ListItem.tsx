@@ -33,12 +33,11 @@ const ImageDeco = styled(Image)`
 
 // 게시글 목록에서 작게 보여지는 게시글 한 개
 // TODO: SVG 색칠 하기
-export default function ListItem({ nowState }) {
-  const state = useSelector((state: RootState) => state.detailPage);
-  // FIXME: 전체 페이지일 경우 또 따로 해줘야 함
-  // const nowState = Object.keys(state).find(
-  //   (key) => state[key as keyof DetailPageState] === true
-  // );
+export default function ListItem({
+  nowState,
+}: {
+  nowState: keyof DetailPageState;
+}) {
   const isAuctionOrGroup = nowState === 'auction' || nowState === 'group';
   return (
     <ListItemBox>

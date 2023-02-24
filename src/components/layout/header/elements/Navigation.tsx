@@ -36,10 +36,10 @@ const NavList = styled.ul`
 type NavItem = {
   href: string;
   label: string;
-  type?: keyof DetailPageState;
+  type: keyof DetailPageState;
 };
 const NAV_ITEMS: NavItem[] = [
-  { href: '/board', label: '전체' },
+  { href: '/board', label: '전체', type: 'board' },
   { href: '/sale', label: '판매', type: 'sale' },
   { href: '/exchange', label: '교환', type: 'exchange' },
   { href: '/free', label: '나눔', type: 'free' },
@@ -59,7 +59,7 @@ export default function Navigation() {
       <NavList>
         {NAV_ITEMS.map(({ href, label, type }) => (
           <li key={href} onClick={menuToggleHandler}>
-            <Link href={href} onClick={() => type && dispatch(setIsType(type))}>
+            <Link href={href} onClick={() => dispatch(setIsType(type))}>
               {label}
             </Link>
           </li>

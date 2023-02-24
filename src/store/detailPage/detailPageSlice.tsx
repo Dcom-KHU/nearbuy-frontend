@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface DetailPageState {
+  board: boolean;
   sale: boolean;
   exchange: boolean;
   free: boolean;
@@ -9,6 +10,7 @@ export interface DetailPageState {
 }
 
 const initialState: DetailPageState = {
+  board: false,
   sale: false,
   exchange: false,
   free: false,
