@@ -1,8 +1,12 @@
 'use client';
 
+import { RootState } from '@/store/store';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import MemberCount from './info/MemberCount';
+import Time from './info/Time';
 
 const SmallImageBox = styled.div`
   display: flex;
@@ -26,9 +30,15 @@ export default function PdpLeft() {
   const onMouthHandling = (key: number) => {
     setIsHover(key);
   };
+  const auction = useSelector((state: RootState) => state.detailPage.auction);
+  const group = useSelector((state: RootState) => state.detailPage.group);
   return (
     <section className='flex flex-col w-2/5 gap-5'>
-      <Image src={images[isHover].url} alt='Image' width={400} height={400} />
+      <div className='relative border'>
+        <Image src={images[isHover].url} alt='Image' width={400} height={400} />
+        {auction && <Time />}
+        {group && <MemberCount />}
+      </div>
       <SmallImageBox>
         {images.map((image) => {
           return (

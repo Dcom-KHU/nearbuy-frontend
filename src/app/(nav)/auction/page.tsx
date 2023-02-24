@@ -1,11 +1,11 @@
 // 경매 페이지
 // our-domain.com/auction
-"use client";
+'use client';
 
-import styled from "styled-components";
-import CardsContainer from "../board/CardsContainer";
-import PageSort from "../board/PageSort";
-import WriteToggle from "@/components/write/WriteToggle";
+import styled from 'styled-components';
+import CardsContainer from '../board/CardsContainer';
+import PageSort from '../board/PageSort';
+import WriteToggle from '@/components/write/WriteToggle';
 
 const SalePageBlock = styled.div`
   //background: lavender;
