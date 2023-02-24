@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ItemContent from './ItemContent';
 import { DetailPageState } from '@/store/detailPage/detailPageSlice';
+import SmallInfoForListItem from '../product-detail-page/pdp-left/info/SmallInfoForListItem';
 
 const ListItemBox = styled.div`
   display: flex;
@@ -35,12 +36,15 @@ const ImageDeco = styled(Image)`
 export default function ListItem() {
   const state = useSelector((state: RootState) => state.detailPage);
   // FIXME: 전체 페이지일 경우 또 따로 해줘야 함
-  const nowON = Object.keys(state).find(
+  const nowState = Object.keys(state).find(
     (key) => state[key as keyof DetailPageState] === true
   );
   return (
     <ListItemBox>
-      <Link href={`/${nowON}/detail`}>
+      {(nowState === 'group' || nowState === 'auction') && (
+        <SmallInfoForListItem type={nowState} />
+      )}
+      <Link href={`/${nowState}/detail`}>
         <Image
           src='/images/for-demo/gloves.jpg'
           alt='gloves'
