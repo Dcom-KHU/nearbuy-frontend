@@ -4,6 +4,7 @@ import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import List from '../list/List';
+import ListNav from '../list/ListNav';
 import Menu from './menu/Menu';
 import User from './user/User';
 
@@ -23,6 +24,12 @@ const MyPageBox = styled.div`
     gap: 50px;
   }
 `;
+const ListBox = styled.div`
+  width: 80%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+`;
 
 // mypage
 const MyPage = () => {
@@ -35,7 +42,12 @@ const MyPage = () => {
         <User />
         <Menu />
       </MyPageBox>
-      {toggle && <List />}
+      {toggle && (
+        <>
+          <ListNav />
+          <List />
+        </>
+      )}
     </>
   );
 };

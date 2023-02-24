@@ -4,7 +4,7 @@ import '../../app/globals.css';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
-  width: 100%;
+  width: 80%;
 `;
 
 const NavList = styled.ul`
@@ -12,7 +12,7 @@ const NavList = styled.ul`
   justify-content: space-evenly;
   align-items: center;
   gap: 30px;
-  padding: 10px;
+  padding-top: 10px;
 
   li:hover {
     color: var(--accent-color);
