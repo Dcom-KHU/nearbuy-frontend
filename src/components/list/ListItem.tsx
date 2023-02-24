@@ -14,6 +14,7 @@ const ListItemBox = styled.div`
   gap: 10px;
   position: relative;
   padding: 15px;
+  border-radius: 8px;
 
   &:hover {
     transition: 0.125s ease-in;
