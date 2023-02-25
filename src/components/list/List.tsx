@@ -1,6 +1,5 @@
 'use client';
 
-import { DetailPageState } from '@/store/detailPage/detailPageSlice';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -86,10 +85,7 @@ export const DUMMY_DATA = [
 ];
 // 게시물 목록들
 const List = () => {
-  const state = useSelector((state: RootState) => state.detailPage);
-  const nowState = Object.keys(state).find(
-    (key) => state[key as keyof DetailPageState] === true
-  );
+  const nowState = useSelector((state: RootState) => state.activePage.active);
   const isBoard = nowState === 'board';
   return (
     <ListItemBox>

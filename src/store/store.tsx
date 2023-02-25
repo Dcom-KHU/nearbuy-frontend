@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import detailPageSlice from './detailPage/detailPageSlice';
+import activePageSlice from './detailPage/activePageSlice';
 import menuToggleSlice from './menuToggle/menuToggleSlice';
 import myPageMenuToggleSlice from './mypageMenuToggle/myPageMenuToggleSlice';
 import priceSlice from './price/priceSlice';
@@ -10,8 +10,8 @@ const store = configureStore({
     menuToggle: menuToggleSlice,
     searchToggle: searchToggleSlice,
     myPageMenuToggle: myPageMenuToggleSlice,
-    detailPage: detailPageSlice,
     price: priceSlice,
+    activePage: activePageSlice,
   },
 });
 

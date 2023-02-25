@@ -1,12 +1,9 @@
 'use client';
 
-import { RootState } from '@/store/store';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ItemContent from './ItemContent';
-import { DetailPageState } from '@/store/detailPage/detailPageSlice';
 import SmallInfoForListItem from '../product-detail-page/pdp-left/info/SmallInfoForListItem';
 
 const ListItemBox = styled.div`
@@ -33,11 +30,7 @@ const ImageDeco = styled(Image)`
 
 // 게시글 목록에서 작게 보여지는 게시글 한 개
 // TODO: SVG 색칠 하기
-export default function ListItem({
-  nowState,
-}: {
-  nowState: keyof DetailPageState;
-}) {
+export default function ListItem({ nowState }: { nowState: string | null }) {
   const isAuctionOrGroup = nowState === 'auction' || nowState === 'group';
   return (
     <ListItemBox>
