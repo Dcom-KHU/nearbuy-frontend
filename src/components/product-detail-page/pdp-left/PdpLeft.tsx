@@ -30,14 +30,15 @@ export default function PdpLeft() {
   const onMouthHandling = (key: number) => {
     setIsHover(key);
   };
-  const auction = useSelector((state: RootState) => state.detailPage.auction);
-  const group = useSelector((state: RootState) => state.detailPage.group);
+  const activeState = useSelector(
+    (state: RootState) => state.activePage.active
+  );
   return (
     <section className='flex flex-col w-2/5 gap-5'>
       <div className='relative'>
         <Image src={images[isHover].url} alt='Image' width={400} height={400} />
-        {auction && <Time />}
-        {group && <MemberCount />}
+        {activeState === 'auction' && <Time />}
+        {activeState === 'group' && <MemberCount />}
       </div>
       <SmallImageBox>
         {images.map((image) => {

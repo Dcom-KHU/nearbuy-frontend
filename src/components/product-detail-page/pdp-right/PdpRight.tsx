@@ -29,12 +29,7 @@ const InfoBox = styled.div`
 // 상세페이지 정보 부분 (오른쪽 부분)
 export default function PdpRight() {
   // 어떤 게시물이냐에 따라, 표시되는 내용 다르게 하기 위한 상태 관리
-  const board = useSelector((state: RootState) => state.detailPage.sale); // 판매
-  const exchange = useSelector((state: RootState) => state.detailPage.exchange); // 교환
-  const share = useSelector((state: RootState) => state.detailPage.free); // 나눔
-  const auction = useSelector((state: RootState) => state.detailPage.auction); // 경매
-  const group = useSelector((state: RootState) => state.detailPage.group); // 공구
-
+  const activeType = useSelector((state: RootState) => state.activePage.active);
   // FIXME: 해당 상세 페이지에서 새로고침 누르면, 상태 사라져서, 내용물 사라짐
   return (
     <RightBox>
@@ -43,13 +38,13 @@ export default function PdpRight() {
           <>
             <SmallInfo />
             <Title />
-            {board && <Price />}
-            {exchange && <ExchangeItems />}
-            {share && (
+            {activeType === 'board' && <Price />}
+            {activeType === 'exchange' && <ExchangeItems />}
+            {activeType === 'share' && (
               <div className='text-base py-3 text-gray-500'>무료 나눔</div>
             )}
-            {auction && <AuctionDetail />}
-            {group && <GroupDetail />}
+            {activeType === 'auction' && <AuctionDetail />}
+            {activeType === 'group' && <GroupDetail />}
             <Location />
           </>
         </div>
