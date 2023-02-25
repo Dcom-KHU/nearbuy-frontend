@@ -38,9 +38,9 @@ export default function PdpRight() {
           <>
             <SmallInfo />
             <Title />
-            {activeType === 'board' && <Price />}
+            {activeType === 'sale' && <Price />}
             {activeType === 'exchange' && <ExchangeItems />}
-            {activeType === 'share' && (
+            {activeType === 'free' && (
               <div className='text-base py-3 text-gray-500'>무료 나눔</div>
             )}
             {activeType === 'auction' && <AuctionDetail />}

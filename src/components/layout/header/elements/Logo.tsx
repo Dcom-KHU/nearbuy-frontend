@@ -1,7 +1,7 @@
 'use client';
 
 import { isActive } from '@/store/detailPage/activePageSlice';
-import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
+import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ const LogoLink = styled(Link)`
 const Logo = () => {
   const dispatch = useDispatch();
   const menuToggleHandler = () => {
-    dispatch(menuToggle());
+    dispatch(closeMenu());
     dispatch(isActive(null));
   };
   return (

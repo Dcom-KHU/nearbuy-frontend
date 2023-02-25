@@ -1,7 +1,7 @@
 'use client';
 
 import { isActive } from '@/store/detailPage/activePageSlice';
-import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
+import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,7 +31,7 @@ const Tools = () => {
     dispatch(searchToggle());
   };
   const menuToggleHandler = () => {
-    dispatch(menuToggle());
+    dispatch(closeMenu());
     dispatch(isActive(null));
   };
   return (
