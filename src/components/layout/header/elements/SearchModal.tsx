@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import '../../../../app/globals.css';
 
 const BackDropBox = styled.div`
   /* TODO: 작은 화면과 큰 화면일 때, 검색창 다르게 표시 */

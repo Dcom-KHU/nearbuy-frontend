@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
 import { useDispatch } from 'react-redux';
 import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
+import { isActive } from '@/store/detailPage/activePageSlice';
 
 const MenuBox = styled.div`
   position: fixed;

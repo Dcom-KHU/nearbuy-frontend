@@ -1,5 +1,7 @@
 'use client';
 
+import { isActive } from '@/store/detailPage/activePageSlice';
+import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
 import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,6 +30,10 @@ const Tools = () => {
   const searchToggleHandler = () => {
     dispatch(searchToggle());
   };
+  const menuToggleHandler = () => {
+    dispatch(menuToggle());
+    dispatch(isActive(null));
+  };
   return (
     <ToolsBox>
       <button onClick={searchToggleHandler}>
@@ -38,7 +44,7 @@ const Tools = () => {
           height={21}
         />
       </button>
-      <Link href='/like'>
+      <Link href='/like' onClick={menuToggleHandler}>
         <Image
           src='/images/header/heart.svg'
           alt='heart'
@@ -46,7 +52,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/chat'>
+      <Link href='/chat' onClick={menuToggleHandler}>
         <Image
           src='/images/header/message.svg'
           alt='message'
@@ -54,7 +60,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/my'>
+      <Link href='/my' onClick={menuToggleHandler}>
         <Image
           src='/images/header/user.svg'
           alt='user'

@@ -1,5 +1,6 @@
 'use client';
 
+import { isActive } from '@/store/detailPage/activePageSlice';
 import { menuToggle } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -27,11 +28,10 @@ const LoginBox = styled.div`
 const Login = () => {
   // 버튼 눌렀을 때, 햄버가 창 사라지게 만듦
   // TODO: 같은 코드가 login, logo, navigation 등에서 반복돼서 사용됨. 반복 줄일 순 없을까?
-  //       현재는 큰 화면에서도 toggleHandler 작동됨. (햄버거 창이 없어서 안 보일 뿐,,)
-  //       작은 창에서만 toggleHandler 작동 시키게 할 순 없을까?
   const dispatch = useDispatch();
   const menuToggleHandler = () => {
     dispatch(menuToggle());
+    dispatch(isActive(null));
   };
   return (
     <LoginBox>
