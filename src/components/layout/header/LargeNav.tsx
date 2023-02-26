@@ -6,18 +6,23 @@ import Navigation from './elements/Navigation';
 import Tools from './elements/Tools';
 import Login from './elements/Login';
 
-const HeaderBox = styled.div`
-  // 큰 화면
-  // TODO: 전체 화면 시, 양 옆 margin 부분 background-color 적용 안 됨.
+const Box = styled.div`
+  width: 100%;
+  height: 88px;
   background-color: rgb(255, 255, 255);
   position: fixed;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
+`;
+const HeaderBox = styled.div`
+  // 큰 화면
+  // TODO: 전체 화면 시, 양 옆 margin 부분 background-color 적용 안 됨.
+  margin: 0 auto;
   font-size: 18px;
   width: 100%;
   max-width: 1200px;
-  padding: 30px 20px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,12 +43,14 @@ const HeaderBox = styled.div`
 // 상단 헤더 (큰 화면일 때)
 const LargeNav = () => {
   return (
-    <HeaderBox>
-      <Logo />
-      <Navigation />
-      <Tools />
-      <Login />
-    </HeaderBox>
+    <Box>
+      <HeaderBox>
+        <Logo />
+        <Navigation />
+        <Tools />
+        <Login />
+      </HeaderBox>
+    </Box>
   );
 };
 export default LargeNav;
