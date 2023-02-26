@@ -5,8 +5,7 @@ import styled from 'styled-components';
 
 const OuterBox = styled.div`
   margin: 20px 0;
-  width: 100%;
-  max-width: 150px;
+  width: 150px;
   height: 5px;
   border: 1px solid #b69eff;
   border-radius: 8px;
@@ -16,26 +15,25 @@ const OuterBox = styled.div`
 
   img,
   p {
-    animation-duration: 2s;
-    animation-name: tagSlidIn;
-    @keyframes tagSlidIn {
-      from {
-        left: 0%;
-      }
-      to {
-        left: 36%;
-      }
-    }
+    animation: tagSlidIn 2s;
     position: absolute;
     left: 36%;
     transform: translate(-50%, 0);
   }
   img {
-    top: -20px;
+    top: -21px;
   }
   p {
     top: 5px;
     font-size: 12px;
+  }
+  @keyframes tagSlidIn {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 36%;
+    }
   }
 `;
 
@@ -48,8 +46,7 @@ const InnerBox = styled.div`
   padding: 0 5px;
   display: flex;
   align-items: center;
-  animation-duration: 2s;
-  animation-name: boxSlideIn;
+  animation: boxSlideIn 2s;
   @keyframes boxSlideIn {
     from {
       width: 0;
@@ -64,7 +61,7 @@ const UserTemp = () => {
   return (
     <div>
       <OuterBox>
-        <InnerBox />
+        <InnerBox>&nbsp;</InnerBox>
         <Image
           src='/images/map/location.svg'
           alt='location'
