@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import UserName from '../userpage/user/userinfo/UserName';
 import UserPic from '../userpage/user/userinfo/UserPic';
