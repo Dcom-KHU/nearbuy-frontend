@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import ItemContent from './ItemContent';
 import SmallInfoForListItem from '../product-detail-page/pdp-left/info/SmallInfoForListItem';
+import ProductMainPicture from './productinfo/ProductMainPicture';
 
 const ListItemBox = styled.div`
   display: flex;
@@ -36,14 +37,7 @@ export default function ListItem({ nowState }: { nowState: string | null }) {
     <ListItemBox>
       {isAuctionOrGroup && <SmallInfoForListItem type={nowState} />}
       <Link href={`/${nowState}/detail`}>
-        <Image
-          src='/images/for-demo/gloves.jpg'
-          alt='gloves'
-          width={200}
-          height={200}
-          // FIXME: image 비율 깨고 200 x 200 으로 설정하기 밑에 코드는 비효율적으로 보임
-          style={{ width: '200px', height: '200px' }}
-        />
+        <ProductMainPicture />
         <ItemContent />
       </Link>
       <button className='liked'>
