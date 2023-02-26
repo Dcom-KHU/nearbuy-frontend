@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import GoogleLogin from "./GoogleLogin";
-import NaverLogin from "./NaverLogin";
-import KakaoLogin from "./KakaoLogin";
-import styled from "styled-components";
+import GoogleLogin from './GoogleLogin';
+import NaverLogin from './NaverLogin';
+import KakaoLogin from './KakaoLogin';
+import styled from 'styled-components';
 
 const SocialLoginBlock = styled.div`
   //background: skyblue;
@@ -20,6 +20,9 @@ const SocialLoginBlock = styled.div`
     margin-bottom: 24px;
     width: 340px;
     border-radius: 5px;
+  }
+  @media screen and (max-width: 707px) {
+    display: none;
   }
 `;
 

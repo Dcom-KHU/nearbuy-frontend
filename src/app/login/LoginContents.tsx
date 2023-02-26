@@ -3,6 +3,7 @@ import JustLogin from './justlogin/JustLogin';
 import SocialLogin from './sociallogin/SocialLogin';
 
 import styled from 'styled-components';
+import SmallSocialLogin from './sociallogin/SmallSocialLogin';
 
 const LoginContentsBlock = styled.div`
   //background: lavender;
@@ -23,6 +24,7 @@ export default function LoginContents() {
     <LoginContentsBlock>
       <JustLogin />
       <SocialLogin />
+      <SmallSocialLogin />
     </LoginContentsBlock>
   );
 }
