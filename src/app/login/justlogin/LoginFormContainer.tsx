@@ -1,6 +1,6 @@
-import { Children } from "react";
-import styled from "styled-components";
-import LoginForm from "./LoginForm";
+import { Children } from 'react';
+import styled from 'styled-components';
+import LoginForm from './LoginForm';
 
 const LoginFormContainerBlock = styled.div`
   //background-color: pink;

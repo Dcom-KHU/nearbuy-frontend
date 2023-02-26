@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import LoginFormContainer from "./LoginFormContainer";
+import styled from 'styled-components';
+import LoginFormContainer from './LoginFormContainer';
 // 일단 단순한 로그인 틀만 구현...
 
 const JustLoginBlock = styled.div`
@@ -14,13 +14,18 @@ const JustLoginBlock = styled.div`
   justify-content: center;
 
   padding: 20px 50px;
+  border-right: 1px solid lightgray;
+
+  @media screen and (max-width: 707px) {
+    border-right: none;
+  }
 `;
 
 export default function JustLogin() {
   return (
     <JustLoginBlock>
       <LoginFormContainer />
-      <a href="">회원가입 (아직 연결 안됨)</a>
+      <a href=''>회원가입 (아직 연결 안됨)</a>
     </JustLoginBlock>
   );
 }
