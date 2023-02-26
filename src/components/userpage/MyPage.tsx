@@ -24,12 +24,6 @@ const MyPageBox = styled.div`
     gap: 50px;
   }
 `;
-const ListBox = styled.div`
-  width: 80%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-`;
 
 // mypage
 const MyPage = () => {

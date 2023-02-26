@@ -1,6 +1,5 @@
 'use client';
 
-import '../../app/globals.css';
 import styled from 'styled-components';
 
 const Nav = styled.nav`

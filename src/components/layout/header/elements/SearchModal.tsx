@@ -24,7 +24,7 @@ const OverlayForm = styled.form`
   width: 100%;
   height: 108px;
   background-color: white;
-  z-index: 11;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;

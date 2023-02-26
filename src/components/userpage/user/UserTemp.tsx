@@ -12,6 +12,7 @@ const OuterBox = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  z-index: -1;
 
   img,
   p {
@@ -59,18 +60,16 @@ const InnerBox = styled.div`
 
 const UserTemp = () => {
   return (
-    <div>
-      <OuterBox>
-        <InnerBox>&nbsp;</InnerBox>
-        <Image
-          src='/images/map/location.svg'
-          alt='location'
-          width={18}
-          height={18}
-        />
-        <p>36&deg;</p>
-      </OuterBox>
-    </div>
+    <OuterBox>
+      <InnerBox>&nbsp;</InnerBox>
+      <Image
+        src='/images/map/location.svg'
+        alt='location'
+        width={18}
+        height={18}
+      />
+      <p>36&deg;</p>
+    </OuterBox>
   );
 };
 export default UserTemp;

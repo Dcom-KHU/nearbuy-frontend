@@ -32,7 +32,7 @@ const Tools = () => {
   };
   const menuToggleHandler = () => {
     dispatch(closeMenu());
-    dispatch(isActive(null));
+    dispatch(isActive('board')); // 일단 userpage나 like page에서 게시글 list 보여주기 위해 'board'로 함.
   };
   return (
     <ToolsBox>
