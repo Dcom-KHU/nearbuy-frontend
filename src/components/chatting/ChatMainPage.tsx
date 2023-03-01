@@ -10,8 +10,7 @@ const ChatList = styled.section`
   min-width: 300px;
   height: 100vh;
   overflow: auto;
-  border: 1px solid red;
-
+  border: 1px solid rgb(168, 168, 168);
   @media screen and (max-width: 707px) {
     display: none;
   }

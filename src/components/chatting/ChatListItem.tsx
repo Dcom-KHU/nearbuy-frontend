@@ -11,6 +11,7 @@ const ChatItem = styled.div`
   gap: 5px;
   align-items: center;
   padding: 10px 5px;
+
   &:hover {
     cursor: pointer;
     background-color: #f3f3f3;

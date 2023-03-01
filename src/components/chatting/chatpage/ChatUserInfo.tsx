@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const UserInfoBox = styled.div`
   width: 100%;
   padding: 0 80px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(168, 168, 168);
   display: flex;
   justify-content: space-between;
   align-items: center;

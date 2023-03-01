@@ -6,7 +6,6 @@ import Header from '@/components/layout/header/Header';
 import { Providers } from './providers';
 import Footer from '@/components/layout/footer/Footer';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
 // main 부분 내용 잘림 방지, 위에 header 만큼 margin-top
 const Box = styled.div`
