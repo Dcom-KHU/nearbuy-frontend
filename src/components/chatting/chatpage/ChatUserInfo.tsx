@@ -1,5 +1,6 @@
 import UserInfo from '@/components/product-detail-page/pdp-right/elements/UserInfo';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const UserInfoBox = styled.div`
@@ -17,9 +18,9 @@ const UserInfoBox = styled.div`
 export default function ChatUserInfo() {
   return (
     <UserInfoBox>
-      <div>
+      <Link href='/my'>
         <UserInfo />
-      </div>
+      </Link>
       <Button>후기 보내기</Button>
     </UserInfoBox>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 import UserName from '../userpage/user/userinfo/UserName';
 import UserPic from '../userpage/user/userinfo/UserPic';
@@ -34,9 +35,13 @@ const MessageBox = styled.div`
 export default function ChatListItem() {
   return (
     <ChatItem>
-      <UserPic size={80} />
+      <Link href='/my'>
+        <UserPic size={80} />
+      </Link>
       <InfoBox>
-        <UserName />
+        <Link href='/my'>
+          <UserName />
+        </Link>
         <MessageBox>
           <p>message</p>
           <p>· 1일</p>

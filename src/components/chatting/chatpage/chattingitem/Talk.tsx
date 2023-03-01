@@ -1,6 +1,7 @@
 'use client';
 
 import UserPic from '@/components/userpage/user/userinfo/UserPic';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const ChatBox = styled.div`
@@ -38,7 +39,9 @@ type Props = {
 export default function Talk({ last, me }: Props) {
   return (
     <ChatBox last={last} me={me}>
-      <UserPic size={24} />
+      <Link href='/my'>
+        <UserPic size={24} />
+      </Link>
       <p>혹시 팔렸나요?</p>
     </ChatBox>
   );
