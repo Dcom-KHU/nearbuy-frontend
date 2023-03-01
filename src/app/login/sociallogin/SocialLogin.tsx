@@ -21,6 +21,7 @@ const SocialLoginBlock = styled.div`
     width: 340px;
     border-radius: 5px;
   }
+  // 작은 화면에선 로고들만 보이게 함
   @media screen and (max-width: 707px) {
     display: none;
   }

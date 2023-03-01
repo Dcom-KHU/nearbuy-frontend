@@ -52,7 +52,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/chat' onClick={menuToggleHandler}>
+      <Link href='/chatting' onClick={menuToggleHandler}>
         <Image
           src='/images/header/message.svg'
           alt='message'

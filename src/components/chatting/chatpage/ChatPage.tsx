@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import ChatUserInfo from './ChatUserInfo';
 import ChatProductInfo from './ChatProductInfo';
+import Chatting from './Chatting';
 
 // 대화 내용
 const ChatArticle = styled.article`
@@ -19,6 +20,7 @@ export default function ChatPage() {
       <ChatArticle>
         <ChatUserInfo />
         <ChatProductInfo />
+        <Chatting />
       </ChatArticle>
     </section>
   );

@@ -10,7 +10,6 @@ const ProductInfoBox = styled.div`
   width: 100%;
   padding: 20px 80px;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 20px;
   position: relative;

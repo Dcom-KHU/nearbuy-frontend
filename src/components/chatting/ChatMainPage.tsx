@@ -21,24 +21,14 @@ const ChatList = styled.ul`
 export default function ChatMainPage() {
   return (
     <div className='w-4/5 h-screen flex gap-10'>
-      <section className='w-2/6'>
+      <section className='w-2/6 flex'>
         <ChatList>
           <ChatListItem />
           <ChatListItem />
           <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
         </ChatList>
+        <ChatPage />
       </section>
-      <ChatPage />
     </div>
   );
 }
