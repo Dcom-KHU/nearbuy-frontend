@@ -18,11 +18,15 @@ const ChattingBox = styled.div<ChattingBoxProps>`
 `;
 // 채팅 내용
 export default function Chatting() {
+  // 제품 설명 토글 시 채팅방 세로 사이즈 조절하기 위해
   const toggle = useSelector((state: RootState) => state.chatToggle.toggle);
   // 새로고침 시 제일 최근 채팅 내용이 보이도록 스크롤 제일 아래로 가게함
-  const chatBoxRef = useRef(null);
+  const chatBoxRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    if (chatBoxRef.current) {
+      // null 체크를 해주어야 합니다.
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
   }, []);
   return (
     <ChattingBox toggle={toggle} ref={chatBoxRef}>
