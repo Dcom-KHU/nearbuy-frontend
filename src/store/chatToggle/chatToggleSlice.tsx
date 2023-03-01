@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  toggle: false,
+  toggle: true,
 };
 
 const chatToggleSlice = createSlice({
