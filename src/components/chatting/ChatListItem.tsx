@@ -36,13 +36,9 @@ const MessageBox = styled.div`
 export default function ChatListItem() {
   return (
     <ChatItem>
-      <Link href='/my'>
-        <UserPic size={80} />
-      </Link>
+      <UserPic size={80} />
       <InfoBox>
-        <Link href='/my'>
-          <UserName />
-        </Link>
+        <UserName />
         <MessageBox>
           <p>message</p>
           <p>· 1일</p>
