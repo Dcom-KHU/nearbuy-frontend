@@ -1,4 +1,6 @@
+import { RootState } from '@/store/store';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Talk from './chattingitem/Talk';
 import Time from './chattingitem/Time';
