@@ -8,6 +8,7 @@ export default function Chatting() {
       <Time />
       <Talk />
       <Talk last />
+      <Time />
       <p>내 대화</p>
     </div>
   );
