@@ -1,9 +1,5 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": [
-    "mainpage",
-    "mypage",
-    "userpage"
-  ]
+  "cSpell.words": ["chattingitem", "mainpage", "mypage", "userpage"]
 }
