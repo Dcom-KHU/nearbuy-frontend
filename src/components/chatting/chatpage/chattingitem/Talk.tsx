@@ -30,8 +30,12 @@ const ChatBox = styled.div`
     align-items: center;
   }
 `;
+type Props = {
+  last?: boolean;
+  me?: boolean;
+};
 // 대화 내용 한 줄 한 줄
-export default function Talk({ last, me }) {
+export default function Talk({ last, me }: Props) {
   return (
     <ChatBox last={last} me={me}>
       <UserPic size={24} />
