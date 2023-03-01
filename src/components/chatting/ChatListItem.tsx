@@ -5,7 +5,7 @@ import UserName from '../userpage/user/userinfo/UserName';
 import UserPic from '../userpage/user/userinfo/UserPic';
 
 // 각 채팅별
-const ChatItem = styled.li`
+const ChatItem = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;

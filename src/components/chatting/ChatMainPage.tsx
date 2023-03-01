@@ -5,8 +5,8 @@ import ChatListItem from './ChatListItem';
 import ChatPage from './chatpage/ChatPage';
 
 // 채팅 목록
-const ChatList = styled.ul`
-  width: 100%;
+const ChatList = styled.section`
+  width: 33%;
   min-width: 300px;
   height: 100vh;
   overflow: auto;
@@ -20,15 +20,26 @@ const ChatList = styled.ul`
 // 채팅 페이지
 export default function ChatMainPage() {
   return (
-    <div className='w-4/5 h-screen flex gap-10'>
-      <section className='w-2/6 flex'>
-        <ChatList>
-          <ChatListItem />
-          <ChatListItem />
-          <ChatListItem />
-        </ChatList>
-        <ChatPage />
-      </section>
+    <div className='w-4/5 h-screen flex gap-10 mt-10'>
+      <ChatList>
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+        <ChatListItem />
+      </ChatList>
+      <ChatPage />
     </div>
   );
 }

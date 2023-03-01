@@ -6,7 +6,7 @@ import ChatProductInfo from './ChatProductInfo';
 import Chatting from './Chatting';
 
 // 대화 내용
-const ChatArticle = styled.article`
+const ChatArticle = styled.main`
   width: 100%;
   height: 100vh;
   min-width: 836px;
