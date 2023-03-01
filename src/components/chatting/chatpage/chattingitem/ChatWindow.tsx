@@ -18,7 +18,7 @@ const BorderBox = styled.div`
   padding: 10px 9px;
   textarea {
     width: 100%;
-    height: 24px !important; // textarea 크기 자유자재로 늘어나는 것 방지
+    height: 24px;
     background: none;
   }
 `;
