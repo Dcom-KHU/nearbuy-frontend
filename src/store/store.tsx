@@ -1,13 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
+import activePageSlice from './detailPage/activePageSlice';
 import menuToggleSlice from './menuToggle/menuToggleSlice';
 import myPageMenuToggleSlice from './mypageMenuToggle/myPageMenuToggleSlice';
+import priceSlice from './price/priceSlice';
 import searchToggleSlice from './searchToggle/searchToggleSlice';
 
 const store = configureStore({
   reducer: {
-    menuToggle: menuToggleSlice.reducer,
-    searchToggle: searchToggleSlice.reducer,
-    myPageMenuToggle: myPageMenuToggleSlice.reducer,
+    menuToggle: menuToggleSlice,
+    searchToggle: searchToggleSlice,
+    myPageMenuToggle: myPageMenuToggleSlice,
+    price: priceSlice,
+    activePage: activePageSlice,
   },
 });
 

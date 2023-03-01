@@ -1,21 +1,21 @@
-"use client";
-import JustLogin from "./justlogin/JustLogin";
-import SocialLogin from "./sociallogin/SocialLogin";
+'use client';
+import JustLogin from './justlogin/JustLogin';
+import SocialLogin from './sociallogin/SocialLogin';
 
-import styled from "styled-components";
+import styled from 'styled-components';
+import SmallSocialLogin from './sociallogin/SmallSocialLogin';
 
 const LoginContentsBlock = styled.div`
   //background: lavender;
   width: 100%;
   height: 100%;
-  padding: 50px 200px;
-
+  padding: 50px 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  .vertical-line {
-    background-color: lightgray;
-    width: 1px;
+  @media screen and (max-width: 707px) {
+    flex-direction: column;
   }
 `;
 
@@ -23,8 +23,8 @@ export default function LoginContents() {
   return (
     <LoginContentsBlock>
       <JustLogin />
-      <div className="vertical-line"></div>
       <SocialLogin />
+      <SmallSocialLogin />
     </LoginContentsBlock>
   );
 }

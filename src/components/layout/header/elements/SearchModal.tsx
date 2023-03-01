@@ -1,10 +1,9 @@
 'use client';
 
 import ReactDOM from 'react-dom';
-import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
+import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import '../../../../app/globals.css';
 
 const BackDropBox = styled.div`
   /* TODO: 작은 화면과 큰 화면일 때, 검색창 다르게 표시 */
@@ -25,7 +24,7 @@ const OverlayForm = styled.form`
   width: 100%;
   height: 108px;
   background-color: white;
-  z-index: 11;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,7 +50,7 @@ const OverlayForm = styled.form`
   /* } */
 `;
 
-// 포탈
+// 검색창
 const BackDropPortal = () => {
   return <BackDropBox />;
 };
@@ -64,11 +63,11 @@ const OverlayPortal: React.FC<{ onClick: () => void }> = (props) => {
   );
 };
 
-// 검색창
+// 포탈
 const SearchModal = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
-    dispatch(searchToggleActions.searchToggle());
+    dispatch(searchToggle());
   };
   return (
     <>

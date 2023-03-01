@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import styled from "styled-components";
-import WriteButton from "./WriteButton";
-import WriteOptions from "./WriteOptions";
+import { useState } from 'react';
+import styled from 'styled-components';
+import WriteButton from './WriteButton';
+import WriteOptions from './WriteOptions';
 
 const WriteToggleBlock = styled.div`
   //background-color: pink;

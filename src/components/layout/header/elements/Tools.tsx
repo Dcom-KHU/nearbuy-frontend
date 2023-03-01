@@ -1,6 +1,8 @@
 'use client';
 
-import { searchToggleActions } from '@/store/searchToggle/searchToggleSlice';
+import { isActive } from '@/store/detailPage/activePageSlice';
+import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
+import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -26,7 +28,11 @@ const ToolsBox = styled.div`
 const Tools = () => {
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
-    dispatch(searchToggleActions.searchToggle());
+    dispatch(searchToggle());
+  };
+  const menuToggleHandler = () => {
+    dispatch(closeMenu());
+    dispatch(isActive('board')); // 일단 userpage나 like page에서 게시글 list 보여주기 위해 'board'로 함.
   };
   return (
     <ToolsBox>
@@ -38,7 +44,7 @@ const Tools = () => {
           height={21}
         />
       </button>
-      <Link href='/like'>
+      <Link href='/like' onClick={menuToggleHandler}>
         <Image
           src='/images/header/heart.svg'
           alt='heart'
@@ -46,7 +52,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/chat'>
+      <Link href='/chat' onClick={menuToggleHandler}>
         <Image
           src='/images/header/message.svg'
           alt='message'
@@ -54,7 +60,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/my'>
+      <Link href='/my' onClick={menuToggleHandler}>
         <Image
           src='/images/header/user.svg'
           alt='user'

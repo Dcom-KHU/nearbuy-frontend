@@ -47,3 +47,14 @@ a {
 li {
   list-style: none;
 }
+
+/* select 기본 css 없앰 */
+select {
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select::-ms-expand {
+  display: none;
+}

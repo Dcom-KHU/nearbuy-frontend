@@ -1,6 +1,9 @@
 'use client';
 
+import { isActive } from '@/store/detailPage/activePageSlice';
+import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 const LogoLink = styled(Link)`
@@ -10,6 +13,15 @@ const LogoLink = styled(Link)`
 
 // 상단 헤더 로고
 const Logo = () => {
-  return <LogoLink href='/'>NEARBUY</LogoLink>;
+  const dispatch = useDispatch();
+  const menuToggleHandler = () => {
+    dispatch(closeMenu());
+    dispatch(isActive(null));
+  };
+  return (
+    <LogoLink href='/' onClick={menuToggleHandler}>
+      NEARBUY
+    </LogoLink>
+  );
 };
 export default Logo;
