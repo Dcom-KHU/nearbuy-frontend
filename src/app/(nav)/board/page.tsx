@@ -20,7 +20,7 @@ const BoardPageBlock = styled.div`
 export default function Board() {
   return (
     <>
-      <h1>전체 페이지</h1>
+      <h1 className='text-center'>전체 페이지</h1>
       <BoardPageBlock>
         <PageSort />
         <List />

@@ -19,7 +19,7 @@ const SalePageBlock = styled.div`
 export default function Auction() {
   return (
     <>
-      <h1>경매 페이지</h1>
+      <h1 className='text-center'>경매 페이지</h1>
       <SalePageBlock>
         <PageSort />
         <List />

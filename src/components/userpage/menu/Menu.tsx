@@ -5,7 +5,6 @@ import MenuItem from './MenuItem';
 
 const MenuBox = styled.div`
   width: 100%;
-  height: 100%;
   padding: 0 30px;
   display: grid;
   justify-items: end;

@@ -10,7 +10,7 @@ interface ChattingBoxProps extends StyledComponentProps<'div', any, {}, never> {
   style?: CSSProperties;
 }
 const ChattingBox = styled.div<ChattingBoxProps>`
-  overflow: auto;
+  overflow-y: auto;
   max-height: ${(props) =>
     props.toggle ? 'calc(100% - 268px)' : 'calc(100% - 218px)'};
   padding: 0 56px;

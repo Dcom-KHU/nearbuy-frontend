@@ -1,16 +1,16 @@
 'use client';
 
-import Link from 'next/link';
 import styled from 'styled-components';
 import UserName from '../userpage/user/userinfo/UserName';
 import UserPic from '../userpage/user/userinfo/UserPic';
 
 // 각 채팅별
 const ChatItem = styled.div`
+  width: 100%;
   display: flex;
   gap: 5px;
   align-items: center;
-  padding: 10px 5px;
+  padding: 10px 15px;
 
   &:hover {
     cursor: pointer;

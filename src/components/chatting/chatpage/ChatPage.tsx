@@ -10,11 +10,12 @@ import ChatWindow from './chattingitem/ChatWindow';
 const ChatMain = styled.main`
   width: 100%;
   height: 100%;
-  min-width: 780px;
+  /* min-width: 780px; */
   border: 1px solid rgb(168, 168, 168);
   position: relative;
   display: flex;
   flex-direction: column;
+  flex-shrink: 1;
 `;
 
 // 채팅방

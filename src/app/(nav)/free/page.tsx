@@ -19,7 +19,7 @@ const SalePageBlock = styled.div`
 export default function Free() {
   return (
     <>
-      <h1>나눔 페이지</h1>
+      <h1 className='text-center'>나눔 페이지</h1>
       <SalePageBlock>
         <PageSort />
         <List />

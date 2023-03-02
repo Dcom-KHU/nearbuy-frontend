@@ -11,10 +11,8 @@ import styled from 'styled-components';
 const Box = styled.div`
   margin-top: 88px;
   // TODO: 햄버거 버튼 누를 시, main 내용이 그 만큼 아래로 내려가도록 하고 싶음. (후순위)
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 `;
 
 export default function RootLayout({
