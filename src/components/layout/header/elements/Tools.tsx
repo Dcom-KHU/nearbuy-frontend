@@ -16,6 +16,7 @@ const ToolsBox = styled.div`
 
   img:hover {
     transform: scale(1.2);
+    cursor: pointer;
   }
 
   // 작은 화면
