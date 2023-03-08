@@ -19,7 +19,7 @@ const SalePageBlock = styled.div`
 export default function Exchange() {
   return (
     <>
-      <h1>교환 페이지</h1>
+      <h1 className='text-center'>교환 페이지</h1>
       <SalePageBlock>
         <PageSort />
         <List />

@@ -31,7 +31,7 @@ const MyPage = () => {
     (state: RootState) => state.myPageMenuToggle.toggle
   );
   return (
-    <>
+    <div className='flex flex-col items-center justify-center'>
       <MyPageBox>
         <User />
         <Menu />
@@ -42,7 +42,7 @@ const MyPage = () => {
           <List />
         </>
       )}
-    </>
+    </div>
   );
 };
 export default MyPage;

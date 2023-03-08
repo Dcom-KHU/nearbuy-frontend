@@ -1,6 +1,9 @@
 'use client';
 
 import styled from 'styled-components';
+import ProductLocation from './productinfo/ProductLocation';
+import ProductPrice from './productinfo/ProductPrice';
+import ProductTitle from './productinfo/ProductTitle';
 
 const ItemContentBox = styled.div`
   display: flex;
@@ -23,9 +26,9 @@ const ItemContentBox = styled.div`
 const ItemContent = () => {
   return (
     <ItemContentBox>
-      <p>따스운 겨울 장갑</p>
-      <p>1,000,000,000</p>
-      <p>경희대학교</p>
+      <ProductTitle />
+      <ProductPrice />
+      <ProductLocation />
     </ItemContentBox>
   );
 };

@@ -10,7 +10,7 @@ import Link from 'next/link';
 const UserInfoBox = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   div:last-child {
     margin-left: auto;
     margin-right: 10px;

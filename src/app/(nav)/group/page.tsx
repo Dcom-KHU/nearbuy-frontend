@@ -19,7 +19,7 @@ const SalePageBlock = styled.div`
 export default function Group() {
   return (
     <>
-      <h1>공구 페이지</h1>
+      <h1 className='text-center'>공구 페이지</h1>
       <SalePageBlock>
         <PageSort />
         <List />

@@ -16,6 +16,7 @@ const ToolsBox = styled.div`
 
   img:hover {
     transform: scale(1.2);
+    cursor: pointer;
   }
 
   // 작은 화면
@@ -52,7 +53,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/chat' onClick={menuToggleHandler}>
+      <Link href='/chatting' onClick={menuToggleHandler}>
         <Image
           src='/images/header/message.svg'
           alt='message'

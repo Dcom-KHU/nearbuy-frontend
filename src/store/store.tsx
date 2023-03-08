@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import chatToggleSlice from './chatToggle/chatToggleSlice';
 import activePageSlice from './detailPage/activePageSlice';
 import menuToggleSlice from './menuToggle/menuToggleSlice';
 import myPageMenuToggleSlice from './mypageMenuToggle/myPageMenuToggleSlice';
@@ -12,6 +13,7 @@ const store = configureStore({
     myPageMenuToggle: myPageMenuToggleSlice,
     price: priceSlice,
     activePage: activePageSlice,
+    chatToggle: chatToggleSlice,
   },
 });
 
