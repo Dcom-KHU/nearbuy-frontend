@@ -35,47 +35,33 @@ interface Itemp {
   writer: string;
 }
 export default function MainPage() {
-  const {
-    data: getData,
-    isLoading: getIsLoading,
-    error: getError,
-  } = useGet<Itemp>({
-    url: "/api/post/sale",
-    params: { id: 1 },
-  });
+  // // get api call 하는 방법
+  // const {
+  //   data: getData,
+  //   isLoading: getIsLoading,
+  //   error: getError,
+  // } = useGet<Itemp>({
+  //   url: "/api/post/sale",
+  //   params: { id: 1 },
+  // });
 
-  useEffect(() => {
-    console.log(getData, getIsLoading, getError);
-  }, [getData, getIsLoading, getError]);
+  // useEffect(() => {
+  //   console.log(getData, getIsLoading, getError);
+  // }, [getData, getIsLoading, getError]);
 
-  const {
-    data: postData,
-    isLoading: postIsLoading,
-    error: postError,
-  } = usePost<{ accessToken: string }>({
-    url: "/api/user/login",
-    data: { id: 1, password: "hii" },
-  });
-  useEffect(() => {
-    console.log(postData, postIsLoading, postError);
-  }, [postData, postIsLoading, postError]);
+  // // post api call 하는 방법
+  // const {
+  //   data: postData,
+  //   isLoading: postIsLoading,
+  //   error: postError,
+  // } = usePost<{ accessToken: string }>({
+  //   url: "/api/user/login",
+  //   data: { id: 1, password: "hii" },
+  // });
 
-  const requestHeaders: AxiosHeaders = new AxiosHeaders();
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set("Authorization", "Bearer ");
-
-  const {
-    data: patchData,
-    isLoading: patchIsLoading,
-    error: patchError,
-  } = usePatch({
-    url: "/api/user/page/change",
-    data: { password: "hii", newPassword: "hii", newPasswordCheck: "hii" },
-    headers: requestHeaders,
-  });
-  useEffect(() => {
-    console.log(patchData, patchIsLoading, patchError);
-  }, [patchData, patchIsLoading, patchError]);
+  // useEffect(() => {
+  //   console.log(postData, postIsLoading, postError);
+  // }, [postData, postIsLoading, postError]);
 
   return (
     <>
