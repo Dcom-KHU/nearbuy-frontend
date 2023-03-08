@@ -28,7 +28,9 @@ export const useGet = <T>(requestConfig: RequestConfigType) => {
           : await customAxios.get<T>(requestConfig.url);
         setData(response.data);
       } catch (err: any) {
-        setError(err.message);
+        setError(
+          err.response.data.message ? err.response.data.message : err.message
+        );
       }
 
       setIsLoading(false);
@@ -59,7 +61,9 @@ export const usePost = <T>(requestConfig: RequestConfigType) => {
         );
         setData(response.data);
       } catch (err: any) {
-        setError(err.message);
+        setError(
+          err.response.data.message ? err.response.data.message : err.message
+        );
       }
 
       setIsLoading(false);
@@ -87,7 +91,10 @@ export const usePatch = <T>(requestConfig: RequestConfigType) => {
         );
         setData(response.data);
       } catch (err: any) {
-        setError(err.message);
+        // console.log(err.message);
+        setError(
+          err.response.data.message ? err.response.data.message : err.message
+        );
       }
 
       setIsLoading(false);
@@ -115,7 +122,9 @@ export const useDelete = <T>(requestConfig: RequestConfigType) => {
         });
         setData(response.data);
       } catch (err: any) {
-        setError(err.message);
+        setError(
+          err.response.data.message ? err.response.data.message : err.message
+        );
       }
 
       setIsLoading(false);
