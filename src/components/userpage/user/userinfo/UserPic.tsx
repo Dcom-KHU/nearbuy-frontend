@@ -8,7 +8,7 @@ type Props = {
 };
 
 const ImageDeco = styled(Image)`
-  padding: 0 10px 10px 10px;
+  padding: 10px;
   border-radius: 50%;
   overflow: hidden;
   &:hover {

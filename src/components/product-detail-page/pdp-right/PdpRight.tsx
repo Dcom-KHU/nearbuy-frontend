@@ -24,6 +24,9 @@ const InfoBox = styled.div`
   border: 1px solid black;
   border-radius: 8px;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 // 상세페이지 정보 부분 (오른쪽 부분)

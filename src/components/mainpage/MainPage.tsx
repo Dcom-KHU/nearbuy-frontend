@@ -9,16 +9,23 @@ import { AxiosHeaders } from "axios";
 const MainBox = styled.main`
   background: ${props => props.color};
   width: 100%;
-  padding: 50px 0;
 `;
 const MainPageBlock = styled.section`
   margin: 0 auto;
   width: 1024px;
-  padding: 30px;
+  height: 100%;
+  padding: 80px 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 100px;
+  background: ${props => props.color};
+  div {
+    min-height: 1px;
+    min-width: 200px;
+    max-width: 500px;
+    overflow: hidden;
+  }
 `;
 
 interface Itemp {
@@ -66,7 +73,7 @@ export default function MainPage() {
   return (
     <>
       <MainBox color="lightblue">
-        <MainPageBlock>
+        <MainPageBlock color="lightblue">
           <Image
             src="/images/for-demo/icecream.jpg"
             alt="kitty"
@@ -88,7 +95,7 @@ export default function MainPage() {
         </MainPageBlock>
       </MainBox>
       <MainBox color="lightyellow">
-        <MainPageBlock>
+        <MainPageBlock color="lightyellow">
           <div>
             If you're looking for random paragraphs, you've come to the right
             place. When a random word or a random sentence isn't quite enough,
@@ -110,7 +117,7 @@ export default function MainPage() {
         </MainPageBlock>
       </MainBox>
       <MainBox color="lightpink">
-        <MainPageBlock>
+        <MainPageBlock color="lightpink">
           <Image
             src="/images/for-demo/icecream.jpg"
             alt="kitty"
