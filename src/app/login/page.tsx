@@ -6,15 +6,22 @@ import LoginContents from './LoginContents';
 import styled from 'styled-components';
 
 const LoginPageBlock = styled.div`
+  width: 940px;
   margin: 0 auto;
   padding-top: 20px;
+
+  @media screen and (max-width: 707px) {
+    width: 470px;
+  }
 `;
 
 export default function Login() {
   return (
-    <LoginPageBlock>
-      <LoginTitle />
-      <LoginContents />
-    </LoginPageBlock>
+    <div>
+      <LoginPageBlock>
+        <LoginTitle />
+        <LoginContents />
+      </LoginPageBlock>
+    </div>
   );
 }
