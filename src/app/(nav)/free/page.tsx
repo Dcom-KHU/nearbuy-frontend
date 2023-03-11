@@ -1,10 +1,15 @@
 // 나눔 페이지
 // our-domain.com/free
 "use client";
-
-import styled from "styled-components";
+/* import styled from "styled-components";
 import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
+import ScrollTop from "@/components/ui/ScrollTop"; */
+
+import styled from "styled-components";
+import PageSort from "../board/PageSort";
+// import WriteToggle from '@/components/write/WriteToggle';
+import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
@@ -19,10 +24,10 @@ const SalePageBlock = styled.div`
 export default function Free() {
   return (
     <>
-      <h1>나눔 페이지</h1>
+      <h1 className="text-center">나눔 페이지</h1>
       <SalePageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </SalePageBlock>
       \
       <ScrollTop />

@@ -4,9 +4,9 @@
 "use client";
 
 import styled from "styled-components";
-import CardsContainer from "./CardsContainer";
 import PageSort from "./PageSort";
-// import WriteToggle from "@/components/write/writeToggles/roundWrite/WriteToggle";   없는게 나을것같대서 일단 지움
+// import WriteToggle from "@/components/write/WriteToggle";
+import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
 const BoardPageBlock = styled.div`
@@ -21,10 +21,10 @@ const BoardPageBlock = styled.div`
 export default function Board() {
   return (
     <>
-      <h1>전체 페이지</h1>
+      <h1 className="text-center">전체 페이지</h1>
       <BoardPageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </BoardPageBlock>
       <ScrollTop />
     </>

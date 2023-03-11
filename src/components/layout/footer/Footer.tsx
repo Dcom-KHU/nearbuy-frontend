@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import styled from 'styled-components';
 
@@ -5,7 +7,7 @@ const FooterBox = styled.div`
   display: flex;
   justify-content: center;
   /* border-top: 1px solid black; */
-  padding: 70px 0;
+  padding: 40px 0;
   gap: 10px;
 
   a:hover {

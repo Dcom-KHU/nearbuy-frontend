@@ -5,37 +5,36 @@ import styled from 'styled-components';
 
 const OuterBox = styled.div`
   margin: 20px 0;
-  width: 100%;
-  max-width: 150px;
+  width: 150px;
   height: 5px;
   border: 1px solid #b69eff;
   border-radius: 8px;
   display: flex;
   align-items: center;
   position: relative;
+  z-index: -1;
 
   img,
   p {
-    animation-duration: 2s;
-    animation-name: tagSlidIn;
-    @keyframes tagSlidIn {
-      from {
-        left: 0%;
-      }
-      to {
-        left: 36%;
-      }
-    }
+    animation: tagSlidIn 2s;
     position: absolute;
     left: 36%;
     transform: translate(-50%, 0);
   }
   img {
-    top: -20px;
+    top: -21px;
   }
   p {
     top: 5px;
     font-size: 12px;
+  }
+  @keyframes tagSlidIn {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 36%;
+    }
   }
 `;
 
@@ -48,8 +47,7 @@ const InnerBox = styled.div`
   padding: 0 5px;
   display: flex;
   align-items: center;
-  animation-duration: 2s;
-  animation-name: boxSlideIn;
+  animation: boxSlideIn 2s;
   @keyframes boxSlideIn {
     from {
       width: 0;
@@ -62,18 +60,16 @@ const InnerBox = styled.div`
 
 const UserTemp = () => {
   return (
-    <div>
-      <OuterBox>
-        <InnerBox />
-        <Image
-          src='/images/map/location.svg'
-          alt='location'
-          width={18}
-          height={18}
-        />
-        <p>36&deg;</p>
-      </OuterBox>
-    </div>
+    <OuterBox>
+      <InnerBox>&nbsp;</InnerBox>
+      <Image
+        src='/images/map/location.svg'
+        alt='location'
+        width={18}
+        height={18}
+      />
+      <p>36&deg;</p>
+    </OuterBox>
   );
 };
 export default UserTemp;

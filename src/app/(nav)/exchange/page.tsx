@@ -3,8 +3,9 @@
 "use client";
 
 import styled from "styled-components";
-import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
+// import WriteToggle from '@/components/write/WriteToggle';
+import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
@@ -19,10 +20,10 @@ const SalePageBlock = styled.div`
 export default function Exchange() {
   return (
     <>
-      <h1>교환 페이지</h1>
+      <h1 className="text-center">교환 페이지</h1>
       <SalePageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </SalePageBlock>
       <ScrollTop />
     </>

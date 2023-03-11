@@ -5,14 +5,15 @@ import MiniWriteToggle from "@/components/write/writeToggles/miniWrite/MiniWrite
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
   align-self: flex-end;
-  margin-right: 10vw;
+  margin-right: 12vw;
 `;
 
 const PageSortBlock = styled.select`
-  margin-right: 10px;
-  width: 180px;
   border: solid 2px gray;
+  padding: 0 10px;
+  text-align-last: center;
 `;
 
 function PageSort() {

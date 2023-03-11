@@ -4,6 +4,7 @@ import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import List from '../list/List';
+import ListNav from '../list/ListNav';
 import Menu from './menu/Menu';
 import User from './user/User';
 
@@ -30,13 +31,18 @@ const MyPage = () => {
     (state: RootState) => state.myPageMenuToggle.toggle
   );
   return (
-    <>
+    <div className='flex flex-col items-center justify-center'>
       <MyPageBox>
         <User />
         <Menu />
       </MyPageBox>
-      {toggle && <List />}
-    </>
+      {toggle && (
+        <>
+          <ListNav />
+          <List />
+        </>
+      )}
+    </div>
   );
 };
 export default MyPage;

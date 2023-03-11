@@ -2,9 +2,15 @@
 // our-domain.com/group
 "use client";
 
-import styled from "styled-components";
+/*import styled from "styled-components";
 import CardsContainer from "../board/CardsContainer";
 import PageSort from "../board/PageSort";
+import ScrollTop from "@/components/ui/ScrollTop";*/
+
+import styled from "styled-components";
+import PageSort from "../board/PageSort";
+// import WriteToggle from '@/components/write/WriteToggle';
+import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
@@ -19,10 +25,10 @@ const SalePageBlock = styled.div`
 export default function Group() {
   return (
     <>
-      <h1>공구 페이지</h1>
+      <h1 className="text-center">공구 페이지</h1>
       <SalePageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </SalePageBlock>
       <ScrollTop />
     </>

@@ -5,7 +5,6 @@ import MenuItem from './MenuItem';
 
 const MenuBox = styled.div`
   width: 100%;
-  height: 100%;
   padding: 0 30px;
   display: grid;
   justify-items: end;
@@ -19,9 +18,9 @@ const MenuBox = styled.div`
 const Menu = () => {
   return (
     <MenuBox>
-      <MenuItem src='menu' title='판매상품' count={32} />
-      <MenuItem src='share' title='같이사요' count={32} />
-      <MenuItem src='shopping' title='구매상품' count={32} />
+      <MenuItem src='menu' title='내 게시글' count={32} />
+      <MenuItem src='share' title='참여 게시글' count={32} />
+      <MenuItem src='../header/heart' title='찜' count={32} />
       <MenuItem src='comment' title='거래후기' count={32} />
     </MenuBox>
   );

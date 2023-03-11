@@ -10,5 +10,5 @@ const myPageMenuToggleSlice = createSlice({
   },
 });
 
-export const myPageMenuToggleActions = myPageMenuToggleSlice.actions;
-export default myPageMenuToggleSlice;
+export const { myPageMenuToggle } = myPageMenuToggleSlice.actions;
+export default myPageMenuToggleSlice.reducer;

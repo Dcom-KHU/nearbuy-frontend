@@ -19,7 +19,7 @@ const HeaderBox = styled.div`
   font-size: 18px;
   width: 100%;
   max-width: 1200px;
-  padding: 30px 20px;
+  padding: 20px;
   display: none;
   z-index: 10;
 

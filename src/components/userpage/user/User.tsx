@@ -11,7 +11,6 @@ const UserBox = styled.div`
   max-width: 243px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 10px;
 `;
 
@@ -21,7 +20,9 @@ const User = () => {
     <UserBox>
       <UserEdit />
       <UserInfo />
-      <UserTemp />
+      <div className='my-0 mx-auto'>
+        <UserTemp />
+      </div>
     </UserBox>
   );
 };
