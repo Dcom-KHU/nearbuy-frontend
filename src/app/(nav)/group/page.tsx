@@ -2,14 +2,8 @@
 // our-domain.com/group
 "use client";
 
-/*import styled from "styled-components";
-import CardsContainer from "../board/CardsContainer";
-import PageSort from "../board/PageSort";
-import ScrollTop from "@/components/ui/ScrollTop";*/
-
 import styled from "styled-components";
 import PageSort from "../board/PageSort";
-// import WriteToggle from '@/components/write/WriteToggle';
 import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
