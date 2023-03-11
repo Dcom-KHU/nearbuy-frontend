@@ -6,7 +6,21 @@ import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
-const ValidationSchema = Yup.object().shape({
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('올바른 이메일 형식이 아니에요.')
+    .required('email을 입력해 주세요.'),
+  password: Yup.string()
+    .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
+    .max(16, '최대 16자리까지만 설정하실 수 있어요.')
+    .required('password를 입력해 주세요.'),
+  // 비번에 특수기호 포함하고 싶으면 아래처럼.
+  // .matches(
+  //   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
+  //   '알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함해야 합니다!'
+  // ),
+});
+const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email('올바른 이메일 형식이 아니에요.')
     .required('email을 입력해 주세요.'),
@@ -23,11 +37,6 @@ const ValidationSchema = Yup.object().shape({
     .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
     .max(16, '최대 16자리까지만 설정하실 수 있어요.')
     .required('password를 입력해 주세요.'),
-  // 비번에 특수기호 포함하고 싶으면 아래처럼.
-  // .matches(
-  //   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
-  //   '알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함해야 합니다!'
-  // ),
   password2: Yup.string()
     .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않아요.')
     .required('password를 다시 한번 입력해 주세요.'),
@@ -47,7 +56,12 @@ interface LoginFormValue {
 */
 export default function LoginForm({ isLogIn }) {
   const handleSubmit = (values: LoginFormValue) => {
-    console.log(values);
+    const { email, username, password } = values;
+    const data: LoginFormValue = { email, password };
+    if (!isLogIn) {
+      data.username = username;
+    }
+    console.log(data);
   };
   const loginForm = isLogIn
     ? { email: '', password: '' }
@@ -56,7 +70,7 @@ export default function LoginForm({ isLogIn }) {
     <>
       <Formik
         initialValues={loginForm}
-        validationSchema={ValidationSchema}
+        validationSchema={isLogIn ? LoginSchema : SignupSchema}
         onSubmit={handleSubmit}
       >
         <Form>
@@ -70,7 +84,6 @@ export default function LoginForm({ isLogIn }) {
             type='email'
             placeholder='Email'
             className='login-input'
-            form={''}
           />
           {!isLogIn && (
             <>
@@ -84,7 +97,6 @@ export default function LoginForm({ isLogIn }) {
                 type='text'
                 placeholder='User Name'
                 className='login-input'
-                form={''}
               />
             </>
           )}
@@ -111,7 +123,6 @@ export default function LoginForm({ isLogIn }) {
                 type='password'
                 placeholder='Password Again'
                 className='login-input'
-                form={''}
               />
             </>
           )}
