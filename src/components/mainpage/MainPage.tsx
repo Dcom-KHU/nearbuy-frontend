@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import Image from "next/image";
-import { useEffect } from "react";
-import { useGet, usePatch, usePost } from "@/hooks/useHttp";
-import { AxiosHeaders } from "axios";
+import styled from 'styled-components';
+import Image from 'next/image';
+import { useEffect } from 'react';
+import { useGet, usePatch, usePost } from '@/hooks/useHttp';
+import { AxiosHeaders } from 'axios';
 
 const MainBox = styled.main`
-  background: ${props => props.color};
+  background: ${(props) => props.color};
   width: 100%;
 `;
 const MainPageBlock = styled.section`
@@ -19,7 +19,7 @@ const MainPageBlock = styled.section`
   justify-content: center;
   align-items: center;
   gap: 100px;
-  background: ${props => props.color};
+  background: ${(props) => props.color};
   div {
     min-height: 1px;
     min-width: 200px;
@@ -72,11 +72,11 @@ export default function MainPage() {
 
   return (
     <>
-      <MainBox color="lightblue">
-        <MainPageBlock color="lightblue">
+      <MainBox color='lightblue'>
+        <MainPageBlock color='lightblue'>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
@@ -94,8 +94,8 @@ export default function MainPage() {
           </div>
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightyellow">
-        <MainPageBlock color="lightyellow">
+      <MainBox color='lightyellow'>
+        <MainPageBlock color='lightyellow'>
           <div>
             If you're looking for random paragraphs, you've come to the right
             place. When a random word or a random sentence isn't quite enough,
@@ -109,18 +109,18 @@ export default function MainPage() {
             paragraphs.
           </div>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightpink">
-        <MainPageBlock color="lightpink">
+      <MainBox color='lightpink'>
+        <MainPageBlock color='lightpink'>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />

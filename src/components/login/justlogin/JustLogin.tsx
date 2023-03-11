@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styled from 'styled-components';
 import LoginFormContainer from './LoginFormContainer';
 // 일단 단순한 로그인 틀만 구현...
@@ -21,11 +22,12 @@ const JustLoginBlock = styled.div`
   }
 `;
 
-export default function JustLogin() {
+export default function JustLogin({ isLogIn }) {
   return (
     <JustLoginBlock>
-      <LoginFormContainer />
-      <a href=''>회원가입 (아직 연결 안됨)</a>
+      <LoginFormContainer isLogIn={isLogIn} />
+      {isLogIn && <Link href='/auth/signup'>계정이 없어요</Link>}
+      {!isLogIn && <Link href='/auth/login'>로그인 할게요</Link>}
     </JustLoginBlock>
   );
 }

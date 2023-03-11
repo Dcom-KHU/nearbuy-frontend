@@ -19,10 +19,10 @@ const LoginContentsBlock = styled.div`
   }
 `;
 
-export default function LoginContents() {
+export default function LoginContents({ isLogIn }) {
   return (
     <LoginContentsBlock>
-      <JustLogin />
+      <JustLogin isLogIn={isLogIn} />
       <SocialLogin />
       <SmallSocialLogin />
     </LoginContentsBlock>

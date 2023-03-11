@@ -28,10 +28,10 @@ const LoginFormContainerBlock = styled.div`
   }
 `;
 
-export default function LoginFormContainer() {
+export default function LoginFormContainer({ isLogIn }) {
   return (
     <LoginFormContainerBlock>
-      <LoginForm />
+      <LoginForm isLogIn={isLogIn} />
     </LoginFormContainerBlock>
   );
 }
