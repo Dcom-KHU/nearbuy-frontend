@@ -1,9 +1,9 @@
 // 좋아요 페이지
 // our-domain.com/like
-'use client';
-import PageSort from '@/app/(nav)/board/PageSort';
-import styled from 'styled-components';
-import LikeList from './LikeList';
+"use client";
+import PageSort from "@/components/ui/PageSort";
+import styled from "styled-components";
+import LikeList from "./LikeList";
 
 const LikePageBlock = styled.div`
   //background: pink;

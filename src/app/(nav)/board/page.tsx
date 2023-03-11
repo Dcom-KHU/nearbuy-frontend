@@ -4,7 +4,7 @@
 "use client";
 
 import styled from "styled-components";
-import PageSort from "./PageSort";
+import PageSort from "../../../components/ui/PageSort";
 import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
