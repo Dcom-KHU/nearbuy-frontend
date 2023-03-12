@@ -6,7 +6,8 @@ import styled from 'styled-components';
 const SmallSocialLoginBox = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 75%;
+  width: 100%;
+  margin-top: 20px;
   padding: 0 12px;
   @media screen and (min-width: 707px) {
     display: none;
