@@ -1,9 +1,7 @@
 'use client';
 import JustLogin from './justlogin/JustLogin';
 import SocialLogin from './sociallogin/SocialLogin';
-
 import styled from 'styled-components';
-import SmallSocialLogin from './sociallogin/SmallSocialLogin';
 
 const LoginContentsBlock = styled.div`
   //background: lavender;
@@ -11,7 +9,7 @@ const LoginContentsBlock = styled.div`
   height: 100%;
   padding: 50px 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   @media screen and (max-width: 707px) {
@@ -28,7 +26,6 @@ export default function LoginContents({ isLogIn }: isLogInProps) {
     <LoginContentsBlock>
       <JustLogin isLogIn={isLogIn} />
       <SocialLogin />
-      {/* <SmallSocialLogin /> */}
     </LoginContentsBlock>
   );
 }

@@ -9,13 +9,13 @@ const LoginFormContainerBlock = styled.div`
     margin-left: 2px;
     margin-bottom: 20px;
     border: 1px solid gray;
-    width: 365px;
+    width: 100%;
   }
 
   .login-button {
     padding: 13px;
     margin: 20px 0;
-    width: 370px;
+    width: 100%;
 
     border-radius: 5px;
     color: white;
