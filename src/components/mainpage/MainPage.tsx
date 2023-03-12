@@ -69,7 +69,10 @@ export default function MainPage() {
   // useGet 해서 가져와진 response 값을 찍는거. API 명세서의 response 예시 형태와 동일함
   useEffect(() => {
     console.log(getData, getIsLoading, getError);
+    console.log(getData?.title);
   }, [getData, getIsLoading, getError]);
+
+  // 음.. 첨에그아저씨는 console.log(data를 함. )
 
   // post api call 하는 방법 예시 - get api call과 생김새는 다르지만 쓰는 방식은 비슷하다!
   // 여기서는 feat/user-login 일반 로그인을 예시로 하겠음
@@ -97,6 +100,8 @@ export default function MainPage() {
 
   return (
     <>
+      <h1>test</h1>
+      {}
       <MainBox color="lightblue">
         <WriteToggle />
         <MainPageBlock color="lightblue">
