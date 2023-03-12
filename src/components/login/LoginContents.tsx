@@ -19,7 +19,11 @@ const LoginContentsBlock = styled.div`
   }
 `;
 
-export default function LoginContents({ isLogIn }) {
+export interface isLogInProps {
+  isLogIn: boolean;
+}
+
+export default function LoginContents({ isLogIn }: isLogInProps) {
   return (
     <LoginContentsBlock>
       <JustLogin isLogIn={isLogIn} />

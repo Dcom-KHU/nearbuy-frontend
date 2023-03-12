@@ -1,11 +1,10 @@
-import { Children } from 'react';
 import styled from 'styled-components';
+import { isLogInProps } from '../LoginContents';
 import LoginForm from './LoginForm';
-import Signup from './Signup';
 
 const LoginFormContainerBlock = styled.div`
-  //background-color: pink;
-
+  /* background-color: pink; */
+  margin-top: ${(props) => (props.isLogin ? '' : '66px')};
   .login-input {
     padding: 10px;
     margin-left: 2px;
@@ -29,9 +28,9 @@ const LoginFormContainerBlock = styled.div`
   }
 `;
 
-export default function LoginFormContainer({ isLogIn }) {
+export default function LoginFormContainer({ isLogIn }: isLogInProps) {
   return (
-    <LoginFormContainerBlock>
+    <LoginFormContainerBlock isLogin={isLogIn}>
       <LoginForm isLogIn={isLogIn} />
     </LoginFormContainerBlock>
   );

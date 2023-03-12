@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-
 import * as Yup from 'yup';
+import { isLogInProps } from '../LoginContents';
+import { usePost } from '@/hooks/useHttp';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -38,7 +39,7 @@ const SignupSchema = Yup.object().shape({
     .max(16, '최대 16자리까지만 설정하실 수 있어요.')
     .required('password를 입력해 주세요.'),
   password2: Yup.string()
-    .oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않아요.')
+    .oneOf([Yup.ref('password')], '비밀번호가 일치하지 않아요.')
     .required('password를 다시 한번 입력해 주세요.'),
 });
 
@@ -54,15 +55,27 @@ interface LoginFormValue {
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
-export default function LoginForm({ isLogIn }) {
+export default function LoginForm({ isLogIn }: isLogInProps) {
+  const [apiData, setApiData] = useState({});
   const handleSubmit = (values: LoginFormValue) => {
-    const { email, username, password } = values;
-    const data: LoginFormValue = { email, password };
-    if (!isLogIn) {
-      data.username = username;
-    }
-    console.log(data);
+    const { email: id, username: name, password } = values;
+    const location = '고양시 덕양구';
+    const data = { id, location, name, password };
+    setApiData(data);
   };
+  const {
+    data: postData,
+    isLoading: postIsLoading,
+    error: postError,
+  } = usePost<{ accessToken: string }>({
+    url: '/api/user/join',
+    data: apiData,
+  });
+
+  useEffect(() => {
+    console.log(postData, postIsLoading, postError);
+  }, [postData, postIsLoading, postError]);
+
   const loginForm = isLogIn
     ? { email: '', password: '' }
     : { email: '', username: '', password: '', password2: '' };
@@ -127,7 +140,11 @@ export default function LoginForm({ isLogIn }) {
             </>
           )}
 
-          <button className='login-button' type='submit'>
+          <button
+            // disabled
+            className='login-button'
+            type='submit'
+          >
             {isLogIn ? '로그인' : '회원가입'}
           </button>
         </Form>
