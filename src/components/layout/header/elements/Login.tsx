@@ -35,7 +35,7 @@ const Login = () => {
   };
   return (
     <LoginBox>
-      <Link href='/login' onClick={menuToggleHandler}>
+      <Link href='/auth/login' onClick={menuToggleHandler}>
         Login
       </Link>
     </LoginBox>
