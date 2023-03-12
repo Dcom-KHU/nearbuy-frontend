@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import ListNav from '@/components/list/ListNav';
-import List from '@/components/list/List';
-import PageSort from '@/app/(nav)/board/PageSort';
+import styled from "styled-components";
+import ListNav from "@/components/list/ListNav";
+import List from "@/components/list/List";
+import PageSort from "@/components/ui/PageSort";
 
 const LikeListBlock = styled.div`
   width: 100%;

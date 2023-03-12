@@ -6,7 +6,7 @@ import MiniWriteButton from "./MiniWriteButton";
 import MiniWriteOptions from "./MiniWriteOptions";
 
 const MiniWriteToggleBlock = styled.div`
-  // background-color: pink;
+  //background-color: pink;
 
   display: flex;
   flex-direction: column;
