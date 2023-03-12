@@ -6,7 +6,7 @@ import SmallNav from './SmallNav';
 
 const Box = styled.div`
   position: relative;
-  z-index: 100;
+  z-index: 9;
 `;
 
 // 반응형 상단 헤더
