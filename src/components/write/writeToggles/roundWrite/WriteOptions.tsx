@@ -32,15 +32,15 @@ export default function WriteOptions() {
   return (
     <WriteOptionsBlock className="shadow-md">
       <li>
-        <a href="#">경매</a>
+        <a href="/writeauction">경매</a>
       </li>
       <div className="garo"></div>
       <li>
-        <a href="#">공구</a>
+        <a href="/writegroup">공구</a>
       </li>
       <div className="garo"></div>
       <li>
-        <a href="#">
+        <a href="/writesell">
           <div>판/교/나</div>
         </a>
       </li>
