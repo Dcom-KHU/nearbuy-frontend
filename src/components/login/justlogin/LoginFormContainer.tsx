@@ -4,7 +4,6 @@ import LoginForm from './LoginForm';
 
 const LoginFormContainerBlock = styled.div`
   /* background-color: pink; */
-  margin-top: ${(props) => (props.isLogin ? '' : '66px')};
   .login-input {
     padding: 10px;
     margin-left: 2px;

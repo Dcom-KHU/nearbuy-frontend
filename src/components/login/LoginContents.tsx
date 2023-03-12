@@ -28,7 +28,7 @@ export default function LoginContents({ isLogIn }: isLogInProps) {
     <LoginContentsBlock>
       <JustLogin isLogIn={isLogIn} />
       <SocialLogin />
-      <SmallSocialLogin />
+      {/* <SmallSocialLogin /> */}
     </LoginContentsBlock>
   );
 }
