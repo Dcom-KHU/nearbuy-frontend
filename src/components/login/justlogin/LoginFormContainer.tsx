@@ -4,6 +4,7 @@ import LoginForm from './LoginForm';
 
 const LoginFormContainerBlock = styled.div`
   /* background-color: pink; */
+  width: 370px;
   .login-input {
     padding: 10px;
     margin-left: 2px;

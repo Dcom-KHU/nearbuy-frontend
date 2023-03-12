@@ -13,7 +13,7 @@ const LoginSchema = Yup.object().shape({
     .required('email을 입력해 주세요.'),
   password: Yup.string()
     .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
-    .max(16, '최대 16자리까지만 설정하실 수 있어요.')
+    .max(20, '최대 20자리까지만 설정하실 수 있어요.')
     .required('password를 입력해 주세요.'),
   // 비번에 특수기호 포함하고 싶으면 아래처럼.
   // .matches(
