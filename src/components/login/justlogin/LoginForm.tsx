@@ -1,8 +1,10 @@
 'use client';
 
 import { Form, Formik, Field, ErrorMessage } from 'formik';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
+import LoginErrorModal from './LoginErrorModal';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -53,10 +55,9 @@ interface LoginFormValue {
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
-async function getData(url: string) {
-  return await (await fetch(url)).json();
-}
 export default function LoginForm({ isLogIn }: isLogInProps) {
+  const [errorModal, setErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const handleSubmit = async (values: LoginFormValue) => {
     const { email: id, password, username: name } = values;
     const loginData = isLogIn
@@ -75,7 +76,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         }
       );
       console.log('this is response ', response);
-
+      // 이미지, 지도, 게시글 공유
       // const data = await response.json();
       // if (data.status === 400) {
       //   throw new Error(data.message);
@@ -84,22 +85,26 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         window.location.replace(`http://localhost:3000` + redirect);
       } else if (response.status === 400) {
         const data = await response.json();
+        setErrorModal(true);
+        setErrorMessage(data.message);
         console.log(data.message);
       }
-      // console.log('this is data ', data);
     } catch (err) {
       console.error(err);
     }
   };
-  // useEffect(() => {
-  //   redirect('/');
-  // }, []);
 
   const loginForm = isLogIn
     ? { email: '', password: '' }
     : { email: '', username: '', password: '', password2: '' };
   return (
     <>
+      {errorModal && (
+        <LoginErrorModal
+          setErrorModal={setErrorModal}
+          errorMessage={errorMessage}
+        />
+      )}
       <Formik
         initialValues={loginForm}
         validationSchema={isLogIn ? LoginSchema : SignupSchema}
