@@ -100,14 +100,16 @@ interface Itemp {
   title: string;
   type: string;
   writer: string;
-  // 밑에서부턴 내가 따로 추가한것
+  // 밑에서부턴 내가 따로 추가한것z
   //post: string[];
-  post: {
-    id: number;
-    image: string[];
-    location: string;
-    type: string;
-  };
+  post: [
+    {
+      id: number;
+      image: string[];
+      location: string;
+      type: string;
+    }
+  ];
 }
 
 /*
@@ -144,31 +146,61 @@ const List = () => {
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-
-    console.log("getData결과: ", getData);
-    console.log("getData?.post결과: ", getData?.post);
-    console.log("post1", getData?.post);
-    console.log("********", getData?.post.id);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
-  // const postIds = getData?.post.map((post) => post.id);
+  const postDatas = getData?.post;
 
+  if (postDatas) {
+    postDatas.map((post) => {
+      console.log("$$$$$$", post.id);
+      console.log("$$$$$$", post.type);
+    });
+  }
+
+  // RootState는 타입스크립트 에러?땜시 추가함
   const nowState = useSelector((state: RootState) => state.activePage.active);
   const isBoard = nowState === "board";
 
+  /* 지금 문제점: 게시글 filter 역할을 nowState가 해주고 있는데 
+  DUMMY_DATA와 달리 postDatas는 nowState라는 키값 존재 안하고 그냥 type이라는 것만 존재함.
+  따라서 nowState부분 type으로 적절하게 바꿔주면 해결 될둣,,,>?? */
+
   return (
-    <ListItemBox>
-      {isBoard ? (
-        <>
-          {Array.isArray(getData) &&
-            getData?.map((getData) => (
-              <ListItem key={getData?.id} nowState={getData?.type} />
+    <>
+      <ListItemBox>
+        {postDatas?.map((post) => (
+          <>
+            <div key={post.id}>
+              <div>{post.id}</div>
+              <div>{post.type}</div>
+            </div>
+          </>
+        ))}
+        {isBoard ? (
+          <>
+            {postDatas?.map((post) => (
+              <ListItem key={post.id} nowState={post.type} />
             ))}
-        </>
-      ) : (
-        <EachList />
-      )}
-    </ListItemBox>
+          </>
+        ) : (
+          <EachList />
+        )}
+      </ListItemBox>
+      <ListItemBox>
+        {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
+        {isBoard ? (
+          <>
+            {DUMMY_DATA.map((data) => (
+              <ListItem key={data.id} nowState={data.nowState} />
+            ))}
+          </>
+        ) : (
+          /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
+          <EachList />
+        )}
+      </ListItemBox>
+    </>
   );
 };
 export default List;
