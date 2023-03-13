@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
-import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import EachList from './EachList';
-import ListItem from './ListItem';
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import EachList from "./EachList";
+import ListItem from "./ListItem";
+import { useEffect } from "react";
+import { useGet, usePatch, usePost } from "@/hooks/useHttp";
+import { AxiosHeaders } from "axios";
+import { StringLiteral } from "typescript";
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -26,12 +30,12 @@ const ListItemBox = styled.div`
 // 해당 오류는 nowState 프로퍼티에 keyof DetailPageState 타입을 지정해두었지만, DUMMY_DATA 배열의 nowState 값은 string 형태이기 때문에 발생하는 오류입니다.
 // 해결 방법으로는 nowState 프로퍼티의 타입을 string으로 지정하거나, DUMMY_DATA의 nowState 값을 DetailPageState 타입의 enum 값으로 변경하는 방법이 있습니다.
 enum NowState {
-  Board = 'board',
-  Sale = 'sale',
-  Exchange = 'exchange',
-  Free = 'free',
-  Auction = 'auction',
-  Group = 'group',
+  Board = "board",
+  Sale = "sale",
+  Exchange = "exchange",
+  Free = "free",
+  Auction = "auction",
+  Group = "group",
 }
 // 게시글 더미 데이터
 export const DUMMY_DATA = [
@@ -83,10 +87,34 @@ export const DUMMY_DATA = [
   { id: 46, nowState: NowState.Auction },
   { id: 47, nowState: NowState.Exchange },
 ];
+
+interface Itemp {
+  id: number;
+  detail: string;
+  image: string[];
+  location: string;
+  ongoing: boolean;
+  salePrice: number;
+  tag: string[];
+  time: boolean;
+  title: string;
+  type: string;
+  writer: string;
+  // 밑에서부턴 내가 따로 추가한것
+  //post: string[];
+  post: {
+    id: number;
+    image: string[];
+    location: string;
+    type: string;
+  };
+}
+
+/*
 // 게시물 목록들
 const List = () => {
   const nowState = useSelector((state: RootState) => state.activePage.active);
-  const isBoard = nowState === 'board';
+  const isBoard = nowState === "board";
   return (
     <ListItemBox>
       {isBoard ? (
@@ -94,6 +122,48 @@ const List = () => {
           {DUMMY_DATA.map((data) => (
             <ListItem key={data.id} nowState={data.nowState} />
           ))}
+        </>
+      ) : (
+        <EachList />
+      )}
+    </ListItemBox>
+  );
+};
+export default List;*/
+
+const List = () => {
+  const {
+    data: getData,
+    // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
+    isLoading: getIsLoading,
+    error: getError,
+  } = useGet<Itemp>({
+    url: "/api/post/board",
+    params: { type: "all" }, // 나머지 파라미터 일단 생략 (default값 있음)
+  });
+
+  useEffect(() => {
+    // console.log(getData, getIsLoading, getError);
+
+    console.log("getData결과: ", getData);
+    console.log("getData?.post결과: ", getData?.post);
+    console.log("post1", getData?.post);
+    console.log("********", getData?.post.id);
+  }, [getData, getIsLoading, getError]);
+
+  // const postIds = getData?.post.map((post) => post.id);
+
+  const nowState = useSelector((state: RootState) => state.activePage.active);
+  const isBoard = nowState === "board";
+
+  return (
+    <ListItemBox>
+      {isBoard ? (
+        <>
+          {Array.isArray(getData) &&
+            getData?.map((getData) => (
+              <ListItem key={getData?.id} nowState={getData?.type} />
+            ))}
         </>
       ) : (
         <EachList />
