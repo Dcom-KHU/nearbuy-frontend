@@ -1,6 +1,7 @@
 'use client';
 
 import { Form, Formik, Field, ErrorMessage } from 'formik';
+import { createKey } from 'next/dist/shared/lib/router/router';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
@@ -55,8 +56,16 @@ interface LoginFormValue {
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
+
+async function getData(mode, loginData) {
+  const res = await fetch('http://13.124.165.236:8080/api/user/' + mode, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(loginData),
+  });
+  return res.json();
+}
 export default function LoginForm({ isLogIn }: isLogInProps) {
-  const [errorModal, setErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const handleSubmit = async (values: LoginFormValue) => {
     const { email: id, password, username: name } = values;
@@ -67,27 +76,16 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
     const redirect = isLogIn ? '/board' : '/auth/login';
 
     try {
-      const response = await fetch(
-        'http://13.124.165.236:8080/api/user/' + mode,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(loginData),
-        }
-      );
-      console.log('this is response ', response);
-      // 이미지, 지도, 게시글 공유
-      // const data = await response.json();
-      // if (data.status === 400) {
-      //   throw new Error(data.message);
-      // }
-      if (response.status === 200) {
+      const data = await getData(mode, loginData);
+      console.log(data);
+      if (data.status === 200) {
         window.location.replace(`http://localhost:3000` + redirect);
-      } else if (response.status === 400) {
-        const data = await response.json();
-        setErrorModal(true);
+      } else if (
+        data.status === 400 ||
+        data.status === 404 ||
+        data.status === 401
+      ) {
         setErrorMessage(data.message);
-        console.log(data.message);
       }
     } catch (err) {
       console.error(err);
@@ -99,9 +97,9 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
     : { email: '', username: '', password: '', password2: '' };
   return (
     <>
-      {errorModal && (
+      {errorMessage && (
         <LoginErrorModal
-          setErrorModal={setErrorModal}
+          setErrorMessage={setErrorMessage}
           errorMessage={errorMessage}
         />
       )}
