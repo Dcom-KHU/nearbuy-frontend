@@ -1,12 +1,8 @@
 'use client';
 
-import React, { use, useEffect, useState } from 'react';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
-import { usePost } from '@/hooks/useHttp';
-import axios from 'axios';
-import { redirect } from 'next/dist/server/api-utils';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -67,21 +63,37 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
       ? { id, password }
       : { id, password, name, location: '경기도 고양시' };
     const mode = isLogIn ? 'login' : 'join';
+    const redirect = isLogIn ? '/board' : '/auth/login';
 
     try {
-      const response = await fetch('백엔드주소/api/user/' + mode, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(loginData),
-      });
+      const response = await fetch(
+        'http://13.124.165.236:8080/api/user/' + mode,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(loginData),
+        }
+      );
       console.log('this is response ', response);
 
-      const data = await response.json();
-      console.log('this is data ', data);
+      // const data = await response.json();
+      // if (data.status === 400) {
+      //   throw new Error(data.message);
+      // }
+      if (response.status === 200) {
+        window.location.replace(`http://localhost:3000` + redirect);
+      } else if (response.status === 400) {
+        const data = await response.json();
+        console.log(data.message);
+      }
+      // console.log('this is data ', data);
     } catch (err) {
       console.error(err);
     }
   };
+  // useEffect(() => {
+  //   redirect('/');
+  // }, []);
 
   const loginForm = isLogIn
     ? { email: '', password: '' }
