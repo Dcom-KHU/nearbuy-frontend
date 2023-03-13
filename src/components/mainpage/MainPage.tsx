@@ -42,33 +42,42 @@ interface Itemp {
   writer: string;
 }
 export default function MainPage() {
-  // // get api call 하는 방법
+  // get api call 하는 방법
   // const {
   //   data: getData,
   //   isLoading: getIsLoading,
   //   error: getError,
   // } = useGet<Itemp>({
-  //   url: "/api/post/sale",
+  //   url: '/api/post/sale',
   //   params: { id: 1 },
   // });
+  // const getDataTitle = getData?.title;
 
   // useEffect(() => {
   //   console.log(getData, getIsLoading, getError);
   // }, [getData, getIsLoading, getError]);
 
-  // // post api call 하는 방법
+  // post api call 하는 방법
+  const {
+    data: postData,
+    isLoading: postIsLoading,
+    error: postError,
+  } = usePost<{ accessToken: string }>({
+    url: '/api/user/login',
+    data: { id: 'aa@aa', password: 'aaaaaaaa' },
+  });
   // const {
   //   data: postData,
   //   isLoading: postIsLoading,
   //   error: postError,
   // } = usePost<{ accessToken: string }>({
-  //   url: "/api/user/login",
-  //   data: { id: 1, password: "hii" },
+  //   url: '/api/user/join',
+  //   data: { id: 'qq@qq', password: 'qqqqqqqq', name: 'qq', location: 'qq' },
   // });
 
-  // useEffect(() => {
-  //   console.log(postData, postIsLoading, postError);
-  // }, [postData, postIsLoading, postError]);
+  useEffect(() => {
+    console.log(postData, postIsLoading, postError);
+  }, [postData, postIsLoading, postError]);
 
   return (
     <>

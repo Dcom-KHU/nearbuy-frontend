@@ -30,7 +30,7 @@ const LoginFormContainerBlock = styled.div`
 
 export default function LoginFormContainer({ isLogIn }: isLogInProps) {
   return (
-    <LoginFormContainerBlock isLogin={isLogIn}>
+    <LoginFormContainerBlock>
       <LoginForm isLogIn={isLogIn} />
     </LoginFormContainerBlock>
   );

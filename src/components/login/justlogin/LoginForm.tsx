@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
 import { usePost } from '@/hooks/useHttp';
+import axios from 'axios';
+import { redirect } from 'next/dist/server/api-utils';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -55,26 +57,31 @@ interface LoginFormValue {
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
+async function getData(url: string) {
+  return await (await fetch(url)).json();
+}
 export default function LoginForm({ isLogIn }: isLogInProps) {
-  const [apiData, setApiData] = useState({});
-  const handleSubmit = (values: LoginFormValue) => {
-    const { email: id, username: name, password } = values;
-    const location = '고양시 덕양구';
-    const data = { id, location, name, password };
-    setApiData(data);
-  };
-  const {
-    data: postData,
-    isLoading: postIsLoading,
-    error: postError,
-  } = usePost<{ accessToken: string }>({
-    url: '/api/user/join',
-    data: apiData,
-  });
+  const handleSubmit = async (values: LoginFormValue) => {
+    const { email: id, password, username: name } = values;
+    const loginData = isLogIn
+      ? { id, password }
+      : { id, password, name, location: '경기도 고양시' };
+    const mode = isLogIn ? 'login' : 'join';
 
-  useEffect(() => {
-    console.log(postData, postIsLoading, postError);
-  }, [postData, postIsLoading, postError]);
+    try {
+      const response = await fetch('백엔드주소/api/user/' + mode, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData),
+      });
+      console.log('this is response ', response);
+
+      const data = await response.json();
+      console.log('this is data ', data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const loginForm = isLogIn
     ? { email: '', password: '' }
@@ -141,7 +148,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
           )}
 
           <button
-            // disabled
+            // disabled={postIsLoading}
             className='login-button'
             type='submit'
           >
