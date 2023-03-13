@@ -1,11 +1,11 @@
 'use client';
 
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-import { createKey } from 'next/dist/shared/lib/router/router';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
+import { serverIP } from '../../../../secrets.json';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -58,7 +58,7 @@ interface LoginFormValue {
 */
 
 async function getData(mode, loginData) {
-  const res = await fetch('http://13.124.165.236:8080/api/user/' + mode, {
+  const res = await fetch(`${serverIP}/api/user/` + mode, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(loginData),
@@ -77,7 +77,6 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
 
     try {
       const data = await getData(mode, loginData);
-      console.log(data);
       if (data.status === 200) {
         window.location.replace(`http://localhost:3000` + redirect);
       } else if (
