@@ -34,14 +34,11 @@ const User = () => {
     params: { id: 1 },
   });
   console.log('getData', getData);
-
-  const { name, mannerPoint, image, location } = getData ?? {};
-  console.log(name, mannerPoint, image, location);
-  const infoData = { name, image, location };
+  const { mannerPoint, ...rest } = getData ?? {};
   return (
     <UserBox>
       <UserEdit />
-      <UserInfo infoData={infoData} />
+      <UserInfo infoData={rest} />
       <div className='my-0 mx-auto'>
         <UserTemp mannerPoint={mannerPoint} />
       </div>
