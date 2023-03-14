@@ -22,14 +22,22 @@ const UserInfoBox = styled.div`
     font-size: 12px;
   }
 `;
-
+interface UserInfoProps {
+  infoData?: {
+    name?: string;
+    location?: string;
+    image?: string;
+  };
+}
 // 유저 프로필
-const UserInfo = () => {
+const UserInfo = ({ infoData }: UserInfoProps) => {
+  const { name, location, image } = infoData ?? {};
+
   return (
     <UserInfoBox>
-      <UserPic />
-      <UserName />
-      <UserAd />
+      <UserPic image={image} />
+      <UserName name={name} />
+      <UserAd ad={location} />
     </UserInfoBox>
   );
 };

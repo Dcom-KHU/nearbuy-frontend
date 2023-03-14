@@ -58,14 +58,14 @@ export default function MainPage() {
   // }, [getData, getIsLoading, getError]);
 
   // post api call 하는 방법
-  const {
-    data: postData,
-    isLoading: postIsLoading,
-    error: postError,
-  } = usePost<{ accessToken: string }>({
-    url: '/api/user/login',
-    data: { id: 'aa@aa', password: 'aaaaaaaa' },
-  });
+  // const {
+  //   data: postData,
+  //   isLoading: postIsLoading,
+  //   error: postError,
+  // } = usePost<{ accessToken: string }>({
+  //   url: '/api/user/login',
+  //   data: { id: 'aa@aa', password: 'aaaaaaaa' },
+  // });
   // const {
   //   data: postData,
   //   isLoading: postIsLoading,
@@ -75,9 +75,9 @@ export default function MainPage() {
   //   data: { id: 'qq@qq', password: 'qqqqqqqq', name: 'qq', location: 'qq' },
   // });
 
-  useEffect(() => {
-    console.log(postData, postIsLoading, postError);
-  }, [postData, postIsLoading, postError]);
+  // useEffect(() => {
+  //   console.log(postData, postIsLoading, postError);
+  // }, [postData, postIsLoading, postError]);
 
   return (
     <>

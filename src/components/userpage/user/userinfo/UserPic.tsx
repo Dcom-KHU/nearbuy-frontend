@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 type Props = {
   size?: number;
+  image?: string;
 };
 
 const ImageDeco = styled(Image)`
@@ -16,10 +17,11 @@ const ImageDeco = styled(Image)`
   }
 `;
 
-export default function UserPic({ size = 150 }: Props) {
+export default function UserPic({ size = 150, image }: Props) {
   return (
     <ImageDeco
-      src='/images/for-demo/kitty.jpg'
+      // src='/images/for-demo/kitty.jpg'
+      src={image ?? '/images/for-demo/kitty.jpg'}
       alt='kitty'
       width={size}
       height={size}
