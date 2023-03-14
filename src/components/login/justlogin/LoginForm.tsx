@@ -1,11 +1,13 @@
 'use client';
 
 import { Form, Formik, Field, ErrorMessage } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
 import { serverIP } from '../../../../secrets.json';
+import { usePost } from '@/hooks/useHttp';
+import { redirect } from 'next/dist/server/api-utils';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -51,7 +53,7 @@ interface LoginFormValue {
   password2?: string;
 }
 
-/* 참고로 <Formik> 컴포넌트에서 initialValues와 onSubmit은 필수값.
+/* 
   <Form> 아래에 <Field>를 두고 props로 name을 initialValues의 키값으로 세팅하면 
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
@@ -66,18 +68,20 @@ async function getData(mode, loginData) {
   return res.json();
 }
 export default function LoginForm({ isLogIn }: isLogInProps) {
+  const mode = isLogIn ? 'login' : 'join';
   const [errorMessage, setErrorMessage] = useState('');
   const handleSubmit = async (values: LoginFormValue) => {
     const { email: id, password, username: name } = values;
     const loginData = isLogIn
       ? { id, password }
       : { id, password, name, location: '경기도 고양시' };
-    const mode = isLogIn ? 'login' : 'join';
     const redirect = isLogIn ? '/board' : '/auth/login';
 
     try {
       const data = await getData(mode, loginData);
-      if (data.status === 200) {
+      const token = data.accessToken;
+      if (data.accessToken) {
+        localStorage.setItem('token', token);
         window.location.replace(`http://localhost:3000` + redirect);
       } else if (
         data.status === 400 ||
@@ -90,7 +94,28 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
       console.error(err);
     }
   };
+  // const [loginData, setLoginData] = useState();
+  // console.log(loginData); // 잘 됨
 
+  // const handleSubmit = async (values: LoginFormValue) => {
+  //   const { email: id, password, username: name } = values;
+  //   const loginData = isLogIn
+  //     ? { id, password }
+  //     : { id, password, name, location: '경기도 고양시' };
+  //   setLoginData(loginData);
+  // };
+  // const redirect = isLogIn ? '/board' : '/auth/login';
+  // const {
+  //   data: postData,
+  //   isLoading: postIsLoading,
+  //   error: postError,
+  // } = usePost<{ accessToken: string }>({
+  //   url: `/api/user/${mode}`,
+  //   data: loginData,
+  // });
+  // useEffect(() => {
+  //   console.log('postData', postData); // 안 됨
+  // }, [loginData, postData, postIsLoading, postError]);
   const loginForm = isLogIn
     ? { email: '', password: '' }
     : { email: '', username: '', password: '', password2: '' };
