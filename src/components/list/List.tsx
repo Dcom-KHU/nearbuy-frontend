@@ -37,69 +37,8 @@ enum NowState {
   Auction = "auction",
   Group = "group",
 }
-// 게시글 더미 데이터
-export const DUMMY_DATA = [
-  { id: 1, nowState: NowState.Sale },
-  { id: 2, nowState: NowState.Exchange },
-  { id: 3, nowState: NowState.Free },
-  { id: 4, nowState: NowState.Auction },
-  { id: 5, nowState: NowState.Group },
-  { id: 6, nowState: NowState.Group },
-  { id: 7, nowState: NowState.Exchange },
-  { id: 8, nowState: NowState.Sale },
-  { id: 9, nowState: NowState.Auction },
-  { id: 10, nowState: NowState.Auction },
-  { id: 11, nowState: NowState.Group },
-  { id: 12, nowState: NowState.Free },
-  { id: 13, nowState: NowState.Exchange },
-  { id: 14, nowState: NowState.Exchange },
-  { id: 15, nowState: NowState.Free },
-  { id: 16, nowState: NowState.Group },
-  { id: 17, nowState: NowState.Sale },
-  { id: 18, nowState: NowState.Group },
-  { id: 19, nowState: NowState.Auction },
-  { id: 20, nowState: NowState.Group },
-  { id: 21, nowState: NowState.Exchange },
-  { id: 22, nowState: NowState.Auction },
-  { id: 23, nowState: NowState.Auction },
-  { id: 24, nowState: NowState.Free },
-  { id: 25, nowState: NowState.Group },
-  { id: 26, nowState: NowState.Group },
-  { id: 27, nowState: NowState.Auction },
-  { id: 28, nowState: NowState.Group },
-  { id: 29, nowState: NowState.Exchange },
-  { id: 30, nowState: NowState.Free },
-  { id: 31, nowState: NowState.Free },
-  { id: 32, nowState: NowState.Group },
-  { id: 33, nowState: NowState.Sale },
-  { id: 34, nowState: NowState.Group },
-  { id: 35, nowState: NowState.Auction },
-  { id: 36, nowState: NowState.Exchange },
-  { id: 37, nowState: NowState.Group },
-  { id: 38, nowState: NowState.Free },
-  { id: 39, nowState: NowState.Group },
-  { id: 40, nowState: NowState.Sale },
-  { id: 41, nowState: NowState.Free },
-  { id: 42, nowState: NowState.Group },
-  { id: 43, nowState: NowState.Auction },
-  { id: 44, nowState: NowState.Auction },
-  { id: 45, nowState: NowState.Free },
-  { id: 46, nowState: NowState.Auction },
-  { id: 47, nowState: NowState.Exchange },
-];
 
 interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: boolean;
-  title: string;
-  type: string;
-  writer: string;
   // 밑에서부턴 내가 따로 추가한것z
   //post: string[];
   post: [
@@ -160,6 +99,12 @@ const List = () => {
 
   // RootState는 타입스크립트 에러?땜시 추가함
   const nowState = useSelector((state: RootState) => state.activePage.active);
+  // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
+  // useSelector hook이 리액트 컴포넌트에서 Redux stord의 상태 읽어오기 위해 사용되고
+  // state: Rootstate는 RootState 타입의 state 매개변수 가지고 있는데, 이는 Redux stord의 전체 상태 객체 의미.
+  // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
+  // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
+
   const isBoard = nowState === "board";
 
   /* 지금 문제점: 게시글 filter 역할을 nowState가 해주고 있는데 
@@ -169,14 +114,8 @@ const List = () => {
   return (
     <>
       <ListItemBox>
-        {postDatas?.map((post) => (
-          <>
-            <div key={post.id}>
-              <div>{post.id}</div>
-              <div>{post.type}</div>
-            </div>
-          </>
-        ))}
+        {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. 
+            true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
         {isBoard ? (
           <>
             {postDatas?.map((post) => (
@@ -184,19 +123,8 @@ const List = () => {
             ))}
           </>
         ) : (
-          <EachList />
-        )}
-      </ListItemBox>
-      <ListItemBox>
-        {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
-        {isBoard ? (
-          <>
-            {DUMMY_DATA.map((data) => (
-              <ListItem key={data.id} nowState={data.nowState} />
-            ))}
-          </>
-        ) : (
-          /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
+          /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
+            -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
           <EachList />
         )}
       </ListItemBox>
