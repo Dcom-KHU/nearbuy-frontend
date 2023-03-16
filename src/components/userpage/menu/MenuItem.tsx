@@ -31,13 +31,16 @@ const GoToSeeButton = styled.button`
   }
 `;
 
-// 메뉴 틀 (판매상품 / 같이사요 / 구매상품 / 거래후기)
-const MenuItem: React.FC<{ src: string; title: string; count: number }> = (
-  props
-) => {
+// 메뉴 틀 (내 게시글 / 참여 게시글 / 찜 / 거래후기)
+const MenuItem: React.FC<{
+  src: string;
+  title: string;
+  state: string;
+  count: number;
+}> = (props) => {
   const dispatch = useDispatch();
-  const goToSeeHandler = () => {
-    dispatch(myPageMenuToggle());
+  const viewHandler = () => {
+    dispatch(myPageMenuToggle(props.state));
   };
   return (
     <MenuItemBox>
@@ -49,7 +52,7 @@ const MenuItem: React.FC<{ src: string; title: string; count: number }> = (
       />
       <div>{props.title}</div>
       <div>{props.count}개</div>
-      <GoToSeeButton onClick={goToSeeHandler}>보러가기&gt;</GoToSeeButton>
+      <GoToSeeButton onClick={viewHandler}>보러가기&gt;</GoToSeeButton>
     </MenuItemBox>
   );
 };

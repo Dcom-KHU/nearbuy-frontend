@@ -18,10 +18,10 @@ const MenuBox = styled.div`
 const Menu = () => {
   return (
     <MenuBox>
-      <MenuItem src='menu' title='내 게시글' count={32} />
-      <MenuItem src='share' title='참여 게시글' count={32} />
-      <MenuItem src='../header/heart' title='찜' count={32} />
-      <MenuItem src='comment' title='거래후기' count={32} />
+      <MenuItem src='menu' title='내 게시글' state='myPosts' count={32} />
+      <MenuItem src='share' title='참여 게시글' state='posts' count={32} />
+      <MenuItem src='../header/heart' title='찜' state='favorites' count={32} />
+      <MenuItem src='comment' title='거래후기' state='reviews' count={32} />
     </MenuBox>
   );
 };

@@ -27,8 +27,8 @@ const MyPageBox = styled.div`
 
 // mypage
 const MyPage = () => {
-  const toggle = useSelector(
-    (state: RootState) => state.myPageMenuToggle.toggle
+  const { myPosts, posts, favorites, reviews } = useSelector(
+    (state: RootState) => state.myPageMenuToggle
   );
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -36,10 +36,24 @@ const MyPage = () => {
         <User />
         <Menu />
       </MyPageBox>
-      {toggle && (
+      {myPosts && (
         <>
-          <ListNav />
-          <List />
+          <h1>1</h1>
+        </>
+      )}
+      {posts && (
+        <>
+          <h1>2</h1>
+        </>
+      )}
+      {favorites && (
+        <>
+          <h1>3</h1>
+        </>
+      )}
+      {reviews && (
+        <>
+          <h1>4</h1>
         </>
       )}
     </div>
