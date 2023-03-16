@@ -6,16 +6,14 @@ import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
 import { serverIP } from '../../../../secrets.json';
+import axios from 'axios';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('올바른 이메일 형식이 아니에요.')
     .required('email을 입력해 주세요.'),
-  password: Yup.string()
-    .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
-    .max(20, '최대 20자리까지만 설정하실 수 있어요.')
-    .required('password를 입력해 주세요.'),
+  password: Yup.string().required('password를 입력해 주세요.'),
   // 비번에 특수기호 포함하고 싶으면 아래처럼.
   // .matches(
   //   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[^\s]*$/,
@@ -57,66 +55,47 @@ interface LoginFormValue {
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
 
-async function getData(mode, loginData) {
-  const res = await fetch(`${serverIP}/api/user/` + mode, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(loginData),
-  });
-  return res.json();
-}
+// 로그인/회원가입
 export default function LoginForm({ isLogIn }: isLogInProps) {
-  const mode = isLogIn ? 'login' : 'join';
-  const [errorMessage, setErrorMessage] = useState('');
+  const mode = isLogIn ? 'login' : 'join'; // url 뒤에 붙이기 위함
+  const [errorMessage, setErrorMessage] = useState(''); // error message 출력
   const handleSubmit = async (values: LoginFormValue) => {
     const { email: id, password, username: name } = values;
     const loginData = isLogIn
       ? { id, password }
-      : { id, password, name, location: '경기도 고양시' };
+      : { id, password, name, location: '경기도' };
     const redirect = isLogIn ? '/board' : '/auth/login';
 
     try {
-      const data = await getData(mode, loginData);
-      console.log('data', data);
+      const response = await axios.post(
+        `${serverIP}/api/user/${mode}`,
+        loginData
+      );
+      console.log(response);
 
-      const token = data.accessToken;
-      if (data.accessToken) {
-        localStorage.setItem('token', token);
-        window.location.replace('http://localhost:3000/board');
-      } else if (
-        data.status === 400 ||
-        data.status === 404 ||
-        data.status === 401 ||
-        data.status === 403
-      ) {
-        setErrorMessage(data.message);
+      if (response.data.accessToken) {
+        localStorage.setItem('login', 'true');
       }
-    } catch (err) {
-      console.error(err);
+      window.location.replace(redirect);
+    } catch (error) {
+      console.error(error);
+      // 오류 발생 시
+      if (error.response.status) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setErrorMessage(error.response.data.message);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.error('requst', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error', error.message);
+      }
     }
   };
-  // const [loginData, setLoginData] = useState();
-  // console.log(loginData); // 잘 됨
 
-  // const handleSubmit = async (values: LoginFormValue) => {
-  //   const { email: id, password, username: name } = values;
-  //   const loginData = isLogIn
-  //     ? { id, password }
-  //     : { id, password, name, location: '경기도 고양시' };
-  //   setLoginData(loginData);
-  // };
-  // const redirect = isLogIn ? '/board' : '/auth/login';
-  // const {
-  //   data: postData,
-  //   isLoading: postIsLoading,
-  //   error: postError,
-  // } = usePost<{ accessToken: string }>({
-  //   url: `/api/user/${mode}`,
-  //   data: loginData,
-  // });
-  // useEffect(() => {
-  //   console.log('postData', postData); // 안 됨
-  // }, [loginData, postData, postIsLoading, postError]);
   const loginForm = isLogIn
     ? { email: '', password: '' }
     : { email: '', username: '', password: '', password2: '' };

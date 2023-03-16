@@ -1,11 +1,12 @@
 'use client';
 
 import { isActive } from '@/store/detailPage/activePageSlice';
+import { loggedOut } from '@/store/loggedIn/loggedInSlice';
 import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
+import { RootState } from '@/store/store';
 import { getToken } from '@/utils/getToken';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import '../../../../app/globals.css';
 
@@ -31,22 +32,24 @@ const Login = () => {
   // 버튼 눌렀을 때, 햄버가 창 사라지게 만듦
   // TODO: 같은 코드가 login, logo, navigation 등에서 반복돼서 사용됨. 반복 줄일 순 없을까?
   const dispatch = useDispatch();
-  const token = getToken();
+  const loggedIn = localStorage.getItem('login') === 'true';
+  console.log('loggedIn,,,', loggedIn);
+
   const menuToggleHandler = () => {
     dispatch(closeMenu());
     dispatch(isActive(null));
-    if (token) {
-      localStorage.removeItem('token');
+    if (loggedIn) {
+      localStorage.removeItem('login');
     }
   };
   return (
     <LoginBox>
-      {token && (
+      {loggedIn && (
         <a href='/' onClick={menuToggleHandler}>
           Logout
         </a>
       )}
-      {!token && (
+      {!loggedIn && (
         <Link href='/auth/login' onClick={menuToggleHandler}>
           Login
         </Link>
