@@ -6,9 +6,7 @@ import styled from "styled-components";
 import EachList from "./EachList";
 import ListItem from "./ListItem";
 import { useEffect } from "react";
-import { useGet, usePatch, usePost } from "@/hooks/useHttp";
-import { AxiosHeaders } from "axios";
-import { StringLiteral } from "typescript";
+import { useGet } from "@/hooks/useHttp";
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -39,8 +37,6 @@ enum NowState {
 }
 
 interface Itemp {
-  // 밑에서부턴 내가 따로 추가한것z
-  //post: string[];
   post: [
     {
       id: number;
@@ -52,27 +48,6 @@ interface Itemp {
     }
   ];
 }
-
-/*
-// 게시물 목록들
-const List = () => {
-  const nowState = useSelector((state: RootState) => state.activePage.active);
-  const isBoard = nowState === "board";
-  return (
-    <ListItemBox>
-      {isBoard ? (
-        <>
-          {DUMMY_DATA.map((data) => (
-            <ListItem key={data.id} nowState={data.nowState} />
-          ))}
-        </>
-      ) : (
-        <EachList />
-      )}
-    </ListItemBox>
-  );
-};
-export default List;*/
 
 const List = () => {
   const {
@@ -101,10 +76,6 @@ const List = () => {
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
   const isBoard = nowState === "board";
-
-  /* 지금 문제점: 게시글 filter 역할을 nowState가 해주고 있는데 
-  DUMMY_DATA와 달리 postDatas는 nowState라는 키값 존재 안하고 그냥 type이라는 것만 존재함.
-  따라서 nowState부분 type으로 적절하게 바꿔주면 해결 될둣,,,>?? */
 
   return (
     <>

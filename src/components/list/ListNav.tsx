@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 
 interface NavItemProps {
   active: boolean;
@@ -24,8 +24,8 @@ const NavList = styled.ul`
 `;
 const NavItem = styled.li<NavItemProps>`
   color: ${(props) =>
-    props.active ? 'var(--accent-color)' : 'var(--text-color)'};
-  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
+    props.active ? "var(--accent-color)" : "var(--text-color)"};
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
   &:hover {
     color: var(--accent-color);
     font-weight: bold;
@@ -34,17 +34,17 @@ const NavItem = styled.li<NavItemProps>`
 `;
 
 const LIST_ITEM = [
-  { title: '전체' },
-  { title: '판매' },
-  { title: '교환' },
-  { title: '나눔' },
-  { title: '경매' },
-  { title: '공구' },
+  { title: "전체" },
+  { title: "판매" },
+  { title: "교환" },
+  { title: "나눔" },
+  { title: "경매" },
+  { title: "공구" },
 ];
 
 // 상단 네비 (전체 ~ 공구)
 const ListNav = () => {
-  const [activeType, setActiveType] = useState('');
+  const [activeType, setActiveType] = useState("");
   console.log(activeType);
 
   const activeHandler = (type: string) => {
