@@ -51,8 +51,8 @@ export default function Board() {
   });
 
   useEffect(() => {
-    console.log(getData, getIsLoading, getError);
-    console.log(getData?.title, getData?.detail);
+    //console.log(getData, getIsLoading, getError);
+    //console.log(getData?.title, getData?.detail);
   }, [getData, getIsLoading, getError]);
 
   return (

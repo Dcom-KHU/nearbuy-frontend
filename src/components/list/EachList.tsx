@@ -16,6 +16,8 @@ interface Itemp {
       image: string[];
       location: string;
       type: string;
+      title: string;
+      salePrice: number | null;
     }
   ];
 }
@@ -32,12 +34,13 @@ export default function EachList() {
   });
 
   useEffect(() => {
-    console.log(getData, getIsLoading, getError);
-    console.log("getData결과: ", getData);
+    // console.log(getData, getIsLoading, getError);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   const postDatas = getData?.post || [];
   console.log("포데: ", postDatas);
+  // products가 postDatas
 
   const nowState = useSelector((state: RootState) => state.activePage.active);
 
@@ -46,7 +49,8 @@ export default function EachList() {
       {postDatas.map((post) => {
         // dummyData 받아오고.. nowState 일치하는 애들만 렌더링
         if (post.type === nowState) {
-          return <ListItem key={post.id} nowState={post.type} />;
+          console.log("포스트: ", post);
+          return <ListItem key={post.id} nowState={post.type} post={post} />;
         }
         return null;
       })}

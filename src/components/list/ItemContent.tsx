@@ -52,8 +52,20 @@ interface Itemp {
 }
 
 // 게시글 설명
-const ItemContent = () => {
+export default function ItemContent({
+  post,
+}: {
+  post: {
+    title: string;
+    id: number;
+    image: string[];
+    location: string;
+    type: string;
+    salePrice: number | null;
+  };
+}) {
   const nowState = useSelector((state: RootState) => state.activePage.active);
+  console.log("ㅍ스트:", post);
 
   const {
     data: getData,
@@ -67,37 +79,30 @@ const ItemContent = () => {
 
   useEffect(() => {
     console.log(getData, getIsLoading, getError);
-    console.log("타이틀: ", getData?.title);
-    console.log("디테일: ", getData?.detail);
-    console.log("일단로그해봐");
   }, [getData, getIsLoading, getError]);
 
   const postDatas = getData?.post;
+  console.log("^^^^^:", postDatas);
 
-  console.log("^^^^^^^^^", nowState, postDatas);
   return (
     <>
-      <div key={getData?.id}>
-        <p>{getData?.id}</p>
-        <p>{getData?.title}</p>
-        <p>{getData?.writer}</p>
-      </div>
-      {postDatas?.map((post) => (
-        <div key={post.id}>
-          <p>{post.id}</p>
-          <p>{post.title}</p>
-          <p>{post.location}</p>
-        </div>
-      ))}
       <ItemContentBox>
-        <ProductTitle />
-        <ProductPrice />
-        <ProductLocation />
+        {/*postDatas?.map((post) => (
+          <div key={post.id}>
+            <p>{post.id}</p>
+            <p>{post.title}</p>
+            <p>{post.location}</p>
+          </div>
+        ))*/}
+        <p>{post.title}</p>
+        {post.salePrice != null ? <p>{post.salePrice}</p> : <p>NULL</p>}
+        <p>{post.location}</p>
       </ItemContentBox>
     </>
   );
-};
-export default ItemContent;
+}
+
+// export default ItemContent;
 
 /* 원래 const ItemContent=()={} 안에 암것도없고 리턴값만 있었음
   return (

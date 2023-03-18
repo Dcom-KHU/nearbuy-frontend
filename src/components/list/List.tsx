@@ -47,6 +47,8 @@ interface Itemp {
       image: string[];
       location: string;
       type: string;
+      title: string;
+      salePrice: number | null;
     }
   ];
 }
@@ -90,13 +92,6 @@ const List = () => {
 
   const postDatas = getData?.post;
 
-  if (postDatas) {
-    postDatas.map((post) => {
-      console.log("$$$$$$", post.id);
-      console.log("$$$$$$", post.type);
-    });
-  }
-
   // RootState는 타입스크립트 에러?땜시 추가함
   const nowState = useSelector((state: RootState) => state.activePage.active);
   // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
@@ -119,7 +114,7 @@ const List = () => {
         {isBoard ? (
           <>
             {postDatas?.map((post) => (
-              <ListItem key={post.id} nowState={post.type} />
+              <ListItem key={post.id} nowState={post.type} post={post} />
             ))}
           </>
         ) : (

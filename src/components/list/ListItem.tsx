@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import styled from 'styled-components';
-import ItemContent from './ItemContent';
-import SmallInfoForListItem from '../product-detail-page/pdp-left/info/SmallInfoForListItem';
-import ProductMainPicture from './productinfo/ProductMainPicture';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useState } from 'react';
+import Link from "next/link";
+import styled from "styled-components";
+import ItemContent from "./ItemContent";
+import SmallInfoForListItem from "../product-detail-page/pdp-left/info/SmallInfoForListItem";
+import ProductMainPicture from "./productinfo/ProductMainPicture";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useState } from "react";
 
 const ListItemBox = styled.div`
   display: flex;
@@ -23,6 +23,7 @@ const ListItemBox = styled.div`
     cursor: pointer;
   }
 `;
+
 const AiFillHeartCss = styled(AiFillHeart)`
   // 하트~
   position: absolute;
@@ -36,9 +37,21 @@ const AiOutlineHeartCss = styled(AiOutlineHeart)`
   right: 17px;
 `;
 
+interface Itemp {
+  nowState: string | null;
+  post: {
+    title: string;
+    id: number;
+    image: string[];
+    location: string;
+    type: string;
+    salePrice: number | null;
+  };
+}
+
 // 게시글 목록에서 작게 보여지는 게시글 한 개
-export default function ListItem({ nowState }: { nowState: string | null }) {
-  const isAuctionOrGroup = nowState === 'auction' || nowState === 'group';
+export default function ListItem({ nowState, post }: Itemp) {
+  const isAuctionOrGroup = nowState === "auction" || nowState === "group";
   const [isLike, setIsLike] = useState(false);
   const isLikeHandler = () => {
     setIsLike((prev) => !prev);
@@ -48,11 +61,11 @@ export default function ListItem({ nowState }: { nowState: string | null }) {
       {isAuctionOrGroup && <SmallInfoForListItem type={nowState} />}
       <Link href={`/${nowState}/detail`}>
         <ProductMainPicture />
-        <ItemContent />
+        <ItemContent post={post} />
       </Link>
-      <button className='liked' onClick={isLikeHandler}>
-        {isLike && <AiFillHeartCss color='#ffa1a1' size={24} />}
-        {!isLike && <AiOutlineHeartCss color='#ffa1a1' size={24} />}
+      <button className="liked" onClick={isLikeHandler}>
+        {isLike && <AiFillHeartCss color="#ffa1a1" size={24} />}
+        {!isLike && <AiOutlineHeartCss color="#ffa1a1" size={24} />}
       </button>
     </ListItemBox>
   );
