@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
+import TellPostPrice from "./productinfo/TellPostPrice";
 
 const ItemContentBox = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ export default function ItemContent({
     <>
       <ItemContentBox>
         <p>{post.title}</p>
-        {post.salePrice != null ? <p>{post.salePrice}</p> : <p>NULL</p>}
+        <TellPostPrice type={post.type} salePrice={post.salePrice} />
         <p>{post.location}</p>
       </ItemContentBox>
     </>
