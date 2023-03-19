@@ -64,7 +64,13 @@ export default function ListItem({ nowState, post }: Itemp) {
   };
   return (
     <ListItemBox>
-      {isAuctionOrGroup && <SmallInfoForListItem type={nowState} />}
+      {isAuctionOrGroup && (
+        <SmallInfoForListItem
+          type={nowState}
+          totalPeople={post.totalPeople}
+          deadline={post.deadline}
+        />
+      )}
       <Link href={`/${nowState}/detail`}>
         <ProductMainPicture />
         <ItemContent post={post} />

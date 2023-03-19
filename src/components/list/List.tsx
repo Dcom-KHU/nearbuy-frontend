@@ -73,6 +73,8 @@ const List = () => {
 
   const postDatas = getData?.post;
 
+  console.log("포데: ", postDatas);
+
   // RootState는 타입스크립트 에러?땜시 추가함
   const nowState = useSelector((state: RootState) => state.activePage.active);
   // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
