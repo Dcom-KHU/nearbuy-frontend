@@ -46,6 +46,12 @@ interface Itemp {
     location: string;
     type: string;
     salePrice: number | null;
+    groupPrice: number | null;
+    currentPrice: number | null;
+    totalPeople: number | null;
+    deadline: number | null;
+    ongoing: boolean;
+    target: string | null;
   };
 }
 

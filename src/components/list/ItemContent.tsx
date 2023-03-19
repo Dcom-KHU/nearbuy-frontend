@@ -33,6 +33,12 @@ export default function ItemContent({
     location: string;
     type: string;
     salePrice: number | null;
+    groupPrice: number | null;
+    currentPrice: number | null;
+    totalPeople: number | null;
+    deadline: number | null;
+    ongoing: boolean;
+    target: string | null;
   };
 }) {
   const nowState = useSelector((state: RootState) => state.activePage.active);
@@ -41,7 +47,12 @@ export default function ItemContent({
     <>
       <ItemContentBox>
         <p>{post.title}</p>
-        <TellPostPrice type={post.type} salePrice={post.salePrice} />
+        <TellPostPrice
+          type={post.type}
+          salePrice={post.salePrice}
+          groupPrice={post.groupPrice}
+          currentPrice={post.currentPrice}
+        />
         <p>{post.location}</p>
       </ItemContentBox>
     </>

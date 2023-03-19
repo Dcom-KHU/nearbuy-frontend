@@ -39,12 +39,18 @@ enum NowState {
 interface Itemp {
   post: [
     {
+      title: string;
       id: number;
       image: string[];
       location: string;
       type: string;
-      title: string;
       salePrice: number | null;
+      groupPrice: number | null;
+      currentPrice: number | null;
+      totalPeople: number | null;
+      deadline: number | null;
+      ongoing: boolean;
+      target: string | null;
     }
   ];
 }

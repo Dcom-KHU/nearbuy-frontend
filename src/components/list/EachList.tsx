@@ -15,6 +15,12 @@ interface Itemp {
       type: string;
       title: string;
       salePrice: number | null;
+      groupPrice: number | null;
+      currentPrice: number | null;
+      totalPeople: number | null;
+      deadline: number | null;
+      ongoing: boolean;
+      target: string | null;
     }
   ];
 }
@@ -35,7 +41,7 @@ export default function EachList() {
   return (
     <>
       {postDatas.map((post) => {
-        // dummyData 받아오고.. nowState 일치하는 애들만 렌더링
+        // postDatas 받아오고.. nowState 일치하는 애들만 렌더링
         if (post.type === nowState) {
           return <ListItem key={post.id} nowState={post.type} post={post} />;
         }

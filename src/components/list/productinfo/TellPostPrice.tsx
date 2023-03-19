@@ -3,9 +3,16 @@
 type TellPostPriceProps = {
   type: string;
   salePrice: number | null;
+  groupPrice: number | null;
+  currentPrice: number | null;
 };
 
-export default function TellPostPrice({ type, salePrice }: TellPostPriceProps) {
+export default function TellPostPrice({
+  type,
+  salePrice,
+  groupPrice,
+  currentPrice,
+}: TellPostPriceProps) {
   switch (type) {
     case "sale":
       return <p>{salePrice}</p>;
@@ -14,9 +21,9 @@ export default function TellPostPrice({ type, salePrice }: TellPostPriceProps) {
     case "free":
       return <p>나눔</p>;
     case "auction":
-      return <p>경매가격아직안넣어줌</p>;
+      return <p>{currentPrice}</p>;
     case "group":
-      return <p>공구가아직안넣어줌</p>;
+      return <p>{groupPrice}</p>;
     default:
       return <p>NULL</p>;
   }
