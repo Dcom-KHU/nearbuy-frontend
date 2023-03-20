@@ -2,6 +2,8 @@
 
 import styled from 'styled-components';
 import MenuItem from './MenuItem';
+import { serverIP } from '@/../secrets.json';
+import axios from 'axios';
 
 const MenuBox = styled.div`
   width: 100%;
@@ -13,6 +15,13 @@ const MenuBox = styled.div`
   row-gap: 20px;
   column-gap: 20px;
 `;
+
+async function getData() {
+  const response = await axios.get(`${serverIP}/api/user/page/my`, {
+    params: { id: 123 },
+  });
+  return response;
+}
 
 // 마이 페이지 오른쪽 부분 (판내상품 ~ 거래후기)
 const Menu = () => {

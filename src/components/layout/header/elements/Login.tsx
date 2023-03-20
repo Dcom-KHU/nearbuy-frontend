@@ -33,7 +33,6 @@ const Login = () => {
   // TODO: 같은 코드가 login, logo, navigation 등에서 반복돼서 사용됨. 반복 줄일 순 없을까?
   const dispatch = useDispatch();
   const loggedIn = localStorage.getItem('login') === 'true';
-  console.log('loggedIn,,,', loggedIn);
 
   const menuToggleHandler = () => {
     dispatch(closeMenu());

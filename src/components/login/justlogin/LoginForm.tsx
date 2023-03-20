@@ -7,6 +7,7 @@ import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
 import { serverIP } from '../../../../secrets.json';
 import axios from 'axios';
+import { useSearchParams } from 'next/navigation';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -71,7 +72,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         `${serverIP}/api/user/${mode}`,
         loginData
       );
-      console.log(response);
+      console.log('response', response);
 
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');

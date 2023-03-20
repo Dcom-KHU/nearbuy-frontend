@@ -31,9 +31,8 @@ const User = () => {
   } = useGet<Itemp>({
     url: '/api/user/page',
     // TODO: params 동적으로 바꾸기.
-    params: { id: 'aa@aa' },
+    params: { id: 1 },
   });
-  console.log('getData', getData);
   const { mannerPoint, ...rest } = getData ?? {};
   return (
     <UserBox>
