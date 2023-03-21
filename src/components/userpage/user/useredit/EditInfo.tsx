@@ -10,6 +10,8 @@ import axios from 'axios';
 import { serverIP } from '@/../secrets.json';
 import { useState } from 'react';
 import GetToken from '@/utils/getToken';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 const Main = styled.main`
   display: flex;
@@ -102,6 +104,7 @@ const EditSchema = Yup.object().shape({
 const EditInfo = () => {
   const initialForm = { name: 'user' };
   const token = GetToken();
+  const userName = useSelector((state: RootState) => state.userInfo.name);
   const [profileImage, setProfileImage] = useState(null);
   const [isChange, setIsChange] = useState(false);
   const changePicHandler = () => {
@@ -154,7 +157,7 @@ const EditInfo = () => {
                 component='div'
                 className='text-xs text-red-500 py-1'
               />
-              <Field name='username' type='text' placeholder='User Name' />
+              <Field name='username' type='text' placeholder={userName} />
               <Button>수정 완료</Button>
             </Form>
           </Formik>
@@ -165,47 +168,3 @@ const EditInfo = () => {
   );
 };
 export default EditInfo;
-
-// const EditInfo = () => {
-//   const initialForm = { name: 'user' };
-//   const [profileImage, setProfileImage] = useState(null);
-
-//   const submitHandler = async (values) => {
-//     const formData = new FormData();
-//     formData.append('username', values.username);
-//     formData.append('profileImage', profileImage);
-
-//     const response = await axios.patch(`${serverIP}/api/user/page`, formData);
-//   };
-
-//   return (
-//     <Main>
-//       <UserPicBox>
-//         <UserPic />
-//         <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} />
-//         <button>프로필 사진 바꾸기</button>
-//       </UserPicBox>
-//       <UserInfoBox>
-//         <NameForm>
-//           <Formik
-//             initialValues={initialForm}
-//             validationSchema={EditSchema}
-//             onSubmit={submitHandler}
-//           >
-//             <Form>
-//               <ErrorMessage
-//                 name='username'
-//                 component='div'
-//                 className='text-xs text-red-500 py-1'
-//               />
-//               <Field name='username' type='text' placeholder='User Name' />
-//               <Button>수정 완료</Button>
-//             </Form>
-//           </Formik>
-//         </NameForm>
-//         <UserTemp />
-//       </UserInfoBox>
-//     </Main>
-//   );
-// };
-// export default EditInfo;

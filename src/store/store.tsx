@@ -7,6 +7,7 @@ import myPageMenuToggleSlice from './mypageMenuToggle/myPageMenuToggleSlice';
 import priceSlice from './price/priceSlice';
 import saveTokenSlice from './saveToken/saveTokenSlice';
 import searchToggleSlice from './searchToggle/searchToggleSlice';
+import userInfoSlice from './userInfo/userInfoSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     chatToggle: chatToggleSlice,
     loggedIn: loggedInSlice,
     saveToken: saveTokenSlice,
+    userInfo: userInfoSlice,
   },
 });
 

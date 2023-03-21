@@ -1,6 +1,8 @@
 'use client';
 
 import { useGet } from '@/hooks/useHttp';
+import { userName } from '@/store/userInfo/userInfoSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import UserEdit from './UserEdit';
 import UserInfo from './userinfo/UserInfo';
@@ -34,6 +36,10 @@ const User = () => {
     params: { id: 1 },
   });
   const { mannerPoint, ...rest } = getData ?? {};
+  const { name } = rest;
+  const dispatch = useDispatch();
+  dispatch(userName(name));
+
   return (
     <UserBox>
       <UserEdit />
