@@ -30,7 +30,7 @@ interface Itemp {
   ongoing: boolean;
   salePrice: number;
   tag: string[];
-  time: boolean;
+  time: number;
   title: string;
   type: string;
   writer: string;
@@ -42,7 +42,6 @@ export default function PDPforSale() {
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  console.log("아이뒤: ", id);
 
   const {
     data: getData,
@@ -53,34 +52,15 @@ export default function PDPforSale() {
     params: { id: id ?? undefined },
   });
 
-  /*
-  //여기도.. 삽질의현장...인데 건진건없음
-  const [post, setPost] = useState({});
-  useEffect(() => {
-    axios.get(`${serverIP}/api/post/sale`).then((data) => {
-      console.log(data);
-      // setPost(data.data.find((post) => post.id));
-      axios({
-        url: "https://test/api/cafe/list/today", // 통신할 웹문서
-        method: "get", // 통신할 방식
-        data: {
-          // 인자로 보낼 데이터
-          params: "id",
-        },
-      });
-    });
-  }, []);
-  */
-
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-    console.log("getData결과아: ", getData);
+    console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (
     <Box>
       <PdpBox>
-        <PdpLeft />
+        <PdpLeft data={getData} />
         <PdpRight />
       </PdpBox>
       <PdpBottom />

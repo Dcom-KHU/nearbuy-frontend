@@ -30,7 +30,7 @@ interface Itemp {
   ongoing: boolean;
   salePrice: number;
   tag: string[];
-  time: boolean;
+  time: number;
   title: string;
   type: string;
   writer: string;

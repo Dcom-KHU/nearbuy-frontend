@@ -1,10 +1,22 @@
+/*
+이거
+
+이제
+
+없어도
+
+되는
+
+파일인듯?
+*/
+
 "use client";
 
 import PdpLeft from "./pdp-left/PdpLeft";
 import PdpRight from "./pdp-right/PdpRight";
 import PdpBottom from "./pdp-bottom/PdpBottom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 
@@ -30,7 +42,7 @@ interface Itemp {
   ongoing: boolean;
   salePrice: number;
   tag: string[];
-  time: boolean;
+  time: number;
   title: string;
   type: string;
   writer: string;
