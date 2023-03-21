@@ -40,7 +40,7 @@ interface Itemp {
   ongoing: boolean;
   salePrice: number;
   tag: string[];
-  time: boolean;
+  time: number;
   title: string;
   type: string;
   writer: string;
@@ -72,7 +72,6 @@ export default function MainPage() {
   // useGet 해서 가져와진 response 값을 찍는거. API 명세서의 response 예시 형태와 동일함
   useEffect(() => {
     console.log(getData, getIsLoading, getError);
-    console.log(getData?.title, getData?.detail);
   }, [getData, getIsLoading, getError]);
 
   // id의 state 업데이트 위해 setId 호출. 나중에 JSX 내부에서 이거 불러와야함!!!! button onClick={()=>handleIdChange(id) 처럼....}
@@ -107,11 +106,8 @@ export default function MainPage() {
   return (
     <>
       <div key={getData?.id}>
-        <div>{getData?.id}</div>
-        <div>{getData?.title}</div>
         <div>{getData?.writer}</div>
       </div>
-      <div>{getData?.writer}</div>
       <MainBox color="lightblue">
         <WriteToggle />
         <MainPageBlock color="lightblue">

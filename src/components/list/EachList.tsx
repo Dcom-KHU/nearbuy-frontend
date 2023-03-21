@@ -18,6 +18,7 @@ interface Itemp {
       groupPrice: number | null;
       currentPrice: number | null;
       totalPeople: number | null;
+      currentPeople: number | null;
       deadline: number | null;
       ongoing: boolean;
       target: string | null;
