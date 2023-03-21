@@ -6,6 +6,7 @@ interface BoxProps {
   type: "group" | "auction";
   totalPeople: number | null;
   deadline: number | null;
+  currentPeople: number | null;
 }
 
 const Box = styled.div<BoxProps>`
@@ -24,18 +25,30 @@ export default function SmallInfoForListItem({
   type,
   totalPeople,
   deadline,
+  currentPeople,
 }: BoxProps) {
   /* 지금 auction 게시물 deadline 값이 invalid하고 totalPeople 옆에 들어갈 '현재 참여중인 인원'에 대한 값이 없음*/
   if (type === "auction") {
     return (
-      <Box type={type} totalPeople={totalPeople} deadline={deadline}>
+      <Box
+        type={type}
+        totalPeople={totalPeople}
+        deadline={deadline}
+        currentPeople={currentPeople}
+      >
         D - <span>시간</span>
       </Box>
     );
   } else if (type === "group") {
     return (
-      <Box type={type} totalPeople={totalPeople} deadline={deadline}>
-        <span>...</span> / <span>{totalPeople}</span>
+      <Box
+        type={type}
+        totalPeople={totalPeople}
+        deadline={deadline}
+        currentPeople={currentPeople}
+      >
+        <span>{currentPeople ? currentPeople : "n"}</span> /{" "}
+        <span>{totalPeople}</span>
       </Box>
     );
   } else {

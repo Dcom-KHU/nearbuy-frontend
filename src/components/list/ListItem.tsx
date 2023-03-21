@@ -49,6 +49,7 @@ interface Itemp {
     groupPrice: number | null;
     currentPrice: number | null;
     totalPeople: number | null;
+    currentPeople: number | null;
     deadline: number | null;
     ongoing: boolean;
     target: string | null;
@@ -69,6 +70,7 @@ export default function ListItem({ nowState, post }: Itemp) {
           type={nowState}
           totalPeople={post.totalPeople}
           deadline={post.deadline}
+          currentPeople={post.currentPeople}
         />
       )}
       <Link href={`/${nowState}/detail/?id=${post.id}`}>

@@ -48,6 +48,7 @@ interface Itemp {
       groupPrice: number | null;
       currentPrice: number | null;
       totalPeople: number | null;
+      currentPeople: number | null;
       deadline: number | null;
       ongoing: boolean;
       target: string | null;
@@ -68,14 +69,12 @@ const List = () => {
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   const postDatas = getData?.post;
+  //console.log("포데: ", postDatas);
 
-  console.log("포데: ", postDatas);
-
-  // RootState는 타입스크립트 에러?땜시 추가함
+  // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);
   // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
   // useSelector hook이 리액트 컴포넌트에서 Redux stord의 상태 읽어오기 위해 사용되고
