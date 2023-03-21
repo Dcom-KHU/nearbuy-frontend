@@ -16,7 +16,7 @@ const WriteSellBlock = styled.div`
   flex-direction: column;
 `;
 
-export default function WriteAuction() {
+const WriteAuction = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
@@ -74,4 +74,6 @@ export default function WriteAuction() {
       </WriteSellBlock>
     </>
   );
-}
+};
+
+export default WriteAuction;
