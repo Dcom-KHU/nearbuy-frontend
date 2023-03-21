@@ -1,5 +1,5 @@
-import ProductDetailPage from '@/components/product-detail-page/ProductDetailPage';
+import PDPforAuction from "@/components/product-detail-page/pdp-type/PDPforAuction";
 
 export default function Page() {
-  return <ProductDetailPage />;
+  return <PDPforAuction />;
 }

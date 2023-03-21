@@ -71,7 +71,7 @@ export default function ListItem({ nowState, post }: Itemp) {
           deadline={post.deadline}
         />
       )}
-      <Link href={`/${nowState}/detail`}>
+      <Link href={`/${nowState}/detail/?id=${post.id}`}>
         <ProductMainPicture />
         <ItemContent post={post} />
       </Link>
