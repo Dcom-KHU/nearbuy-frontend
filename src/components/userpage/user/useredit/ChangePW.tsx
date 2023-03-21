@@ -6,23 +6,23 @@ import styled from 'styled-components';
 const PWform = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
-  position: relative;
   margin-bottom: 30px;
 
   button {
     position: absolute;
-    bottom: -30%;
-    right: -5%;
+    right: 3%;
+    bottom: 5%;
   }
 `;
 const PWBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: 80%;
   gap: 3px;
 
   input {
-    width: 90%;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: var(--border-radius);
   }

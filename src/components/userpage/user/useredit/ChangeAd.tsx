@@ -22,11 +22,16 @@ const AdForm = styled.form`
     top: 55%;
     right: 3%;
   }
-  button:last-child {
+  /* button:last-child {
     position: absolute;
     bottom: -230%;
     right: -10%;
-  }
+  } */
+`;
+const ButtonBox = styled.div`
+  position: absolute;
+  right: 3%;
+  bottom: 5%;
 `;
 
 // 마이페이지 수정하기 - 주소 변경
@@ -46,9 +51,11 @@ const ChangeAd = () => {
             height={18}
           />
         </button>
-        <Button>수정 완료</Button>
       </AdForm>
       <div>지도 사진</div>
+      <ButtonBox>
+        <Button>수정 완료</Button>
+      </ButtonBox>
     </div>
   );
 };

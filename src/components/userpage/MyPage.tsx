@@ -38,21 +38,57 @@ const MyPage = () => {
   const [postsData, setPostsData] = useState();
   const [favoritesData, setFavoritesData] = useState();
   const [reviewsData, setReviewsData] = useState();
-  const fetchData = async (id: string | number = 1) => {
-    const response = await axios.get(`${serverIP}/api/user/page/all`, {
-      params: {
-        id,
-      },
-    });
-    const { myPosts, posts, favorites, reviews } = response.data;
-    setMyPostsData(myPosts);
-    setPostsData(posts);
-    setFavoritesData(favorites);
-    setReviewsData(reviews);
+  const fetchData = async (url: string, id: string | number = 1) => {
+    try {
+      const response = await axios.get(`${serverIP}/api/user/page${url}`, {
+        params: {
+          id: 1,
+        },
+      });
+      if (url === '/my') {
+        setMyPostsData(response.data.post);
+      }
+      if (url === '/other') {
+        setPostsData(response.data.post);
+      } else if (url === '/like') {
+        setFavoritesData(response.data.post);
+      } else if (url === '/review') {
+        setReviewsData(response.data.review);
+      }
+    } catch (error) {
+      console.error(error);
+      // 오류 발생 시
+      if (error.response.status) {
+        console.error('response.status', error.response.status);
+      } else if (error.request) {
+        console.error('requst', error.request);
+      } else {
+        console.error('Error', error.message);
+      }
+    }
   };
   useEffect(() => {
-    fetchData();
+    fetchData('/my');
+    fetchData('/other');
+    fetchData('/like');
+    fetchData('/review');
   }, []);
+
+  // const fetchData = async (id: string | number = 1) => {
+  //   const response = await axios.get(`${serverIP}/api/user/page/all`, {
+  //     params: {
+  //       id,
+  //     },
+  //   });
+  //   const { myPosts, posts, favorites, reviews } = response.data;
+  //   setMyPostsData(myPosts.post);
+  //   setPostsData(posts.post);
+  //   setFavoritesData(favorites.post);
+  //   setReviewsData(reviews.review);
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -60,31 +96,27 @@ const MyPage = () => {
         <User />
         <Menu />
       </MyPageBox>
-      {myPosts && (
+      {/* {myPosts && (
         <>
           <ListNav />
-          <h1>myPosts</h1>
           <List dataList={myPostsData} />
         </>
-      )}
+      )} */}
       {posts && (
         <>
           <ListNav />
-          <h1>posts</h1>
           <List dataList={postsData} />
         </>
       )}
       {favorites && (
         <>
           <ListNav />
-          <h1>favorites</h1>
           <List dataList={favoritesData} />
         </>
       )}
       {reviews && (
         <>
           <ListNav />
-          <h1>reviews</h1>
           <List dataList={reviewsData} />
         </>
       )}
