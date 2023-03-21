@@ -25,14 +25,43 @@ const SellWriteFormBlock = styled.div`
   padding-top: 20px;
 `;
 
+const CategorySelect = styled.input`
+  padding: 150px 10px;
+
+  input[type="radio"] {
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid #333;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+  }
+`;
+
 interface PostFormBlockProps {
   register: UseFormRegister<FieldValues>;
   type: string;
+  category?: string;
+  setCategory?: Function;
 }
+
+// 판/교/나 카테고리
+const sellCategory = [
+  { key: 1, value: "sale", kor: "판매" },
+  { key: 2, value: "exchange", kor: "교환" },
+  { key: 3, value: "free", kor: "나눔" },
+];
 
 // eslint-disable-next-line react/display-name
 const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
-  const { register, type } = props;
+  const { register, type, category, setCategory } = props;
+
+  const categoryClickHandler = (value: string) => {
+    setCategory?.(value);
+  };
 
   return (
     <SellWriteFormBlock>
@@ -92,6 +121,56 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
           <></>
         )}
 
+        {/* 2행~ - 판교나 */}
+        {/* {type === "sell" && } */}
+        <div className="flex flex-row justify-between">
+          {category === "sale" ? (
+            <input
+              placeholder="가격"
+              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="number"
+              {...register("salePrice", { required: true })}
+            />
+          ) : category === "exchange" ? (
+            <input
+              placeholder="교환 원하는 상품"
+              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="text"
+              {...register("target", { required: true })}
+            />
+          ) : (
+            <input
+              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg cursor-not-allowed"
+              type="text"
+              disabled
+            />
+          )}
+          {/* 카테고리 선택 */}
+          <div className="flex flex-row justify-between">
+            {sellCategory.map(val => {
+              return (
+                <label
+                  key={val.key}
+                  className={[
+                    category === val.value ? "bg-[#e6e6fa]" : "",
+                    "p-[10px] mx-[5px] border-[1px] border-[#333] rounded cursor-pointer text-center",
+                  ].join(" ")}
+                >
+                  <CategorySelect
+                    id="categorySelect"
+                    type="radio"
+                    value={val.value}
+                    checked={category === val.value}
+                    onChange={() => categoryClickHandler(val.value)}
+                    hidden
+                  />
+                  {val.kor}
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
         {/* 3행 */}
         {/* 상세 설명 */}
         <textarea
@@ -123,11 +202,13 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
         />
 
         {/* 거래 가능 날짜 */}
-        <input
-          className="form-input"
-          type="date"
-          {...register("date", { required: true })}
-        />
+        {type !== "sell" && (
+          <input
+            className="form-input"
+            type="date"
+            {...register("date", { required: true })}
+          />
+        )}
 
         {/* 공구 - 분배 방식 */}
         {type === "group" && (
