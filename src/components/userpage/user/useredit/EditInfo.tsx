@@ -6,6 +6,10 @@ import UserPic from '../userinfo/UserPic';
 import UserTemp from '../UserTemp';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import axios from 'axios';
+import { serverIP } from '@/../secrets.json';
+import { useState } from 'react';
+import GetToken from '@/utils/getToken';
 
 const Main = styled.main`
   display: flex;
@@ -18,6 +22,7 @@ const UserPicBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   button {
     font-size: 12px;
     &:hover {
@@ -46,6 +51,41 @@ const NameForm = styled.div`
     bottom: -10%;
   }
 `;
+const Box = styled.div`
+  /* width: 300px; */
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  input {
+    display: inline-block;
+    padding: 0 10px;
+    /* vertical-align: middle; */
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+  }
+  label {
+    display: inline-block;
+    padding-top: 3px;
+    color: #fff;
+    /* vertical-align: middle; */
+    background-color: #999999;
+    cursor: pointer;
+    margin-left: 10px;
+    /* font-size: 4px; */
+    width: 100px;
+    max-width: 150px;
+    text-align: center;
+  }
+  input[type='file'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+  }
+`;
 
 const EditSchema = Yup.object().shape({
   username: Yup.string()
@@ -60,15 +100,46 @@ const EditSchema = Yup.object().shape({
 });
 // 마이페이지 수정하기 - 프로필 편집
 const EditInfo = () => {
-  const initialForm = { name: 'hah' };
-  const submitHandler = () => {
-    alert('hah');
+  const initialForm = { name: 'user' };
+  const token = GetToken();
+  const [profileImage, setProfileImage] = useState(null);
+  const [isChange, setIsChange] = useState(false);
+  const changePicHandler = () => {
+    setIsChange((prev) => !prev);
+  };
+  const submitHandler = async (values) => {
+    const formData = {
+      name: values.username,
+      image: profileImage.name,
+      location: '대한민국 경기도 평택시',
+    };
+    console.log(formData);
+
+    const response = await axios.patch(`${serverIP}/api/user/page`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
   };
   return (
     <Main>
       <UserPicBox>
         <UserPic />
-        <button>프로필 사진 바꾸기</button>
+        {!isChange && (
+          <button onClick={changePicHandler}>프로필 사진 바꾸기</button>
+        )}
+        {isChange && (
+          <Box>
+            <input value={profileImage?.name} placeholder='첨부파일' readOnly />
+            <label htmlFor='file'>파일선택</label>
+            <input
+              type='file'
+              id='file'
+              onChange={(e) => setProfileImage(e.target.files[0])}
+            />
+          </Box>
+        )}
       </UserPicBox>
       <UserInfoBox>
         <NameForm>
@@ -94,3 +165,47 @@ const EditInfo = () => {
   );
 };
 export default EditInfo;
+
+// const EditInfo = () => {
+//   const initialForm = { name: 'user' };
+//   const [profileImage, setProfileImage] = useState(null);
+
+//   const submitHandler = async (values) => {
+//     const formData = new FormData();
+//     formData.append('username', values.username);
+//     formData.append('profileImage', profileImage);
+
+//     const response = await axios.patch(`${serverIP}/api/user/page`, formData);
+//   };
+
+//   return (
+//     <Main>
+//       <UserPicBox>
+//         <UserPic />
+//         <input type="file" onChange={(e) => setProfileImage(e.target.files[0])} />
+//         <button>프로필 사진 바꾸기</button>
+//       </UserPicBox>
+//       <UserInfoBox>
+//         <NameForm>
+//           <Formik
+//             initialValues={initialForm}
+//             validationSchema={EditSchema}
+//             onSubmit={submitHandler}
+//           >
+//             <Form>
+//               <ErrorMessage
+//                 name='username'
+//                 component='div'
+//                 className='text-xs text-red-500 py-1'
+//               />
+//               <Field name='username' type='text' placeholder='User Name' />
+//               <Button>수정 완료</Button>
+//             </Form>
+//           </Formik>
+//         </NameForm>
+//         <UserTemp />
+//       </UserInfoBox>
+//     </Main>
+//   );
+// };
+// export default EditInfo;

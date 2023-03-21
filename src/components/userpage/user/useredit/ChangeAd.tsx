@@ -22,11 +22,6 @@ const AdForm = styled.form`
     top: 55%;
     right: 3%;
   }
-  /* button:last-child {
-    position: absolute;
-    bottom: -230%;
-    right: -10%;
-  } */
 `;
 const ButtonBox = styled.div`
   position: absolute;

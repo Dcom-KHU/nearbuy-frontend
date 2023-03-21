@@ -7,6 +7,8 @@ import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
 import { serverIP } from '../../../../secrets.json';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { saveToken } from '@/store/saveToken/saveTokenSlice';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -57,8 +59,10 @@ interface LoginFormValue {
 
 // 로그인/회원가입
 export default function LoginForm({ isLogIn }: isLogInProps) {
+  const dispatch = useDispatch();
   const mode = isLogIn ? 'login' : 'join'; // url 뒤에 붙이기 위함
   const [errorMessage, setErrorMessage] = useState(''); // error message 출력
+
   const handleSubmit = async (values: LoginFormValue) => {
     const { email: id, password, username: name } = values;
     const loginData = isLogIn
@@ -75,6 +79,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
 
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');
+        dispatch(saveToken(response.data.accessToken));
       }
       window.location.replace(redirect);
     } catch (error) {
