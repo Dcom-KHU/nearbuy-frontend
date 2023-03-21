@@ -27,11 +27,12 @@ const SellWriteFormBlock = styled.div`
 
 interface PostFormBlockProps {
   register: UseFormRegister<FieldValues>;
+  type: string;
 }
 
 // eslint-disable-next-line react/display-name
 const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
-  const { register } = props;
+  const { register, type } = props;
 
   return (
     <SellWriteFormBlock>
@@ -48,24 +49,48 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
           {...register("title", { required: true })}
         />
 
-        {/* 2행 */}
-        <div className="flex flex-row justify-between">
-          {/* 총 가격 */}
-          <input
-            placeholder="총 가격"
-            className="w-[70%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
-            type="number"
-            {...register("price", { required: true })}
-          />
-          {/* 모집 인원 */}
-          <input
-            placeholder="모집인원"
-            className="w-1/4 m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
-            type="number"
-            min={1}
-            {...register("recruitingNum", { required: true })}
-          />
-        </div>
+        {/* 2행 - 동적 컴포넌트 */}
+        {/* 공구 */}
+        {type === "group" ? (
+          <div className="flex flex-row justify-between">
+            {/* 총 가격 */}
+            <input
+              placeholder="총 가격"
+              className="w-[70%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="number"
+              {...register("price", { required: true })}
+            />
+            {/* 모집 인원 */}
+            <input
+              placeholder="모집인원"
+              className="w-1/4 m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="number"
+              min={1}
+              {...register("recruitingNum", { required: true })}
+            />
+          </div>
+        ) : // 경매
+        type === "auction" ? (
+          <div className="flex flex-row justify-between">
+            {/* 최소 가격 */}
+            <input
+              placeholder="최소 가격"
+              className="w-[48%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="number"
+              {...register("startPrice", { required: true })}
+            />
+            {/* 최소 액수 증가 단위 */}
+            <input
+              placeholder="최소 액수 증가 단위"
+              className="w-[48%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+              type="number"
+              min={100}
+              {...register("increasePrice", { required: true })}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
 
         {/* 3행 */}
         {/* 상세 설명 */}
@@ -104,26 +129,28 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
           {...register("date", { required: true })}
         />
 
-        {/* 분배 방식 */}
-        <select
-          className="form-input bg-no-repeat"
-          style={{
-            backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-            backgroundPosition: "right 12px center",
-            backgroundSize: "1.5em",
-          }}
-          {...register("distribute", { required: true })}
-        >
-          <option key={0} value="default">
-            공구 분배 방식
-          </option>
-          <option key={1} value="direct">
-            직접 분배
-          </option>
-          <option key={2} value="post">
-            배송 분배
-          </option>
-        </select>
+        {/* 공구 - 분배 방식 */}
+        {type === "group" && (
+          <select
+            className="form-input bg-no-repeat"
+            style={{
+              backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+              backgroundPosition: "right 12px center",
+              backgroundSize: "1.5em",
+            }}
+            {...register("distribute", { required: true })}
+          >
+            <option key={0} value="default">
+              공구 분배 방식
+            </option>
+            <option key={1} value="direct">
+              직접 분배
+            </option>
+            <option key={2} value="post">
+              배송 분배
+            </option>
+          </select>
+        )}
       </RightFormContainer>
     </SellWriteFormBlock>
   );
