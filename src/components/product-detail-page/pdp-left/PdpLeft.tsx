@@ -8,20 +8,6 @@ import styled from "styled-components";
 import MemberCount from "./info/MemberCount";
 import Time from "./info/Time";
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: number;
-  title: string;
-  type: string;
-  writer: string;
-}
-
 const SmallImageBox = styled.div`
   display: flex;
   gap: 20px;

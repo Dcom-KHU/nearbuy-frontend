@@ -4,7 +4,7 @@ import PdpLeft from "../pdp-left/PdpLeft";
 import PdpRight from "../pdp-right/PdpRight";
 import PdpBottom from "../pdp-bottom/PdpBottom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 
@@ -30,7 +30,7 @@ interface Itemp {
   ongoing: boolean;
   salePrice: number;
   tag: string[];
-  time: number;
+  time: boolean;
   title: string;
   type: string;
   writer: string;
@@ -49,19 +49,20 @@ export default function PDPforSale() {
     error: getError,
   } = useGet<Itemp>({
     url: "/api/post/sale", // 필수
-    params: { id: id ?? undefined },
+    params: { id: id },
   });
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
     console.log("getData결과: ", getData);
+    console.log("타입", typeof getData);
   }, [getData, getIsLoading, getError]);
 
   return (
     <Box>
       <PdpBox>
-        <PdpLeft data={getData} />
-        <PdpRight />
+        <PdpLeft />
+        <PdpRight getData={getData} />
       </PdpBox>
       <PdpBottom />
     </Box>
