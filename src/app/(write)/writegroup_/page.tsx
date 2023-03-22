@@ -11,6 +11,7 @@ import PostImageList from "@/components/write/writepage/common/ImageList";
 import PostFormBlock from "@/components/write/writepage/common/PostFormBlock";
 import customAxios from "@/utils/customAxios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const WriteSellBlock = styled.div`
   // background-color: aliceblue;
@@ -25,7 +26,12 @@ export default function WriteGroup() {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
+  // 이미지 파일
+  const [images, setImages] = useState<File[]>();
+
   const submitHandler = async (d: any) => {
+    console.log(images);
+
     const registeredData = {
       title: d.title,
       detail: d.detail,
@@ -36,18 +42,20 @@ export default function WriteGroup() {
       totalPeople: d.recruitingNum,
       distribute: d.distribute,
       day: [new Date(d.date).getTime()], // 추후 n개 input을 리스트형식으로 이미 바꾸기
+      // image: images,
     };
 
     const result = await customAxios
       .post("/api/post/group", registeredData, {
         headers: {
           Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQxMjAxMywiZXhwIjoxNjc5NDEyNjEzfQ.uvTOsG_jz5Hy7bqpbFM5DfohOnZuaRn-kna6Wx6dS5Q",
+            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ3Mzk3OSwiZXhwIjoxNjc5NDc0NTc5fQ.ot2Uiio7RbUCgpn340xvDPYh2vjz3KITlKEhlsoM4yA",
+          "Content-Type": "multipart/form-data;",
         },
       })
       .then(data => {
         console.log(data);
-        router.replace("/board");
+        // router.replace("/board");
       })
       .catch(err => {
         console.log(err);
@@ -60,7 +68,11 @@ export default function WriteGroup() {
         <div className="self-start pl-8 py-5 text-[20px]">공동구매 포스팅</div>
 
         {/* 이미지 리스트 */}
-        <PostImageList register={register} />
+        <PostImageList
+          register={register}
+          images={images}
+          setImages={setImages}
+        />
 
         {/* form */}
         <PostFormBlock register={register} type="group" />
