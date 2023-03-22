@@ -64,7 +64,8 @@ const List = () => {
     error: getError,
   } = useGet<Itemp>({
     url: "/api/post/board",
-    params: { type: "all" }, // 나머지 파라미터 일단 생략 (default값 있음)
+    params: { type: "all", size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
+    // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
   useEffect(() => {
@@ -72,7 +73,7 @@ const List = () => {
   }, [getData, getIsLoading, getError]);
 
   const postDatas = getData?.post;
-  //console.log("포데: ", postDatas);
+  console.log("포데: ", postDatas);
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);

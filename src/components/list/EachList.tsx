@@ -33,7 +33,8 @@ export default function EachList() {
     error: getError,
   } = useGet<Itemp>({
     url: "/api/post/board",
-    params: { type: "all" },
+    params: { type: "all", size: 20 },
+    // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
   const postDatas = getData?.post || [];
