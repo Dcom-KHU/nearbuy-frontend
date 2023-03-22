@@ -38,7 +38,7 @@ const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
   const changeHandler = (files: FileList | null) => {
     const imageArr = files ? Array.from(files) : undefined;
     imageArr &&
-      setImages(prev => {
+      setImages((prev: File[]) => {
         console.log(prev);
         return prev ? [...prev, ...imageArr] : [...imageArr];
       });
