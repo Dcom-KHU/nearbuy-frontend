@@ -70,7 +70,7 @@ export default function PdpRight({ getData }: RightProps) {
             )}
             {activeType === "auction" && <AuctionDetail />}
             {activeType === "group" && <GroupDetail />}
-            <Location />
+            <Location location={getData?.location} />
           </>
         </div>
         <InfoBox>
