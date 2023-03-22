@@ -34,30 +34,27 @@ const NavItem = styled.li<NavItemProps>`
 `;
 
 const LIST_ITEM = [
-  { title: '전체' },
-  { title: '판매' },
-  { title: '교환' },
-  { title: '나눔' },
-  { title: '경매' },
-  { title: '공구' },
+  { title: '전체', type: 'board' },
+  { title: '판매', type: 'sale' },
+  { title: '교환', type: 'exchange' },
+  { title: '나눔', type: 'free' },
+  { title: '경매', type: 'auction' },
+  { title: '공구', type: 'group' },
 ];
 
 // 상단 네비 (전체 ~ 공구)
-const ListNav = () => {
-  const [activeType, setActiveType] = useState('');
-  console.log(activeType);
-
+const ListNav = ({ activeType, setActiveType }) => {
   const activeHandler = (type: string) => {
     setActiveType(type);
   };
   return (
     <Nav>
       <NavList>
-        {LIST_ITEM.map(({ title }, i) => (
+        {LIST_ITEM.map(({ title, type }, i) => (
           <NavItem
             key={i}
-            onClick={() => activeHandler(title)}
-            active={activeType === title}
+            onClick={() => activeHandler(type)}
+            active={activeType === type}
           >
             {title}
           </NavItem>

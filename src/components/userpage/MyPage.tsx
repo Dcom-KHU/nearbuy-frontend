@@ -31,6 +31,7 @@ const MyPageBox = styled.div`
 
 // mypage
 const MyPage = () => {
+  const [activeType, setActiveType] = useState('전체');
   const { myPosts, posts, favorites, reviews } = useSelector(
     (state: RootState) => state.myPageMenuToggle
   );
@@ -104,20 +105,20 @@ const MyPage = () => {
       )} */}
       {posts && (
         <>
-          <ListNav />
-          <List dataList={postsData} />
+          <ListNav activeType={activeType} setActiveType={setActiveType} />
+          <List dataList={postsData} activeType={activeType} />
         </>
       )}
       {favorites && (
         <>
-          <ListNav />
-          <List dataList={favoritesData} />
+          <ListNav activeType={activeType} setActiveType={setActiveType} />
+          <List dataList={favoritesData} activeType={activeType} />
         </>
       )}
       {reviews && (
         <>
-          <ListNav />
-          <List dataList={reviewsData} />
+          <ListNav activeType={activeType} setActiveType={setActiveType} />
+          <List dataList={reviewsData} activeType={activeType} />
         </>
       )}
     </div>

@@ -3,6 +3,7 @@
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import css from 'styled-jsx/css';
 import EachList from './EachList';
 import ListItem from './ListItem';
 
@@ -12,10 +13,20 @@ const ListItemBox = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
   padding: 30px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  row-gap: 30px;
-  justify-items: center;
+  ${(props) => {
+    if (props.emptyData) {
+      return css`
+        display: flex;
+        justify-content: center;
+      `;
+    }
+    return css`
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      row-gap: 30px;
+      justify-items: center;
+    `;
+  }}
 `;
 
 // ************************************************************************************************
@@ -36,34 +47,40 @@ enum NowState {
 // 게시글 더미 데이터
 interface ListProps {
   dataList?: [];
+  activeType?: string;
 }
 // 게시물 목록들
-const List = ({ dataList }: ListProps) => {
-  console.log('123', dataList);
+const List = ({ dataList, activeType }: ListProps) => {
   let emptyData = true;
-  if (dataList) {
+  console.log('emp before', emptyData);
+  if (dataList && dataList.length !== 0) {
     emptyData = false;
   }
-  console.log(emptyData, 'emp');
+  console.log('data', dataList);
+  console.log('emp after', emptyData);
 
-  const nowState = useSelector((state: RootState) => state.activePage.active);
-  const isBoard = nowState === 'board';
+  console.log('active', activeType);
+
+  let nowState = useSelector((state: RootState) => state.activePage.active);
+  if (activeType) {
+    nowState = activeType;
+  }
+
+  const isBoard = nowState === 'board' || nowState === '전체';
+  console.log('isboard', isBoard);
   return (
-    <ListItemBox>
-      {emptyData && <h1>hh</h1>}
-      <h1>aaa</h1>
+    <ListItemBox emptyData={emptyData}>
+      {emptyData && <h1>게시글이 없어요.</h1>}
       {!emptyData &&
         (isBoard ? (
           <>
-            <h1>kdk</h1>
             {dataList?.map((data) => (
               <ListItem key={data.id} nowState={data.type} />
             ))}
           </>
         ) : (
           <>
-            <h1>sd</h1>
-            <EachList dataList={dataList} />
+            <EachList dataList={dataList} activeType={activeType} />
           </>
         ))}
     </ListItemBox>
