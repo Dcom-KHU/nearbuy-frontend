@@ -39,13 +39,15 @@ const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
   const [prevImgURLArr, setPrevImgURLArr] = useState<string[]>([]);
 
   const prevImgURLAdd = (imgArr: File[]) => {
+    // 새로운 imgFile에 대한 url 담는 arr
     let newPrevImgURLArr: string[] = [];
     imgArr?.forEach(img => {
       const imgURL = URL.createObjectURL(img);
       newPrevImgURLArr.push(imgURL);
     });
+
+    // state 업데이트
     setPrevImgURLArr(prev => {
-      console.log(newPrevImgURLArr);
       return [...prev, ...newPrevImgURLArr];
     });
   };
