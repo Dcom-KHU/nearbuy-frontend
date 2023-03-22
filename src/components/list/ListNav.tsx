@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import styled from 'styled-components';
 
 interface NavItemProps {
@@ -45,6 +44,7 @@ const LIST_ITEM = [
 // 상단 네비 (전체 ~ 공구)
 const ListNav = ({ activeType, setActiveType }) => {
   const activeHandler = (type: string) => {
+    // 현재 마이페이지 내에서 어떤 항목을 리스팅 하고 있는지 설정
     setActiveType(type);
   };
   return (

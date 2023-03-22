@@ -31,6 +31,7 @@ const MyPageBox = styled.div`
 
 // mypage
 const MyPage = () => {
+  // 마이페이지에서 각 항목별 리스팅 하기 위해 activeType 생성
   const [activeType, setActiveType] = useState('전체');
   const { myPosts, posts, favorites, reviews } = useSelector(
     (state: RootState) => state.myPageMenuToggle
@@ -105,6 +106,8 @@ const MyPage = () => {
       )} */}
       {posts && (
         <>
+          {/* List에 activeType 보내면, 마이페이지 내의 게시글 리스팅. */}
+          {/* List에 activeType 없으면, 전체 페이지 내의 게시글 리스팅. */}
           <ListNav activeType={activeType} setActiveType={setActiveType} />
           <List dataList={postsData} activeType={activeType} />
         </>

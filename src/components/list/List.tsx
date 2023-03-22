@@ -51,23 +51,18 @@ interface ListProps {
 }
 // 게시물 목록들
 const List = ({ dataList, activeType }: ListProps) => {
+  // dataList가 비어있는 경우를 대비하여.
   let emptyData = true;
-  console.log('emp before', emptyData);
   if (dataList && dataList.length !== 0) {
     emptyData = false;
   }
-  console.log('data', dataList);
-  console.log('emp after', emptyData);
-
-  console.log('active', activeType);
 
   let nowState = useSelector((state: RootState) => state.activePage.active);
   if (activeType) {
     nowState = activeType;
   }
 
-  const isBoard = nowState === 'board' || nowState === '전체';
-  console.log('isboard', isBoard);
+  const isBoard = nowState === 'board';
   return (
     <ListItemBox emptyData={emptyData}>
       {emptyData && <h1>게시글이 없어요.</h1>}

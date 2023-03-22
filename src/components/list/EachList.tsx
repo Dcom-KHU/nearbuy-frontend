@@ -7,8 +7,6 @@ export default function EachList({ dataList, activeType }) {
   if (activeType) {
     nowState = activeType;
   }
-  console.log('aa', dataList);
-
   return (
     <>
       {dataList?.map((data) => {
