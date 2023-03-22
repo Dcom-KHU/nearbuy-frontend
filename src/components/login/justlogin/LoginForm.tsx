@@ -38,10 +38,10 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
     .max(16, '최대 16자리까지만 설정하실 수 있어요.')
-    .required('password를 입력해 주세요.'),
+    .required('비밀번호를 입력해 주세요.'),
   password2: Yup.string()
     .oneOf([Yup.ref('password')], '비밀번호가 일치하지 않아요.')
-    .required('password를 다시 한번 입력해 주세요.'),
+    .required('비밀번호를 다시 한번 입력해 주세요.'),
 });
 
 interface LoginFormValue {

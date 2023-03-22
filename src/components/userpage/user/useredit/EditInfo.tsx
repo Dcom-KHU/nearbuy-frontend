@@ -53,7 +53,7 @@ const NameForm = styled.div`
     bottom: -10%;
   }
 `;
-const Box = styled.div`
+const FileSelectBox = styled.div`
   /* width: 300px; */
   display: flex;
   justify-content: center;
@@ -133,7 +133,7 @@ const EditInfo = () => {
           <button onClick={changePicHandler}>프로필 사진 바꾸기</button>
         )}
         {isChange && (
-          <Box>
+          <FileSelectBox>
             <input value={profileImage?.name} placeholder='첨부파일' readOnly />
             <label htmlFor='file'>파일선택</label>
             <input
@@ -141,7 +141,7 @@ const EditInfo = () => {
               id='file'
               onChange={(e) => setProfileImage(e.target.files[0])}
             />
-          </Box>
+          </FileSelectBox>
         )}
       </UserPicBox>
       <UserInfoBox>
