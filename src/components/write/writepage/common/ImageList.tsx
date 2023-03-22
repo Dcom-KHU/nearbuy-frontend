@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import styled from "styled-components";
+import Image from "next/image";
 
 const ProductImageBlock = styled.div`
   // background-color: pink;
@@ -35,11 +36,27 @@ interface PostFormBlockProps {
 const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
   const { register, images, setImages } = props;
 
+  const [prevImgURLArr, setPrevImgURLArr] = useState<string[]>([]);
+
+  const prevImgURLAdd = (imgArr: File[]) => {
+    let newPrevImgURLArr: string[] = [];
+    imgArr?.forEach(img => {
+      const imgURL = URL.createObjectURL(img);
+      newPrevImgURLArr.push(imgURL);
+    });
+    setPrevImgURLArr(prev => {
+      console.log(newPrevImgURLArr);
+      return [...prev, ...newPrevImgURLArr];
+    });
+  };
+
   const changeHandler = (files: FileList | null) => {
     const imageArr = files ? Array.from(files) : undefined;
+    // 미리보기 이미지 url 추가
+    imageArr && prevImgURLAdd(imageArr);
+
     imageArr &&
       setImages((prev: File[]) => {
-        console.log(prev);
         return prev ? [...prev, ...imageArr] : [...imageArr];
       });
   };
@@ -65,12 +82,18 @@ const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
 
       {/* 업로드한 이미지 사진들 */}
       <div className="w-[500px] h-[180px] border-2 overflow-auto flex">
-        <div className="tempImg">상품 사진 올 예정</div>
-        <div className="tempImg">상품 사진 올 예정</div>
-        <div className="tempImg">
-          사실 사진 어디에둬야할지 모르겠음ㅠㅠ 글보
-        </div>
-        <div className="tempImg">사실 사진 어디에둬야할지 모르겠음ㅠ</div>
+        {prevImgURLArr.map((url, i) => {
+          return (
+            <Image
+              key={i}
+              src={url}
+              alt="사진"
+              width={180}
+              height={180}
+              className="border object-contain w-[180px] min-w-[120px] aspect-square my-0 mx-[10px]"
+            />
+          );
+        })}
       </div>
     </ProductImageBlock>
   );

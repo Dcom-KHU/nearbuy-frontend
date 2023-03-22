@@ -50,7 +50,7 @@ export default function WriteGroup() {
         headers: {
           Authorization:
             "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ3Mzk3OSwiZXhwIjoxNjc5NDc0NTc5fQ.ot2Uiio7RbUCgpn340xvDPYh2vjz3KITlKEhlsoM4yA",
-          "Content-Type": "multipart/form-data;",
+          // "Content-Type": "multipart/form-data;",
         },
       })
       .then(data => {
