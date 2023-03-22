@@ -12,6 +12,7 @@ import LeftFormContainer from "../LeftFormContainer";
 import RightFormContainer from "../RightFormContainer";
 import GroupLeftForm from "../writegroup/GroupLeftForm";
 import GroupRightForm from "../writegroup/GroupRIghtForm";
+import GetLocation from "./GetLocation";
 import { PostMainInput } from "./PostMainInput";
 
 const SellWriteFormBlock = styled.div`
@@ -195,12 +196,13 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
         {/* <GroupRightForm /> */}
 
         {/* 거래 희망 장소 */}
-        <input
+        {/* <input
           placeholder="거래 희망 장소 선택(임시 input란)"
           className="form-input"
           type="text"
           {...register("location", { required: true })}
-        />
+        /> */}
+        <GetLocation register={register} />
 
         {/* 거래 가능 날짜 */}
         {type !== "sell" && (

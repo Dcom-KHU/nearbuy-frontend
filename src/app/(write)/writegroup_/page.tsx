@@ -29,6 +29,9 @@ export default function WriteGroup() {
   // 이미지 파일
   const [images, setImages] = useState<File[]>();
 
+  // 거래 희망 장소
+  const [locations, setLocations] = useState<string[]>();
+
   const submitHandler = async (d: any) => {
     console.log(images);
 
@@ -49,7 +52,7 @@ export default function WriteGroup() {
       .post("/api/post/group", registeredData, {
         headers: {
           Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ3Mzk3OSwiZXhwIjoxNjc5NDc0NTc5fQ.ot2Uiio7RbUCgpn340xvDPYh2vjz3KITlKEhlsoM4yA",
+            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ5MDIzNCwiZXhwIjoxNjc5NDkwODM0fQ.QOMskGhTx_uD57LV_wN3Qm7rrCbcm6ZpIal9l6-mzxA",
           // "Content-Type": "multipart/form-data;",
         },
       })
