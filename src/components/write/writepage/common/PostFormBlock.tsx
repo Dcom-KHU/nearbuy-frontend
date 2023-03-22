@@ -122,54 +122,55 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
         )}
 
         {/* 2행~ - 판교나 */}
-        {/* {type === "sell" && } */}
-        <div className="flex flex-row justify-between">
-          {category === "sale" ? (
-            <input
-              placeholder="가격"
-              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
-              type="number"
-              {...register("salePrice", { required: true })}
-            />
-          ) : category === "exchange" ? (
-            <input
-              placeholder="교환 원하는 상품"
-              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
-              type="text"
-              {...register("target", { required: true })}
-            />
-          ) : (
-            <input
-              className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg cursor-not-allowed"
-              type="text"
-              disabled
-            />
-          )}
-          {/* 카테고리 선택 */}
+        {type === "sell" && (
           <div className="flex flex-row justify-between">
-            {sellCategory.map(val => {
-              return (
-                <label
-                  key={val.key}
-                  className={[
-                    category === val.value ? "bg-[#e6e6fa]" : "",
-                    "p-[10px] mx-[5px] border-[1px] border-[#333] rounded cursor-pointer text-center",
-                  ].join(" ")}
-                >
-                  <CategorySelect
-                    id="categorySelect"
-                    type="radio"
-                    value={val.value}
-                    checked={category === val.value}
-                    onChange={() => categoryClickHandler(val.value)}
-                    hidden
-                  />
-                  {val.kor}
-                </label>
-              );
-            })}
+            {category === "sale" ? (
+              <input
+                placeholder="가격"
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+                type="number"
+                {...register("salePrice", { required: true })}
+              />
+            ) : category === "exchange" ? (
+              <input
+                placeholder="교환 원하는 상품"
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+                type="text"
+                {...register("target", { required: true })}
+              />
+            ) : (
+              <input
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg cursor-not-allowed"
+                type="text"
+                disabled
+              />
+            )}
+            {/* 카테고리 선택 */}
+            <div className="flex flex-row justify-between">
+              {sellCategory.map(val => {
+                return (
+                  <label
+                    key={val.key}
+                    className={[
+                      category === val.value ? "bg-[#e6e6fa]" : "",
+                      "p-[10px] mx-[5px] border-[1px] border-[#333] rounded cursor-pointer text-center",
+                    ].join(" ")}
+                  >
+                    <CategorySelect
+                      id="categorySelect"
+                      type="radio"
+                      value={val.value}
+                      checked={category === val.value}
+                      onChange={() => categoryClickHandler(val.value)}
+                      hidden
+                    />
+                    {val.kor}
+                  </label>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* 3행 */}
         {/* 상세 설명 */}
