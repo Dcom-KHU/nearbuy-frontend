@@ -12,6 +12,7 @@ import PostFormBlock from "@/components/write/writepage/common/PostFormBlock";
 import customAxios from "@/utils/customAxios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import KakaoMap from "@/components/write/writepage/common/KakaoMap";
 
 const WriteSellBlock = styled.div`
   // background-color: aliceblue;
@@ -90,6 +91,9 @@ export default function WriteGroup() {
             등록하기
           </button>
         </form>
+
+        {/* 지도 연습 */}
+        {/* <KakaoMap /> */}
       </WriteSellBlock>
     </>
   );
