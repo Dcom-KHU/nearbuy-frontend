@@ -121,9 +121,7 @@ const MyPage = () => {
       )}
       {reviews && (
         <>
-          <ReviewModal />
-          <ListNav activeType={activeType} setActiveType={setActiveType} />
-          <List dataList={reviewsData} activeType={activeType} />
+          <ReviewModal dataList={reviewsData} />
         </>
       )}
     </div>
