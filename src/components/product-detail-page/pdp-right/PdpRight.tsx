@@ -41,6 +41,7 @@ interface Itemp {
   title: string;
   type: string;
   writer: string;
+  target: string;
 }
 
 interface RightProps {
@@ -64,7 +65,9 @@ export default function PdpRight({ getData }: RightProps) {
             <SmallInfo />
             <Title title={getData?.title} />
             {activeType === "sale" && <Price salePrice={getData?.salePrice} />}
-            {activeType === "exchange" && <ExchangeItems />}
+            {activeType === "exchange" && (
+              <ExchangeItems target={getData?.target} />
+            )}
             {activeType === "free" && (
               <div className="text-base py-3 text-gray-500">무료 나눔</div>
             )}
