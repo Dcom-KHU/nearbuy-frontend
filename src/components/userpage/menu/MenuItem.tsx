@@ -37,7 +37,6 @@ const MenuItem: React.FC<{
   title: string;
   state: string;
   count: number;
-  url: string;
 }> = (props) => {
   const dispatch = useDispatch();
 
