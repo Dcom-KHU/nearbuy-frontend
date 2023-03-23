@@ -38,6 +38,7 @@ interface Itemp {
   totalPeople: number;
   distribute: string;
   day: number[];
+  currentPeople: number;
 }
 
 // 상세 페이지 전체 (PDP)
