@@ -64,7 +64,7 @@ export default function PDPforSale() {
         <PdpLeft />
         <PdpRight getData={getData} />
       </PdpBox>
-      <PdpBottom />
+      <PdpBottom detail={getData?.detail} />
     </Box>
   );
 }
