@@ -1,7 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import {
+  AiFillHeart,
+  AiOutlineHeart,
+  AiOutlineShareAlt,
+  AiOutlineAlert,
+} from "react-icons/ai";
 
 const NameBox = styled.div`
   display: flex;
@@ -22,21 +29,29 @@ const ToolBox = styled.div`
     transform: scale(1.2);
   }
 `;
+const AiFillHeartCss = styled(AiFillHeart)`
+  // 하트~
+`;
+const AiOutlineHeartCss = styled(AiOutlineHeart)`
+  // 하트~
+`;
 
 // 상세페이지 제목, 그 옆의 도구들 (찜, 공유, 신고)
 export default function Title({ title }: { title: string }) {
+  const [isLike, setIsLike] = useState(false);
+  const isLikeHandler = () => {
+    setIsLike((prev) => !prev);
+  };
   return (
     <NameBox>
       <p>{title}</p>
       <ToolBox>
-        <Image
-          src="/images/header/heart.svg"
-          alt="block"
-          width={20}
-          height={20}
-        />
-        <Image src="/images/share.svg" alt="block" width={20} height={20} />
-        <Image src="/images/block.svg" alt="block" width={20} height={20} />
+        <button className="liked" onClick={isLikeHandler}>
+          {isLike && <AiFillHeartCss color="dimgray" size={24} />}
+          {!isLike && <AiOutlineHeartCss color="dimgray" size={24} />}
+        </button>
+        <AiOutlineShareAlt color="dimgray" size={24} />
+        <AiOutlineAlert color="dimgray" size={25} />
       </ToolBox>
     </NameBox>
   );
