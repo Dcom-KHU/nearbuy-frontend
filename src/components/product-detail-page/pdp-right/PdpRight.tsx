@@ -75,7 +75,7 @@ export default function PdpRight({ getData }: RightProps) {
         </div>
         <InfoBox>
           <UserInfo />
-          <Tags />
+          <Tags tagArr={getData?.tag} />
         </InfoBox>
       </div>
       <ChatButton />

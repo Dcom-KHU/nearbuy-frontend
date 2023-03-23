@@ -1,3 +1,13 @@
+/*
+해야할것: 
+- smallInfo쪽 시간, 채팅, 조회수, 관심 수
+- 찜 기능
+- 신고 기능, 채팅하기 연결
+- userInfo
+- 게시글 태그
+- 이미지
+*/
+
 "use client";
 
 import PdpLeft from "../pdp-left/PdpLeft";
