@@ -47,7 +47,7 @@ export default function SmallInfoForListItem({
         deadline={deadline}
         currentPeople={currentPeople}
       >
-        <span>{currentPeople ? currentPeople : "n"}</span> /{" "}
+        <span>{currentPeople ? currentPeople : "null임"}</span> /{" "}
         <span>{totalPeople}</span>
       </Box>
     );

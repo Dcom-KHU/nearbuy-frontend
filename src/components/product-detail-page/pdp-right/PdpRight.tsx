@@ -44,6 +44,11 @@ interface Itemp {
   increasePrice: number;
   currentPrice: number;
   startPrice: number;
+  groupPrice: number;
+  totalPeople: number;
+  distribute: string;
+  currentPeople: number;
+  day: number[];
 }
 
 interface RightProps {
@@ -82,7 +87,13 @@ export default function PdpRight({ getData }: RightProps) {
                 start={getData?.startPrice}
               />
             )}
-            {activeType === "group" && <GroupDetail />}
+            {activeType === "group" && (
+              <GroupDetail
+                groupPrice={getData?.groupPrice}
+                totalPeople={getData?.totalPeople}
+                currentPeople={getData?.currentPeople}
+              />
+            )}
             <Location location={getData?.location} />
           </>
         </div>
