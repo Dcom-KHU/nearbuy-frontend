@@ -11,7 +11,6 @@ import ExchangeItems from "./elements/EachDetail/ExchangeItems";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import AuctionDetail from "./elements/EachDetail/AuctionDetail";
-import Price from "./elements/EachDetail/Price";
 import GroupDetail from "./elements/EachDetail/GroupDetail";
 
 const RightBox = styled.section`
@@ -42,6 +41,9 @@ interface Itemp {
   type: string;
   writer: string;
   target: string;
+  increasePrice: number;
+  currentPrice: number;
+  startPrice: number;
 }
 
 interface RightProps {
@@ -64,14 +66,22 @@ export default function PdpRight({ getData }: RightProps) {
           <>
             <SmallInfo />
             <Title title={getData?.title} />
-            {activeType === "sale" && <Price salePrice={getData?.salePrice} />}
+            {activeType === "sale" && (
+              <div className="text-2xl py-3">{getData?.salePrice}원</div>
+            )}
             {activeType === "exchange" && (
               <ExchangeItems target={getData?.target} />
             )}
             {activeType === "free" && (
               <div className="text-base py-3 text-gray-500">무료 나눔</div>
             )}
-            {activeType === "auction" && <AuctionDetail />}
+            {activeType === "auction" && (
+              <AuctionDetail
+                increase={getData?.increasePrice}
+                current={getData?.currentPrice}
+                start={getData?.startPrice}
+              />
+            )}
             {activeType === "group" && <GroupDetail />}
             <Location location={getData?.location} />
           </>

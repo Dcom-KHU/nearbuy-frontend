@@ -28,52 +28,33 @@ interface Itemp {
   image: string[];
   location: string;
   ongoing: boolean;
-  salePrice: number;
+  // salePrice: number;
   tag: string[];
   time: number;
   title: string;
   type: string;
   writer: string;
+  startPrice: number;
+  increasePrice: number;
+  currentPrice: number;
+  deadline: number;
 }
 
 // 상세 페이지 전체 (PDP)
 export default function PDPforAuction() {
-  //const [id, setId] = useState(1);
-
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  console.log("아이뒤: ", id);
 
   const {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/auction", // 필수
+    url: "/api/post/auction",
     params: { id: id ?? undefined },
   });
 
-  /*
-  //여기도.. 삽질의현장...인데 건진건없음
-  const [post, setPost] = useState({});
   useEffect(() => {
-    axios.get(`${serverIP}/api/post/sale`).then((data) => {
-      console.log(data);
-      // setPost(data.data.find((post) => post.id));
-      axios({
-        url: "https://test/api/cafe/list/today", // 통신할 웹문서
-        method: "get", // 통신할 방식
-        data: {
-          // 인자로 보낼 데이터
-          params: "id",
-        },
-      });
-    });
-  }, []);
-  */
-
-  useEffect(() => {
-    // console.log(getData, getIsLoading, getError);
     console.log("getData결과아: ", getData);
   }, [getData, getIsLoading, getError]);
 
@@ -81,9 +62,9 @@ export default function PDPforAuction() {
     <Box>
       <PdpBox>
         <PdpLeft />
-        <PdpRight />
+        <PdpRight getData={getData} />
       </PdpBox>
-      <PdpBottom />
+      <PdpBottom detail={getData?.detail} />
     </Box>
   );
 }
