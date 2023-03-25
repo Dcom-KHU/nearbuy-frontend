@@ -56,7 +56,7 @@ export default function PDPforGroup() {
   });
 
   useEffect(() => {
-    console.log("getData결과: ", getData);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (

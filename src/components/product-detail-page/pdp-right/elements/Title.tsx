@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import {
   AiFillHeart,
   AiOutlineHeart,
@@ -29,12 +28,6 @@ const ToolBox = styled.div`
     transform: scale(1.2);
   }
 `;
-const AiFillHeartCss = styled(AiFillHeart)`
-  // 하트~
-`;
-const AiOutlineHeartCss = styled(AiOutlineHeart)`
-  // 하트~
-`;
 
 // 상세페이지 제목, 그 옆의 도구들 (찜, 공유, 신고)
 export default function Title({ title }: { title: string }) {
@@ -47,8 +40,8 @@ export default function Title({ title }: { title: string }) {
       <p>{title}</p>
       <ToolBox>
         <button className="liked" onClick={isLikeHandler}>
-          {isLike && <AiFillHeartCss color="dimgray" size={24} />}
-          {!isLike && <AiOutlineHeartCss color="dimgray" size={24} />}
+          {isLike && <AiFillHeart color="dimgray" size={24} />}
+          {!isLike && <AiOutlineHeart color="dimgray" size={24} />}
         </button>
         <AiOutlineShareAlt color="dimgray" size={24} />
         <AiOutlineAlert color="dimgray" size={25} />

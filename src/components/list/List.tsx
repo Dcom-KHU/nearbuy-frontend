@@ -68,12 +68,12 @@ const List = () => {
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
+  const postDatas = getData?.post;
+
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-  }, [getData, getIsLoading, getError]);
-
-  const postDatas = getData?.post;
-  console.log("포데: ", postDatas);
+    console.log("포데: ", postDatas);
+  }, [postDatas]);
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);

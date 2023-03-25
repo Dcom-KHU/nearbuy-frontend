@@ -58,14 +58,13 @@ export default function PDPforSale() {
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/sale", // 필수
-    params: { id: id },
+    url: "/api/post/sale",
+    params: { id: id ?? undefined },
   });
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-    console.log("getData결과: ", getData);
-    console.log("타입", typeof getData);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (

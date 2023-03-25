@@ -4,7 +4,7 @@ import PdpLeft from "../pdp-left/PdpLeft";
 import PdpRight from "../pdp-right/PdpRight";
 import PdpBottom from "../pdp-bottom/PdpBottom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 
@@ -28,7 +28,7 @@ interface Itemp {
   image: string[];
   location: string;
   ongoing: boolean;
-  salePrice: number;
+  // salePrice: number;
   tag: string[];
   time: number;
   title: string;
@@ -38,52 +38,29 @@ interface Itemp {
 
 // 상세 페이지 전체 (PDP)
 export default function PDPforFree() {
-  //const [id, setId] = useState(1);
-
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  console.log("아이뒤: ", id);
 
   const {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/free", // 필수
+    url: "/api/post/free",
     params: { id: id ?? undefined },
   });
 
-  /*
-  //여기도.. 삽질의현장...인데 건진건없음
-  const [post, setPost] = useState({});
   useEffect(() => {
-    axios.get(`${serverIP}/api/post/sale`).then((data) => {
-      console.log(data);
-      // setPost(data.data.find((post) => post.id));
-      axios({
-        url: "https://test/api/cafe/list/today", // 통신할 웹문서
-        method: "get", // 통신할 방식
-        data: {
-          // 인자로 보낼 데이터
-          params: "id",
-        },
-      });
-    });
-  }, []);
-  */
-
-  useEffect(() => {
-    // console.log(getData, getIsLoading, getError);
-    console.log("getData결과아: ", getData);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (
     <Box>
       <PdpBox>
         <PdpLeft />
-        <PdpRight />
+        <PdpRight getData={getData} />
       </PdpBox>
-      <PdpBottom />
+      <PdpBottom detail={getData?.detail} />
     </Box>
   );
 }

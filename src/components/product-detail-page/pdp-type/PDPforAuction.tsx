@@ -4,7 +4,7 @@ import PdpLeft from "../pdp-left/PdpLeft";
 import PdpRight from "../pdp-right/PdpRight";
 import PdpBottom from "../pdp-bottom/PdpBottom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 
@@ -55,7 +55,7 @@ export default function PDPforAuction() {
   });
 
   useEffect(() => {
-    console.log("getData결과아: ", getData);
+    // console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (
