@@ -65,7 +65,7 @@ export default function PDPforAuction() {
         <PdpLeft />
         <PdpRight getData={getData} />
       </PdpBox>
-      <PdpBottom detail={getData?.detail} />
+      <PdpBottom detail={getData?.detail!} />
     </Box>
   );
 }

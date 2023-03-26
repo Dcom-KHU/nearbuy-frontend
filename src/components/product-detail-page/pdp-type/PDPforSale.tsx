@@ -50,7 +50,7 @@ export default function PDPforSale() {
         <PdpLeft />
         <PdpRight getData={getData} />
       </PdpBox>
-      <PdpBottom detail={getData?.detail} />
+      <PdpBottom detail={getData?.detail!} />
     </Box>
   );
 }
