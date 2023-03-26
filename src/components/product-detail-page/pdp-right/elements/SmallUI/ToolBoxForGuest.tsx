@@ -26,12 +26,21 @@ const ModalOverlayBox = styled.div`
   align-items: center;
 `;
 const ModalContainerBox = styled.div`
+  background-color: white;
   position: fixed;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
+  padding: 30px;
+  border-radius: 20px;
+
+  .report-buttons {
+    border: solid 2px lightgray;
+    border-radius: 8px;
+    margin-left: 10px;
+    padding: 8px;
+  }
 `;
 
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
@@ -59,10 +68,20 @@ export default function ToolBoxForGuest() {
       {ReportModal && (
         <ModalOverlayBox onClick={() => setReportModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
-            <h2>게시글을 신고하겠습니까?</h2>
-            <div>
-              <button /*onClick={handleReport}*/>신고</button>
-              <button onClick={() => setReportModal(false)}>취소</button>
+            <h2>게시글을 신고하시겠습니까?</h2>
+            <div style={{ width: "250px", height: "60px" }}></div>
+            <div style={{ float: "right" }}>
+              <button
+                className="report-buttons" /*onClick={handleReport} 함수 만들어야됨*/
+              >
+                신고
+              </button>
+              <button
+                className="report-buttons"
+                onClick={() => setReportModal(false)}
+              >
+                취소
+              </button>
             </div>
           </ModalContainerBox>
         </ModalOverlayBox>

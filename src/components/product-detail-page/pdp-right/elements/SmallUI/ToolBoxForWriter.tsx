@@ -30,12 +30,21 @@ const ModalOverlayBox = styled.div`
 `;
 
 const ModalContainerBox = styled.div`
+  background-color: white;
   position: fixed;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
+  padding: 30px;
+  border-radius: 20px;
+
+  .delete-buttons {
+    border: solid 2px lightgray;
+    border-radius: 8px;
+    margin-left: 10px;
+    padding: 8px;
+  }
 `;
 interface PostDelProps {
   id: number;
@@ -74,10 +83,18 @@ export default function ToolBoxForWriter({ id }: { id: number }) {
       {DeleteModal && (
         <ModalOverlayBox onClick={() => setDeleteModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
-            <h2>게시글을 삭제하겠습니까?</h2>
-            <div>
-              <button /*onClick={handleDelete}*/>삭제</button>
-              <button onClick={() => setDeleteModal(false)}>취소</button>
+            <h2>게시글을 삭제하시겠습니까?</h2>
+            <div style={{ width: "250px", height: "60px" }}></div>
+            <div style={{ float: "right" }}>
+              <button className="delete-buttons" /*onClick={handleDelete}*/>
+                삭제
+              </button>
+              <button
+                className="delete-buttons"
+                onClick={() => setDeleteModal(false)}
+              >
+                취소
+              </button>
             </div>
           </ModalContainerBox>
         </ModalOverlayBox>
