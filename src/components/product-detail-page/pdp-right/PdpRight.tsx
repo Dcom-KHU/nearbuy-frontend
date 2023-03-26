@@ -70,7 +70,7 @@ export default function PdpRight({ getData }: RightProps) {
         <div>
           <>
             <SmallInfo />
-            <Title title={getData?.title} />
+            <Title title={getData?.title} id={getData?.id} />
             {activeType === "sale" && (
               <div className="text-2xl py-3">{getData?.salePrice}원</div>
             )}

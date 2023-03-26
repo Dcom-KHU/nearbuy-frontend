@@ -23,14 +23,14 @@ export default function ToolBoxForGuest() {
 
   return (
     <ToolBoxForGuestBox>
-      <button className="liked" onClick={isLikeHandler}>
+      <button className="liked" onClick={isLikeHandler} title="찜">
         {isLike && <AiFillHeart color="dimgray" size={24} />}
         {!isLike && <AiOutlineHeart color="dimgray" size={24} />}
       </button>
-      <button>
+      <button title="공유">
         <AiOutlineShareAlt color="dimgray" size={24} />
       </button>
-      <button>
+      <button title="신고">
         <AiOutlineAlert color="dimgray" size={25} />
       </button>
     </ToolBoxForGuestBox>

@@ -99,7 +99,7 @@ export default function MainPage() {
   }, [postData, postIsLoading, postError]);
 
   /*
-    fetch는 로그인 한다음에 헤더에 accesstoken 세팅 해준다음에 요청을 보낼 수 있는 것들밖에 없어서 아직은 다룰 일 없음. 
+    patch 는 로그인 한다음에 헤더에 accesstoken 세팅 해준다음에 요청을 보낼 수 있는 것들밖에 없어서 아직은 다룰 일 없음. 
     사용 방법은 비슷! 
   */
 
