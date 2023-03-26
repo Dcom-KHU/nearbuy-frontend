@@ -1,13 +1,3 @@
-/*
-해야할것: 
-- smallInfo쪽 시간, 채팅, 조회수, 관심 수
-- 찜 기능
-- 신고 기능, 채팅하기 연결
-- userInfo
-- 게시글 태그
-- 이미지
-*/
-
 "use client";
 
 import PdpLeft from "../pdp-left/PdpLeft";
@@ -17,6 +7,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
+import { DetailPropsInterface } from "./DetailPropsInterface";
 
 const Box = styled.article`
   margin: 0 auto;
@@ -32,20 +23,6 @@ const PdpBox = styled.div`
   padding: 50px 20px;
 `;
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: boolean;
-  title: string;
-  type: string;
-  writer: string;
-}
-
 // 상세 페이지 전체 (PDP)
 export default function PDPforSale() {
   //const [id, setId] = useState(1);
@@ -57,7 +34,7 @@ export default function PDPforSale() {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
-  } = useGet<Itemp>({
+  } = useGet<DetailPropsInterface>({
     url: "/api/post/sale",
     params: { id: id ?? undefined },
   });

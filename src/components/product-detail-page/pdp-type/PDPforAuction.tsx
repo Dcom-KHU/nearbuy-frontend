@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
+import { DetailPropsInterface } from "./DetailPropsInterface";
 
 const Box = styled.article`
   margin: 0 auto;
@@ -49,7 +50,7 @@ export default function PDPforAuction() {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
-  } = useGet<Itemp>({
+  } = useGet<DetailPropsInterface>({
     url: "/api/post/auction",
     params: { id: id ?? undefined },
   });

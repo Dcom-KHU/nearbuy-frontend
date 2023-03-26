@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
+import { DetailPropsInterface } from "./DetailPropsInterface";
 
 const Box = styled.article`
   margin: 0 auto;
@@ -22,20 +23,6 @@ const PdpBox = styled.div`
   padding: 50px 20px;
 `;
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  // salePrice: number;
-  tag: string[];
-  time: number;
-  title: string;
-  type: string;
-  writer: string;
-}
-
 // 상세 페이지 전체 (PDP)
 export default function PDPforFree() {
   const searchParams = useSearchParams();
@@ -45,7 +32,7 @@ export default function PDPforFree() {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
-  } = useGet<Itemp>({
+  } = useGet<DetailPropsInterface>({
     url: "/api/post/free",
     params: { id: id ?? undefined },
   });

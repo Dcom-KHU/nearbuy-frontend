@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import AuctionDetail from "./elements/EachDetail/AuctionDetail";
 import GroupDetail from "./elements/EachDetail/GroupDetail";
+import { DetailPropsInterface } from "../pdp-type/DetailPropsInterface";
 
 const RightBox = styled.section`
   width: 489px;
@@ -28,31 +29,8 @@ const InfoBox = styled.div`
   gap: 30px;
 `;
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: boolean;
-  title: string;
-  type: string;
-  writer: string;
-  target: string;
-  increasePrice: number;
-  currentPrice: number;
-  startPrice: number;
-  groupPrice: number;
-  totalPeople: number;
-  distribute: string;
-  currentPeople: number;
-  day: number[];
-}
-
 interface RightProps {
-  getData: Itemp;
+  getData: DetailPropsInterface | undefined;
 }
 
 // 상세페이지 정보 부분 (오른쪽 부분)
