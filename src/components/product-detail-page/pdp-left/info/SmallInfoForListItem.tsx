@@ -1,6 +1,7 @@
 "use client";
 
 import styled from "styled-components";
+import calculateDeadline from "@/utils/calculateDeadline";
 
 interface BoxProps {
   type: "group" | "auction";
@@ -28,7 +29,8 @@ export default function SmallInfoForListItem({
   currentPeople,
 }: BoxProps) {
   /* 지금 auction 게시물 deadline 값이 invalid하고 totalPeople 옆에 들어갈 '현재 참여중인 인원'에 대한 값이 없음*/
-  if (type === "auction") {
+  if (type === "auction" && deadline) {
+    const deadlineString = calculateDeadline(deadline);
     return (
       <Box
         type={type}
@@ -36,7 +38,7 @@ export default function SmallInfoForListItem({
         deadline={deadline}
         currentPeople={currentPeople}
       >
-        D - <span>시간</span>
+        {deadlineString}
       </Box>
     );
   } else if (type === "group") {
