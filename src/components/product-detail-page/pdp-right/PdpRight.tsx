@@ -7,6 +7,7 @@ import Title from "./elements/SmallUI/Title";
 import UserInfo from "./elements/UserInfo";
 import Location from "./elements/Location";
 import ChatButton from "./elements/ChatButton";
+import ParticipateButton from "./elements/ParticipateButton";
 import ExchangeItems from "./elements/EachDetail/ExchangeItems";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -80,7 +81,12 @@ export default function PdpRight({ getData }: RightProps) {
           <Tags tagArr={getData?.tag} />
         </InfoBox>
       </div>
-      <ChatButton />
+      <div className="flex">
+        {(activeType === "auction" || activeType === "group") && (
+          <ParticipateButton />
+        )}
+        <ChatButton />
+      </div>
     </RightBox>
   );
 }
