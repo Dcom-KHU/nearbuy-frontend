@@ -1,9 +1,9 @@
 "use client";
 
 import styled from "styled-components";
-import SmallInfo from "./elements/SmallInfo";
+import SmallInfo from "./elements/SmallUI/SmallInfo";
 import Tags from "./elements/Tag/Tags";
-import Title from "./elements/Title";
+import Title from "./elements/SmallUI/Title";
 import UserInfo from "./elements/UserInfo";
 import Location from "./elements/Location";
 import ChatButton from "./elements/ChatButton";
