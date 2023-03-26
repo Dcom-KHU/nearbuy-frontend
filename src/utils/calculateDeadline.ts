@@ -7,5 +7,9 @@ export default function calculateDeadline(deadline: number): string {
   // 남은 시간을 일 단위로 변환
   const dayDiff = Math.ceil(timeDiff / ONE_DAY_MS);
 
-  return `D-${dayDiff}`;
+  if (dayDiff >= 0) {
+    return `D-${dayDiff}`;
+  } else {
+    return "마감되었습니다";
+  }
 }
