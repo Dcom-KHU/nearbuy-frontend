@@ -4,7 +4,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useDelete } from "@/hooks/useHttp";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   AiOutlineShareAlt,
   AiOutlineEdit,
@@ -37,7 +37,6 @@ const ModalContainerBox = styled.div`
   background-color: white;
   padding: 20px;
 `;
-
 interface PostDelProps {
   id: number;
 }
@@ -57,7 +56,7 @@ export default function ToolBoxForWriter({ id }: { id: number }) {
     });
   */
 
-  const [showModal, setShowModal] = useState(false);
+  const [DeleteModal, setDeleteModal] = useState(false);
 
   return (
     <>
@@ -68,17 +67,17 @@ export default function ToolBoxForWriter({ id }: { id: number }) {
         <Link href="/board" /* 게시글 수정 페이지로 연결 */ title="수정하기">
           <AiOutlineEdit href="localhost:3000/sale" color="dimgray" size={24} />
         </Link>
-        <button title="삭제하기" onClick={() => setShowModal(true)}>
+        <button title="삭제하기" onClick={() => setDeleteModal(true)}>
           <AiOutlineDelete color="dimgray" size={24} />
         </button>
       </ToolBoxForWriterBox>
-      {showModal && (
-        <ModalOverlayBox onClick={() => setShowModal(false)}>
+      {DeleteModal && (
+        <ModalOverlayBox onClick={() => setDeleteModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
-            <h2>게시글을 삭제하시겠습니까?</h2>
+            <h2>게시글을 삭제하겠습니까?</h2>
             <div>
               <button /*onClick={handleDelete}*/>삭제</button>
-              <button onClick={() => setShowModal(false)}>취소</button>
+              <button onClick={() => setDeleteModal(false)}>취소</button>
             </div>
           </ModalContainerBox>
         </ModalOverlayBox>
