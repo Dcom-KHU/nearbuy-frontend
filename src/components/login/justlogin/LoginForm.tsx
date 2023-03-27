@@ -81,7 +81,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         localStorage.setItem('login', 'true');
         dispatch(saveToken(response.data.accessToken));
       }
-      window.location.replace(redirect);
+      // globalThis.location.replace(redirect);
     } catch (error) {
       console.error(error);
       // 오류 발생 시
