@@ -75,13 +75,21 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         `${serverIP}/api/user/${mode}`,
         loginData
       );
+
       console.log('response', response);
+      const cookies = response.headers['set-cookie'];
+      // const refreshToken = cookies
+      //   .find((cookie) => cookie.startsWith('refreshToken='))
+      //   .split('=')[1];
+      // console.log('ref', refreshToken);
+
+      console.log('cookie', cookies);
 
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');
         dispatch(saveToken(response.data.accessToken));
       }
-      // globalThis.location.replace(redirect);
+      globalThis.location.replace(redirect);
     } catch (error) {
       console.error(error);
       // 오류 발생 시

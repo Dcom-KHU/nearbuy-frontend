@@ -1,5 +1,9 @@
+import { saveToken } from '@/store/saveToken/saveTokenSlice';
 import axios, { AxiosInstance } from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import secrets from '../../secrets.json';
+import GetToken from './getToken';
 
 const customAxios: AxiosInstance = axios.create({
   baseURL: secrets.serverIP,
@@ -8,20 +12,18 @@ const customAxios: AxiosInstance = axios.create({
     // 'Content-Type': 'application/json',
   },
 });
-customAxios.interceptors.request.use(function (config) {
-  const token = localStorage.getItem('token');
 
-  if (!token) {
-    config.headers['accessToken'] = null;
-    config.headers['refreshToken'] = null;
-    return config;
+// header에 accessToken 설정
+customAxios.interceptors.request.use((config) => {
+  const accessToken = GetToken();
+
+  if (!accessToken) {
+    config.headers.Authorization = null;
+  } else if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
-  if (config.headers && token) {
-    const { accessToken, refreshToken } = JSON.parse(token);
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
-    config.headers['refreshToken'] = `Bearer ${refreshToken}`;
-    return config;
-  }
+
+  return config;
 });
 
 //AccessToken이 만료됐을때 처리
@@ -33,20 +35,12 @@ customAxios.interceptors.response.use(
     const originalConfig = err.config;
 
     if (err.response && err.response.status === 401) {
-      const refreshToken = originalConfig.headers['refreshToken'];
       try {
-        const data = await axios({
-          url: `refreshtoken담아 보낼 URL`,
-          method: 'GET',
-          headers: {
-            Authorization: refreshToken,
-          },
-        });
+        const data = await axios.post(`/api/user/token`);
         if (data) {
-          localStorage.setItem(
-            'token',
-            JSON.stringify(data.data, ['accessToken', 'refreshToken'])
-          );
+          const dispatch = useDispatch();
+          dispatch(saveToken(data.data.accessToken));
+          console.log('data is : ', data);
           return await customAxios.request(originalConfig);
         }
       } catch (err) {
@@ -57,4 +51,55 @@ customAxios.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
 export default customAxios;
+
+// customAxios.interceptors.request.use(function (config) {
+//   const token = localStorage.getItem('token');
+
+//   if (!token) {
+//     config.headers['accessToken'] = null;
+//     config.headers['refreshToken'] = null;
+//     return config;
+//   }
+//   if (config.headers && token) {
+//     const { accessToken, refreshToken } = JSON.parse(token);
+//     config.headers['Authorization'] = `Bearer ${accessToken}`;
+//     config.headers['refreshToken'] = `Bearer ${refreshToken}`;
+//     return config;
+//   }
+// });
+
+// //AccessToken이 만료됐을때 처리
+// customAxios.interceptors.response.use(
+//   function (response) {
+//     return response;
+//   },
+//   async function (err) {
+//     const originalConfig = err.config;
+
+//     if (err.response && err.response.status === 401) {
+//       const refreshToken = originalConfig.headers['refreshToken'];
+//       try {
+//         const data = await axios({
+//           url: `refreshtoken담아 보낼 URL`,
+//           method: 'GET',
+//           headers: {
+//             Authorization: refreshToken,
+//           },
+//         });
+//         if (data) {
+//           localStorage.setItem(
+//             'token',
+//             JSON.stringify(data.data, ['accessToken', 'refreshToken'])
+//           );
+//           return await customAxios.request(originalConfig);
+//         }
+//       } catch (err) {
+//         console.log('토큰 갱신 에러');
+//       }
+//       return Promise.reject(err);
+//     }
+//     return Promise.reject(err);
+//   }
+// );
