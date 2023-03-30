@@ -78,22 +78,6 @@ const MyPage = () => {
     fetchData('/review');
   }, []);
 
-  // const fetchData = async (id: string | number = 1) => {
-  //   const response = await axios.get(`${serverIP}/api/user/page/all`, {
-  //     params: {
-  //       id,
-  //     },
-  //   });
-  //   const { myPosts, posts, favorites, reviews } = response.data;
-  //   setMyPostsData(myPosts.post);
-  //   setPostsData(posts.post);
-  //   setFavoritesData(favorites.post);
-  //   setReviewsData(reviews.review);
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   return (
     <div className='flex flex-col items-center justify-center'>
       <MyPageBox>

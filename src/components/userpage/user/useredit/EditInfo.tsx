@@ -12,6 +12,7 @@ import { useState } from 'react';
 import GetToken from '@/utils/getToken';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import Cookie from 'js-cookie';
 
 const Main = styled.main`
   display: flex;
@@ -114,19 +115,22 @@ const EditInfo = () => {
     setIsChange((prev) => !prev);
   };
   const submitHandler = async (values) => {
+    const userId = Cookie.get('userId');
     const formData = {
       name: values.username,
       image: profileImage?.name,
       location: '대한민국 경기도 평택시',
     };
     console.log(formData);
+    console.log('token', token);
 
     const response = await axios.patch(`${serverIP}/api/user/page`, formData, {
+      params: { id: userId },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
+    console.log('res is : ', response);
   };
   return (
     <Main>
