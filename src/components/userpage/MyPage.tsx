@@ -11,6 +11,7 @@ import User from './user/User';
 import { serverIP } from '@/../secrets.json';
 import { useEffect, useState } from 'react';
 import ReviewModal from './reviews/ReviewModal';
+import Cookie from 'js-cookie';
 
 const MyPageBox = styled.div`
   display: flex;
@@ -36,11 +37,11 @@ const MyPage = () => {
   const { myPosts, posts, favorites, reviews } = useSelector(
     (state: RootState) => state.myPageMenuToggle
   );
+  const userId = Cookie.get('userId');
   const [myPostsData, setMyPostsData] = useState();
   const [postsData, setPostsData] = useState();
   const [favoritesData, setFavoritesData] = useState();
   const [reviewsData, setReviewsData] = useState();
-  const userId = useSelector((state: RootState) => state.userInfo.id);
   const fetchData = async (url: string, id: string | number = 1) => {
     try {
       const response = await axios.get(`${serverIP}/api/user/page${url}`, {
@@ -99,12 +100,12 @@ const MyPage = () => {
         <User />
         <Menu />
       </MyPageBox>
-      {/* {myPosts && (
+      {myPosts && (
         <>
-          <ListNav />
-          <List dataList={myPostsData} />
+          <ListNav activeType={activeType} setActiveType={setActiveType} />
+          <List dataList={myPostsData} activeType={activeType} />
         </>
-      )} */}
+      )}
       {posts && (
         <>
           {/* List에 activeType props로 보내면, 마이페이지 내의 게시글 리스팅. */}

@@ -1,12 +1,15 @@
 'use client';
 
-import { useGet } from '@/hooks/useHttp';
 import { userName } from '@/store/userInfo/userInfoSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import UserEdit from './UserEdit';
 import UserInfo from './userinfo/UserInfo';
 import UserTemp from './UserTemp';
+import Cookie from 'js-cookie';
+import axios from 'axios';
+import { serverIP } from '@/../secrets.json';
+import { useEffect, useReducer, useState } from 'react';
 
 const UserBox = styled.div`
   width: 50%;
@@ -26,17 +29,20 @@ interface Itemp {
 
 // 마이페이지 왼쪽 부분
 const User = () => {
-  const {
-    data: getData,
-    isLoading: getIsLoading,
-    error: getError,
-  } = useGet<Itemp>({
-    url: '/api/user/page',
-    // TODO: params 동적으로 바꾸기.
-    params: { id: 1 },
-  });
-  const { mannerPoint, ...rest } = getData ?? {};
-  const { name } = rest;
+  const userId = Cookie.get('userId');
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`${serverIP}/api/user/page`, {
+        params: { id: userId },
+      });
+      setUserData(response.data);
+    };
+    fetchData();
+  }, []);
+  const { mannerPoint, ...rest } = userData;
+
   const dispatch = useDispatch();
   dispatch(userName(name));
 

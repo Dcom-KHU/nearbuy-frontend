@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { saveToken } from '@/store/saveToken/saveTokenSlice';
 import { getId } from '@/store/userInfo/userInfoSlice';
+import Cookies from 'js-cookie';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -80,9 +81,8 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
       console.log('response', response);
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');
-
         dispatch(saveToken(response.data.accessToken));
-        dispatch(getId(id));
+        Cookies.set('userId', id, { expires: 1 });
       }
       globalThis.location.replace(redirect);
     } catch (error) {
