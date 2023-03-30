@@ -100,6 +100,13 @@ const EditSchema = Yup.object().shape({
       '특수문자는 포함하실 수 없어요.'
     )
     .required('닉네임을 입력해 주세요.'),
+  location: Yup.string()
+    .matches(/^[가-힣a-zA-Z]/, '숫자나 특수문자로 시작하실 수 없어요.')
+    .matches(
+      /^[가-힣a-zA-Z][^!@#$%^&*()_+\-=\[\]{};':"\\|,.<>?\s]/,
+      '특수문자는 포함하실 수 없어요.'
+    )
+    .required('주소를 입력해 주세요.'),
 });
 // 마이페이지 수정하기 - 프로필 편집
 const EditInfo = () => {
@@ -109,6 +116,9 @@ const EditInfo = () => {
   const initialForm = { name: 'user' };
   const token = GetToken();
   const userName = useSelector((state: RootState) => state.userInfo.name);
+  const userLocation = useSelector(
+    (state: RootState) => state.userInfo.location
+  );
   const [profileImage, setProfileImage] = useState(null);
   const [isChange, setIsChange] = useState(false);
   const changePicHandler = () => {
@@ -119,18 +129,16 @@ const EditInfo = () => {
     const formData = {
       name: values.username,
       image: profileImage?.name,
-      location: '대한민국 경기도 평택시',
+      location: values.location,
     };
-    console.log(formData);
-    console.log('token', token);
 
-    const response = await axios.patch(`${serverIP}/api/user/page`, formData, {
+    await axios.patch(`${serverIP}/api/user/page`, formData, {
       params: { id: userId },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log('res is : ', response);
+    global.location.replace('http://localhost:3000/my');
   };
   return (
     <Main>
@@ -158,13 +166,19 @@ const EditInfo = () => {
             validationSchema={EditSchema}
             onSubmit={submitHandler}
           >
-            <Form>
+            <Form className='flex flex-col gap-3'>
               <ErrorMessage
                 name='username'
                 component='div'
-                className='text-xs text-red-500 py-1'
+                className='text-xs text-red-500'
               />
               <Field name='username' type='text' placeholder={userName} />
+              <ErrorMessage
+                name='location'
+                component='div'
+                className='text-xs text-red-500'
+              />
+              <Field name='location' type='text' placeholder={userLocation} />
               <Button>수정 완료</Button>
             </Form>
           </Formik>

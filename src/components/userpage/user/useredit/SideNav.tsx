@@ -7,13 +7,16 @@ import '../../../../app/globals.css';
 const Nav = styled.nav`
   width: 200px;
   min-width: 150px;
-  height: 274px;
+  height: 204px;
   border: 1px solid #b69eff;
   border-radius: 8px;
   padding: 50px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media screen and (max-width: 707px) {
     height: auto;
-    width: 500px;
+    width: 400px;
     padding: 10px;
   }
 `;
@@ -21,6 +24,7 @@ const SideNavList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 50px;
 
   a:hover {
@@ -43,9 +47,6 @@ const SideNav = () => {
         </li>
         <li>
           <Link href='/my/edit/password'>비밀번호 변경</Link>
-        </li>
-        <li>
-          <Link href='/my/edit/address'>주소 변경</Link>
         </li>
       </SideNavList>
     </Nav>

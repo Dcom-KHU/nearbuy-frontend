@@ -1,6 +1,10 @@
 'use client';
 
-import { getMannerPoint, userName } from '@/store/userInfo/userInfoSlice';
+import {
+  getLocation,
+  getMannerPoint,
+  userName,
+} from '@/store/userInfo/userInfoSlice';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import UserEdit from './UserEdit';
@@ -50,6 +54,7 @@ const User = () => {
   const dispatch = useDispatch();
   dispatch(userName(name));
   dispatch(getMannerPoint(mannerPoint));
+  dispatch(getLocation(location));
 
   return (
     <UserBox>
