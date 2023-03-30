@@ -41,7 +41,11 @@ const User = () => {
     };
     fetchData();
   }, []);
-  const { mannerPoint, ...rest } = userData;
+  const mannerPoint = userData?.mannerPoint;
+  const name = userData?.name;
+  const location = userData?.location;
+  const image = userData?.image;
+  const rest = { name, image, location };
 
   const dispatch = useDispatch();
   dispatch(userName(name));
