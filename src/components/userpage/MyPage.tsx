@@ -1,6 +1,5 @@
 'use client';
 
-import { useGet } from '@/hooks/useHttp';
 import { RootState } from '@/store/store';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -41,11 +40,12 @@ const MyPage = () => {
   const [postsData, setPostsData] = useState();
   const [favoritesData, setFavoritesData] = useState();
   const [reviewsData, setReviewsData] = useState();
+  const userId = useSelector((state: RootState) => state.userInfo.id);
   const fetchData = async (url: string, id: string | number = 1) => {
     try {
       const response = await axios.get(`${serverIP}/api/user/page${url}`, {
         params: {
-          id: 1,
+          id: userId,
         },
       });
       if (url === '/my') {

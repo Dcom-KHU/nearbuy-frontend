@@ -9,6 +9,7 @@ import { serverIP } from '../../../../secrets.json';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { saveToken } from '@/store/saveToken/saveTokenSlice';
+import { getId } from '@/store/userInfo/userInfoSlice';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -77,17 +78,11 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
       );
 
       console.log('response', response);
-      const cookies = response.headers['set-cookie'];
-      // const refreshToken = cookies
-      //   .find((cookie) => cookie.startsWith('refreshToken='))
-      //   .split('=')[1];
-      // console.log('ref', refreshToken);
-
-      console.log('cookie', cookies);
-
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');
+
         dispatch(saveToken(response.data.accessToken));
+        dispatch(getId(id));
       }
       globalThis.location.replace(redirect);
     } catch (error) {
