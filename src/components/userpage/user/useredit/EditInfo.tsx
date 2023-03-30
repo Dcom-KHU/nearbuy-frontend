@@ -102,6 +102,9 @@ const EditSchema = Yup.object().shape({
 });
 // 마이페이지 수정하기 - 프로필 편집
 const EditInfo = () => {
+  const mannerPoint = useSelector(
+    (state: RootState) => state.userInfo.mannerPoint
+  );
   const initialForm = { name: 'user' };
   const token = GetToken();
   const userName = useSelector((state: RootState) => state.userInfo.name);
@@ -113,7 +116,7 @@ const EditInfo = () => {
   const submitHandler = async (values) => {
     const formData = {
       name: values.username,
-      image: profileImage.name,
+      image: profileImage?.name,
       location: '대한민국 경기도 평택시',
     };
     console.log(formData);
@@ -162,7 +165,7 @@ const EditInfo = () => {
             </Form>
           </Formik>
         </NameForm>
-        <UserTemp />
+        <UserTemp mannerPoint={mannerPoint} />
       </UserInfoBox>
     </Main>
   );
