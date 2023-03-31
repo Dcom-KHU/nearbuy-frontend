@@ -93,7 +93,7 @@ export default function WriteGroup() {
         </form>
 
         {/* 지도 연습 */}
-        {/* <KakaoMap /> */}
+        <KakaoMap />
       </WriteSellBlock>
     </>
   );
