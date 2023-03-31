@@ -18,6 +18,16 @@ const Container = styled.div`
     width: 100%;
   }
 
+  .form-input2 {
+    background-color: rgb(220, 220, 220);
+    padding: 10px;
+    margin: 0px 0px 10px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+  }
+
   .submit-button {
     padding: 13px;
     border-radius: 5px;

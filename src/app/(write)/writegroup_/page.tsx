@@ -31,16 +31,17 @@ export default function WriteGroup() {
   const [images, setImages] = useState<File[]>();
 
   // 거래 희망 장소
-  const [locations, setLocations] = useState<string[]>();
+  const [locations, setLocations] = useState<string[]>([]);
 
   const submitHandler = async (d: any) => {
     console.log(images);
+    console.log(locations);
 
     const registeredData = {
       title: d.title,
       detail: d.detail,
       image: ["test.png"],
-      location: d.location,
+      location: locations,
       tag: d.tag.split(" "),
       groupPrice: d.price,
       totalPeople: d.recruitingNum,
@@ -48,6 +49,8 @@ export default function WriteGroup() {
       day: [new Date(d.date).getTime()], // 추후 n개 input을 리스트형식으로 이미 바꾸기
       // image: images,
     };
+
+    console.log(registeredData);
 
     const result = await customAxios
       .post("/api/post/group", registeredData, {
@@ -79,7 +82,12 @@ export default function WriteGroup() {
         />
 
         {/* form */}
-        <PostFormBlock register={register} type="group" />
+        <PostFormBlock
+          register={register}
+          locations={locations}
+          setLocations={setLocations}
+          type="group"
+        />
         <form
           className="m-auto"
           onSubmit={handleSubmit(submitHandler, async d => console.log(d))}
@@ -93,7 +101,7 @@ export default function WriteGroup() {
         </form>
 
         {/* 지도 연습 */}
-        <KakaoMap />
+        {/* <KakaoMap /> */}
       </WriteSellBlock>
     </>
   );

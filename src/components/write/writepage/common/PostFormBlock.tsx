@@ -47,6 +47,8 @@ interface PostFormBlockProps {
   type: string;
   category?: string;
   setCategory?: Function;
+  locations: string[];
+  setLocations: Function;
 }
 
 // 판/교/나 카테고리
@@ -58,7 +60,8 @@ const sellCategory = [
 
 // eslint-disable-next-line react/display-name
 const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
-  const { register, type, category, setCategory } = props;
+  const { register, type, category, setCategory, locations, setLocations } =
+    props;
 
   const categoryClickHandler = (value: string) => {
     setCategory?.(value);
@@ -202,7 +205,11 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
           type="text"
           {...register("location", { required: true })}
         /> */}
-        <GetLocation register={register} />
+        <GetLocation
+          register={register}
+          locations={locations}
+          setLocations={setLocations}
+        />
 
         {/* 거래 가능 날짜 */}
         {type !== "sell" && (
