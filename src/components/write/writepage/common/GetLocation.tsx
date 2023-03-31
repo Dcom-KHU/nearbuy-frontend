@@ -23,6 +23,15 @@ const GetLocation = (props: GetLocationProps) => {
     );
   };
 
+  const deleteLocation = (id: number) => {
+    setLocations((prev: string) => {
+      const newLocations = locations.filter((v, i) => {
+        return i !== id;
+      });
+      return newLocations;
+    });
+  };
+
   return (
     <>
       {component}
@@ -46,7 +55,21 @@ const GetLocation = (props: GetLocationProps) => {
         placeholder="선택한 거래 희망 장소들"
         className="form-input2 h-[150px]"
       >
-        {locations ? locations.join("\n") : "선택한 거래 희망 장소들"}
+        {locations
+          ? locations.map((v, i) => {
+              return (
+                <div
+                  key={i}
+                  className="m-[3px]"
+                  onClick={() => {
+                    deleteLocation(i);
+                  }}
+                >
+                  {v}
+                </div>
+              );
+            })
+          : "선택한 거래 희망 장소들"}
       </div>
     </>
   );
