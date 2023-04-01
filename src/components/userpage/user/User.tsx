@@ -35,7 +35,6 @@ interface Itemp {
 const User = () => {
   const userId = Cookie.get('userId');
   const [userData, setUserData] = useState();
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`${serverIP}/api/user/page`, {

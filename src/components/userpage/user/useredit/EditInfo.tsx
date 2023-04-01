@@ -6,13 +6,12 @@ import UserPic from '../userinfo/UserPic';
 import UserTemp from '../UserTemp';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import axios from 'axios';
-import { serverIP } from '@/../secrets.json';
 import { useState } from 'react';
 import GetToken from '@/utils/getToken';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import Cookie from 'js-cookie';
+import customAxios from '@/utils/customAxios';
 
 const Main = styled.main`
   display: flex;
@@ -124,6 +123,7 @@ const EditInfo = () => {
   const changePicHandler = () => {
     setIsChange((prev) => !prev);
   };
+
   const submitHandler = async (values) => {
     const userId = Cookie.get('userId');
     const formData = {
@@ -131,14 +131,18 @@ const EditInfo = () => {
       image: profileImage?.name,
       location: values.location,
     };
+    try {
+      await customAxios.patch(`/api/user/page`, formData, {
+        params: { id: userId },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    await axios.patch(`${serverIP}/api/user/page`, formData, {
-      params: { id: userId },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    global.location.replace('http://localhost:3000/my');
+      global.location.replace('http://localhost:3000/my');
+    } catch (err) {
+      console.error('edit patch error : ', err);
+    }
   };
   return (
     <Main>
@@ -179,7 +183,7 @@ const EditInfo = () => {
                 className='text-xs text-red-500'
               />
               <Field name='location' type='text' placeholder={userLocation} />
-              <Button>수정 완료</Button>
+              <Button type='submit'>수정 완료</Button>
             </Form>
           </Formik>
         </NameForm>

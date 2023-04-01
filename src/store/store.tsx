@@ -18,7 +18,6 @@ const store = configureStore({
     activePage: activePageSlice,
     chatToggle: chatToggleSlice,
     loggedIn: loggedInSlice,
-    saveToken: saveTokenSlice,
     userInfo: userInfoSlice,
   },
 });

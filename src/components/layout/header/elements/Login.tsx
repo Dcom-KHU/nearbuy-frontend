@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import '../../../../app/globals.css';
 import { serverIP } from '@/../secrets.json';
 import GetToken from '@/utils/getToken';
+import Cookies from 'js-cookie';
 
 const LoginBox = styled.div`
   a:hover {
@@ -42,6 +43,8 @@ const Login = () => {
     if (loggedIn) {
       localStorage.removeItem('login');
       try {
+        Cookies.remove('accessToken');
+        Cookies.remove('userId');
         const response = await axios.post(`${serverIP}/api/user/logout`, {
           headers: { Authorization: token },
         });
@@ -53,7 +56,11 @@ const Login = () => {
   };
   return (
     <LoginBox>
-      {loggedIn && <div onClick={menuToggleHandler}>Logout</div>}
+      {loggedIn && (
+        <a href='/' onClick={menuToggleHandler}>
+          Logout
+        </a>
+      )}
       {!loggedIn && (
         <Link href='/auth/login' onClick={menuToggleHandler}>
           Login

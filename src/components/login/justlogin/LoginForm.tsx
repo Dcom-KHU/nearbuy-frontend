@@ -5,9 +5,8 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
 import LoginErrorModal from './LoginErrorModal';
-import { serverIP } from '../../../../secrets.json';
+import { serverIP } from '@/../secrets.json';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
@@ -59,11 +58,10 @@ interface LoginFormValue {
 
 // 로그인/회원가입
 export default function LoginForm({ isLogIn }: isLogInProps) {
-  const dispatch = useDispatch();
   const mode = isLogIn ? 'login' : 'join'; // url 뒤에 붙이기 위함
   const [errorMessage, setErrorMessage] = useState(''); // error message 출력
-
   const handleSubmit = async (values: LoginFormValue) => {
+    // return () => clearInterval(interval);
     const { email: id, password, username: name } = values;
     const loginData = isLogIn
       ? { id, password }
@@ -75,13 +73,21 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
         `${serverIP}/api/user/${mode}`,
         loginData
       );
-
+      // const res = axios.post(`${serverIP}/api/user/token`);
+      // console.log('res : ', res);
       console.log('response', response);
       if (response.data.accessToken) {
         localStorage.setItem('login', 'true');
         Cookies.set('accessToken', response.data.accessToken, { expires: 1 });
+        // Cookies.set('key', 'value', { path: '', domain: serverIP });
         Cookies.set('userId', id, { expires: 1 });
+
+        // setTimeout(() => {
+        //   const res = axios.post(`${serverIP}/api/user/token`);
+        //   console.log('res : ', res);
+        // }, 5000);
       }
+
       globalThis.location.replace(redirect);
     } catch (error) {
       console.error(error);

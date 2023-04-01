@@ -1,16 +1,18 @@
-import { saveToken } from '@/store/saveToken/saveTokenSlice';
 import axios, { AxiosInstance } from 'axios';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import secrets from '../../secrets.json';
 import GetToken from './getToken';
+import Cookies from 'js-cookie';
+import { serverIP } from '@/../secrets.json';
 
 const customAxios: AxiosInstance = axios.create({
   baseURL: secrets.serverIP,
   headers: {
     // "Content-Type": "application/x-www-form-urlencoded",
     // 'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': secrets.serverIP,
+    'Access-Control-Allow-Credentials': true,
   },
+  withCredentials: true,
 });
 
 // header에 accessToken 설정
@@ -26,29 +28,60 @@ customAxios.interceptors.request.use((config) => {
   return config;
 });
 
-//AccessToken이 만료됐을때 처리
+// // AccessToken이 만료됐을때 처리
+// customAxios.interceptors.response.use(
+//   function (response) {
+//     return response;
+//   },
+//   async function (err) {
+//     const originalConfig = err.config;
+
+//     if (err.response && err.response.status === 401) {
+//       try {
+//         const data = await axios.post(`${serverIP}/api/user/token`);
+//         console.log('data is : ', data);
+//         if (data) {
+//           Cookies.set('accessToken', data.data.accessToken, { expires: 1 });
+//           return await customAxios(originalConfig);
+//         }
+//       } catch (err) {
+//         console.log('토큰 갱신 에러');
+//       }
+//       return Promise.reject(err);
+//     }
+//     return Promise.reject(err);
+//   }
+// );
+
 customAxios.interceptors.response.use(
-  function (response) {
+  (response) => {
     return response;
   },
-  async function (err) {
-    const originalConfig = err.config;
-
-    if (err.response && err.response.status === 401) {
+  async (error) => {
+    const originalRequest = error.config;
+    console.log(error.response.status, '??');
+    if (
+      error.response.status === 500 ||
+      (error.response.status === 401 && !originalRequest._retry)
+    ) {
+      originalRequest._retry = true;
       try {
-        const data = await axios.post(`/api/user/token`);
-        if (data) {
-          const dispatch = useDispatch();
-          dispatch(saveToken(data.data.accessToken));
-          console.log('data is : ', data);
-          return await customAxios.request(originalConfig);
-        }
-      } catch (err) {
-        console.log('토큰 갱신 에러');
+        const response = await axios.post(`${serverIP}/api/user/token`, {
+          withCredentials: true,
+        });
+        const newAccessToken = response.data.accessToken;
+        Cookies.remove('accessToken');
+        Cookies.set('accessToken', newAccessToken, { expire: 1 });
+        customAxios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${newAccessToken}`;
+        return customAxios(originalRequest);
+      } catch (e) {
+        console.error('token error : ', e);
       }
-      return Promise.reject(err);
     }
-    return Promise.reject(err);
+
+    return Promise.reject(error);
   }
 );
 
