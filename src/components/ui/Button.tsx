@@ -13,11 +13,12 @@ const ButtonUi = styled.button`
 `;
 
 type Props = {
+  type: any;
   children?: React.ReactNode;
 };
 
 // 버튼 UI
 const Button: React.FC<Props> = (props) => {
-  return <ButtonUi>{props.children}</ButtonUi>;
+  return <ButtonUi type={props.type || 'button'}>{props.children}</ButtonUi>;
 };
 export default Button;

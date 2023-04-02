@@ -2,9 +2,8 @@
 
 import { isActive } from '@/store/detailPage/activePageSlice';
 import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
-import { RootState } from '@/store/store';
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
   useSelectedLayoutSegment,

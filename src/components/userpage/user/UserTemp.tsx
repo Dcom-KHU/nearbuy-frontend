@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 
-const OuterBox = styled.div`
+const OuterBox = styled.div<{ mannerPoint?: number }>`
   margin: 20px 0;
   width: 150px;
   height: 5px;
@@ -18,7 +18,7 @@ const OuterBox = styled.div`
   p {
     animation: tagSlidIn 2s;
     position: absolute;
-    left: 36%;
+    left: ${(props) => `${props.mannerPoint}%` ?? 0};
     transform: translate(-50%, 0);
   }
   img {
@@ -33,18 +33,17 @@ const OuterBox = styled.div`
       left: 0%;
     }
     to {
-      left: 36%;
+      left: ${(props) => props.mannerPoint ?? 0};
     }
   }
 `;
 
 // 매너 온도
-const InnerBox = styled.div`
-  width: 36%;
+const InnerBox = styled.div<{ mannerPoint?: number }>`
+  width: ${(props) => `${props.mannerPoint}%` ?? 0};
   height: 5px;
   border-radius: 8px;
   background-color: #b69eff;
-  padding: 0 5px;
   display: flex;
   align-items: center;
   animation: boxSlideIn 2s;
@@ -53,22 +52,26 @@ const InnerBox = styled.div`
       width: 0;
     }
     to {
-      width: 36%;
+      width: ${(props) => props.mannerPoint ?? 0};
     }
   }
 `;
 
-const UserTemp = () => {
+interface UserTempProps {
+  mannerPoint?: number;
+}
+
+const UserTemp = ({ mannerPoint }: UserTempProps) => {
   return (
-    <OuterBox>
-      <InnerBox>&nbsp;</InnerBox>
+    <OuterBox mannerPoint={mannerPoint}>
+      <InnerBox mannerPoint={mannerPoint}>&nbsp;</InnerBox>
       <Image
         src='/images/map/location.svg'
         alt='location'
         width={18}
         height={18}
       />
-      <p>36&deg;</p>
+      <p>{mannerPoint ?? 0}&deg;</p>
     </OuterBox>
   );
 };

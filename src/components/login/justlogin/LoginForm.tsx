@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import { isLogInProps } from '../LoginContents';
-import { usePost } from '@/hooks/useHttp';
+import LoginErrorModal from './LoginErrorModal';
+import { serverIP } from '@/../secrets.json';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 // 유효성 검사를 위한 yup 라이브러리 기능 담음
 const LoginSchema = Yup.object().shape({
@@ -37,10 +40,10 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, '안전을 위해, 8자리 이상으로 설정해주세요.')
     .max(16, '최대 16자리까지만 설정하실 수 있어요.')
-    .required('password를 입력해 주세요.'),
+    .required('비밀번호를 입력해 주세요.'),
   password2: Yup.string()
     .oneOf([Yup.ref('password')], '비밀번호가 일치하지 않아요.')
-    .required('password를 다시 한번 입력해 주세요.'),
+    .required('비밀번호를 다시 한번 입력해 주세요.'),
 });
 
 interface LoginFormValue {
@@ -55,32 +58,70 @@ interface LoginFormValue {
   setState과 유효성 검사가 자동 설정됨. 
   <ErrorMessage>는 yup에서 정의해둔 에러메세지 표시해주는 곳. 
 */
-export default function LoginForm({ isLogIn }: isLogInProps) {
-  const [apiData, setApiData] = useState({});
-  const handleSubmit = (values: LoginFormValue) => {
-    const { email: id, username: name, password } = values;
-    const location = '고양시 덕양구';
-    const data = { id, location, name, password };
-    setApiData(data);
-  };
-  const {
-    data: postData,
-    isLoading: postIsLoading,
-    error: postError,
-  } = usePost<{ accessToken: string }>({
-    url: '/api/user/join',
-    data: apiData,
-  });
 
-  useEffect(() => {
-    console.log(postData, postIsLoading, postError);
-  }, [postData, postIsLoading, postError]);
+// 로그인/회원가입
+export default function LoginForm({ isLogIn }: isLogInProps) {
+  const mode = isLogIn ? 'login' : 'join'; // url 뒤에 붙이기 위함
+  const [errorMessage, setErrorMessage] = useState(''); // error message 출력
+  const handleSubmit = async (values: LoginFormValue) => {
+    // return () => clearInterval(interval);
+    const { email: id, password, username: name } = values;
+    const loginData = isLogIn
+      ? { id, password }
+      : { id, password, name, location: '경기도' };
+    const redirect = isLogIn ? '/board' : '/auth/login';
+
+    try {
+      const response = await axios.post(
+        `${serverIP}/api/user/${mode}`,
+        loginData
+      );
+      // const res = axios.post(`${serverIP}/api/user/token`);
+      // console.log('res : ', res);
+      console.log('response', response);
+      if (response.data.accessToken) {
+        localStorage.setItem('login', 'true');
+        Cookies.set('accessToken', response.data.accessToken, { expires: 1 });
+        // Cookies.set('key', 'value', { path: '', domain: serverIP });
+        Cookies.set('userId', id, { expires: 1 });
+
+        // setTimeout(() => {
+        //   const res = axios.post(`${serverIP}/api/user/token`);
+        //   console.log('res : ', res);
+        // }, 5000);
+      }
+
+      globalThis.location.replace(redirect);
+    } catch (error) {
+      console.error(error);
+      // 오류 발생 시
+      if (error.response.status) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setErrorMessage(error.response.data.message);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.error('requst', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error', error.message);
+      }
+    }
+  };
 
   const loginForm = isLogIn
     ? { email: '', password: '' }
     : { email: '', username: '', password: '', password2: '' };
   return (
     <>
+      {errorMessage && (
+        <LoginErrorModal
+          setErrorMessage={setErrorMessage}
+          errorMessage={errorMessage}
+        />
+      )}
       <Formik
         initialValues={loginForm}
         validationSchema={isLogIn ? LoginSchema : SignupSchema}
@@ -141,7 +182,7 @@ export default function LoginForm({ isLogIn }: isLogInProps) {
           )}
 
           <button
-            // disabled
+            // disabled={postIsLoading}
             className='login-button'
             type='submit'
           >

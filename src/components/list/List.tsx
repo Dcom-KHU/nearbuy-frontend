@@ -14,10 +14,20 @@ const ListItemBox = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
   padding: 30px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  row-gap: 30px;
-  justify-items: center;
+  ${(props) => {
+    if (props.emptyData) {
+      return css`
+        display: flex;
+        justify-content: center;
+      `;
+    }
+    return css`
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      row-gap: 30px;
+      justify-items: center;
+    `;
+  }}
 `;
 
 // ************************************************************************************************

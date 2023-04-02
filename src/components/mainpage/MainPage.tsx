@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import styled from "styled-components";
 import Image from "next/image";
@@ -34,8 +34,8 @@ export default function MainPage() {
         <WriteToggle />
         <MainPageBlock color="lightblue">
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
@@ -53,8 +53,8 @@ export default function MainPage() {
           </div>
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightyellow">
-        <MainPageBlock color="lightyellow">
+      <MainBox color='lightyellow'>
+        <MainPageBlock color='lightyellow'>
           <div>
             If you&apos;re looking for random paragraphs, you&apos;ve come to
             the right place. When a random word or a random sentence isn&apos;t
@@ -68,18 +68,18 @@ export default function MainPage() {
             are listed in the following paragraphs.
           </div>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightpink">
-        <MainPageBlock color="lightpink">
+      <MainBox color='lightpink'>
+        <MainPageBlock color='lightpink'>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />

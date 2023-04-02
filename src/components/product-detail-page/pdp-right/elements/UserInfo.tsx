@@ -16,21 +16,32 @@ const UserInfoBox = styled.div`
     margin-right: 10px;
   }
 `;
-
+interface UserInfoProps {
+  infoData?: {
+    name?: string;
+    image?: string;
+    location?: string;
+    mannerPoint?: number;
+  };
+}
 // user 정보들 (사진, 이름, 주소, 매너온도)
-export default function UserInfo() {
+export default function UserInfo({ infoData }: UserInfoProps) {
+  const { name, image, location, mannerPoint } = infoData ?? {};
+  console.log('this is ,,, ', infoData);
+  console.log('mannerPoint,,, ', mannerPoint);
+
   return (
     <UserInfoBox>
-      <Link href="/my">
-        <UserPic size={70} />
+      <Link href='/my'>
+        <UserPic size={70} image={image} />
       </Link>
       <div>
-        <Link href="/my">
-          <UserName />
+        <Link href='/my'>
+          <UserName name={name} />
         </Link>
-        <UserAd />
+        <UserAd ad={location} />
       </div>
-      <UserTemp />
+      <UserTemp mannerPoint={mannerPoint} />
     </UserInfoBox>
   );
 }

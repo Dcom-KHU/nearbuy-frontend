@@ -24,8 +24,8 @@ const NavList = styled.ul`
 `;
 const NavItem = styled.li<NavItemProps>`
   color: ${(props) =>
-    props.active ? "var(--accent-color)" : "var(--text-color)"};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+    props.active ? 'var(--accent-color)' : 'var(--text-color)'};
+  font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
   &:hover {
     color: var(--accent-color);
     font-weight: bold;
@@ -34,6 +34,7 @@ const NavItem = styled.li<NavItemProps>`
 `;
 
 const LIST_ITEM = [
+
   { title: "전체" },
   { title: "판매" },
   { title: "교환" },
@@ -53,6 +54,7 @@ const ListNav = () => {
   return (
     <Nav>
       <NavList>
+
         {LIST_ITEM.map(({ title }, i) => (
           <NavItem
             key={i}

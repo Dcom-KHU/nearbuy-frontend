@@ -3,9 +3,10 @@
 import { isActive } from '@/store/detailPage/activePageSlice';
 import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import { searchToggle } from '@/store/searchToggle/searchToggleSlice';
+import { RootState } from '@/store/store';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const ToolsBox = styled.div`
@@ -27,6 +28,7 @@ const ToolsBox = styled.div`
 
 // 상단 헤더 도구들 (검색 ~ 유저)
 const Tools = () => {
+  const loggedIn = localStorage.getItem('login') === 'true';
   const dispatch = useDispatch();
   const searchToggleHandler = () => {
     dispatch(searchToggle());
@@ -34,6 +36,12 @@ const Tools = () => {
   const menuToggleHandler = () => {
     dispatch(closeMenu());
     dispatch(isActive('board')); // 일단 userpage나 like page에서 게시글 list 보여주기 위해 'board'로 함.
+  };
+  const myPageHandler = () => {
+    dispatch(closeMenu());
+    if (!loggedIn) {
+      window.location.replace('http://localhost:3000/auth/login');
+    }
   };
   return (
     <ToolsBox>
@@ -61,7 +69,7 @@ const Tools = () => {
           height={21}
         />
       </Link>
-      <Link href='/my' onClick={menuToggleHandler}>
+      <Link href='/my' onClick={myPageHandler}>
         <Image
           src='/images/header/user.svg'
           alt='user'

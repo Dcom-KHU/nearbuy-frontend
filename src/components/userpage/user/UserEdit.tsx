@@ -19,7 +19,6 @@ const UserEdit = () => {
   return (
     <UserEditBox>
       <Link href='/my/edit'>
-        {/* tailwind hover 작동 안 함 */}
         <div className='hover:scale-110'>
           <Image
             src='/images/setting.svg'
