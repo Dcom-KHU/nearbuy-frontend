@@ -8,13 +8,14 @@ import priceSlice from './price/priceSlice';
 import saveTokenSlice from './saveToken/saveTokenSlice';
 import searchToggleSlice from './searchToggle/searchToggleSlice';
 import userInfoSlice from './userInfo/userInfoSlice';
+// import priceSlice from './price/priceSlice';
 
 const store = configureStore({
   reducer: {
     menuToggle: menuToggleSlice,
     searchToggle: searchToggleSlice,
     myPageMenuToggle: myPageMenuToggleSlice,
-    price: priceSlice,
+    // price: priceSlice,
     activePage: activePageSlice,
     chatToggle: chatToggleSlice,
     loggedIn: loggedInSlice,

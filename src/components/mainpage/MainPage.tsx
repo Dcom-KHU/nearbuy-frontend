@@ -3,9 +3,6 @@
 import styled from "styled-components";
 import Image from "next/image";
 import WriteToggle from "../write/writeToggles/roundWrite/WriteToggle";
-import { useEffect } from "react";
-import { useGet, usePatch, usePost } from "@/hooks/useHttp";
-import { AxiosHeaders } from "axios";
 
 const MainBox = styled.main`
   background: ${(props) => props.color};
@@ -29,76 +26,8 @@ const MainPageBlock = styled.section`
   }
 `;
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: boolean;
-  title: string;
-  type: string;
-  writer: string;
-}
 export default function MainPage() {
-  // get api call 하는 방법
-  // const {
-  //   data: getData,
-  //   isLoading: getIsLoading,
-  //   error: getError,
-  // } = useGet<Itemp>({
-  //   url: '/api/post/sale',
-  //   params: { id: 1 },
-  // });
-  // const getDataTitle = getData?.title;
-
-  // useEffect(() => {
-  //   console.log(getData, getIsLoading, getError);
-  // }, [getData, getIsLoading, getError]);
-
-  // post api call 하는 방법
-  // const {
-  //   data: postData,
-  //   isLoading: postIsLoading,
-  //   error: postError,
-  // } = usePost<{ accessToken: string }>({
-  //   url: '/api/user/login',
-  //   data: { id: 'aa@aa', password: 'aaaaaaaa' },
-  // });
-  // const {
-  //   data: postData,
-  //   isLoading: postIsLoading,
-  //   error: postError,
-  // } = usePost<{ accessToken: string }>({
-  //   url: '/api/user/join',
-  //   data: { id: 'qq@qq', password: 'qqqqqqqq', name: 'qq', location: 'qq' },
-  // });
-
-  // useEffect(() => {
-  //   console.log(postData, postIsLoading, postError);
-  // }, [postData, postIsLoading, postError]);
-
-  // const options = {
-  //   enableHighAccuracy: true,
-  //   timeout: 5000,
-  //   maximumAge: 0,
-  // };
-
-  // function success(pos) {
-  //   const crd = pos.coords;
-  //   console.log('your curren position is:');
-  //   console.log(`latitude : ${crd.latitude}`);
-  //   console.log(`latitude : ${crd.longitude}`);
-  //   console.log(`more or less ${crd.accuracy} meters.`);
-  // }
-
-  // function error(err) {
-  //   console.warn(`ERROR(${err.code}): ${err.message}`);
-  // }
-
-  // navigator.geolocation.getCurrentPosition(success, error, options);
+  /* 원래 여기 useGet, usePost 등 예시랑 주석으로 설명 달아둔거 있었는데 너무 정신없을까봐 일단 치워둠*/
   return (
     <>
       <MainBox color="lightblue">
@@ -119,7 +48,7 @@ export default function MainPage() {
             you&apos;d like to see and click the button. Your chosen number of
             paragraphs will instantly appear. While it may not be obvious to
             everyone, there are a number of reasons creating random paragraphs
-            can be useful. A few examples of how some people use this generator
+            can be useful. A fsew examples of how some people use this generator
             are listed in the following paragraphs.
           </div>
         </MainPageBlock>

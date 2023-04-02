@@ -1,5 +1,5 @@
-import ProductDetailPage from '@/components/product-detail-page/ProductDetailPage';
+import PDPforFree from "@/components/product-detail-page/pdp-type/PDPforFree";
 
 export default function Page() {
-  return <ProductDetailPage />;
+  return <PDPforFree />;
 }

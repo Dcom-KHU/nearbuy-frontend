@@ -5,7 +5,10 @@ import { closeMenu } from '@/store/menuToggle/menuToggleSlice';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useSelectedLayoutSegments } from 'next/navigation';
+import {
+  useSelectedLayoutSegment,
+  useSelectedLayoutSegments,
+} from 'next/navigation';
 
 const Nav = styled.nav`
   width: 70%;

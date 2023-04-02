@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 
 interface NavItemProps {
   active: boolean;
@@ -33,28 +34,32 @@ const NavItem = styled.li<NavItemProps>`
 `;
 
 const LIST_ITEM = [
-  { title: '전체', type: 'board' },
-  { title: '판매', type: 'sale' },
-  { title: '교환', type: 'exchange' },
-  { title: '나눔', type: 'free' },
-  { title: '경매', type: 'auction' },
-  { title: '공구', type: 'group' },
+
+  { title: "전체" },
+  { title: "판매" },
+  { title: "교환" },
+  { title: "나눔" },
+  { title: "경매" },
+  { title: "공구" },
 ];
 
 // 상단 네비 (전체 ~ 공구)
-const ListNav = ({ activeType, setActiveType }) => {
+const ListNav = () => {
+  const [activeType, setActiveType] = useState("");
+  console.log(activeType);
+
   const activeHandler = (type: string) => {
-    // 현재 마이페이지 내에서 어떤 항목을 리스팅 하고 있는지 설정
     setActiveType(type);
   };
   return (
     <Nav>
       <NavList>
-        {LIST_ITEM.map(({ title, type }, i) => (
+
+        {LIST_ITEM.map(({ title }, i) => (
           <NavItem
             key={i}
-            onClick={() => activeHandler(type)}
-            active={activeType === type}
+            onClick={() => activeHandler(title)}
+            active={activeType === title}
           >
             {title}
           </NavItem>

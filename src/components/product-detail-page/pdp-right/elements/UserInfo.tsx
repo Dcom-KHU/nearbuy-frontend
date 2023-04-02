@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import UserPic from '@/components/userpage/user/userinfo/UserPic';
-import UserName from '@/components/userpage/user/userinfo/UserName';
-import UserTemp from '@/components/userpage/user/UserTemp';
-import UserAd from '@/components/userpage/user/userinfo/UserAd';
-import Link from 'next/link';
+import styled from "styled-components";
+import UserPic from "@/components/userpage/user/userinfo/UserPic";
+import UserName from "@/components/userpage/user/userinfo/UserName";
+import UserTemp from "@/components/userpage/user/UserTemp";
+import UserAd from "@/components/userpage/user/userinfo/UserAd";
+import Link from "next/link";
 
 const UserInfoBox = styled.div`
   display: flex;
