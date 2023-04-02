@@ -1,9 +1,11 @@
-'use client';
+// 없는게 나을것같다 해서 지움
 
-import { useState } from 'react';
-import styled from 'styled-components';
-import WriteButton from './WriteButton';
-import WriteOptions from './WriteOptions';
+"use client";
+
+import { useState } from "react";
+import styled from "styled-components";
+import WriteButton from "./WriteButton";
+import WriteOptions from "./WriteOptions";
 
 const WriteToggleBlock = styled.div`
   //background-color: pink;

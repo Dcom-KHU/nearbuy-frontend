@@ -1,11 +1,11 @@
 // 공구 페이지
 // our-domain.com/group
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import PageSort from '../board/PageSort';
-import WriteToggle from '@/components/write/WriteToggle';
-import List from '@/components/list/List';
+import styled from "styled-components";
+import PageSort from "../../../components/ui/PageSort";
+import List from "@/components/list/List";
+import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
   //background: lavender;
@@ -19,12 +19,12 @@ const SalePageBlock = styled.div`
 export default function Group() {
   return (
     <>
-      <h1 className='text-center'>공구 페이지</h1>
+      <h1 className="text-center">공구 페이지</h1>
       <SalePageBlock>
         <PageSort />
         <List />
       </SalePageBlock>
-      <WriteToggle />
+      <ScrollTop />
     </>
   );
 }

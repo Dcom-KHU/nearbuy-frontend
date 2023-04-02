@@ -1,12 +1,12 @@
 // 전체 페이지
 // our-domain.com/board
 
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import PageSort from './PageSort';
-import WriteToggle from '@/components/write/WriteToggle';
-import List from '@/components/list/List';
+import styled from "styled-components";
+import PageSort from "../../../components/ui/PageSort";
+import List from "@/components/list/List";
+import ScrollTop from "@/components/ui/ScrollTop";
 
 const BoardPageBlock = styled.div`
   // background: lavender;
@@ -20,12 +20,12 @@ const BoardPageBlock = styled.div`
 export default function Board() {
   return (
     <>
-      <h1 className='text-center'>전체 페이지</h1>
+      <h1 className="text-center">전체 페이지</h1>
       <BoardPageBlock>
         <PageSort />
         <List />
       </BoardPageBlock>
-      <WriteToggle />
+      <ScrollTop />
     </>
   );
 }
