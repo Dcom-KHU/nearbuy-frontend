@@ -36,13 +36,6 @@ const GetLocation = (props: GetLocationProps) => {
     <>
       {component}
       <button
-        onClick={() => {
-          console.log(locations);
-        }}
-      >
-        hi
-      </button>
-      <button
         className="form-input"
         onClick={() => {
           openMapHandler();
