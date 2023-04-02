@@ -6,6 +6,10 @@ import { RootState } from '@/store/store';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import {
+  useSelectedLayoutSegment,
+  useSelectedLayoutSegments,
+} from 'next/navigation';
 
 const Nav = styled.nav`
   width: 70%;
@@ -62,9 +66,10 @@ const NAV_ITEMS: NavItem[] = [
 
 // 상단 헤더 네비 (전체 ~ 공구)
 export default function Navigation() {
+  const [, activeType] = useSelectedLayoutSegments();
   const dispatch = useDispatch();
   // 현재 표시되고 있는 페이지
-  const activeType = useSelector((state: RootState) => state.activePage.active);
+  // const activeType = useSelector((state: RootState) => state.activePage.active);
   // 작은 nav 일때, 햄버거 버튼 토글
   const menuToggleHandler = () => {
     dispatch(closeMenu());
@@ -74,7 +79,7 @@ export default function Navigation() {
       <NavList>
         {NAV_ITEMS.map(({ href, label, type, active }) => (
           <NavItem
-            key={href}
+            key={type}
             active={activeType === type}
             onClick={menuToggleHandler}
           >

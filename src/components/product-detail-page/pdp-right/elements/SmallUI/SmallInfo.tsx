@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
+import styled from "styled-components";
+import convertTime from "@/utils/convertTime";
 
 const SmallInfoBox = styled.div`
   display: flex;
@@ -15,10 +16,12 @@ const SmallInfoBox = styled.div`
 `;
 
 // 가장 위 작게 표시되는 정보들 (시간, 채팅수, 관심수, 조회수)
-export default function SmallInfo() {
+export default function SmallInfo({ time }: { time: number }) {
+  const timeString = convertTime({ time });
+
   return (
     <SmallInfoBox>
-      <p>4시간 전</p>
+      <p>{timeString}</p>
       <p>채팅 4</p>
       <p>관심 7</p>
       <p>조회 103</p>

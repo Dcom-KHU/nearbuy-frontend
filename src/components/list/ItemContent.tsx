@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import ProductLocation from './productinfo/ProductLocation';
-import ProductPrice from './productinfo/ProductPrice';
-import ProductTitle from './productinfo/ProductTitle';
+import styled from "styled-components";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
+import TellPostPrice from "./productinfo/TellPostPrice";
 
 const ItemContentBox = styled.div`
   display: flex;
@@ -23,13 +23,38 @@ const ItemContentBox = styled.div`
 `;
 
 // 게시글 설명
-const ItemContent = () => {
+export default function ItemContent({
+  post,
+}: {
+  post: {
+    title: string;
+    id: number;
+    image: string[];
+    location: string;
+    type: string;
+    salePrice: number | null;
+    groupPrice: number | null;
+    currentPrice: number | null;
+    totalPeople: number | null;
+    deadline: number | null;
+    ongoing: boolean;
+    target: string | null;
+  };
+}) {
+  const nowState = useSelector((state: RootState) => state.activePage.active);
+
   return (
-    <ItemContentBox>
-      <ProductTitle />
-      <ProductPrice />
-      <ProductLocation />
-    </ItemContentBox>
+    <>
+      <ItemContentBox>
+        <p>{post.title}</p>
+        <TellPostPrice
+          type={post.type}
+          salePrice={post.salePrice}
+          groupPrice={post.groupPrice}
+          currentPrice={post.currentPrice}
+        />
+        <p>{post.location}</p>
+      </ItemContentBox>
+    </>
   );
-};
-export default ItemContent;
+}
