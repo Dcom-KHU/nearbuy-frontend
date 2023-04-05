@@ -49,6 +49,8 @@ const MyPage = () => {
           id: userId,
         },
       });
+      console.log('data', response);
+
       if (url === '/my') {
         setMyPostsData(response.data.post);
       }
@@ -59,6 +61,10 @@ const MyPage = () => {
       } else if (url === '/review') {
         setReviewsData(response.data.review);
       }
+      // console.log('a', myPostsData);
+      // console.log('b', postsData);
+      // console.log('c', favoritesData);
+      // console.log('d', reviewsData);
     } catch (error) {
       console.error(error);
       // 오류 발생 시
