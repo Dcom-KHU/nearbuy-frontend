@@ -49,6 +49,7 @@ interface PostFormBlockProps {
   setCategory?: Function;
   locations: string[];
   setLocations: Function;
+  update?: boolean;
 }
 
 // 판/교/나 카테고리
@@ -60,8 +61,15 @@ const sellCategory = [
 
 // eslint-disable-next-line react/display-name
 const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
-  const { register, type, category, setCategory, locations, setLocations } =
-    props;
+  const {
+    register,
+    type,
+    category,
+    setCategory,
+    locations,
+    setLocations,
+    update,
+  } = props;
 
   const categoryClickHandler = (value: string) => {
     setCategory?.(value);
@@ -126,7 +134,7 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
         )}
 
         {/* 2행~ - 판교나 */}
-        {type === "sell" && (
+        {type === "sell" && !update && (
           <div className="flex flex-row justify-between">
             {category === "sale" ? (
               <input
@@ -173,6 +181,45 @@ const PostFormBlock = React.forwardRef((props: PostFormBlockProps, ref) => {
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {/* 판교나 update 시 */}
+        {type === "sell" && update && (
+          <div className="flex flex-row justify-between">
+            {category === "sale" ? (
+              <input
+                placeholder="가격"
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+                type="number"
+                {...register("salePrice", { required: true })}
+              />
+            ) : category === "exchange" ? (
+              <input
+                placeholder="교환 원하는 상품"
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg"
+                type="text"
+                {...register("target", { required: true })}
+              />
+            ) : (
+              <input
+                className="w-[60%] m-[10px 0] p-[10px] border-[1px] border-[lightgray] rounded-lg cursor-not-allowed"
+                type="text"
+                disabled
+              />
+            )}
+            {/* 카테고리 선택 */}
+            <label
+              className={
+                "bg-[#e6e6fa] w-[35%] p-[10px] mx-[5px] border-[1px] border-[#333] rounded cursor-pointer text-center"
+              }
+            >
+              {category === "sale"
+                ? "판매"
+                : category === "exchange"
+                ? "교환"
+                : "나눔"}
+            </label>
           </div>
         )}
 

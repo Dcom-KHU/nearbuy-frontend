@@ -47,11 +47,16 @@ const WriteSell = () => {
     switch (category) {
       case SALE:
         url = "/api/post/sale";
+        break;
       case EXCHANGE:
         url = "/api/post/exchange";
+        break;
       case FREE:
         url = "/api/post/free";
+        break;
     }
+
+    console.log(category, url);
 
     await customAxios
       .post(url, registeredData)
@@ -82,6 +87,7 @@ const WriteSell = () => {
           });
 
         router.replace("/board");
+        // router.replace("/writesell_/update/36?type=sale");
       })
       .catch(err => {
         console.log(err);
