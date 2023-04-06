@@ -1,11 +1,8 @@
-"use client";
+'use client';
 
 import styled from "styled-components";
 import Image from "next/image";
 import WriteToggle from "../write/writeToggles/roundWrite/WriteToggle";
-import { useEffect } from "react";
-import { useGet, usePatch, usePost } from "@/hooks/useHttp";
-import { AxiosHeaders } from "axios";
 
 const MainBox = styled.main`
   background: ${(props) => props.color};
@@ -29,56 +26,16 @@ const MainPageBlock = styled.section`
   }
 `;
 
-interface Itemp {
-  id: number;
-  detail: string;
-  image: string[];
-  location: string;
-  ongoing: boolean;
-  salePrice: number;
-  tag: string[];
-  time: boolean;
-  title: string;
-  type: string;
-  writer: string;
-}
 export default function MainPage() {
-  // // get api call 하는 방법
-  // const {
-  //   data: getData,
-  //   isLoading: getIsLoading,
-  //   error: getError,
-  // } = useGet<Itemp>({
-  //   url: "/api/post/sale",
-  //   params: { id: 1 },
-  // });
-
-  // useEffect(() => {
-  //   console.log(getData, getIsLoading, getError);
-  // }, [getData, getIsLoading, getError]);
-
-  // // post api call 하는 방법
-  // const {
-  //   data: postData,
-  //   isLoading: postIsLoading,
-  //   error: postError,
-  // } = usePost<{ accessToken: string }>({
-  //   url: "/api/user/login",
-  //   data: { id: 1, password: "hii" },
-  // });
-
-  // useEffect(() => {
-  //   console.log(postData, postIsLoading, postError);
-  // }, [postData, postIsLoading, postError]);
-
+  /* 원래 여기 useGet, usePost 등 예시랑 주석으로 설명 달아둔거 있었는데 너무 정신없을까봐 일단 치워둠*/
   return (
     <>
       <MainBox color="lightblue">
         <WriteToggle />
         <MainPageBlock color="lightblue">
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
@@ -91,13 +48,13 @@ export default function MainPage() {
             you&apos;d like to see and click the button. Your chosen number of
             paragraphs will instantly appear. While it may not be obvious to
             everyone, there are a number of reasons creating random paragraphs
-            can be useful. A few examples of how some people use this generator
+            can be useful. A fsew examples of how some people use this generator
             are listed in the following paragraphs.
           </div>
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightyellow">
-        <MainPageBlock color="lightyellow">
+      <MainBox color='lightyellow'>
+        <MainPageBlock color='lightyellow'>
           <div>
             If you&apos;re looking for random paragraphs, you&apos;ve come to
             the right place. When a random word or a random sentence isn&apos;t
@@ -111,18 +68,18 @@ export default function MainPage() {
             are listed in the following paragraphs.
           </div>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />
         </MainPageBlock>
       </MainBox>
-      <MainBox color="lightpink">
-        <MainPageBlock color="lightpink">
+      <MainBox color='lightpink'>
+        <MainPageBlock color='lightpink'>
           <Image
-            src="/images/for-demo/icecream.jpg"
-            alt="kitty"
+            src='/images/for-demo/icecream.jpg'
+            alt='kitty'
             width={380}
             height={500}
           />

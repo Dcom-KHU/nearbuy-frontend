@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { RootState } from '@/store/store';
-import Image from 'next/image';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import MemberCount from './info/MemberCount';
-import Time from './info/Time';
+import { RootState } from "@/store/store";
+import Image from "next/image";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import MemberCount from "./info/MemberCount";
+import Time from "./info/Time";
 
 const SmallImageBox = styled.div`
   display: flex;
@@ -21,10 +21,10 @@ const SmallImageBox = styled.div`
 export default function PdpLeft() {
   // 사용자가 올린 사진들
   const images = [
-    { key: 0, url: '/images/block.svg' },
-    { key: 1, url: '/images/setting.svg' },
-    { key: 2, url: '/images/header/heart.svg' },
-    { key: 3, url: '/images/header/user.svg' },
+    { key: 0, url: "/images/block.svg" },
+    { key: 1, url: "/images/setting.svg" },
+    { key: 2, url: "/images/header/heart.svg" },
+    { key: 3, url: "/images/header/user.svg" },
   ];
   const [isHover, setIsHover] = useState(0);
   const onMouthHandling = (key: number) => {
@@ -34,11 +34,11 @@ export default function PdpLeft() {
     (state: RootState) => state.activePage.active
   );
   return (
-    <section className='flex flex-col w-2/5 gap-5'>
-      <div className='relative'>
-        <Image src={images[isHover].url} alt='Image' width={400} height={400} />
-        {activeState === 'auction' && <Time />}
-        {activeState === 'group' && <MemberCount />}
+    <section className="flex flex-col w-2/5 gap-5">
+      <div className="relative">
+        <Image src={images[isHover].url} alt="Image" width={400} height={400} />
+        {activeState === "auction" && <Time />}
+        {activeState === "group" && <MemberCount />}
       </div>
       <SmallImageBox>
         {images.map((image) => {
@@ -46,7 +46,7 @@ export default function PdpLeft() {
             <Image
               key={image.key}
               src={image.url}
-              alt='block'
+              alt="block"
               width={40}
               height={40}
               onMouseOver={() => {

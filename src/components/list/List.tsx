@@ -2,9 +2,11 @@
 
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import EachList from './EachList';
 import ListItem from './ListItem';
+import { useEffect } from 'react';
+import { useGet } from '@/hooks/useHttp';
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -12,10 +14,20 @@ const ListItemBox = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
   padding: 30px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  row-gap: 30px;
-  justify-items: center;
+  ${(props) => {
+    if (props.emptyData) {
+      return css`
+        display: flex;
+        justify-content: center;
+      `;
+    }
+    return css`
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      row-gap: 30px;
+      justify-items: center;
+    `;
+  }}
 `;
 
 // ************************************************************************************************
@@ -33,72 +45,84 @@ enum NowState {
   Auction = 'auction',
   Group = 'group',
 }
-// 게시글 더미 데이터
-export const DUMMY_DATA = [
-  { id: 1, nowState: NowState.Sale },
-  { id: 2, nowState: NowState.Exchange },
-  { id: 3, nowState: NowState.Free },
-  { id: 4, nowState: NowState.Auction },
-  { id: 5, nowState: NowState.Group },
-  { id: 6, nowState: NowState.Group },
-  { id: 7, nowState: NowState.Exchange },
-  { id: 8, nowState: NowState.Sale },
-  { id: 9, nowState: NowState.Auction },
-  { id: 10, nowState: NowState.Auction },
-  { id: 11, nowState: NowState.Group },
-  { id: 12, nowState: NowState.Free },
-  { id: 13, nowState: NowState.Exchange },
-  { id: 14, nowState: NowState.Exchange },
-  { id: 15, nowState: NowState.Free },
-  { id: 16, nowState: NowState.Group },
-  { id: 17, nowState: NowState.Sale },
-  { id: 18, nowState: NowState.Group },
-  { id: 19, nowState: NowState.Auction },
-  { id: 20, nowState: NowState.Group },
-  { id: 21, nowState: NowState.Exchange },
-  { id: 22, nowState: NowState.Auction },
-  { id: 23, nowState: NowState.Auction },
-  { id: 24, nowState: NowState.Free },
-  { id: 25, nowState: NowState.Group },
-  { id: 26, nowState: NowState.Group },
-  { id: 27, nowState: NowState.Auction },
-  { id: 28, nowState: NowState.Group },
-  { id: 29, nowState: NowState.Exchange },
-  { id: 30, nowState: NowState.Free },
-  { id: 31, nowState: NowState.Free },
-  { id: 32, nowState: NowState.Group },
-  { id: 33, nowState: NowState.Sale },
-  { id: 34, nowState: NowState.Group },
-  { id: 35, nowState: NowState.Auction },
-  { id: 36, nowState: NowState.Exchange },
-  { id: 37, nowState: NowState.Group },
-  { id: 38, nowState: NowState.Free },
-  { id: 39, nowState: NowState.Group },
-  { id: 40, nowState: NowState.Sale },
-  { id: 41, nowState: NowState.Free },
-  { id: 42, nowState: NowState.Group },
-  { id: 43, nowState: NowState.Auction },
-  { id: 44, nowState: NowState.Auction },
-  { id: 45, nowState: NowState.Free },
-  { id: 46, nowState: NowState.Auction },
-  { id: 47, nowState: NowState.Exchange },
-];
-// 게시물 목록들
-const List = () => {
+
+interface Itemp {
+  post: [
+    {
+      title: string;
+      id: number;
+      image: string[];
+      location: string;
+      type: string;
+      salePrice: number | null;
+      groupPrice: number | null;
+      currentPrice: number | null;
+      totalPeople: number | null;
+      currentPeople: number | null;
+      deadline: number | null;
+      ongoing: boolean;
+      target: string | null;
+    }
+  ];
+}
+
+const List = ({ dataList }) => {
+  let myPageList = false;
+  myPageList = (dataList ?? true) === dataList;
+
+  const {
+    data: getData,
+    // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
+    isLoading: getIsLoading,
+    error: getError,
+  } = useGet<Itemp>({
+    url: '/api/post/board',
+    params: { type: 'all', size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
+    // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
+  });
+
+  let postDatas = getData?.post;
+
+  if (myPageList) {
+    postDatas = dataList;
+  }
+  const emptyData = postDatas?.length === 0;
+
+  useEffect(() => {
+    // console.log(getData, getIsLoading, getError);
+    console.log('포데: ', postDatas);
+  }, [postDatas]);
+
+  // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);
+  // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
+  // useSelector hook이 리액트 컴포넌트에서 Redux stord의 상태 읽어오기 위해 사용되고
+  // state: Rootstate는 RootState 타입의 state 매개변수 가지고 있는데, 이는 Redux stord의 전체 상태 객체 의미.
+  // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
+  // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
+
   const isBoard = nowState === 'board';
+
   return (
-    <ListItemBox>
-      {isBoard ? (
-        <>
-          {DUMMY_DATA.map((data) => (
-            <ListItem key={data.id} nowState={data.nowState} />
-          ))}
-        </>
-      ) : (
-        <EachList />
-      )}
-    </ListItemBox>
+    <>
+      <ListItemBox emptyData={emptyData}>
+        {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. 
+            true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
+        {emptyData ? (
+          <div>게시글이 없습니다.</div>
+        ) : isBoard ? (
+          <>
+            {postDatas?.map((post) => (
+              <ListItem key={post.id} nowState={post.type} post={post} />
+            ))}
+          </>
+        ) : (
+          /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
+            -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
+          <EachList dataList={postDatas} />
+        )}
+      </ListItemBox>
+    </>
   );
 };
 export default List;

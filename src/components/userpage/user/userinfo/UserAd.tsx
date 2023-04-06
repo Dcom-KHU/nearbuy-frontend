@@ -8,6 +8,10 @@ const Address = styled.address`
   color: rgba(33, 33, 36, 0.5);
 `;
 
-export default function UserAd() {
-  return <Address>경기도 고양시</Address>;
+interface UserAdProps {
+  ad?: string;
+}
+
+export default function UserAd({ ad }: UserAdProps) {
+  return <Address>{ad ?? '대한민국'}</Address>;
 }

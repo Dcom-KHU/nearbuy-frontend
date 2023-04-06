@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Tag from './Tag';
-import styled from 'styled-components';
+import Tag from "./Tag";
+import styled from "styled-components";
 
 // FIXME: minmax를 60px로 설정해놔서 길이가 그 이상 넘어가면 박스 벗어남
 const TagList = styled.ul`
@@ -16,8 +16,8 @@ const TagList = styled.ul`
 // *******************************
 
 // 태그들
-export default function Tags() {
-  const arr = ['고양이', '강아지', '태그', '야옹이'];
+export default function Tags({ tagArr }: { tagArr: string[] }) {
+  const arr = tagArr;
   return (
     <TagList>
       {arr.map((data) => (
