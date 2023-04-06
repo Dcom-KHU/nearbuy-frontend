@@ -191,7 +191,9 @@ export default function Page({
   return (
     <>
       <WriteSellBlock>
-        <div className="self-start pl-8 py-5 text-[20px]">공동구매 포스팅</div>
+        <div className="self-start pl-8 py-5 text-[20px]">
+          공동구매 포스팅 수정
+        </div>
 
         {/* 이미지 리스트 */}
         <PostImageListUpdate
