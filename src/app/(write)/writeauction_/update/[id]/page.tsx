@@ -141,7 +141,7 @@ export default function Page({
               console.log(err);
             }));
 
-        // router.replace("/board");
+        router.replace("/board");
       })
       .catch(err => {
         console.log(err);
