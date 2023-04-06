@@ -33,6 +33,8 @@ const MyPageBox = styled.div`
 // mypage
 const MyPage = () => {
   // 마이페이지에서 각 항목별 리스팅 하기 위해 activeType 생성
+  const [listItemCount, setListItemCount] = useState({});
+
   const [activeType, setActiveType] = useState('board');
   const { myPosts, posts, favorites, reviews } = useSelector(
     (state: RootState) => state.myPageMenuToggle
@@ -49,16 +51,36 @@ const MyPage = () => {
           id: userId,
         },
       });
+
       if (url === '/my') {
         setMyPostsData(response.data.post);
-      }
-      if (url === '/other') {
+        setListItemCount((prevState) => ({
+          ...prevState,
+          my: response.data.post.length,
+        }));
+      } else if (url === '/other') {
         setPostsData(response.data.post);
+        setListItemCount((prevState) => ({
+          ...prevState,
+          other: response.data.post.length,
+        }));
       } else if (url === '/like') {
         setFavoritesData(response.data.post);
+        setListItemCount((prevState) => ({
+          ...prevState,
+          like: response.data.post.length,
+        }));
       } else if (url === '/review') {
         setReviewsData(response.data.review);
+        setListItemCount((prevState) => ({
+          ...prevState,
+          review: response.data.review.length,
+        }));
       }
+      // console.log('a', myPostsData);
+      // console.log('b', postsData);
+      // console.log('c', favoritesData);
+      // console.log('d', reviewsData);
     } catch (error) {
       console.error(error);
       // 오류 발생 시
@@ -77,12 +99,11 @@ const MyPage = () => {
     fetchData('/like');
     fetchData('/review');
   }, []);
-
   return (
     <div className='flex flex-col items-center justify-center'>
       <MyPageBox>
         <User />
-        <Menu />
+        <Menu count={listItemCount} />
       </MyPageBox>
       {myPosts && (
         <>

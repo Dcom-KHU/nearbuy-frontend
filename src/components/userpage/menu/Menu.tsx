@@ -15,13 +15,19 @@ const MenuBox = styled.div`
 `;
 
 // 마이 페이지 오른쪽 부분 (판내상품 ~ 거래후기)
-const Menu = () => {
+const Menu = ({ count }) => {
+  const { my, other, like, review } = count;
   return (
     <MenuBox>
-      <MenuItem src='menu' title='내 게시글' state='myPosts' count={32} />
-      <MenuItem src='share' title='참여 게시글' state='posts' count={32} />
-      <MenuItem src='../header/heart' title='찜' state='favorites' count={32} />
-      <MenuItem src='comment' title='거래후기' state='reviews' count={32} />
+      <MenuItem src='menu' title='내 게시글' state='myPosts' count={my} />
+      <MenuItem src='share' title='참여 게시글' state='posts' count={other} />
+      <MenuItem
+        src='../header/heart'
+        title='찜'
+        state='favorites'
+        count={like}
+      />
+      <MenuItem src='comment' title='거래후기' state='reviews' count={review} />
     </MenuBox>
   );
 };

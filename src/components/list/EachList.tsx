@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
 // import { DUMMY_DATA } from "./List";
-import ListItem from "./ListItem";
-import { useGet } from "@/hooks/useHttp";
+import ListItem from './ListItem';
+import { useGet } from '@/hooks/useHttp';
 
 interface Itemp {
   post: [
@@ -26,18 +26,24 @@ interface Itemp {
   ];
 }
 
-export default function EachList() {
+export default function EachList({ dataList }) {
+  let myPageList = false;
+  myPageList = (dataList ?? true) === dataList;
+
   const {
     data: getData,
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/board",
-    params: { type: "all", size: 20 },
+    url: '/api/post/board',
+    params: { type: 'all', size: 20 },
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
-  const postDatas = getData?.post || [];
+  let postDatas = getData?.post || [];
+  if (myPageList) {
+    postDatas = dataList;
+  }
   const nowState = useSelector((state: RootState) => state.activePage.active);
 
   return (

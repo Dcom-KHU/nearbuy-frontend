@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import EachList from "./EachList";
-import ListItem from "./ListItem";
-import { useEffect } from "react";
-import { useGet } from "@/hooks/useHttp";
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import styled, { css } from 'styled-components';
+import EachList from './EachList';
+import ListItem from './ListItem';
+import { useEffect } from 'react';
+import { useGet } from '@/hooks/useHttp';
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -38,12 +38,12 @@ const ListItemBox = styled.div`
 // 해당 오류는 nowState 프로퍼티에 keyof DetailPageState 타입을 지정해두었지만, DUMMY_DATA 배열의 nowState 값은 string 형태이기 때문에 발생하는 오류입니다.
 // 해결 방법으로는 nowState 프로퍼티의 타입을 string으로 지정하거나, DUMMY_DATA의 nowState 값을 DetailPageState 타입의 enum 값으로 변경하는 방법이 있습니다.
 enum NowState {
-  Board = "board",
-  Sale = "sale",
-  Exchange = "exchange",
-  Free = "free",
-  Auction = "auction",
-  Group = "group",
+  Board = 'board',
+  Sale = 'sale',
+  Exchange = 'exchange',
+  Free = 'free',
+  Auction = 'auction',
+  Group = 'group',
 }
 
 interface Itemp {
@@ -66,23 +66,31 @@ interface Itemp {
   ];
 }
 
-const List = () => {
+const List = ({ dataList }) => {
+  let myPageList = false;
+  myPageList = (dataList ?? true) === dataList;
+
   const {
     data: getData,
     // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/board",
-    params: { type: "all", size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
+    url: '/api/post/board',
+    params: { type: 'all', size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
-  const postDatas = getData?.post;
+  let postDatas = getData?.post;
+
+  if (myPageList) {
+    postDatas = dataList;
+  }
+  const emptyData = postDatas?.length === 0;
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-    console.log("포데: ", postDatas);
+    console.log('포데: ', postDatas);
   }, [postDatas]);
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
@@ -93,14 +101,16 @@ const List = () => {
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
-  const isBoard = nowState === "board";
+  const isBoard = nowState === 'board';
 
   return (
     <>
-      <ListItemBox>
+      <ListItemBox emptyData={emptyData}>
         {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. 
             true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
-        {isBoard ? (
+        {emptyData ? (
+          <div>게시글이 없습니다.</div>
+        ) : isBoard ? (
           <>
             {postDatas?.map((post) => (
               <ListItem key={post.id} nowState={post.type} post={post} />
@@ -109,7 +119,7 @@ const List = () => {
         ) : (
           /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
             -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
-          <EachList />
+          <EachList dataList={postDatas} />
         )}
       </ListItemBox>
     </>
