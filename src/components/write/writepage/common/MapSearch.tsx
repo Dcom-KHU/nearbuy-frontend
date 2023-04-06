@@ -152,13 +152,13 @@ const MapSearch = (props: MapSearchProps) => {
       </div>
       <div id="map" className="w-full h-[600px] min-h-[500px]"></div>
       <div className="flex flex-row justify-center">
-        <button
+        {/* <button
           onClick={() => {
             console.log(selectLocation);
           }}
         >
           jd
-        </button>
+        </button> */}
         <button
           className="w-[100px] h bg-[#b8ddfd] p-[10px] m-[10px] border-[1px] rounded-md text-gray-600 hover:bg-sky-300"
           onClick={() => {

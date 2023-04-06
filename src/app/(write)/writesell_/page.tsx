@@ -27,14 +27,19 @@ const WriteSell = () => {
   const { register, handleSubmit } = useForm();
   const [category, setCategory] = useState<string>(SALE);
 
+  // 이미지 파일
+  const [images, setImages] = useState<File[]>([]);
+
+  // 거래 희망 장소
+  const [locations, setLocations] = useState<string[]>([]);
+
   const submitHandler = async (d: any) => {
     const registeredData = {
       title: d.title,
       detail: d.detail,
-      image: ["test.png"],
-      location: d.location,
+      location: locations[0],
       tag: d.tag.split(" "),
-      salePrice: JSON.parse(d.salePrice),
+      salePrice: d.salePrice ? JSON.parse(d.salePrice) : "",
       target: d.target,
     };
 
@@ -48,15 +53,34 @@ const WriteSell = () => {
         url = "/api/post/free";
     }
 
-    const result = await customAxios
-      .post(url, registeredData, {
-        headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQxNzQ5MSwiZXhwIjoxNjc5NDE4MDkxfQ.rTdCfAdHoEgJ82e8Lyxd7MM3jnQEMBvBQUyjPtJAADA",
-        },
-      })
-      .then(data => {
-        console.log(data);
+    await customAxios
+      .post(url, registeredData)
+      .then(async data => {
+        // 이미지 가공
+        const formData = new FormData();
+        if (images) {
+          for (let i = 0; i < images.length; i++) {
+            formData.append("image", images[i]);
+          }
+        }
+
+        // 이미지 업로드
+        await customAxios
+          .post("/api/image/post", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data;",
+            },
+            params: {
+              id: data.data.postId,
+            },
+          })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
         router.replace("/board");
       })
       .catch(err => {
@@ -72,13 +96,19 @@ const WriteSell = () => {
         </div>
 
         {/* 이미지 리스트 */}
-        <PostImageList register={register} />
+        <PostImageList
+          register={register}
+          images={images}
+          setImages={setImages}
+        />
 
         {/* form */}
         <PostFormBlock
           register={register}
           type="sell"
           category={category}
+          locations={locations}
+          setLocations={setLocations}
           setCategory={setCategory}
         />
         <form
