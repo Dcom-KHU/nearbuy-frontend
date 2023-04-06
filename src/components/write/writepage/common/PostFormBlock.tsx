@@ -43,7 +43,7 @@ const CategorySelect = styled.input`
 `;
 
 interface PostFormBlockProps {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<FieldValues> | any;
   type: string;
   category?: string;
   setCategory?: Function;
