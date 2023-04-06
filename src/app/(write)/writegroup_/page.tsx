@@ -28,7 +28,7 @@ export default function WriteGroup() {
   const { register, handleSubmit } = useForm();
 
   // 이미지 파일
-  const [images, setImages] = useState<File[]>();
+  const [images, setImages] = useState<File[]>([]);
 
   // 거래 희망 장소
   const [locations, setLocations] = useState<string[]>([]);
@@ -40,29 +40,54 @@ export default function WriteGroup() {
     const registeredData = {
       title: d.title,
       detail: d.detail,
-      image: ["test.png"],
-      location: locations,
+      // image: ["test.png"],
+      location: locations[0],
       tag: d.tag.split(" "),
       groupPrice: d.price,
       totalPeople: d.recruitingNum,
       distribute: d.distribute,
       day: [new Date(d.date).getTime()], // 추후 n개 input을 리스트형식으로 이미 바꾸기
-      // image: images,
     };
 
     console.log(registeredData);
 
     const result = await customAxios
       .post("/api/post/group", registeredData, {
-        headers: {
-          Authorization:
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ5MDIzNCwiZXhwIjoxNjc5NDkwODM0fQ.QOMskGhTx_uD57LV_wN3Qm7rrCbcm6ZpIal9l6-mzxA",
-          // "Content-Type": "multipart/form-data;",
-        },
+        // headers: {
+        //   Authorization:
+        //     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY3OTQ5MDIzNCwiZXhwIjoxNjc5NDkwODM0fQ.QOMskGhTx_uD57LV_wN3Qm7rrCbcm6ZpIal9l6-mzxA",
+        //   // "Content-Type": "multipart/form-data;",
+        // },
       })
-      .then(data => {
-        console.log(data);
-        // router.replace("/board");
+      .then(async data => {
+        console.log(data.data.postId);
+
+        // 이미지 가공...
+        const formData = new FormData();
+        if (images) {
+          for (let i = 0; i < images.length; i++) {
+            formData.append("image", images[i]);
+          }
+        }
+
+        // 이미지 업로드
+        const imgUpdateResult = await customAxios
+          .post("/api/image/post", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data;",
+            },
+            params: {
+              id: data.data.postId,
+            },
+          })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+        router.replace("/board");
       })
       .catch(err => {
         console.log(err);

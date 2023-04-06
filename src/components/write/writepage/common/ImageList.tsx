@@ -26,7 +26,7 @@ const ProductImageBlock = styled.div`
 `;
 
 interface PostFormBlockProps {
-  register: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<FieldValues>;
   images: File[] | undefined;
   setImages: Function;
 }
@@ -63,6 +63,25 @@ const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
       });
   };
 
+  const deleteImage = (id: number) => {
+    setImages((prev: File[]) => {
+      const newImages = prev.filter((v, i) => {
+        return i !== id;
+      });
+      // console.log(newImages);
+
+      return newImages;
+    });
+    setPrevImgURLArr((prev: string[]) => {
+      const newPrevImgURLArr = prev.filter((v, i) => {
+        return i !== id;
+      });
+      // console.log(newPrevImgURLArr);
+
+      return newPrevImgURLArr;
+    });
+  };
+
   return (
     <ProductImageBlock>
       {/* 이미지 업로드 버튼 */}
@@ -93,6 +112,9 @@ const PostImageList = React.forwardRef((props: PostFormBlockProps, ref) => {
               width={180}
               height={180}
               className="border object-contain w-[180px] min-w-[120px] aspect-square my-0 mx-[10px]"
+              onClick={() => {
+                deleteImage(i);
+              }}
             />
           );
         })}
