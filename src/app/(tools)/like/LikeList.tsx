@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
-import ListNav from "@/components/list/ListNav";
-import List from "@/components/list/List";
-import PageSort from "@/components/ui/PageSort";
+import styled from 'styled-components';
+import List from '@/components/list/List';
+import customAxios from '@/utils/customAxios';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 const LikeListBlock = styled.div`
   width: 100%;
@@ -13,10 +14,22 @@ const LikeListBlock = styled.div`
 `;
 
 export default function LikeList() {
+  const [data, setData] = useState();
+  const userId = Cookies.get('userId');
+  const getData = async () => {
+    const response = await customAxios.get(`/api/user/page/like`, {
+      params: { id: userId },
+    });
+    setData(response.data.post);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log('res', data);
+
   return (
     <LikeListBlock>
-      <ListNav />
-      <List />
+      <List dataList={data} />
     </LikeListBlock>
   );
 }
