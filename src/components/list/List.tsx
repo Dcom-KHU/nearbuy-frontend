@@ -86,6 +86,7 @@ const List = ({ dataList }) => {
   if (myPageList) {
     postDatas = dataList;
   }
+  const emptyData = postDatas?.length === 0;
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
@@ -104,10 +105,12 @@ const List = ({ dataList }) => {
 
   return (
     <>
-      <ListItemBox>
+      <ListItemBox emptyData={emptyData}>
         {/* isBoard는 데이터 전체 표시하기 위해 둠. isBoard가 true라는건 전체 페이지 보고있는것. 
             true니까 map을 써서 더미데이터의 모든 리스트 가져옴 */}
-        {isBoard ? (
+        {emptyData ? (
+          <div>게시글이 없습니다.</div>
+        ) : isBoard ? (
           <>
             {postDatas?.map((post) => (
               <ListItem key={post.id} nowState={post.type} post={post} />
@@ -116,7 +119,7 @@ const List = ({ dataList }) => {
         ) : (
           /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
             -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
-          <EachList dataList={dataList} />
+          <EachList dataList={postDatas} />
         )}
       </ListItemBox>
     </>
