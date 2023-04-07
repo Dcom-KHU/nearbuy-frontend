@@ -18,7 +18,7 @@ export default function LikePost({ id }: { id: number }) {
       });
       setIsLike(response.data);
       setLoading(false);
-      console.log("찜여부:", response.data);
+      // console.log("찜여부:", response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);

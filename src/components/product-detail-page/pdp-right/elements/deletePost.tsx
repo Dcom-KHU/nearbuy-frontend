@@ -50,7 +50,7 @@ function DeleteModal({ id }: DeleteModalProps) {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${serverIP}/api/post`, {
+      await axios.delete(`${serverIP}/api/post`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { id: id },
       });

@@ -1,9 +1,7 @@
 "use client";
 
-// import { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-// import { useState } from "react";
 import { AiOutlineShareAlt, AiOutlineEdit } from "react-icons/ai";
 import { DeleteModal } from "../DeletePost";
 
