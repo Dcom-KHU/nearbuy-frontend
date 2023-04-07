@@ -43,7 +43,7 @@ export default function ChatPage(props: IChatPage) {
           setOtherUser={setOtherUser}
           setPostId={setPostId}
         />
-        <ChatWindow />
+        <ChatWindow room={room} />
       </ChatMain>
     </section>
   );
