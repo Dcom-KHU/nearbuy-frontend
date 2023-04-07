@@ -39,6 +39,10 @@ const ModalContainerBox = styled.div`
     margin-left: 10px;
     padding: 8px;
   }
+  #report-dropdown {
+    padding: 5px 14px;
+    border: solid 1px #9b9b9b;
+  }
 `;
 const ReportTextArea = styled.textarea`
   border: solid 1px gray;
@@ -51,13 +55,34 @@ const ReportTextArea = styled.textarea`
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
 export default function ToolBoxForGuest({ id }: { id: number }) {
   const [ReportModal, setReportModal] = useState(false);
+  const [reportDetail, setReportDetail] = useState("");
   const token = GetToken();
+  const [selectedOption, setSelectedOption] = useState("");
+  const handleOptionChange = (e: any) => {
+    setSelectedOption(e.target.value);
+  };
+
+  const handleReport = async () => {
+    try {
+      await axios.post(
+        `${serverIP}/api/post/report?id=${id}`,
+        { detail: reportDetail, type: selectedOption },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setReportModal(false);
+      alert("게시글이 신고되었습니다");
+    } catch (error) {
+      console.log(error, "handleReport실패");
+      alert("신고 접수에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
     <>
       <ToolBoxForGuestBox>
         <LikePost id={id} />
-
         <button title="공유">
           <AiOutlineShareAlt color="dimgray" size={24} />
         </button>
@@ -65,19 +90,35 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
           <AiOutlineAlert color="dimgray" size={25} />
         </button>
       </ToolBoxForGuestBox>
-
       {ReportModal && (
         <ModalOverlayBox onClick={() => setReportModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
-            <h2>게시글을 신고하시겠습니까?</h2>
+            <h2 className="mb-3">게시글을 신고하시겠습니까?</h2>
+            <div className="reportDropDown">
+              <select
+                id="report-dropdown"
+                value={selectedOption}
+                onChange={handleOptionChange}
+              >
+                <option value="">신고 사유 선택</option>
+                <option value="부적절한 판매 물품">부적절한 판매 물품</option>
+                <option value="부적절한 게시글 내용">
+                  부적절한 게시글 내용
+                </option>
+                <option value="사기 의심">사기 의심</option>
+                <option value="개인정보 노출">개인정보 노출</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
             <ReportTextArea
               placeholder="신고 내용을 입력해주세요(최대 150자)"
+              required
               maxLength={150}
+              value={reportDetail}
+              onChange={(e) => setReportDetail(e.target.value)}
             />
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
-              <button
-                className="report-buttons" /*onClick={handleReport} 함수 만들어야됨*/
-              >
+              <button className="report-buttons" onClick={handleReport}>
                 신고
               </button>
               <button
