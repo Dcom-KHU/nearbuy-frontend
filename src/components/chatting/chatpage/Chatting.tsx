@@ -29,8 +29,15 @@ interface IChat {
   time: number;
 }
 
+interface IChattingProps {
+  room: number | undefined;
+  setOtherUser: Function;
+  setPostId: Function;
+}
+
 // 채팅 내용
-export default function Chatting({ room }: { room: number | undefined }) {
+export default function Chatting(props: IChattingProps) {
+  const { room, setOtherUser, setPostId } = props;
   const [chatList, setChatList] = useState<IChat[]>([]);
   // 채팅 목록 불러오기
   useEffect(() => {
@@ -40,6 +47,7 @@ export default function Chatting({ room }: { room: number | undefined }) {
           .get("/api/chat/list", { params: { room: room } })
           .then(data => {
             setChatList(data.data);
+            setPostId(data.data.post);
           })
           .catch(err => {
             console.log(err);
@@ -64,6 +72,15 @@ export default function Chatting({ room }: { room: number | undefined }) {
     })();
   }, []);
 
+  useEffect(() => {
+    chatList[0] &&
+      chatList[0].userList.forEach(userName => {
+        if (userName !== myName) {
+          setOtherUser(userName);
+        }
+      });
+  }, [myName, chatList]);
+
   // 제품 설명 토글 시 채팅방 세로 사이즈 조절하기 위해
   const toggle = useSelector((state: RootState) => state.chatToggle.toggle);
   // 새로고침 시 제일 최근 채팅 내용이 보이도록 스크롤 제일 아래로 가게함
@@ -73,7 +90,7 @@ export default function Chatting({ room }: { room: number | undefined }) {
       // null 체크를 해주어야 합니다.
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
-  }, []);
+  }, [chatList]);
 
   return (
     <ChattingBox toggle={toggle} ref={chatBoxRef}>
@@ -90,24 +107,11 @@ export default function Chatting({ room }: { room: number | undefined }) {
 
           const isImSender = myName === v.sender;
           return isImSender ? (
-            <Talk me msg={v.message} time={v.time} />
+            <Talk key={v.id} me msg={v.message} time={v.time} />
           ) : (
-            <Talk msg={v.message} time={v.time} />
+            <Talk key={v.id} msg={v.message} time={v.time} />
           );
         })}
-      {/* <Time />
-      <Talk />
-      <Talk />
-      <Talk />
-      <Talk />
-      <Talk last />
-      <Time />
-      <Talk me />
-      <Talk last />
-      <Talk me />
-      <Time />
-      <Talk me />
-      <Talk me /> */}
     </ChattingBox>
   );
 }

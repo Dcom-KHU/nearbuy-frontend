@@ -35,9 +35,13 @@ export default function ChatPage(props: IChatPage) {
   return (
     <section className="w-4/6">
       <ChatMain>
-        <ChatUserInfo />
+        <ChatUserInfo userName={otherUser} />
         <ChatProductInfo />
-        <Chatting room={room} />
+        <Chatting
+          room={room}
+          setOtherUser={setOtherUser}
+          setPostId={setPostId}
+        />
         <ChatWindow />
       </ChatMain>
     </section>
