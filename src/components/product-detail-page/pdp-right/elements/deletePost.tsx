@@ -55,7 +55,7 @@ function DeleteModal({ id }: DeleteModalProps) {
         params: { id: id },
       });
       alert("게시글이 삭제되었습니다");
-      router.push("/sale");
+      router.push("/board");
       setDeleteModal(false);
     } catch (error) {
       console.log(error);
