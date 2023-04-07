@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import ChatUserInfo from './ChatUserInfo';
-import ChatProductInfo from './ChatProductInfo';
-import Chatting from './Chatting';
-import ChatWindow from './chattingitem/ChatWindow';
+import styled from "styled-components";
+import ChatUserInfo from "./ChatUserInfo";
+import ChatProductInfo from "./ChatProductInfo";
+import Chatting from "./Chatting";
+import ChatWindow from "./chattingitem/ChatWindow";
+import { useState } from "react";
 
 // 대화 내용
 const ChatMain = styled.main`
@@ -18,14 +19,25 @@ const ChatMain = styled.main`
   flex-shrink: 1;
 `;
 
+interface IChatPage {
+  room: number | undefined;
+}
+
 // 채팅방
-export default function ChatPage() {
+export default function ChatPage(props: IChatPage) {
+  const { room } = props;
+
+  // ChatUserInfo에서 사용
+  const [otherUser, setOtherUser] = useState<string>();
+  // ChatProductInfo에서 사용
+  const [postId, setPostId] = useState<number>();
+
   return (
-    <section className='w-4/6'>
+    <section className="w-4/6">
       <ChatMain>
         <ChatUserInfo />
         <ChatProductInfo />
-        <Chatting />
+        <Chatting room={room} />
         <ChatWindow />
       </ChatMain>
     </section>

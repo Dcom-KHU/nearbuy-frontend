@@ -42,10 +42,11 @@ interface ChatListItemProps {
   message: string;
   time: number;
   memberId?: string;
+  setSelectedRoomNum: Function;
 }
 
 export default function ChatListItem(props: ChatListItemProps) {
-  const { room, sender, memberId, message, time } = props;
+  const { room, sender, memberId, message, time, setSelectedRoomNum } = props;
   const [memName, setMemName] = useState<string>();
   const [memImg, setMemImg] = useState<string>();
 
@@ -73,9 +74,16 @@ export default function ChatListItem(props: ChatListItemProps) {
     })();
   }, []);
 
+  const clickRoomHandler = (roomNum: number) => {
+    setSelectedRoomNum(roomNum);
+  };
+
   return (
     <>
-      <div className="flex flex-row px-[15px] py-[10px] w-[100%] items-center hover:cursor-pointer hover:bg-[#f3f3f3]">
+      <div
+        className="flex flex-row px-[15px] py-[10px] w-[100%] items-center hover:cursor-pointer hover:bg-[#f3f3f3]"
+        onClick={() => clickRoomHandler(room)}
+      >
         <UserPic size={70} image={memImg} />
         <div className="w-[75%] h-[50px] flex flex-col justify-center">
           <UserName name={memName} />

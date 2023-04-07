@@ -1,7 +1,7 @@
-import UserInfo from '@/components/product-detail-page/pdp-right/elements/UserInfo';
-import Button from '@/components/ui/Button';
-import Link from 'next/link';
-import styled from 'styled-components';
+import UserInfo from "@/components/product-detail-page/pdp-right/elements/UserInfo";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
+import styled from "styled-components";
 
 const UserInfoBox = styled.div`
   width: 100%;
@@ -21,11 +21,11 @@ export default function ChatUserInfo() {
   return (
     <UserInfoBox>
       <LeftBox>
-        <Link href='/my'>
+        <Link href="/my">
           <UserInfo />
         </Link>
       </LeftBox>
-      <Button>후기 보내기</Button>
+      {/* <Button>후기 보내기</Button> */}
     </UserInfoBox>
   );
 }

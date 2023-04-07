@@ -41,6 +41,8 @@ export default function ChatMainPage() {
   // ws으로 메세지 받을 시 true로 변환, 채팅방 목록 업데이트 후 false로 변환
   const [isNewSocketEvent, setIsNewSocketEvent] = useState<boolean>(true);
   const [chatRooms, setChatRooms] = useState<IchatRoom[]>([]);
+  // 선택된 채팅방 번호
+  const [selectedRoomNum, setSelectedRoomNum] = useState<number>();
 
   useEffect(() => {
     if (isNewSocketEvent) {
@@ -53,6 +55,7 @@ export default function ChatMainPage() {
             return data.data.reverse();
           });
         setChatRooms(getChatRooms);
+        setSelectedRoomNum(getChatRooms[0].room);
         // console.log(getChatRooms);
       })();
 
@@ -76,13 +79,19 @@ export default function ChatMainPage() {
   return (
     // <div className='w-4/5 h-screen flex gap-10 mt-10 my-0 mx-auto'>
     <ChatMainBox>
-      <button onClick={() => tmep()}>hi</button>
+      {/* <button onClick={() => tmep()}>hi</button> */}
       <ChatList>
         {chatRooms.map((v, i) => {
-          return <ChatListItem key={v.room} {...v} />;
+          return (
+            <ChatListItem
+              key={v.room}
+              {...v}
+              setSelectedRoomNum={setSelectedRoomNum}
+            />
+          );
         })}
       </ChatList>
-      <ChatPage />
+      <ChatPage room={selectedRoomNum} />
     </ChatMainBox>
   );
 }
