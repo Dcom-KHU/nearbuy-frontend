@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { serverIP } from "@/../secrets.json";
 import GetToken from "@/utils/getToken";
-import {
-  AiFillHeart,
-  AiOutlineHeart,
-  AiOutlineShareAlt,
-  AiOutlineAlert,
-} from "react-icons/ai";
-
-interface PostData {
-  isLiked: boolean;
-}
+import { AiOutlineShareAlt, AiOutlineAlert } from "react-icons/ai";
+import LikePost from "../LikePost";
 
 const ToolBoxForGuestBox = styled.div`
   display: flex;
@@ -58,72 +50,13 @@ const ReportTextArea = styled.textarea`
 
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
 export default function ToolBoxForGuest({ id }: { id: number }) {
-  const [isLike, setIsLike] = useState<boolean | undefined>(undefined);
-  const [loading, setLoading] = useState(false);
-  /*const isLikeHandler = () => {
-    setIsLike((prev) => !prev);
-  };
-  */
   const [ReportModal, setReportModal] = useState(false);
   const token = GetToken();
-
-  const getLikeStatus = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`${serverIP}/api/post/like`, {
-        headers: { Authorization: `Bearer ${token}` },
-        params: { id: id },
-      });
-      setIsLike(response.data);
-      setLoading(false);
-      //console.log("찜여부:", response.data);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }, [id, token]);
-
-  useEffect(() => {
-    getLikeStatus();
-  }, [getLikeStatus]);
-
-  const toggleLike = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await axios.patch(`${serverIP}/api/post/like`, null, {
-        headers: { Authorization: `Bearer ${token}` },
-        params: { id: id },
-      });
-      setIsLike(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }, [id, token]);
-
-  const isLikeHandler = async () => {
-    await toggleLike();
-    setIsLike((prev) => !prev);
-    getLikeStatus();
-  };
 
   return (
     <>
       <ToolBoxForGuestBox>
-        {loading ? (
-          <div>
-            <AiOutlineHeart color="dimgray" size={24} />
-          </div>
-        ) : (
-          <button className="liked" onClick={isLikeHandler} title="찜">
-            {isLike ? (
-              <AiFillHeart color="dimgray" size={24} />
-            ) : (
-              <AiOutlineHeart color="dimgray" size={24} />
-            )}
-          </button>
-        )}
+        <LikePost id={id} />
 
         <button title="공유">
           <AiOutlineShareAlt color="dimgray" size={24} />
@@ -138,8 +71,8 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
             <h2>게시글을 신고하시겠습니까?</h2>
             <ReportTextArea
-              placeholder="신고 내용을 입력해주세요(최대 100자)"
-              maxLength={100}
+              placeholder="신고 내용을 입력해주세요(최대 150자)"
+              maxLength={150}
             />
             <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <button
