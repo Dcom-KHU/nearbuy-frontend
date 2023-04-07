@@ -3,14 +3,16 @@
 // import { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { useDelete } from "@/hooks/useHttp";
 import { useState } from "react";
 import {
   AiOutlineShareAlt,
   AiOutlineEdit,
   AiOutlineDelete,
 } from "react-icons/ai";
-import customAxios from "@/utils/customAxios";
+import { serverIP } from "@/../secrets.json";
+import GetToken from "@/utils/getToken";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ToolBoxForWriterBox = styled.div`
   display: flex;
@@ -46,26 +48,26 @@ const ModalContainerBox = styled.div`
     padding: 8px;
   }
 `;
-interface PostDelProps {
-  id: number;
-}
 
 // 게시글 주인일 때 표시하는 UI들. 공유, 수정, 삭제.
 export default function ToolBoxForWriter({ id }: { id: number }) {
-  /*
-  게시글 삭제를 위한 useDelete 불러오고 싶었음 but AxiosError 뜸
-    const {
-        data: deleteData,
-        isLoading: gdeleteIsLoading,
-        error: deleteError,
-    } = useDelete<PostDelProps>({
-        url: "/api/post", // 필수
-        headers: { Authorization: `Bearer 어쩌구` },
-        params: { id: id },
-    });
-  */
-
+  const token = GetToken();
+  const router = useRouter();
   const [DeleteModal, setDeleteModal] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`${serverIP}/api/post`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id: id },
+      });
+      alert("게시글이 삭제되었습니다");
+      router.push("/sale");
+      setDeleteModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -86,7 +88,7 @@ export default function ToolBoxForWriter({ id }: { id: number }) {
             <h2>게시글을 삭제하시겠습니까?</h2>
             <div style={{ width: "250px", height: "60px" }}></div>
             <div style={{ float: "right" }}>
-              <button className="delete-buttons" /*onClick={handleDelete}*/>
+              <button className="delete-buttons" onClick={handleDelete}>
                 삭제
               </button>
               <button
