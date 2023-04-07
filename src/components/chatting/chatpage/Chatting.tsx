@@ -1,11 +1,12 @@
 import { RootState } from "@/store/store";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import styled, { CSSProperties, StyledComponentProps } from "styled-components";
 import Talk from "./chattingitem/Talk";
 import Time from "./chattingitem/Time";
 import customAxios from "@/utils/customAxios";
 import Cookie from "js-cookie";
+import { WebSocketContext } from "@/context/WebSocketContext";
 
 interface ChattingBoxProps extends StyledComponentProps<"div", any, {}, never> {
   toggle?: boolean;
@@ -72,6 +73,7 @@ export default function Chatting(props: IChattingProps) {
     })();
   }, []);
 
+  // chatList, myName 가져온 후, 내가 아닌 채팅방 멤버 닉네임을 가져와서 setOtherUser로 설정하기(페이지 상단 userInfo 설정 위해)
   useEffect(() => {
     chatList[0] &&
       chatList[0].userList.forEach(userName => {
@@ -80,6 +82,29 @@ export default function Chatting(props: IChattingProps) {
         }
       });
   }, [myName, chatList]);
+
+  // 실시간으로 채팅 메시지 받고 세팅하기
+  // (만약 기존 채팅 로그가 아직 세팅되지 않았을 때 메시지가 오면 문제 발생함.
+  //  기존 채팅 로그 리스트(chatList)와 실시간 채팅 리스트를 따로 관리할 필요가 있음.
+  //  하지만 그럴 경우가 매우 드물기 때문에 여기서는 굳이 고려하지 않음.)
+  const ws = useContext(WebSocketContext);
+  ws.current.onmessage = (evt: MessageEvent) => {
+    const data = JSON.parse(evt.data);
+    const newChat = {
+      id: data.id,
+      sender: data.sender,
+      userList: data.userList,
+      message: data.message,
+      room: JSON.parse(data.room),
+      post: JSON.parse(data.post),
+      time: JSON.parse(data.time),
+      last: JSON.parse(data.last),
+    };
+
+    setChatList((prev: IChat[]) => {
+      return [...prev, newChat];
+    });
+  };
 
   // 제품 설명 토글 시 채팅방 세로 사이즈 조절하기 위해
   const toggle = useSelector((state: RootState) => state.chatToggle.toggle);

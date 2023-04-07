@@ -5,7 +5,8 @@ import ChatUserInfo from "./ChatUserInfo";
 import ChatProductInfo from "./ChatProductInfo";
 import Chatting from "./Chatting";
 import ChatWindow from "./chattingitem/ChatWindow";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { WebSocketContext } from "@/context/WebSocketContext";
 
 // 대화 내용
 const ChatMain = styled.main`
