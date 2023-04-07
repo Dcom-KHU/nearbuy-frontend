@@ -46,7 +46,11 @@ export default function Talk({ last, me, msg, time }: Props) {
   };
 
   return (
-    <div className="flex flex-row justify-end">
+    <div
+      className={
+        me ? "flex flex-row justify-end" : "flex flex-row justify-start"
+      }
+    >
       {me ? (
         <span className="pt-[20px] text-[#a5a5a5] mr-[5px]">
           {setTimeHander(time)}
@@ -61,7 +65,7 @@ export default function Talk({ last, me, msg, time }: Props) {
       </Link> */}
         <p>{msg}</p>
       </ChatBox>
-      {me === false ? (
+      {me === undefined ? (
         <span className="pt-[20px] text-[#a5a5a5] ml-[5px]">
           {setTimeHander(time)}
         </span>
