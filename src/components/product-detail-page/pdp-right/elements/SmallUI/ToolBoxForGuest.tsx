@@ -48,6 +48,13 @@ const ModalContainerBox = styled.div`
     padding: 8px;
   }
 `;
+const ReportTextArea = styled.textarea`
+  border: solid 1px gray;
+  margin: 15px 0;
+  padding: 10px;
+  height: 100px;
+  width: 340px;
+`;
 
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
 export default function ToolBoxForGuest({ id }: { id: number }) {
@@ -130,8 +137,11 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
         <ModalOverlayBox onClick={() => setReportModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
             <h2>게시글을 신고하시겠습니까?</h2>
-            <div style={{ width: "250px", height: "60px" }}></div>
-            <div style={{ float: "right" }}>
+            <ReportTextArea
+              placeholder="신고 내용을 입력해주세요(최대 100자)"
+              maxLength={100}
+            />
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
               <button
                 className="report-buttons" /*onClick={handleReport} 함수 만들어야됨*/
               >
