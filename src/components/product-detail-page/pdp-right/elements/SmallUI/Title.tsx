@@ -23,7 +23,7 @@ export default function Title({ title, id }: { title: string; id: number }) {
     <NameBox>
       <p>{title}</p>
       {/* 추후 게시글 주인이면 tb for writer, 주인 아니면 tb for guest 띄우기 */}
-      <ToolBoxForGuest />
+      <ToolBoxForGuest id={id} />
       <div /* 나중에 없애기 */> &nbsp;&nbsp; | &nbsp;&nbsp;</div>
       <ToolBoxForWriter id={id} />
     </NameBox>

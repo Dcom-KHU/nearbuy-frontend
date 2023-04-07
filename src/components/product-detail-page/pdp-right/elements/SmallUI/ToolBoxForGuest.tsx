@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import axios from "axios";
+import { serverIP } from "@/../secrets.json";
+import GetToken from "@/utils/getToken";
 import {
   AiFillHeart,
   AiOutlineHeart,
@@ -44,12 +46,27 @@ const ModalContainerBox = styled.div`
 `;
 
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
-export default function ToolBoxForGuest() {
+export default function ToolBoxForGuest({ id }: { id: number }) {
   const [isLike, setIsLike] = useState(false);
   const isLikeHandler = () => {
     setIsLike((prev) => !prev);
   };
   const [ReportModal, setReportModal] = useState(false);
+
+  const token = GetToken();
+  const handleLike = async () => {
+    try {
+      const response = await axios.get(`${serverIP}/api/post/like`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id: id },
+      });
+      console.log("리데:", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleLike();
 
   return (
     <>
