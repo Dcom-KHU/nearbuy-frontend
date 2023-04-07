@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { serverIP } from "@/../secrets.json";
@@ -11,6 +11,10 @@ import {
   AiOutlineShareAlt,
   AiOutlineAlert,
 } from "react-icons/ai";
+
+interface PostData {
+  isLiked: boolean;
+}
 
 const ToolBoxForGuestBox = styled.div`
   display: flex;
@@ -47,41 +51,84 @@ const ModalContainerBox = styled.div`
 
 // 게시글 주인이 아닐 때 표시하는 UI들. 찜, 공유, 신고.
 export default function ToolBoxForGuest({ id }: { id: number }) {
-  const [isLike, setIsLike] = useState(false);
-  const isLikeHandler = () => {
+  const [isLike, setIsLike] = useState<boolean | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  /*const isLikeHandler = () => {
     setIsLike((prev) => !prev);
   };
+  */
   const [ReportModal, setReportModal] = useState(false);
-
   const token = GetToken();
-  const handleLike = async () => {
+
+  const handleLike = useCallback(async () => {
+    setLoading(true);
     try {
-      const response = await axios.get(`${serverIP}/api/post/like`, {
+      const response = await axios.get<PostData>(`${serverIP}/api/post/like`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { id: id },
       });
-      console.log("리데:", response.data);
+      console.log("리데::::", response.data);
+      setIsLike(response.data.isLiked);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
-  };
+  }, [id, token]);
 
-  handleLike();
+  useEffect(() => {
+    handleLike();
+  }, [handleLike]);
+
+  const toggleLike = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await axios.patch(`${serverIP}/api/post/like`, null, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id: id },
+      });
+      setIsLike(response.data.isLiked);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, [id, token]);
+
+  const isLikeHandler = async () => {
+    await toggleLike();
+    console.log("isLike::::::; ", isLike);
+  };
 
   return (
     <>
-      <ToolBoxForGuestBox>
-        <button className="liked" onClick={isLikeHandler} title="찜">
-          {isLike && <AiFillHeart color="dimgray" size={24} />}
-          {!isLike && <AiOutlineHeart color="dimgray" size={24} />}
-        </button>
-        <button title="공유">
-          <AiOutlineShareAlt color="dimgray" size={24} />
-        </button>
-        <button title="신고" onClick={() => setReportModal(true)}>
-          <AiOutlineAlert color="dimgray" size={25} />
-        </button>
-      </ToolBoxForGuestBox>
+      {loading ? (
+        <div>Loading..</div>
+      ) : (
+        <ToolBoxForGuestBox>
+          <button className="liked" onClick={isLikeHandler} title="찜">
+            {isLike ? (
+              <AiFillHeart color="dimgray" size={24} />
+            ) : (
+              <AiOutlineHeart color="dimgray" size={24} />
+            )}
+          </button>
+          {/*
+            <button className="liked" onClick={isLikeHandler} title="찜">
+              {isLike && <AiFillHeart color="dimgray" size={24} />}
+             {!isLike && <AiOutlineHeart color="dimgray" size={24} />}
+           </button>
+         */}
+
+          <button title="공유">
+            <AiOutlineShareAlt color="dimgray" size={24} />
+          </button>
+          <button title="신고" onClick={() => setReportModal(true)}>
+            <AiOutlineAlert color="dimgray" size={25} />
+          </button>
+        </ToolBoxForGuestBox>
+      )}
+
       {ReportModal && (
         <ModalOverlayBox onClick={() => setReportModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
