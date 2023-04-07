@@ -36,18 +36,6 @@ interface sellGetData {
   target: string[];
 }
 
-const padNumber = (num: number, len: number) => {
-  return String(num).padStart(len, "0");
-};
-const formatDate = (dayNum: number) => {
-  let date = new Date(dayNum);
-  let year: string = "" + date.getFullYear(); // 년도
-  let month: string = padNumber(date.getMonth() + 1, 2); // 월
-  let day: string = padNumber(date.getDate(), 2); // 날짜
-
-  return [year, month, day].join("-");
-};
-
 // 판매/교환/나눔 카테고리
 const SALE = "sale";
 const EXCHANGE = "exchange";
