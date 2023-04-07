@@ -5,6 +5,7 @@ import axios from "axios";
 import { serverIP } from "@/../secrets.json";
 import GetToken from "@/utils/getToken";
 import styled from "styled-components";
+import { AiOutlineAlert } from "react-icons/ai";
 
 const ModalOverlayBox = styled.div`
   position: fixed;
@@ -76,7 +77,7 @@ function ReportModal({ id }: { id: number }) {
   return (
     <>
       <button title="신고" onClick={() => setReportModal(true)}>
-        Report
+        <AiOutlineAlert color="dimgray" size={24} />
       </button>
       {ReportModal && (
         <ModalOverlayBox onClick={() => setReportModal(false)}>

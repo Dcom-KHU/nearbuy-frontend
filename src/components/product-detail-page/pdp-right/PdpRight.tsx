@@ -7,7 +7,7 @@ import Title from "./elements/SmallUI/Title";
 import UserInfo from "./elements/UserInfo";
 import Location from "./elements/Location";
 import ChatButton from "./elements/SmallUI/ChatButton";
-import InactiveChatButton from "./elements/SmallUI/InactiveChatButton";
+import { InactiveChatButton } from "./elements/SmallUI/ChatButton";
 import ParticipateButton from "./elements/SmallUI/ParticipateButton";
 import ExchangeItems from "./elements/EachDetail/ExchangeItems";
 import { useSelector } from "react-redux";
@@ -87,7 +87,7 @@ export default function PdpRight({ getData }: RightProps) {
         {(activeType === "auction" || activeType === "group") && (
           <ParticipateButton />
         )}
-        {getData?.ongoing === false ? <ChatButton /> : <InactiveChatButton />}
+        {getData?.ongoing === true ? <ChatButton /> : <InactiveChatButton />}
       </div>
     </RightBox>
   );
