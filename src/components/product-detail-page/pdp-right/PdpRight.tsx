@@ -7,6 +7,7 @@ import Title from "./elements/SmallUI/Title";
 import UserInfo from "./elements/UserInfo";
 import Location from "./elements/Location";
 import ChatButton from "./elements/SmallUI/ChatButton";
+import InactiveChatButton from "./elements/SmallUI/InactiveChatButton";
 import ParticipateButton from "./elements/SmallUI/ParticipateButton";
 import ExchangeItems from "./elements/EachDetail/ExchangeItems";
 import { useSelector } from "react-redux";
@@ -48,6 +49,7 @@ export default function PdpRight({ getData }: RightProps) {
       <div className="w-full">
         <div>
           <>
+            {getData?.ongoing === true && <div>거래완료</div>}
             <SmallInfo time={getData?.time} />
             <Title title={getData?.title} id={getData?.id} />
             {activeType === "sale" && (
@@ -85,7 +87,7 @@ export default function PdpRight({ getData }: RightProps) {
         {(activeType === "auction" || activeType === "group") && (
           <ParticipateButton />
         )}
-        <ChatButton />
+        {getData?.ongoing === false ? <ChatButton /> : <InactiveChatButton />}
       </div>
     </RightBox>
   );

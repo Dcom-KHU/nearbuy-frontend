@@ -41,7 +41,7 @@ export default function PDPforSale() {
 
   useEffect(() => {
     // console.log(getData, getIsLoading, getError);
-    // console.log("getData결과: ", getData);
+    console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
 
   return (
