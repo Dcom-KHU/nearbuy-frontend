@@ -49,7 +49,12 @@ export default function PdpRight({ getData }: RightProps) {
       <div className="w-full">
         <div>
           <>
-            {getData?.ongoing === true && <div>거래완료</div>}
+            {getData?.ongoing === false && (
+              <div className="font-extrabold text-4xl my-9 text-pink-400">
+                거래가 완료된 상품입니다
+              </div>
+              // FIXME: 못생김
+            )}
             <SmallInfo time={getData?.time} />
             <Title title={getData?.title} id={getData?.id} />
             {activeType === "sale" && (
