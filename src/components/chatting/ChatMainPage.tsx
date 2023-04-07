@@ -27,11 +27,20 @@ const ChatList = styled.section`
   border: 1px solid rgb(168, 168, 168);
 `;
 
+interface IchatRoom {
+  id: string;
+  room: number;
+  sender: string;
+  message: string;
+  time: number;
+  memberId?: string;
+}
+
 // 채팅 페이지
 export default function ChatMainPage() {
   // ws으로 메세지 받을 시 true로 변환, 채팅방 목록 업데이트 후 false로 변환
   const [isNewSocketEvent, setIsNewSocketEvent] = useState<boolean>(true);
-  const [chatRooms, setChatRooms] = useState([]);
+  const [chatRooms, setChatRooms] = useState<IchatRoom[]>([]);
 
   useEffect(() => {
     if (isNewSocketEvent) {
@@ -44,8 +53,7 @@ export default function ChatMainPage() {
             return data.data.reverse();
           });
         setChatRooms(getChatRooms);
-        // console.log(chatRooms);
-        // console.log(typeof chatRooms);
+        // console.log(getChatRooms);
       })();
 
       setIsNewSocketEvent(false);
@@ -70,22 +78,9 @@ export default function ChatMainPage() {
     <ChatMainBox>
       <button onClick={() => tmep()}>hi</button>
       <ChatList>
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
-        <ChatListItem />
+        {chatRooms.map((v, i) => {
+          return <ChatListItem key={v.room} {...v} />;
+        })}
       </ChatList>
       <ChatPage />
     </ChatMainBox>
