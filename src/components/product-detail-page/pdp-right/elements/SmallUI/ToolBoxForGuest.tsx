@@ -60,16 +60,16 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
   const [ReportModal, setReportModal] = useState(false);
   const token = GetToken();
 
-  const handleLike = useCallback(async () => {
+  const getLikeStatus = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get<PostData>(`${serverIP}/api/post/like`, {
+      const response = await axios.get(`${serverIP}/api/post/like`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { id: id },
       });
-      console.log("리데::::", response.data);
-      setIsLike(response.data.isLiked);
+      setIsLike(response.data);
       setLoading(false);
+      //console.log("찜여부:", response.data);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -77,8 +77,8 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
   }, [id, token]);
 
   useEffect(() => {
-    handleLike();
-  }, [handleLike]);
+    getLikeStatus();
+  }, [getLikeStatus]);
 
   const toggleLike = useCallback(async () => {
     setLoading(true);
@@ -87,7 +87,7 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
         headers: { Authorization: `Bearer ${token}` },
         params: { id: id },
       });
-      setIsLike(response.data.isLiked);
+      setIsLike(response.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -97,15 +97,18 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
 
   const isLikeHandler = async () => {
     await toggleLike();
-    console.log("isLike::::::; ", isLike);
+    setIsLike((prev) => !prev);
+    getLikeStatus();
   };
 
   return (
     <>
-      {loading ? (
-        <div>Loading..</div>
-      ) : (
-        <ToolBoxForGuestBox>
+      <ToolBoxForGuestBox>
+        {loading ? (
+          <div>
+            <AiOutlineHeart color="dimgray" size={24} />
+          </div>
+        ) : (
           <button className="liked" onClick={isLikeHandler} title="찜">
             {isLike ? (
               <AiFillHeart color="dimgray" size={24} />
@@ -113,21 +116,15 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
               <AiOutlineHeart color="dimgray" size={24} />
             )}
           </button>
-          {/*
-            <button className="liked" onClick={isLikeHandler} title="찜">
-              {isLike && <AiFillHeart color="dimgray" size={24} />}
-             {!isLike && <AiOutlineHeart color="dimgray" size={24} />}
-           </button>
-         */}
+        )}
 
-          <button title="공유">
-            <AiOutlineShareAlt color="dimgray" size={24} />
-          </button>
-          <button title="신고" onClick={() => setReportModal(true)}>
-            <AiOutlineAlert color="dimgray" size={25} />
-          </button>
-        </ToolBoxForGuestBox>
-      )}
+        <button title="공유">
+          <AiOutlineShareAlt color="dimgray" size={24} />
+        </button>
+        <button title="신고" onClick={() => setReportModal(true)}>
+          <AiOutlineAlert color="dimgray" size={25} />
+        </button>
+      </ToolBoxForGuestBox>
 
       {ReportModal && (
         <ModalOverlayBox onClick={() => setReportModal(false)}>
