@@ -9,12 +9,10 @@ import Location from "./elements/Location";
 import ChatButton from "./elements/SmallUI/ChatButton";
 import { InactiveChatButton } from "./elements/SmallUI/ChatButton";
 import ParticipateButton from "./elements/SmallUI/ParticipateButton";
-import ExchangeItems from "./elements/EachDetail/ExchangeItems";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import AuctionDetail from "./elements/EachDetail/AuctionDetail";
-import GroupDetail from "./elements/EachDetail/GroupDetail";
 import { DetailPropsInterface } from "../pdp-type/DetailPropsInterface";
+import ShowPrice from "./elements/ShowPrice";
 
 const RightBox = styled.section`
   width: 489px;
@@ -57,29 +55,7 @@ export default function PdpRight({ getData }: RightProps) {
             )}
             <SmallInfo time={getData?.time} />
             <Title title={getData?.title} id={getData?.id} />
-            {activeType === "sale" && (
-              <div className="text-2xl py-3">{getData?.salePrice}원</div>
-            )}
-            {activeType === "exchange" && (
-              <ExchangeItems target={getData?.target} />
-            )}
-            {activeType === "free" && (
-              <div className="text-base py-3 text-gray-500">무료 나눔</div>
-            )}
-            {activeType === "auction" && (
-              <AuctionDetail
-                increase={getData?.increasePrice}
-                current={getData?.currentPrice}
-                start={getData?.startPrice}
-              />
-            )}
-            {activeType === "group" && (
-              <GroupDetail
-                groupPrice={getData?.groupPrice}
-                totalPeople={getData?.totalPeople}
-                currentPeople={getData?.currentPeople}
-              />
-            )}
+            <ShowPrice getData={getData} />
             <Location location={getData?.location} />
           </>
         </div>
