@@ -20,6 +20,7 @@ const LeftBox = styled.div`
 
 interface IChatUserInfoProps {
   userName: string | undefined;
+  memNum: number | undefined;
 }
 
 interface IUserInfo {
@@ -30,31 +31,36 @@ interface IUserInfo {
 }
 // 채팅방 위에 뜨는 유저 정보 및 후기 보내기 버튼
 export default function ChatUserInfo(props: IChatUserInfoProps) {
-  const { userName } = props;
+  const { userName, memNum } = props;
 
-  // // 해당 유저 이름
-  // const [userInfo, setUserInfo] = useState<IUserInfo>();
-  // useEffect(() => {
-  //   (async () => {
-  //     await customAxios
-  //       .get("/api/user/page", { params: { id: userName } })
-  //       .then(data => {
-  //         setUserInfo(data.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   })();
-  // }, [userName]);
+  // 현재 선택된 채팅방의 상단에 띄울 유저 정보
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+  useEffect(() => {
+    (async () => {
+      if (memNum === 2) {
+        await customAxios
+          .get("/api/user/page/name", { params: { name: userName } })
+          .then(data => {
+            setUserInfo(data.data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    })();
+  }, [userName, memNum]);
 
   return (
     <UserInfoBox>
-      <LeftBox>
-        <Link href="/my">
-          <UserInfo infoData={{ name: userName }} />
-          {/* <UserInfo infoData={userInfo} /> */}
-        </Link>
-      </LeftBox>
+      {userInfo && (
+        <LeftBox>
+          {/* console창에 찍히는 Warning: validateDOMNesting(...): <a> caanot appear as a descendant of <a> 원인 */}
+          <Link href="/my">
+            <UserInfo infoData={userInfo} />
+            {/* <UserInfo infoData={userInfo} /> */}
+          </Link>
+        </LeftBox>
+      )}
       {/* <Button>후기 보내기</Button> */}
     </UserInfoBox>
   );

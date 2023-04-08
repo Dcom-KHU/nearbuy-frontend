@@ -115,7 +115,7 @@ export default function ChatMainPage() {
         })}
       </ChatList>
       <ChatPage
-        room={selectedRoomNum}
+        selectedRoom={selectedRoomNum}
         setIsNewSocketEvent={setIsNewSocketEvent}
       />
     </ChatMainBox>

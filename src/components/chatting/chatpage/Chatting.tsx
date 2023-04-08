@@ -34,13 +34,15 @@ interface IChat {
 interface IChattingProps {
   room: number | undefined;
   setOtherUser: Function;
+  setMemNum: Function;
   setPostId: Function;
   setIsNewSocketEvent: Function;
 }
 
 // 채팅 내용
 export default function Chatting(props: IChattingProps) {
-  const { room, setOtherUser, setPostId, setIsNewSocketEvent } = props;
+  const { room, setOtherUser, setMemNum, setPostId, setIsNewSocketEvent } =
+    props;
   const [chatList, setChatList] = useState<IChat[]>([]);
   // 채팅 목록 불러오기
   useEffect(() => {
@@ -50,7 +52,8 @@ export default function Chatting(props: IChattingProps) {
           .get("/api/chat/list", { params: { room: room } })
           .then(data => {
             setChatList(data.data);
-            setPostId(data.data.post);
+            setPostId(data.data[0].post);
+            setMemNum(data.data[0].userIdList.length);
           })
           .catch(err => {
             console.log(err);
@@ -103,7 +106,8 @@ export default function Chatting(props: IChattingProps) {
     const newChat = {
       id: data.id,
       sender: data.sender,
-      userList: data.userList,
+      userIdList: data.useIdrList,
+      userNameList: data.userNameList,
       message: data.message,
       room: JSON.parse(data.room),
       post: JSON.parse(data.post),

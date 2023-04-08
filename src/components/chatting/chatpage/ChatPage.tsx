@@ -21,31 +21,33 @@ const ChatMain = styled.main`
 `;
 
 interface IChatPage {
-  room: number | undefined;
+  selectedRoom: number | undefined;
   setIsNewSocketEvent: Function;
 }
 
 // 채팅방
 export default function ChatPage(props: IChatPage) {
-  const { room, setIsNewSocketEvent } = props;
+  const { selectedRoom, setIsNewSocketEvent } = props;
 
   // ChatUserInfo에서 사용
   const [otherUser, setOtherUser] = useState<string>();
+  const [memNum, setMemNum] = useState<number>();
   // ChatProductInfo에서 사용
   const [postId, setPostId] = useState<number>();
 
   return (
     <section className="w-4/6">
       <ChatMain>
-        <ChatUserInfo userName={otherUser} />
+        <ChatUserInfo userName={otherUser} memNum={memNum} />
         <ChatProductInfo postId={postId} />
         <Chatting
-          room={room}
+          room={selectedRoom}
           setOtherUser={setOtherUser}
+          setMemNum={setMemNum}
           setPostId={setPostId}
           setIsNewSocketEvent={setIsNewSocketEvent}
         />
-        <ChatWindow room={room} />
+        <ChatWindow room={selectedRoom} />
       </ChatMain>
     </section>
   );
