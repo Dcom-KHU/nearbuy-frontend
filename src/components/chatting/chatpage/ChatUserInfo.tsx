@@ -37,7 +37,7 @@ export default function ChatUserInfo(props: IChatUserInfoProps) {
   const [userInfo, setUserInfo] = useState<IUserInfo>();
   useEffect(() => {
     (async () => {
-      if (memNum === 2) {
+      if (memNum === 2 && userName) {
         await customAxios
           .get("/api/user/page/name", { params: { name: userName } })
           .then(data => {

@@ -64,16 +64,17 @@ export default function ChatProductInfo(props: IChatProductInfoProps) {
   // 현재 선택된 채팅방의 상단에 띄울 게시글 정보
   const [postInfo, setPostInfo] = useState<IPostInfo>();
   useEffect(() => {
-    (async () => {
-      await customAxios
-        .get("/api/post/summary", { params: { id: postId } })
-        .then(data => {
-          setPostInfo(data.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    })();
+    postId &&
+      (async () => {
+        await customAxios
+          .get("/api/post/summary", { params: { id: postId } })
+          .then(data => {
+            setPostInfo(data.data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })();
   }, [postId]);
 
   // const [toggle, setToggle] = useState(true);

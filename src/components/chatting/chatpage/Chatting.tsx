@@ -68,7 +68,7 @@ export default function Chatting(props: IChattingProps) {
     (async () => {
       const userId = Cookie.get("userId");
       await customAxios
-        .get("/api/user/page", { params: { id: userId } })
+        .get("/api/user/page/id", { params: { id: userId } })
         .then(data => {
           setMyName(data.data.name);
         })
