@@ -41,12 +41,23 @@ interface ChatListItemProps {
   sender: string;
   message: string;
   time: number;
-  memberId?: string;
+  post: number;
+  userIdList: string[];
+  userNameList: string[];
   setSelectedRoomNum: Function;
 }
 
 export default function ChatListItem(props: ChatListItemProps) {
-  const { room, sender, memberId, message, time, setSelectedRoomNum } = props;
+  const {
+    room,
+    sender,
+    message,
+    time,
+    post,
+    userIdList,
+    userNameList,
+    setSelectedRoomNum,
+  } = props;
   const [memName, setMemName] = useState<string>();
   const [memImg, setMemImg] = useState<string>();
 
@@ -60,17 +71,29 @@ export default function ChatListItem(props: ChatListItemProps) {
 
   useEffect(() => {
     (async () => {
-      // 추후 api 수정되어 memberId 받을 수 있을 때, memberId로 바꿔주기
-      const userId = Cookie.get("userId");
-      await customAxios
-        .get("/api/user/page", { params: { id: userId } })
-        .then(data => {
-          setMemName(data.data.name);
-          setMemImg(data.data.image);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // 단체 채팅방이면
+      if (userIdList.length !== 1) {
+        await customAxios
+          .get("/api/post/summary", { params: { id: post } })
+          .then(data => {
+            setMemName(data.data.title);
+            setMemImg(data.data.image);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        // 1:1 채팅방이면
+        await customAxios
+          .get("/api/user/page/id", { params: { id: userIdList[0] } })
+          .then(data => {
+            setMemName(data.data.name);
+            setMemImg(data.data.image);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     })();
   }, []);
 

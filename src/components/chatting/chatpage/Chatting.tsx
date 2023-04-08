@@ -25,7 +25,8 @@ interface IChat {
   room: number;
   post: number;
   sender: string;
-  userList: string[];
+  userNameList: string[];
+  userIdList: string[];
   message: string;
   time: number;
 }
@@ -77,7 +78,7 @@ export default function Chatting(props: IChattingProps) {
   // chatList, myName 가져온 후, 내가 아닌 채팅방 멤버 닉네임을 가져와서 setOtherUser로 설정하기(페이지 상단 userInfo 설정 위해)
   useEffect(() => {
     chatList[0] &&
-      chatList[0].userList.forEach(userName => {
+      chatList[0].userNameList.forEach(userName => {
         if (userName !== myName) {
           setOtherUser(userName);
         }

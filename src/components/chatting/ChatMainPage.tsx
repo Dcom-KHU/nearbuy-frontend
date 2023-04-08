@@ -35,7 +35,9 @@ interface IchatRoom {
   sender: string;
   message: string;
   time: number;
-  memberId?: string;
+  post: number;
+  userIdList: string[];
+  userNameList: string[];
 }
 
 // 채팅 페이지
