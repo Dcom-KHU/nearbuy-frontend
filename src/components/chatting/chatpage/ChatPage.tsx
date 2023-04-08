@@ -22,11 +22,12 @@ const ChatMain = styled.main`
 
 interface IChatPage {
   room: number | undefined;
+  setIsNewSocketEvent: Function;
 }
 
 // 채팅방
 export default function ChatPage(props: IChatPage) {
-  const { room } = props;
+  const { room, setIsNewSocketEvent } = props;
 
   // ChatUserInfo에서 사용
   const [otherUser, setOtherUser] = useState<string>();
@@ -42,6 +43,7 @@ export default function ChatPage(props: IChatPage) {
           room={room}
           setOtherUser={setOtherUser}
           setPostId={setPostId}
+          setIsNewSocketEvent={setIsNewSocketEvent}
         />
         <ChatWindow room={room} />
       </ChatMain>

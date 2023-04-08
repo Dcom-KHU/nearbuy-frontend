@@ -5,10 +5,12 @@
 import styled from "styled-components";
 import ChatListItem from "./ChatListItem";
 import ChatPage from "./chatpage/ChatPage";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { WebSocketContext } from "@/context/WebSocketContext";
 import Cookie from "js-cookie";
 import customAxios from "@/utils/customAxios";
+import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const ChatMainBox = styled.div`
   display: flex;
@@ -54,8 +56,10 @@ export default function ChatMainPage() {
             // 최신순 정렬
             return data.data.reverse();
           });
+        console.log(getChatRooms);
         setChatRooms(getChatRooms);
-        setSelectedRoomNum(getChatRooms[0].room);
+        selectedRoomNum === undefined &&
+          setSelectedRoomNum(getChatRooms[0].room);
         // console.log(getChatRooms);
       })();
 
@@ -63,18 +67,35 @@ export default function ChatMainPage() {
     }
   }, [isNewSocketEvent]);
 
-  // 채팅방 내부로 옮길 코드들...
+  // Closing modal window when route changes
+  const pathname = usePathname(); // Get current route
+  // Save pathname on component mount into a REF
+  const savedPathNameRef = useRef(pathname);
   const ws = useContext(WebSocketContext);
-  const tmep = () => {
-    const accessToken = Cookie.get("accessToken");
+  useEffect(() => {
+    window.onbeforeunload = event => {
+      event.preventDefault();
+      event.returnValue = "";
+      ws.current.close();
+    };
 
-    ws.current.send(
-      JSON.stringify({
-        eventType: "getChatRoomList",
-        accessToken: `Bearer ${accessToken}`,
-      })
-    );
-  };
+    // If REF has been changed, do the stuff
+    if (savedPathNameRef.current !== pathname) {
+      ws.current.close();
+    }
+  }, [pathname]);
+
+  // // 채팅방 내부로 옮길 코드들...
+  // const tmep = () => {
+  //   const accessToken = Cookie.get("accessToken");
+
+  //   ws.current.send(
+  //     JSON.stringify({
+  //       eventType: "getChatRoomList",
+  //       accessToken: `Bearer ${accessToken}`,
+  //     })
+  //   );
+  // };
 
   return (
     // <div className='w-4/5 h-screen flex gap-10 mt-10 my-0 mx-auto'>
@@ -91,7 +112,10 @@ export default function ChatMainPage() {
           );
         })}
       </ChatList>
-      <ChatPage room={selectedRoomNum} />
+      <ChatPage
+        room={selectedRoomNum}
+        setIsNewSocketEvent={setIsNewSocketEvent}
+      />
     </ChatMainBox>
   );
 }

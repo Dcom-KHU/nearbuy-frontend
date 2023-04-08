@@ -34,11 +34,12 @@ interface IChattingProps {
   room: number | undefined;
   setOtherUser: Function;
   setPostId: Function;
+  setIsNewSocketEvent: Function;
 }
 
 // 채팅 내용
 export default function Chatting(props: IChattingProps) {
-  const { room, setOtherUser, setPostId } = props;
+  const { room, setOtherUser, setPostId, setIsNewSocketEvent } = props;
   const [chatList, setChatList] = useState<IChat[]>([]);
   // 채팅 목록 불러오기
   useEffect(() => {
@@ -89,7 +90,15 @@ export default function Chatting(props: IChattingProps) {
   //  하지만 그럴 경우가 매우 드물기 때문에 여기서는 굳이 고려하지 않음.)
   const ws = useContext(WebSocketContext);
   ws.current.onmessage = (evt: MessageEvent) => {
+    console.log("eevent");
+    // 채팅방 목록 순서 바꾸기 위해 flag를 true로 변경
+    setIsNewSocketEvent(true);
+
     const data = JSON.parse(evt.data);
+    if (JSON.parse(data.room) !== room) {
+      console.log(data.room, room);
+      return;
+    }
     const newChat = {
       id: data.id,
       sender: data.sender,
