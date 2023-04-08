@@ -1,8 +1,12 @@
 "use client";
 
 import UserPic from "@/components/userpage/user/userinfo/UserPic";
+import customAxios from "@/utils/customAxios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import UserImg from "./UserImg";
+import Image from "next/image";
 
 const ChatBox = styled.div`
   display: flex;
@@ -17,7 +21,7 @@ const ChatBox = styled.div`
     // 내가 보낸 메세지에는 내 프로필 사진 안 뜨게 함
     display: ${props => (props.me ? "none" : "inline-block")};
     // 남이 보낸 메세지에 마지막 대화에만 사진 뜨게 함
-    visibility: ${props => (props.last ? "visible" : "hidden")};
+    // visibility: ${props => (props.last ? "visible" : "hidden")};
   }
   p {
     margin-bottom: 8px;
@@ -38,12 +42,29 @@ type Props = {
   me?: boolean;
   msg: string;
   time: number;
+  sender?: string;
 };
 // 대화 내용 한 줄 한 줄
-export default function Talk({ last, me, msg, time }: Props) {
+export default function Talk({ last, me, msg, time, sender }: Props) {
   const setTimeHander = (time: number) => {
     return new Date(time).toLocaleString();
   };
+
+  const [userImg, setUserImg] = useState<string>();
+  const getImg = async (userName: string) => {
+    await customAxios
+      .get("/api/user/page/name", { params: { name: userName } })
+      .then(data => {
+        setUserImg(data.data.image);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    sender && getImg(sender);
+  }, [sender]);
 
   return (
     <div
@@ -60,9 +81,15 @@ export default function Talk({ last, me, msg, time }: Props) {
       )}
       <ChatBox last={last} me={me}>
         {/* 해당 페이지 맨 위에 누구와 채팅하는지 사진을 볼 수 있으므로 생략,,, */}
-        {/* <Link href='/my'>
-        <UserPic size={24} />
-      </Link> */}
+        {sender ? (
+          <Link href="/my">
+            <UserImg size={24} image={userImg} />
+          </Link>
+        ) : (
+          <Link href="/my">
+            <UserImg size={24} />
+          </Link>
+        )}
         <p>{msg}</p>
       </ChatBox>
       {me === undefined ? (

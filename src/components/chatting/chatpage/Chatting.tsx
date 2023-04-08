@@ -148,7 +148,7 @@ export default function Chatting(props: IChattingProps) {
           return isImSender ? (
             <Talk key={v.id} me msg={v.message} time={v.time} />
           ) : (
-            <Talk key={v.id} msg={v.message} time={v.time} />
+            <Talk key={v.id} msg={v.message} time={v.time} sender={v.sender} />
           );
         })}
     </ChattingBox>
