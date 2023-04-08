@@ -4,10 +4,15 @@ import ProductPrice from "@/components/list/productinfo/ProductPrice";
 import ProductTitle from "@/components/list/productinfo/ProductTitle";
 import styled from "styled-components";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { toggleHandler } from "@/store/chatToggle/chatToggleSlice";
+import customAxios from "@/utils/customAxios";
+import ProductPic from "../chatPost/ProductPic";
+import PostTitle from "../chatPost/PostTitle";
+import PostDetail from "../chatPost/PostDetail";
+import PostLocation from "../chatPost/PostLocation";
 
 const ProductInfoBox = styled.div`
   border-bottom: 1px solid rgb(168, 168, 168);
@@ -43,9 +48,33 @@ const BetweenPictureAndTextsBox = styled.div`
 interface IChatProductInfoProps {
   postId: number | undefined;
 }
+
+interface IPostInfo {
+  id: number;
+  type: string;
+  title: string;
+  image: string;
+  location: string;
+}
+
 // 채팅방 상단에 대화중인 상품 정보
 export default function ChatProductInfo(props: IChatProductInfoProps) {
   const { postId } = props;
+
+  // 현재 선택된 채팅방의 상단에 띄울 게시글 정보
+  const [postInfo, setPostInfo] = useState<IPostInfo>();
+  useEffect(() => {
+    (async () => {
+      await customAxios
+        .get("/api/post/summary", { params: { id: postId } })
+        .then(data => {
+          setPostInfo(data.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    })();
+  }, [postId]);
 
   // const [toggle, setToggle] = useState(true);
   const toggle = useSelector((state: RootState) => state.chatToggle.toggle);
@@ -55,14 +84,15 @@ export default function ChatProductInfo(props: IChatProductInfoProps) {
     setRotate(prev => (prev === "" ? "rotate(180deg)" : ""));
     dispatch(toggleHandler());
   };
+
   return (
     <ProductInfoBox rotate={rotate} toggle={toggle}>
-      {toggle && <ProductMainPicture size="50px" />}
+      {toggle && <ProductPic size="50px" image={postInfo?.image} />}
       <BetweenPictureAndTextsBox visible={toggle}>
-        {toggle && <ProductTitle />}
-        {toggle && <ProductPrice />}
+        {toggle && <PostTitle title={postInfo?.title} />}
+        {toggle && <PostDetail detail={postInfo?.type} />}
       </BetweenPictureAndTextsBox>
-      {toggle && <ProductLocation />}
+      {toggle && <PostLocation location={postInfo?.location} />}
       <button onClick={rotateHandler}>
         <Image
           src="/images/down-arrow.svg"
