@@ -59,18 +59,20 @@ export default function ParticipateModal({ id }: { id: number }) {
 
   const handleParticipate = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${serverIP}/api/post/group/participate?id=${id}`,
+        {},
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log("response::::", response);
       setParticipateModal(false);
+      window.location.reload(); // Refresh and update the page
       alert("공동구매 참여 신청되었습니다");
     } catch (error) {
       console.log("An error occured while participating. ", error);
-      alert("공동구매 참여에 실패했습니다. 다시 시도해주세요.");
+      // FIXME: 해당 api에서 이미 참여한 경우해서 실패한 경우를 분리해서 response 주면 좋을듯
+      alert("이미 참여한 공동구매입니다.");
     }
   };
 
