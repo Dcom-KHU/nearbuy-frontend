@@ -35,6 +35,14 @@ const ModalContainerBox = styled.div`
     padding: 8px;
   }
 `;
+const InputPriceForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px 20px;
+`;
 
 const ParticipateButton = styled.button`
   background-color: var(--background-color);
@@ -53,14 +61,28 @@ const ParticipateButton = styled.button`
   }
 `;
 
-export default function ParticipateAuction({ id }: { id: number }) {
+export default function ParticipateAuction({
+  id,
+  increase,
+  current,
+}: {
+  id: number;
+  increase: number;
+  current: number;
+}) {
   const [participateModal, setParticipateModal] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<number>(increase);
   const token = GetToken();
+  const handleOptionChange = (e: any) => {
+    setSelectedOption(parseInt(e.target.value));
+  };
 
   const handleParticipate = async () => {
+    setParticipateModal(false);
+
     try {
       await axios.post(
-        `${serverIP}/api/post/group/participate?id=${id}`,
+        `${serverIP}/api/post/auction/participate?id=${id}&newBid=${selectedOption}`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -68,23 +90,41 @@ export default function ParticipateAuction({ id }: { id: number }) {
       );
       setParticipateModal(false);
       window.location.reload(); // Refresh and update the page
-      alert("경매 참여 신청되었습니다");
+      alert(`${current + selectedOption}원으로 경매 참가했습니다`);
+      console.log("parsedOption::");
     } catch (error) {
       console.log("An error occured while participating. ", error);
       // FIXME: 해당 api에서 이미 참여한 경우해서 실패한 경우를 분리해서 response 주면 좋을듯
-      alert("이미 참여한 공동구매입니다.");
+      alert(`경매 참여에 실패했습니다.`);
     }
   };
 
   return (
     <>
       <ParticipateButton onClick={() => setParticipateModal(true)}>
-        ~~참여하기
+        참여하기
       </ParticipateButton>
       {participateModal && (
         <ModalOverlayBox onClick={() => setParticipateModal(false)}>
           <ModalContainerBox onClick={(e) => e.stopPropagation()}>
             <h2>경매에 참여하시겠습니까?</h2>
+            <InputPriceForm>
+              <select
+                name="price"
+                value={selectedOption}
+                onChange={handleOptionChange}
+                required
+              >
+                <option value="placeholder" disabled>
+                  가격 입력하기 (단위: {increase}원)
+                </option>
+                <option value={increase * 1}>{current + increase}원</option>
+                <option value={increase * 2}>{current + increase * 2}원</option>
+                <option value={increase * 3}>{current + increase * 3}원</option>
+                <option value={increase * 4}>{current + increase * 4}원</option>
+                <option value={increase * 5}>{current + increase * 5}원</option>
+              </select>
+            </InputPriceForm>
             <div style={{ width: "250px", height: "60px" }}></div>
             <div style={{ float: "right" }}>
               <button className="parti-buttons" onClick={handleParticipate}>

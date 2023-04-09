@@ -71,6 +71,8 @@ export default function PdpRight({ getData }: RightProps) {
             id={getData?.id}
             writer={getData?.writer}
             postType={activeType}
+            increase={getData?.increasePrice}
+            current={getData?.currentPrice}
           />
         )}
         <ChatButton id={getData?.id} ongoing={getData?.ongoing} />

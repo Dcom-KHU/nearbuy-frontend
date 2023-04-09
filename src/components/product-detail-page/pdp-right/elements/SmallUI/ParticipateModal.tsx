@@ -13,10 +13,14 @@ export default function ParticipateModal({
   id,
   writer,
   postType,
+  increase,
+  current,
 }: {
   id: number;
   writer: string;
   postType: string;
+  increase: number;
+  current: number;
 }) {
   const isWriter = CheckIfWriter({ id });
   const type = postType;
@@ -26,7 +30,9 @@ export default function ParticipateModal({
     if (type === "group") {
       return <ParticipateGroup id={id} />;
     } else {
-      return <ParticipateAuction id={id} />;
+      return (
+        <ParticipateAuction id={id} increase={increase} current={current} />
+      );
     }
   } else if (isWriter === true) {
     if (type === "group") {
