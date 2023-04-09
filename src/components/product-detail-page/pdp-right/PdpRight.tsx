@@ -54,14 +54,13 @@ export default function PdpRight({ getData }: RightProps) {
               </div>
               // FIXME: 못생김
             )}
-            <SmallInfo time={getData?.time} />
+            <SmallInfo time={getData?.time} ongoing={getData?.ongoing} />
             <Title title={getData?.title} id={getData?.id} />
             <ShowPrice getData={getData} />
             <Location location={getData?.location} />
           </>
         </div>
         <InfoBox>
-          {/*userData && <UserInfo infoData={userData} />*/}
           <ShowWriterInfo writer={getData?.writer} />
           <Tags tagArr={getData?.tag} />
         </InfoBox>
