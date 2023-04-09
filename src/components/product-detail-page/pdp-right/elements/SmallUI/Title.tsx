@@ -1,9 +1,13 @@
 "use client";
 
 // import { useState } from "react";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
-import ToolBoxForGuest from "./ToolBoxForGuest";
+import axios from "axios";
+import { serverIP } from "@/../secrets.json";
+import GetToken from "@/utils/getToken";
 import ToolBoxForWriter from "./ToolBoxForWriter";
+import ToolBoxForGuest from "./ToolBoxForGuest";
 
 const NameBox = styled.div`
   display: flex;
@@ -19,13 +23,29 @@ const NameBox = styled.div`
 
 // 상세페이지 제목, 그 옆의 도구들 (찜, 공유, 신고)
 export default function Title({ title, id }: { title: string; id: number }) {
+  const token = GetToken();
+  const [isWriter, setIsWriter] = useState<boolean>();
+
+  // 글쓴이인지 아닌지 판단.
+  const getWriterStatus = useCallback(async () => {
+    try {
+      const response = await axios.get(`${serverIP}/api/post/validate`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { id: id },
+      });
+      setIsWriter(response.data);
+      // console.log("찜여부:", response.data);
+    } catch (error) {
+      console.log("An error occurred while getting LikeStatus. ", error);
+    }
+  }, [id, token]);
+
+  getWriterStatus();
+
   return (
     <NameBox>
       <p>{title}</p>
-      {/* 추후 게시글 주인이면 tb for writer, 주인 아니면 tb for guest 띄우기 */}
-      <ToolBoxForGuest id={id} />
-      <div /* 나중에 없애기 */> &nbsp;&nbsp; | &nbsp;&nbsp;</div>
-      <ToolBoxForWriter id={id} />
+      {isWriter ? <ToolBoxForWriter id={id} /> : <ToolBoxForGuest id={id} />}
     </NameBox>
   );
 }
