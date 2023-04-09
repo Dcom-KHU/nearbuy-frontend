@@ -45,11 +45,11 @@ export default function ChatButton({
   const isWriter = CheckIfWriter({ id });
 
   if (isWriter === true) {
-    if (activeType === "auction" || activeType === "group") {
-      // 글작성자 본인이고, 공구나 경매 게시글일 때
+    if (activeType === "group") {
+      // 글작성자 본인이고, 공구 게시글일 때
       return <ActiveChatButtonBlock href="#">단체 채팅</ActiveChatButtonBlock>;
     }
-    // 글작성자이고 공구나 경매 게시글일 때
+    // 글작성자이고 공구 게시글 아닐 때
     else
       return <ActiveChatButtonBlock href="#">채팅 확인</ActiveChatButtonBlock>;
   } else if (isWriter === false) {
