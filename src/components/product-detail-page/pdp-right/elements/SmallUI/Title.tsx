@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import ToolBoxForWriter from "./ToolBoxForWriter";
 import ToolBoxForGuest from "./ToolBoxForGuest";
-import useCheckIfWriter from "../CheckIfWriter";
+import CheckIfWriter from "../CheckIfWriter";
 import { AiOutlineShareAlt } from "react-icons/ai";
 
 const NameBox = styled.div`
@@ -20,7 +20,7 @@ const NameBox = styled.div`
 
 // 상세페이지 제목, 그 옆의 도구들 (찜, 공유, 신고)
 export default function Title({ title, id }: { title: string; id: number }) {
-  const isWriter = useCheckIfWriter({ id });
+  const isWriter = CheckIfWriter({ id });
 
   return (
     <NameBox>

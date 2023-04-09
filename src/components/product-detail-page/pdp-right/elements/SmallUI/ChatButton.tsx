@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import styled from "styled-components";
+import CheckIfWriter from "../CheckIfWriter";
 
-const LinkCss = styled(Link)`
+const ActiveChatButtonBlock = styled(Link)`
   background-color: var(--background-color);
   border-radius: 8px;
   width: 100px;
@@ -26,13 +27,37 @@ const InactiveChatButtonBlock = styled.div`
   padding: 10px;
   margin-top: 20px;
   margin-right: 5px;
+  &.noLogin {
+    width: 150px;
+  }
 `;
 
-// 채팅하기 버튼
-export default function ChatButton() {
-  return <LinkCss href="#">채팅하기</LinkCss>;
-}
+export default function ChatButton({
+  id,
+  ongoing,
+}: {
+  id: number;
+  ongoing: boolean;
+}) {
+  const isWriter = CheckIfWriter({ id });
 
-export function InactiveChatButton() {
-  return <InactiveChatButtonBlock>거래완료</InactiveChatButtonBlock>;
+  if (isWriter === true) {
+    // 글작성자일 때
+    return <ActiveChatButtonBlock href="#">채팅 확인</ActiveChatButtonBlock>;
+  } else if (isWriter === false) {
+    if (ongoing === true) {
+      // 글작성자 아니고 로그인 돼있는데 거래 아직 진행중일 때
+      return <ActiveChatButtonBlock href="#">채팅하기</ActiveChatButtonBlock>;
+    } else {
+      // 글작성자 아니고 로그인 돼있는데 거래 완료됐을 때
+      return <InactiveChatButtonBlock>거래완료</InactiveChatButtonBlock>;
+    }
+  } else {
+    // 로그인 안돼있을 때
+    return (
+      <InactiveChatButtonBlock className="noLogin">
+        로그인 해주세요
+      </InactiveChatButtonBlock>
+    );
+  }
 }

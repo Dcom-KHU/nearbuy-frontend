@@ -17,7 +17,7 @@ const LinkCss = styled(Link)`
   }
 `;
 
-// 채팅하기 버튼
+// 참여하기 버튼
 export default function ParticipateButton() {
   return <LinkCss href="#">참여하기</LinkCss>;
 }

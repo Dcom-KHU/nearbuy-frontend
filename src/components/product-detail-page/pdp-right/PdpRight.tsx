@@ -5,7 +5,7 @@ import SmallInfo from "./elements/SmallUI/SmallInfo";
 import Tags from "./elements/Tag/Tags";
 import Title from "./elements/SmallUI/Title";
 import Location from "./elements/Location";
-import ChatButton, { InactiveChatButton } from "./elements/SmallUI/ChatButton";
+import ChatButton from "./elements/SmallUI/ChatButton";
 import ParticipateButton from "./elements/SmallUI/ParticipateButton";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
@@ -69,7 +69,7 @@ export default function PdpRight({ getData }: RightProps) {
         {(activeType === "auction" || activeType === "group") && (
           <ParticipateButton />
         )}
-        {getData?.ongoing === true ? <ChatButton /> : <InactiveChatButton />}
+        <ChatButton id={getData?.id} ongoing={getData?.ongoing} />
       </div>
     </RightBox>
   );

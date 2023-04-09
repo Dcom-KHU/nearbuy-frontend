@@ -7,7 +7,7 @@ interface Props {
   id: number;
 }
 
-const useCheckIfWriter = ({ id }: Props): boolean | undefined => {
+const CheckIfWriter = ({ id }: Props): boolean | undefined => {
   const token = GetToken();
   const [isWriter, setIsWriter] = useState<boolean | undefined>();
 
@@ -33,4 +33,4 @@ const useCheckIfWriter = ({ id }: Props): boolean | undefined => {
   return isWriter;
 };
 
-export default useCheckIfWriter;
+export default CheckIfWriter;
