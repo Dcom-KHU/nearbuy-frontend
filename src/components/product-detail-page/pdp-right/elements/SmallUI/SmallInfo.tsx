@@ -22,9 +22,7 @@ export default function SmallInfo({ time }: { time: number }) {
   return (
     <SmallInfoBox>
       <p>{timeString}</p>
-      <p>채팅 4</p>
-      <p>관심 7</p>
-      <p>조회 103</p>
+      <p>거래가 완료된 상품입니다</p>
     </SmallInfoBox>
   );
 }
