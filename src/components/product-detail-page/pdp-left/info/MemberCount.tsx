@@ -31,9 +31,11 @@ export default function MemberCount() {
     params: { id: id },
   });
 
+  /*
   useEffect(() => {
     console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
+  */
   return (
     <Box>
       총 모집인원 [ {getData?.totalPeople} ]명 중 [{" "}

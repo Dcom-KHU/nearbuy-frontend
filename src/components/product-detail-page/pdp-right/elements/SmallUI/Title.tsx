@@ -1,9 +1,10 @@
 "use client";
 
-// import { useState } from "react";
 import styled from "styled-components";
-import ToolBoxForGuest from "./ToolBoxForGuest";
 import ToolBoxForWriter from "./ToolBoxForWriter";
+import ToolBoxForGuest from "./ToolBoxForGuest";
+import CheckIfWriter from "../CheckIfWriter";
+import { AiOutlineShareAlt } from "react-icons/ai";
 
 const NameBox = styled.div`
   display: flex;
@@ -19,13 +20,23 @@ const NameBox = styled.div`
 
 // 상세페이지 제목, 그 옆의 도구들 (찜, 공유, 신고)
 export default function Title({ title, id }: { title: string; id: number }) {
+  const isWriter = CheckIfWriter({ id });
+
   return (
     <NameBox>
       <p>{title}</p>
-      {/* 추후 게시글 주인이면 tb for writer, 주인 아니면 tb for guest 띄우기 */}
-      <ToolBoxForGuest />
-      <div /* 나중에 없애기 */> &nbsp;&nbsp; | &nbsp;&nbsp;</div>
-      <ToolBoxForWriter id={id} />
+      {isWriter === true ? (
+        // 게시글 주인일 때
+        <ToolBoxForWriter id={id} />
+      ) : isWriter === false ? (
+        // 로그인 돼있지만 게시글 주인 아닐 때
+        <ToolBoxForGuest id={id} />
+      ) : (
+        // 로그인 안돼있을 때
+        <button title="공유">
+          <AiOutlineShareAlt color="dimgray" size={24} />
+        </button>
+      )}
     </NameBox>
   );
 }

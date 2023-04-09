@@ -27,16 +27,14 @@ interface UserInfoProps {
 // user 정보들 (사진, 이름, 주소, 매너온도)
 export default function UserInfo({ infoData }: UserInfoProps) {
   const { name, image, location, mannerPoint } = infoData ?? {};
-  console.log('this is ,,, ', infoData);
-  console.log('mannerPoint,,, ', mannerPoint);
 
   return (
     <UserInfoBox>
-      <Link href='/my'>
+      <Link href="/my">
         <UserPic size={70} image={image} />
       </Link>
       <div>
-        <Link href='/my'>
+        <Link href="/my">
           <UserName name={name} />
         </Link>
         <UserAd ad={location} />
