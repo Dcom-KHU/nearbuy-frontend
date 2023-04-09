@@ -6,7 +6,7 @@ import Tags from "./elements/Tag/Tags";
 import Title from "./elements/SmallUI/Title";
 import Location from "./elements/Location";
 import ChatButton from "./elements/SmallUI/ChatButton";
-import ParticipateButton from "./elements/SmallUI/ParticipateButton";
+import ParticipateModal from "./elements/SmallUI/ParticipateModal";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { DetailPropsInterface } from "../pdp-type/DetailPropsInterface";
@@ -67,7 +67,7 @@ export default function PdpRight({ getData }: RightProps) {
       </div>
       <div className="flex">
         {(activeType === "auction" || activeType === "group") && (
-          <ParticipateButton id={getData?.id} />
+          <ParticipateModal id={getData?.id} />
         )}
         <ChatButton id={getData?.id} ongoing={getData?.ongoing} />
       </div>
