@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import styled from "styled-components";
+import CheckIfWriter from "../CheckIfWriter";
 
 const LinkCss = styled(Link)`
   background-color: var(--background-color);
@@ -18,6 +19,12 @@ const LinkCss = styled(Link)`
 `;
 
 // 참여하기 버튼
-export default function ParticipateButton() {
-  return <LinkCss href="#">참여하기</LinkCss>;
+export default function ParticipateButton({ id }: { id: number }) {
+  const isWriter = CheckIfWriter({ id });
+
+  if (isWriter === false) {
+    return <LinkCss href="#">참여하기</LinkCss>;
+  } else {
+    return <></>;
+  }
 }

@@ -67,7 +67,7 @@ export default function PdpRight({ getData }: RightProps) {
       </div>
       <div className="flex">
         {(activeType === "auction" || activeType === "group") && (
-          <ParticipateButton />
+          <ParticipateButton id={getData?.id} />
         )}
         <ChatButton id={getData?.id} ongoing={getData?.ongoing} />
       </div>

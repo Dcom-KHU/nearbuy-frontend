@@ -18,9 +18,6 @@ const ActiveChatButtonBlock = styled(Link)`
     color: var(--accent-color);
     font-weight: 600;
   }
-  &.createChat {
-    width: 140px;
-  }
 `;
 
 const InactiveChatButtonBlock = styled.div`
@@ -50,11 +47,7 @@ export default function ChatButton({
   if (isWriter === true) {
     if (activeType === "auction" || activeType === "group") {
       // 글작성자 본인이고, 공구나 경매 게시글일 때
-      return (
-        <ActiveChatButtonBlock href="#" className="createChat">
-          단체 채팅
-        </ActiveChatButtonBlock>
-      );
+      return <ActiveChatButtonBlock href="#">단체 채팅</ActiveChatButtonBlock>;
     }
     // 글작성자이고 공구나 경매 게시글일 때
     else
