@@ -58,7 +58,7 @@ function DeleteModal({ id }: DeleteModalProps) {
       router.push("/board");
       setDeleteModal(false);
     } catch (error) {
-      console.log(error);
+      console.log("An error occured while deleting the post. ", error);
     }
   };
 

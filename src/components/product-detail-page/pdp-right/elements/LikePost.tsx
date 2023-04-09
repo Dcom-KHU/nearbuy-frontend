@@ -20,7 +20,7 @@ export default function LikePost({ id }: { id: number }) {
       setLoading(false);
       // console.log("찜여부:", response.data);
     } catch (error) {
-      console.log(error);
+      console.log("An error occurred while getting LikeStatus. ", error);
       setLoading(false);
     }
   }, [id, token]);
@@ -39,7 +39,7 @@ export default function LikePost({ id }: { id: number }) {
       setIsLike(response.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("An error occurred while trying to toggleLike. ", error);
       setLoading(false);
     }
   }, [id, token]);

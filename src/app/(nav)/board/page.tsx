@@ -50,11 +50,6 @@ export default function Board() {
     params: { type: "all", page: 0, size: "9" },
   });
 
-  useEffect(() => {
-    //console.log(getData, getIsLoading, getError);
-    //console.log(getData?.title, getData?.detail);
-  }, [getData, getIsLoading, getError]);
-
   return (
     <>
       <h1 className="text-center">전체 페이지</h1>

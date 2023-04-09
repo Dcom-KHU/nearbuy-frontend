@@ -21,7 +21,7 @@ export default function ShowWriterInfo({ writer }: ShowWriterInfoProps) {
           setUserData(response.data);
         }
       } catch (error) {
-        console.log("error getting writer data");
+        console.log("Error occured while getting writer data.", error);
       }
     };
     fetchData();

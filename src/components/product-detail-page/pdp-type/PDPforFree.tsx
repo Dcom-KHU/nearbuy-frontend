@@ -37,9 +37,11 @@ export default function PDPforFree() {
     params: { id: id ?? undefined },
   });
 
+  /*
   useEffect(() => {
-    // console.log("getData결과: ", getData);
+     console.log("getData결과: ", getData);
   }, [getData, getIsLoading, getError]);
+ */
 
   return (
     <Box>
