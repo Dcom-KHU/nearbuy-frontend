@@ -5,6 +5,8 @@ const PriceBox = styled.div`
   align-items: center;
   gap: 10px;
   margin: 0 0;
+  padding-top: 2px;
+  padding-bottom: 10px;
   p:last-child {
     margin-left: auto;
   }
@@ -21,14 +23,15 @@ export default function AuctionDetail({
   start: number;
 }) {
   return (
-    <div>
-      <div className="pt-4 text-gray-500 ml-2">경매 시작가: {start}원</div>
-
+    <>
+      <div className="flex pt-4 text-gray-500 justify-between">
+        <div>경매 시작가: {start}원</div>
+        <div>마감까지 2일 20시간</div>
+      </div>
       <PriceBox>
         <p>현재 최고가</p>
-        <div className="text-2xl py-3">{current}원</div>
-        <p className="text-gray-500">마감까지 2일 20시간</p>
+        <div className="text-2xl">{current}원</div>
       </PriceBox>
-    </div>
+    </>
   );
 }
