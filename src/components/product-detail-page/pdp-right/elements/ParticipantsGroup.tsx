@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+// 공구 게시글에서 참여자 조회
+
+import { useState } from "react";
 import axios from "axios";
 import { serverIP } from "@/../secrets.json";
 import GetToken from "@/utils/getToken";
@@ -71,7 +73,7 @@ interface ParticipantsData {
 }
 
 // 참여자 조회
-export default function SeeParticipants({
+export default function ParticipantsGroup({
   id,
   writer,
 }: {

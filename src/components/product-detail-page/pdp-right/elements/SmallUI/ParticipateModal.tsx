@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import axios from "axios";
-import { serverIP } from "@/../secrets.json";
-import GetToken from "@/utils/getToken";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 import CheckIfWriter from "../CheckIfWriter";
-import DoParticipate from "../DoParticipate";
-import SeeParticipants from "../SeeParticipants";
+import ParticipateGroup from "../ParticipateGroup";
+import ParticipantsGroup from "../ParticipantsGroup";
 
 // 참여하기 버튼
 export default function ParticipateModal({
@@ -18,13 +15,14 @@ export default function ParticipateModal({
   writer: string;
 }) {
   const isWriter = CheckIfWriter({ id });
+  const activeType = useSelector((state: RootState) => state.activePage.active);
 
   if (isWriter === false) {
     // 로그인 돼있고, 글작성자가 아닌 경우
-    return <DoParticipate id={id} />;
+    return <ParticipateGroup id={id} />;
   } else if (isWriter === true) {
     // 글 작성자인 경우
-    return <SeeParticipants id={id} writer={writer} />;
+    return <ParticipantsGroup id={id} writer={writer} />;
   } else {
     // 로그인 안돼있는 경우
     return <></>;

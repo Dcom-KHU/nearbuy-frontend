@@ -1,3 +1,5 @@
+// 공구 게시글에서 참여
+
 import { useState } from "react";
 import axios from "axios";
 import { serverIP } from "@/../secrets.json";
@@ -51,7 +53,7 @@ const ParticipateButton = styled.button`
   }
 `;
 
-export default function DoParticipate({ id }: { id: number }) {
+export default function ParticipateGroup({ id }: { id: number }) {
   const [participateModal, setParticipateModal] = useState(false);
   const token = GetToken();
 
