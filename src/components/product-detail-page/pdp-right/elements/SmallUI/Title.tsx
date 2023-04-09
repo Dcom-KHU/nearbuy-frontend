@@ -1,10 +1,10 @@
 "use client";
 
-// import { useState } from "react";
 import styled from "styled-components";
 import ToolBoxForWriter from "./ToolBoxForWriter";
 import ToolBoxForGuest from "./ToolBoxForGuest";
 import useCheckIfWriter from "../CheckIfWriter";
+import { AiOutlineShareAlt } from "react-icons/ai";
 
 const NameBox = styled.div`
   display: flex;
@@ -25,7 +25,18 @@ export default function Title({ title, id }: { title: string; id: number }) {
   return (
     <NameBox>
       <p>{title}</p>
-      {isWriter ? <ToolBoxForWriter id={id} /> : <ToolBoxForGuest id={id} />}
+      {isWriter === true ? (
+        // 게시글 주인일 때
+        <ToolBoxForWriter id={id} />
+      ) : isWriter === false ? (
+        // 로그인 돼있지만 게시글 주인 아닐 때
+        <ToolBoxForGuest id={id} />
+      ) : (
+        // 로그인 안돼있을 때
+        <button title="공유">
+          <AiOutlineShareAlt color="dimgray" size={24} />
+        </button>
+      )}
     </NameBox>
   );
 }

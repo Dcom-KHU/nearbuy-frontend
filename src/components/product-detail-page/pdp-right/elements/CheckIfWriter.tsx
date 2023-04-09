@@ -9,22 +9,26 @@ interface Props {
 
 const useCheckIfWriter = ({ id }: Props): boolean | undefined => {
   const token = GetToken();
-  const [isWriter, setIsWriter] = useState<boolean>();
+  const [isWriter, setIsWriter] = useState<boolean | undefined>();
 
   useEffect(() => {
-    const getWriterStatus = async () => {
-      try {
-        const response = await axios.get(`${serverIP}/api/post/validate`, {
-          headers: { Authorization: `Bearer ${token}` },
-          params: { id: id },
-        });
-        setIsWriter(response.data);
-      } catch (error) {
-        console.log("An error occurred while getting Writer status. ", error);
-        setIsWriter(false);
-      }
-    };
-    getWriterStatus();
+    if (token != undefined) {
+      const getWriterStatus = async () => {
+        try {
+          const response = await axios.get(`${serverIP}/api/post/validate`, {
+            headers: { Authorization: `Bearer ${token}` },
+            params: { id: id },
+          });
+          setIsWriter(response.data);
+        } catch (error) {
+          console.log("An error occurred while getting Writer status. ", error);
+          setIsWriter(false);
+        }
+      };
+      getWriterStatus();
+    } else {
+      setIsWriter(undefined);
+    }
   }, [id, token]);
   return isWriter;
 };

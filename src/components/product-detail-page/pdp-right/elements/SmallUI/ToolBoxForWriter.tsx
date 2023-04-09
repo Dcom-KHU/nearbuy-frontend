@@ -15,7 +15,7 @@ export default function ToolBoxForWriter({ id }: { id: number }) {
   return (
     <>
       <ToolBoxForWriterBox>
-        <button title="공유하기">
+        <button title="공유하기" /* 로그인 돼있고 게시글 주인일 때*/>
           <AiOutlineShareAlt color="dimgray" size={24} />
         </button>
         <Link href="/board" /* 게시글 수정 페이지로 연결 */ title="수정하기">
