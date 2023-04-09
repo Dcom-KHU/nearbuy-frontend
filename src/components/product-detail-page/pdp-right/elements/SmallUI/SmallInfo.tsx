@@ -16,15 +16,23 @@ const SmallInfoBox = styled.div`
 `;
 
 // 가장 위 작게 표시되는 정보들 (시간, 채팅수, 관심수, 조회수)
-export default function SmallInfo({ time }: { time: number }) {
+export default function SmallInfo({
+  time,
+  ongoing,
+}: {
+  time: number;
+  ongoing: boolean;
+}) {
   const timeString = convertTime({ time });
 
   return (
     <SmallInfoBox>
       <p>{timeString}</p>
-      <p>채팅 4</p>
-      <p>관심 7</p>
-      <p>조회 103</p>
+      {ongoing === true ? (
+        <p>거래가 진행중입니다</p>
+      ) : (
+        <p>거래가 완료된 상품입니다</p>
+      )}
     </SmallInfoBox>
   );
 }
