@@ -31,15 +31,15 @@ export default function MiniWriteOptions() {
   return (
     <MiniWriteOptionsBlock className="shadow">
       <li>
-        <a href="/writeauction">경매</a>
+        <a href="/writeauction_">경매</a>
       </li>
       <div className="sero"></div>
       <li>
-        <a href="/writegroup">공구</a>
+        <a href="/writegroup_">공구</a>
       </li>
       <div className="sero"></div>
       <li>
-        <a href="/writesell">
+        <a href="/writesell_">
           <div>판매/교환/나눔</div>
         </a>
       </li>
