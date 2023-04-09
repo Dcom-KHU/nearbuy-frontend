@@ -23,10 +23,10 @@ const ModalContainerBox = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
   padding: 27px;
   border-radius: 20px;
+  width: 400px;
 
   .parti-buttons {
     border: solid 2px lightgray;
@@ -37,7 +37,16 @@ const ModalContainerBox = styled.div`
   .line {
     width: 100%;
     border: solid 1px lightgray;
-    margin-bottom: 3px;
+    margin-bottom: 10px;
+  }
+  ul {
+    border: solid 1px lightgray;
+    border-radius: 3px;
+    min-width: max-content;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 5px 10px;
   }
   li {
     // 개별 참여자 박스
@@ -45,6 +54,9 @@ const ModalContainerBox = styled.div`
     justify-content: space-between;
     padding: 3px 7px;
     div:nth-child(2) {
+      color: #464646;
+    }
+    div:nth-child(3) {
       color: #999999;
     }
   }
@@ -68,18 +80,13 @@ interface ParticipantsData {
   user: {
     name: string;
     mannerPoint: number;
+    auctionPrice: number;
     participate: boolean;
   }[];
 }
 
 // 참여자 조회
-export default function ParticipantsAuction({
-  id,
-  writer,
-}: {
-  id: number;
-  writer: string;
-}) {
+export default function ParticipantsAuction({ id }: { id: number }) {
   const [participateModal, setParticipateModal] = useState(false);
   const [participants, setParticipants] = useState<ParticipantsData>();
   const [isLoading, setIsLoading] = useState(false); // add loading state
@@ -89,7 +96,7 @@ export default function ParticipantsAuction({
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${serverIP}/api/post/group/participate`,
+        `${serverIP}/api/post/auction/participate`,
         {
           headers: { Authorization: `Bearer ${token}` },
           params: { id: id },
@@ -111,7 +118,7 @@ export default function ParticipantsAuction({
           handleParticipants();
         }}
       >
-        ~~참여자 조회
+        참여자 조회
       </ParticipateButton>
       {participateModal && (
         <ModalOverlayBox onClick={() => setParticipateModal(false)}>
@@ -119,16 +126,15 @@ export default function ParticipantsAuction({
             <h2 style={{ paddingBottom: "5px", paddingLeft: "3px" }}>
               참여자 조회
             </h2>
-            <div className="line"></div>
             {isLoading ? (
               <div>Loading...</div>
             ) : (
               <ul>
-                <li>[주최자] {writer}</li>
                 {participants?.user?.map((participant) => (
-                  <li key={participant.name}>
+                  <li key={participant.auctionPrice}>
                     <div>{participant.name}</div>
-                    <div>{participant.mannerPoint}</div>
+                    <div>{participant.auctionPrice}원</div>
+                    <div>{participant.mannerPoint}&#176;</div>
                   </li>
                 ))}
               </ul>

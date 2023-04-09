@@ -42,8 +42,8 @@ const InputPriceForm = styled.form`
   border: 1px solid black;
   border-radius: 8px;
   padding: 10px 20px;
+  margin: 25px 0;
 `;
-
 const ParticipateButton = styled.button`
   background-color: var(--background-color);
   border-radius: 8px;
@@ -125,7 +125,6 @@ export default function ParticipateAuction({
                 <option value={increase * 5}>{current + increase * 5}원</option>
               </select>
             </InputPriceForm>
-            <div style={{ width: "250px", height: "60px" }}></div>
             <div style={{ float: "right" }}>
               <button className="parti-buttons" onClick={handleParticipate}>
                 참여

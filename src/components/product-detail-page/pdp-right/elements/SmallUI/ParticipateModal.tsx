@@ -38,7 +38,7 @@ export default function ParticipateModal({
     if (type === "group") {
       return <ParticipantsGroup id={id} writer={writer} />;
     } else {
-      return <ParticipantsAuction id={id} writer={writer} />;
+      return <ParticipantsAuction id={id} />;
     }
   } else {
     // 로그인 안돼있는 경우
