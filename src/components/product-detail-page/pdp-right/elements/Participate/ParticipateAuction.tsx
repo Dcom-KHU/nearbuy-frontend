@@ -91,7 +91,6 @@ export default function ParticipateAuction({
       setParticipateModal(false);
       window.location.reload(); // Refresh and update the page
       alert(`${current + selectedOption}원으로 경매 참가했습니다`);
-      console.log("parsedOption::");
     } catch (error) {
       console.log("An error occured while participating. ", error);
       // FIXME: 해당 api에서 이미 참여한 경우해서 실패한 경우를 분리해서 response 주면 좋을듯
