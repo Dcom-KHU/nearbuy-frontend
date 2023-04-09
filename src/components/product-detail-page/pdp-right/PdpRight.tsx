@@ -1,10 +1,13 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import SmallInfo from "./elements/SmallUI/SmallInfo";
 import Tags from "./elements/Tag/Tags";
 import Title from "./elements/SmallUI/Title";
+import axios from "axios";
 import UserInfo from "./elements/UserInfo";
+import { serverIP } from "@/../secrets.json";
 import Location from "./elements/Location";
 import ChatButton from "./elements/SmallUI/ChatButton";
 import { InactiveChatButton } from "./elements/SmallUI/ChatButton";
@@ -37,11 +40,32 @@ interface RightProps {
 export default function PdpRight({ getData }: RightProps) {
   // 어떤 게시물이냐에 따라, 표시되는 내용 다르게 하기 위한 상태 관리
   const activeType = useSelector((state: RootState) => state.activePage.active);
+  // 판매자 데이터 불러오기
+  const [userData, setUserData] = useState<any>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (getData?.writer) {
+          const response = await axios.get(`${serverIP}/api/user/page/name`, {
+            params: { name: getData?.writer },
+          });
+          setUserData(response.data);
+        }
+      } catch (error) {
+        console.log("error getting writer data");
+      }
+    };
+    fetchData();
+  }, [getData?.writer]);
+  // console.log(userData?.mannerPoint, name, location, image);
+
   // FIXME: 해당 상세 페이지에서 새로고침 누르면, 상태 사라져서, 내용물 사라짐
   if (!getData) {
     console.log("getData is not present. check PdpLeft");
     return null;
   }
+
   return (
     <RightBox>
       <div className="w-full">
@@ -60,7 +84,7 @@ export default function PdpRight({ getData }: RightProps) {
           </>
         </div>
         <InfoBox>
-          <UserInfo />
+          {userData && <UserInfo infoData={userData} />}
           <Tags tagArr={getData?.tag} />
         </InfoBox>
       </div>
