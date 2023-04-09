@@ -3,6 +3,11 @@
 import Link from "next/link";
 import styled from "styled-components";
 import CheckIfWriter from "../CheckIfWriter";
+import customAxios from "@/utils/customAxios";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 
 const ActiveChatButtonBlock = styled(Link)`
   background-color: var(--background-color);
@@ -41,13 +46,57 @@ export default function ChatButton({
 }) {
   const isWriter = CheckIfWriter({ id });
 
+  // 어떤 게시물이냐에 따라, 표시되는 내용 다르게 하기 위한 상태 관리
+  const activeType = useSelector((state: RootState) => state.activePage.active);
+  const [apiUrl, setApiUrl] = useState<string>(`api/chat/enter`);
+  const router = useRouter();
+
+  const makeChatRoomHandler = async () => {
+    await customAxios
+      .post(apiUrl, {}, { params: { id: id } })
+      .then(data => {
+        router.push("/chatting");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // 혹시 채팅방 만들기 api response로 이미 만들어져 있는 채팅방에 대해서 200이 아닌 에러를 출력할 시를 대비해...
+    router.push("/chatting");
+  };
+
+  useEffect(() => {
+    if (activeType) {
+      switch (activeType) {
+        case "sale" || "exchange" || "free" || "auction":
+          setApiUrl(`api/chat/enter`);
+          break;
+        // 경매는 낙찰할 유저 이름이 필요... 이 컴포넌트에서 해당 유저에 대한 정보를 가지고 있어야 함
+        // case "auction":
+        //   setApiUrl(`api/post/auction/finish`);
+        //   break;
+        case "group":
+          setApiUrl(`api/post/group/finish`);
+          break;
+        default:
+          setApiUrl(`api/chat/enter`);
+      }
+    }
+  }, [activeType]);
+
   if (isWriter === true) {
     // 글작성자일 때
-    return <ActiveChatButtonBlock href="#">채팅 확인</ActiveChatButtonBlock>;
+    return (
+      <ActiveChatButtonBlock href="/chatting">채팅 확인</ActiveChatButtonBlock>
+    );
   } else if (isWriter === false) {
     if (ongoing === true) {
       // 글작성자 아니고 로그인 돼있는데 거래 아직 진행중일 때
-      return <ActiveChatButtonBlock href="#">채팅하기</ActiveChatButtonBlock>;
+      return (
+        <ActiveChatButtonBlock href="#" onClick={() => makeChatRoomHandler()}>
+          채팅하기
+        </ActiveChatButtonBlock>
+      );
     } else {
       // 글작성자 아니고 로그인 돼있는데 거래 완료됐을 때
       return <InactiveChatButtonBlock>거래완료</InactiveChatButtonBlock>;
