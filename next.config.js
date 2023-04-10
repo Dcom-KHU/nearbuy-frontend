@@ -5,4 +5,11 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+//module.exports = nextConfig;
+
+module.exports = {
+  ...nextConfig,
+  images: {
+    domains: [process.env.SERVER_IP],
+  },
+};
