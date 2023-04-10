@@ -102,7 +102,7 @@ const List = ({ dataList }) => {
   // state: Rootstate는 RootState 타입의 state 매개변수 가지고 있는데, 이는 Redux stord의 전체 상태 객체 의미.
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
-
+  console.log("포데: ", postDatas);
   const isBoard = nowState === "board";
 
   return (

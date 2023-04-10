@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import MemberCount from "./info/MemberCount";
 import Time from "./info/Time";
+import { serverIP } from "@/../secrets.json";
 
 const SmallImageBox = styled.div`
   display: flex;
@@ -18,7 +19,9 @@ const SmallImageBox = styled.div`
 `;
 
 // 상세페이지 사진 부분 (왼쪽 부분)
-export default function PdpLeft() {
+export default function PdpLeft({}: {}) {
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
   // 사용자가 올린 사진들
   const images = [
     { key: 0, url: "/images/block.svg" },
@@ -40,6 +43,17 @@ export default function PdpLeft() {
         {activeState === "auction" && <Time />}
         {activeState === "group" && <MemberCount />}
       </div>
+      {/* FIXME:: GET 400 (bad request 뜸)
+        <Image
+        src={`${serverUrl}/api/image/post-77/1681048568201-712374445771627.png`}
+        alt="tempImg"
+        width={100}
+        height={100}
+      />*/}
+      <img
+        src={`${serverIP}/api/image/post-77/1681048568201-712374445771627.png`}
+      ></img>
+
       <SmallImageBox>
         {images.map((image) => {
           return (

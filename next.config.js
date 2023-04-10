@@ -7,9 +7,18 @@ const nextConfig = {
 
 //module.exports = nextConfig;
 
+/*module.exports = {
+  ...nextConfig,
+  images: {
+    domains: ["52.79.184.107"],
+  },
+};*/
+
 module.exports = {
   ...nextConfig,
   images: {
-    domains: [process.env.SERVER_IP],
+    loader: "imgix",
+    path: "",
+    domains: [process.env.NEXT_PUBLIC_SERVER_URL],
   },
 };
