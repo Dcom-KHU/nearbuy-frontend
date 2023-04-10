@@ -44,7 +44,7 @@ export default function PDPforGroup() {
   return (
     <Box>
       <PdpBox>
-        <PdpLeft />
+        <PdpLeft imageData={getData?.image} />
         <PdpRight getData={getData} />
       </PdpBox>
       <PdpBottom detail={getData?.detail!} />
