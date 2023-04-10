@@ -45,7 +45,7 @@ export default function PDPforExchange() {
   return (
     <Box>
       <PdpBox>
-        <PdpLeft />
+        <PdpLeft imageData={getData?.image} />
         <PdpRight getData={getData} />
       </PdpBox>
       <PdpBottom detail={getData?.detail!} />
