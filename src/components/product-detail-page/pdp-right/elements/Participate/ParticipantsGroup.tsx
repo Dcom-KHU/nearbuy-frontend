@@ -73,7 +73,9 @@ export default function ParticipantsGroup({
                 {participants?.user?.map((participant) => (
                   <li key={participant.name}>
                     <div>{participant.name}</div>
-                    <div>{participant.mannerPoint}</div>
+                    <div className="manner">
+                      {participant.mannerPoint}&#176;
+                    </div>
                   </li>
                 ))}
               </ul>

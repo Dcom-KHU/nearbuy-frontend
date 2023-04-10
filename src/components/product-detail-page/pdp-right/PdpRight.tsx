@@ -73,6 +73,7 @@ export default function PdpRight({ getData }: RightProps) {
             postType={activeType}
             increase={getData?.increasePrice}
             current={getData?.currentPrice}
+            ongoing={getData?.ongoing}
           />
         )}
         <ChatButton id={getData?.id} ongoing={getData?.ongoing} />

@@ -39,7 +39,7 @@ export const ModalContainerBox = styled.div`
     overflow-y: auto;
     margin-top: 10px;
     padding: 5px 10px;
-    width: 340px;
+    width: 350px;
     &.group-participant {
       width: 280px;
     }
@@ -48,17 +48,22 @@ export const ModalContainerBox = styled.div`
     // 개별 참여자 박스
     display: flex;
     justify-content: space-between;
-    padding: 3px 7px;
-    div:nth-child(2) {
-      color: #464646;
-    }
-    div:nth-child(3) {
+    padding: 5px 7px;
+    font-size: 109%;
+    .manner {
       color: #999999;
     }
+    // border-bottom: solid 1px lightgray;
   }
   button {
     margin-top: 10px;
     margin-right: -1px;
+  }
+  .hammer {
+    color: lightgray;
+    &:hover {
+      color: #603ad0;
+    }
   }
 `;
 
