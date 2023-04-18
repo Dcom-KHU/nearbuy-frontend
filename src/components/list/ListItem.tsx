@@ -42,7 +42,7 @@ interface Itemp {
   post: {
     title: string;
     id: number;
-    image: string[];
+    image: string;
     location: string;
     type: string;
     salePrice: number | null;
@@ -74,7 +74,7 @@ export default function ListItem({ nowState, post }: Itemp) {
         />
       )}
       <Link href={`/${nowState}/detail/?id=${post.id}`}>
-        <ProductMainPicture />
+        <ProductMainPicture cardImg={post.image} />
         <ItemContent post={post} />
       </Link>
       <button className="liked" onClick={isLikeHandler}>
