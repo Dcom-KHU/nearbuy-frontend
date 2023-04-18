@@ -6,6 +6,7 @@ import ItemContent from "./ItemContent";
 import SmallInfoForListItem from "../product-detail-page/pdp-left/info/SmallInfoForListItem";
 import ProductMainPicture from "./productinfo/ProductMainPicture";
 import LikePost from "../product-detail-page/pdp-right/elements/LikePost";
+import CheckIfWriter from "../product-detail-page/pdp-right/elements/CheckIfWriter";
 
 const ListItemBox = styled.div`
   display: flex;
@@ -50,6 +51,7 @@ interface Itemp {
 // 게시글 목록에서 작게 보여지는 게시글 한 개 (미리보기 카드)
 export default function ListItem({ nowState, post }: Itemp) {
   const isAuctionOrGroup = nowState === "auction" || nowState === "group";
+  const isWriter = CheckIfWriter({ id: post.id });
 
   return (
     <ListItemBox>
@@ -65,9 +67,11 @@ export default function ListItem({ nowState, post }: Itemp) {
         <ProductMainPicture cardImg={post.image} />
         <ItemContent post={post} />
       </Link>
-      <HeartCSS>
-        <LikePost id={post.id} />
-      </HeartCSS>
+      {!isWriter && (
+        <HeartCSS>
+          <LikePost id={post.id} />
+        </HeartCSS>
+      )}
     </ListItemBox>
   );
 }

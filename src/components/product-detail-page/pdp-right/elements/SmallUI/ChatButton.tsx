@@ -42,7 +42,7 @@ export default function ChatButton({
   ongoing: boolean;
 }) {
   const activeType = useSelector((state: RootState) => state.activePage.active);
-  const isWriter = CheckIfWriter({ id });
+  const isWriter = CheckIfWriter({ id }); // id 는 게시글 id
 
   if (isWriter === true) {
     if (activeType === "group") {

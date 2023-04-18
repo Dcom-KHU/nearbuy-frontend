@@ -7,7 +7,8 @@ interface Props {
   id: number;
 }
 
-const CheckIfWriter = ({ id }: Props): boolean | undefined => {
+const CheckIfWriter = ({ id }: { id: number }): boolean | undefined => {
+  // id 는 게시글 id
   const token = GetToken();
   const [isWriter, setIsWriter] = useState<boolean | undefined>();
 
