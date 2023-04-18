@@ -7,13 +7,17 @@ const nextConfig = {
 
 //module.exports = nextConfig;
 
-/*module.exports = {
+const secrets = require("./secrets.json");
+const serverIP = secrets.serverIP;
+
+module.exports = {
   ...nextConfig,
   images: {
-    domains: ["52.79.184.107"],
+    domains: [serverIP],
   },
-};*/
+};
 
+/*
 module.exports = {
   ...nextConfig,
   images: {
@@ -22,3 +26,4 @@ module.exports = {
     domains: [process.env.NEXT_PUBLIC_SERVER_URL],
   },
 };
+*/
