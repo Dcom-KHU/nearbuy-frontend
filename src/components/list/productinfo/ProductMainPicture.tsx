@@ -28,6 +28,7 @@ export default function ProductMainPicture({
         alt="image"
         width={200}
         height={200}
+        style={{ width: size, height: size }}
       ></img>
     );
   }

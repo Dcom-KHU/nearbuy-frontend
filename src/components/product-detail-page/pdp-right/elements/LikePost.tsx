@@ -57,13 +57,18 @@ export default function LikePost({ id }: { id: number }) {
           <AiOutlineHeart color="dimgray" size={24} />
         </div>
       ) : (
-        <button className="liked" onClick={isLikeHandler} title="찜">
+        <div
+          className="liked"
+          onClick={isLikeHandler}
+          title="찜"
+          style={{ cursor: "pointer" }}
+        >
           {isLike ? (
             <AiFillHeart color="dimgray" size={24} />
           ) : (
             <AiOutlineHeart color="dimgray" size={24} />
           )}
-        </button>
+        </div>
       )}
     </>
   );
