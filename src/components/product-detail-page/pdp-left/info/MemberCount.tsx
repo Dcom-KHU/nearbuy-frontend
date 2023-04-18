@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
@@ -8,7 +7,7 @@ import styled from "styled-components";
 const Box = styled.div`
   padding: 5px 10px;
   position: absolute;
-  top: -34px;
+  top: -44px;
   left: 0;
   color: royalblue;
 `;
