@@ -33,8 +33,8 @@ export default function PdpLeft({
   imageData: string[] | undefined;
 }) {
   // 사용자가 올린 사진들 -> default image로 설정
-  const images = [
-    { key: 0, url: "/images/block.svg" },
+  const defaultImage = [
+    { key: 0, url: "/images/default/default_image.png" },
     { key: 1, url: "/images/setting.svg" },
     { key: 2, url: "/images/header/heart.svg" },
     { key: 3, url: "/images/header/user.svg" },
@@ -43,7 +43,7 @@ export default function PdpLeft({
   const imgList =
     imageData?.map((url, index) => {
       return { key: index, url: `${serverIP}/api/image/${url}` };
-    }) ?? images; // imgList가 undefined인 경우엔 default image 보여주기
+    }) ?? defaultImage; // imgList가 undefined인 경우엔 default image 보여주기
 
   const [isHover, setIsHover] = useState(0);
   const onMouthHandling = (key: number) => {
@@ -56,14 +56,23 @@ export default function PdpLeft({
   return (
     <section className="flex flex-col w-2/5 gap-5">
       <div className="relative">
-        {/*<Image src={images[isHover].url} alt="Image" width={400} height={400} />*/}
+        {/*<Image src={defaultImage[isHover].url} alt="Image" width={400} height={400} />*/}
         <LargeImageBox>
-          <img
-            src={imgList[isHover].url}
-            alt="image"
-            width={400}
-            height={400}
-          ></img>
+          {imageData?.length ? (
+            <img
+              src={imgList[isHover].url}
+              alt="image"
+              width={400}
+              height={400}
+            ></img>
+          ) : (
+            <Image
+              src={defaultImage[isHover].url}
+              alt="Image"
+              width={400}
+              height={400}
+            />
+          )}
         </LargeImageBox>
         {activeState === "auction" && <Time />}
         {activeState === "group" && <MemberCount />}
