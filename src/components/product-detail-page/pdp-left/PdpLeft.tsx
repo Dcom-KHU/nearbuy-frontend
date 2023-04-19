@@ -1,8 +1,9 @@
+// 디테일 페이지 내 사진 띄우기
 "use client";
 
 import { RootState } from "@/store/store";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import MemberCount from "./info/MemberCount";
@@ -36,8 +37,6 @@ export default function PdpLeft({
   const defaultImage = [
     { key: 0, url: "/images/default/default_image.png" },
     { key: 1, url: "/images/setting.svg" },
-    { key: 2, url: "/images/header/heart.svg" },
-    { key: 3, url: "/images/header/user.svg" },
   ];
 
   const imgList =
@@ -46,12 +45,25 @@ export default function PdpLeft({
     }) ?? defaultImage; // imgList가 undefined인 경우엔 default image 보여주기
 
   const [isHover, setIsHover] = useState(0);
+  const [largeImageError, setLargeImageError] = useState(false);
+  const [smallImageError, setSmallImageError] = useState(
+    new Array(imgList.length).fill(false)
+  );
+
   const onMouthHandling = (key: number) => {
     setIsHover(key);
   };
   const activeState = useSelector(
     (state: RootState) => state.activePage.active
   );
+  const handleLargeImageError = () => {
+    setLargeImageError(true);
+  };
+  const handleSmallImageError = (index: number) => {
+    const newSmallImageError = [...smallImageError];
+    newSmallImageError[index] = true;
+    setSmallImageError(newSmallImageError);
+  };
 
   return (
     <section className="flex flex-col w-2/5 gap-5">
@@ -60,10 +72,15 @@ export default function PdpLeft({
         <LargeImageBox>
           {imageData?.length ? (
             <img
-              src={imgList[isHover].url}
+              src={
+                largeImageError
+                  ? "/images/default/error_image.png"
+                  : imgList[isHover].url
+              }
               alt="image"
               width={400}
               height={400}
+              onError={handleLargeImageError}
             ></img>
           ) : (
             <Image
@@ -77,25 +94,25 @@ export default function PdpLeft({
         {activeState === "auction" && <Time />}
         {activeState === "group" && <MemberCount />}
       </div>
-      {/* FIXME:: GET 400 (bad request 뜸). 
-        근데 img 쓰면.. Image 안써서 그런지 hover 됐을 때 처리가 좀 느림
-        <Image
-        src={`${serverUrl}/api/image/post-77/1681048568201-712374445771627.png`}
-        alt="tempImg"
-        width={100}
-        height={100}
-      />*/}
+      {/* FIXME:: img 쓰면 Image 안써서 그런지 hover 됐을 때 처리가 좀 느림*/}
       <SmallImageBox>
-        {imgList.map((image) => {
+        {imgList.map((image, index) => {
           return (
             <img
               key={image.key}
-              src={image.url}
+              src={
+                smallImageError[index]
+                  ? "/images/default/error_image.png"
+                  : image.url
+              }
               alt="block"
               width={40}
               height={40}
               onMouseOver={() => {
                 onMouthHandling(image.key);
+              }}
+              onError={() => {
+                handleSmallImageError(index);
               }}
             ></img>
           );

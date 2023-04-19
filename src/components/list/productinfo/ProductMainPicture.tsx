@@ -9,27 +9,31 @@ export default function ProductMainPicture({
   size?: string;
   cardImg: string | null;
 }) {
-  // const cardImage =
+  const handleImageError = (event: React.SyntheticEvent<HTMLDivElement>) => {
+    event.currentTarget.innerHTML = `<Image src="/images/default/error_image.png" alt="gloves" width={200} height={200} style={{ width: '20px', height: '20px'}} />`;
+  };
 
   if (cardImg === null) {
     return (
       <Image
         src="/images/default/default_image.png"
-        alt="gloves"
+        alt="default image"
         width={200}
         height={200}
-        style={{ width: size, height: size }}
+        style={{ width: "200px", height: "200px" }}
       />
     );
   } else {
     return (
-      <img
-        src={`${serverIP}/api/image/${cardImg}`}
-        alt="image"
-        width={200}
-        height={200}
-        style={{ width: size, height: size }}
-      ></img>
+      <div onError={handleImageError}>
+        <img
+          src={`${serverIP}/api/image/${cardImg}`}
+          alt="product image"
+          width={200}
+          height={200}
+          style={{ width: "200px", height: "200px" }}
+        />
+      </div>
     );
   }
 }
