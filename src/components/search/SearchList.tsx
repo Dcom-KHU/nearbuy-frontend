@@ -66,7 +66,8 @@ const SearchList = ({
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   // 설명과 에러는 List.tsx 파일 참고
-  console.log("포스트데타: ", postDatas);
+
+  //console.log("포스트데타: ", postDatas);
   const isBoard = true;
 
   if (getError?.response?.status === 404) {

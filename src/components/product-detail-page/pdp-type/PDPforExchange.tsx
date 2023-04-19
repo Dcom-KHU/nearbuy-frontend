@@ -5,7 +5,6 @@ import PdpRight from "../pdp-right/PdpRight";
 import PdpBottom from "../pdp-bottom/PdpBottom";
 import { DetailPropsInterface } from "./DetailPropsInterface";
 import styled from "styled-components";
-import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 
@@ -37,11 +36,6 @@ export default function PDPforExchange() {
     params: { id: id ?? undefined },
   });
 
-  /*
-  useEffect(() => {
-     console.log("getData결과: ", getData);
-  }, [getData, getIsLoading, getError]);
- */
   return (
     <Box>
       <PdpBox>
