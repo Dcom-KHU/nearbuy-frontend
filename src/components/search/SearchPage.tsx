@@ -1,21 +1,29 @@
 "use client";
 
+import styled from "styled-components";
+import SearchList from "./SearchList";
+import ScrollTop from "@/components/ui/ScrollTop";
 import { useSearchParams } from "next/navigation";
 
-// 상세 페이지 전체 (PDP)
+const SalePageBlock = styled.div`
+  //background: lavender;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("q");
-  /*
-  useEffect(() => {
-     console.log("getData결과: ", getData);
-  }, [getData, getIsLoading, getError]);
- */
 
   return (
     <>
-      <div>서치 페이지 입니다</div>
-      <div>{keyword}</div>
+      <SalePageBlock>
+        <SearchList searchKey={keyword} />
+      </SalePageBlock>
+      <ScrollTop />
     </>
   );
 }
