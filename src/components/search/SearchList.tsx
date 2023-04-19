@@ -5,12 +5,27 @@ import SearchEachList from "./SearchEachList";
 import ListItem from "../list/ListItem";
 import { useGet } from "@/hooks/useHttp";
 
-const ListItemBox = styled.div`
+const ListItemBox = styled.div<ListItemBoxProps>`
   width: 80%;
   max-width: 1200px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 20px;
   padding: 30px 0;
+
+  ${(props) => {
+    if (props.emptyData) {
+      return css`
+        display: flex;
+        justify-content: center;
+      `;
+    }
+    return css`
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      row-gap: 30px;
+      justify-items: center;
+    `;
+  }}
 `;
 
 // ************************************************************************************************
@@ -23,6 +38,10 @@ enum NowState {
   Free = "free",
   Auction = "auction",
   Group = "group",
+}
+
+interface ListItemBoxProps {
+  emptyData?: boolean;
 }
 
 interface Itemp {
@@ -45,12 +64,7 @@ interface Itemp {
   ];
 }
 
-const SearchList = ({
-  searchKey,
-}: {
-  dataList: any;
-  searchKey: string | null;
-}) => {
+const SearchList = ({ searchKey }: { searchKey: string | null }) => {
   const {
     data: getData,
     // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
@@ -63,6 +77,8 @@ const SearchList = ({
   });
 
   let postDatas = getData?.post || [];
+
+  const emptyData = postDatas?.length === 0;
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   // 설명과 에러는 List.tsx 파일 참고
@@ -77,7 +93,7 @@ const SearchList = ({
   return (
     <>
       <div>검색어: {searchKey}</div>
-      <ListItemBox>
+      <ListItemBox emptyData={emptyData}>
         {postDatas?.length === 0 ? (
           <div>&apos;{searchKey}&apos;에 해당하는 게시글이 없습니다.</div>
         ) : isBoard ? (
