@@ -1,9 +1,7 @@
 "use client";
 
-import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
-import EachList from "../list/EachList";
+import SearchEachList from "./SearchEachList";
 import ListItem from "../list/ListItem";
 import { useGet } from "@/hooks/useHttp";
 
@@ -32,7 +30,7 @@ interface Itemp {
     {
       title: string;
       id: number;
-      image: string[];
+      image: string;
       location: string;
       type: string;
       salePrice: number | null;
@@ -47,7 +45,12 @@ interface Itemp {
   ];
 }
 
-const SearchList = ({ searchKey }: { searchKey: string | null }) => {
+const SearchList = ({
+  searchKey,
+}: {
+  dataList: any;
+  searchKey: string | null;
+}) => {
   const {
     data: getData,
     // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
@@ -59,13 +62,12 @@ const SearchList = ({ searchKey }: { searchKey: string | null }) => {
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
-  let postDatas = getData?.post;
+  let postDatas = getData?.post || [];
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
-  const nowState = useSelector((state: RootState) => state.activePage.active);
   // 설명과 에러는 List.tsx 파일 참고
   console.log("포스트데타: ", postDatas);
-  const isBoard = nowState === "board";
+  const isBoard = true;
 
   if (getError?.response?.status === 404) {
     return <div>게시글이 없습니다.</div>;
@@ -76,7 +78,7 @@ const SearchList = ({ searchKey }: { searchKey: string | null }) => {
       <div>검색어: {searchKey}</div>
       <ListItemBox>
         {postDatas?.length === 0 ? (
-          <div>게시글이 없습니다.</div>
+          <div>&apos;{searchKey}&apos;에 해당하는 게시글이 없습니다.</div>
         ) : isBoard ? (
           <>
             {postDatas?.map((post) => (
@@ -86,7 +88,7 @@ const SearchList = ({ searchKey }: { searchKey: string | null }) => {
         ) : (
           /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
             -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
-          <EachList dataList={postDatas} />
+          <SearchEachList dataList={postDatas} searchKey={searchKey} />
         )}
       </ListItemBox>
     </>
