@@ -67,7 +67,6 @@ export default function ListItem({ nowState, post }: Itemp) {
         <ProductMainPicture cardImg={post.image} />
         <ItemContent post={post} />
       </Link>
-      <div>Iswriter결과:</div>
       {isWriter === false && (
         <HeartCSS>
           <LikePost id={post.id} />
