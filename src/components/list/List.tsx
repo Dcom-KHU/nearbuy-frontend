@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import EachList from "./EachList";
 import ListItem from "./ListItem";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGet } from "@/hooks/useHttp";
 
 const ListItemBox = styled.div`
@@ -28,6 +28,32 @@ const ListItemBox = styled.div`
       justify-items: center;
     `;
   }}
+`;
+
+const PaginationBox = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+`;
+
+const PaginationButton = styled.button`
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #f4f4f4;
+  }
+  ${(props) =>
+    props.disabled &&
+    css`
+      cursor: default;
+      opacity: 0.5;
+      pointer-events: none;
+    `}
 `;
 
 // ************************************************************************************************
@@ -66,7 +92,9 @@ interface Itemp {
   ];
 }
 
-const List = ({ dataList }: { dataList: any }) => {
+const List = ({ dataList }: { dataList?: any }) => {
+  const [page, setPage] = useState(1);
+
   let myPageList = false;
   myPageList = (dataList ?? true) === dataList;
 
@@ -77,7 +105,7 @@ const List = ({ dataList }: { dataList: any }) => {
     error: getError,
   } = useGet<Itemp>({
     url: "/api/post/board",
-    params: { type: "all", size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
+    params: { type: "all", page: page, size: 12 }, // 나머지 파라미터 일단 생략 (default값 있음)
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 
@@ -96,8 +124,31 @@ const List = ({ dataList }: { dataList: any }) => {
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
-  // console.log("포데: ", postDatas);
+  console.log("포데: ", postDatas);
+
   const isBoard = nowState === "board";
+
+  const totalPages = Math.ceil(85 / 12); // 페이지당 12개 게시글
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  const renderPageButtons = () => {
+    const buttons = [];
+    for (let i = 1; i <= totalPages; i++) {
+      buttons.push(
+        <PaginationButton
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={i === page}
+        >
+          {i}
+        </PaginationButton>
+      );
+    }
+    return buttons;
+  };
 
   return (
     <>
@@ -118,6 +169,7 @@ const List = ({ dataList }: { dataList: any }) => {
           <EachList dataList={postDatas} />
         )}
       </ListItemBox>
+      <PaginationBox>{renderPageButtons()}</PaginationBox>
     </>
   );
 };

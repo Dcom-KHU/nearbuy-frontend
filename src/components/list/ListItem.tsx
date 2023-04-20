@@ -53,7 +53,7 @@ export default function ListItem({ nowState, post }: Itemp) {
   const isAuctionOrGroup = nowState === "auction" || nowState === "group";
   const isWriter = CheckIfWriter({ id: post.id });
 
-  console.log("잘넘어오니?", post);
+  // console.log("잘넘어오니?", post);
 
   return (
     <ListItemBox>
