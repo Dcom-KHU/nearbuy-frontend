@@ -7,6 +7,8 @@ import EachList from "./EachList";
 import ListItem from "./ListItem";
 import { useEffect, useState } from "react";
 import { useGet } from "@/hooks/useHttp";
+import axios from "axios";
+import { serverIP } from "@/../secrets.json";
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -94,26 +96,33 @@ interface Itemp {
 
 const List = ({ dataList }: { dataList?: any }) => {
   const [page, setPage] = useState(1);
+  const [postDatas, setPostDatas] = useState<Itemp["post"]>();
+
+  useEffect(() => {
+    handlePageChange(1);
+  }, []);
 
   let myPageList = false;
   myPageList = (dataList ?? true) === dataList;
 
-  const {
-    data: getData,
-    // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
-    isLoading: getIsLoading,
-    error: getError,
-  } = useGet<Itemp>({
-    url: "/api/post/board",
-    params: { type: "all", page: page, size: 12 }, // 나머지 파라미터 일단 생략 (default값 있음)
-    // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
-  });
+  const handlePageChange = async (newPage: number) => {
+    setPage(newPage);
+    try {
+      const response = await axios.get(`${serverIP}/api/post/board`, {
+        params: { type: "all", page: newPage, size: 12 },
+      });
+      console.log("ㅇㅇㅇㅇ:::", response.data.post);
+      const newPostDatas = response.data.post;
+      if (myPageList) {
+        dataList = newPostDatas;
+      } else {
+        setPostDatas(newPostDatas);
+      }
+    } catch (error) {
+      console.log("Error occurred while getting post/board datas");
+    }
+  };
 
-  let postDatas = getData?.post;
-
-  if (myPageList) {
-    postDatas = dataList;
-  }
   const emptyData = postDatas?.length === 0;
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
@@ -124,15 +133,9 @@ const List = ({ dataList }: { dataList?: any }) => {
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
-  console.log("포데: ", postDatas);
-
   const isBoard = nowState === "board";
 
   const totalPages = Math.ceil(85 / 12); // 페이지당 12개 게시글
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
 
   const renderPageButtons = () => {
     const buttons = [];
@@ -149,6 +152,22 @@ const List = ({ dataList }: { dataList?: any }) => {
     }
     return buttons;
   };
+
+  useEffect(() => {
+    if (page) {
+      const getDataAgain = async () => {
+        try {
+          const response = await axios.get(`${serverIP}/api/post/board`, {
+            params: { type: "all", page: page, size: 12 },
+          });
+          console.log("데타:::", response.data.post);
+        } catch (error) {
+          console.log("Error occurred while getting post/board datas");
+        }
+      };
+      getDataAgain();
+    }
+  }, [page]);
 
   return (
     <>
