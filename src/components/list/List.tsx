@@ -137,7 +137,6 @@ const List = ({ dataList }: { dataList?: any }) => {
         }
       };
       getDataAgain();
-      console.log(nowState);
     }
   }, [page, nowState]);
 
