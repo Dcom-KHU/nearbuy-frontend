@@ -5,8 +5,8 @@ import styled from "styled-components";
 import ItemContent from "./ItemContent";
 import SmallInfoForListItem from "../product-detail-page/pdp-left/info/SmallInfoForListItem";
 import ProductMainPicture from "./productinfo/ProductMainPicture";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useState } from "react";
+import LikePost from "../product-detail-page/pdp-right/elements/LikePost";
+import CheckIfWriter from "../product-detail-page/pdp-right/elements/CheckIfWriter";
 
 const ListItemBox = styled.div`
   display: flex;
@@ -20,21 +20,13 @@ const ListItemBox = styled.div`
     transition: 0.125s ease-in;
     transform: scale(1.01); // 없어도됨
     box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.14);
-    cursor: pointer;
   }
 `;
 
-const AiFillHeartCss = styled(AiFillHeart)`
-  // 하트~
+const HeartCSS = styled.div`
   position: absolute;
-  bottom: 110px;
-  right: 17px;
-`;
-const AiOutlineHeartCss = styled(AiOutlineHeart)`
-  // 하트~
-  position: absolute;
-  bottom: 110px;
-  right: 17px;
+  bottom: 100px;
+  right: 19px;
 `;
 
 interface Itemp {
@@ -42,7 +34,7 @@ interface Itemp {
   post: {
     title: string;
     id: number;
-    image: string[];
+    image: string;
     location: string;
     type: string;
     salePrice: number | null;
@@ -59,10 +51,10 @@ interface Itemp {
 // 게시글 목록에서 작게 보여지는 게시글 한 개 (미리보기 카드)
 export default function ListItem({ nowState, post }: Itemp) {
   const isAuctionOrGroup = nowState === "auction" || nowState === "group";
-  const [isLike, setIsLike] = useState(false);
-  const isLikeHandler = () => {
-    setIsLike((prev) => !prev);
-  };
+  const isWriter = CheckIfWriter({ id: post.id });
+
+  console.log("잘넘어오니?", post);
+
   return (
     <ListItemBox>
       {isAuctionOrGroup && (
@@ -74,13 +66,14 @@ export default function ListItem({ nowState, post }: Itemp) {
         />
       )}
       <Link href={`/${nowState}/detail/?id=${post.id}`}>
-        <ProductMainPicture />
+        <ProductMainPicture cardImg={post.image} />
         <ItemContent post={post} />
       </Link>
-      <button className="liked" onClick={isLikeHandler}>
-        {isLike && <AiFillHeartCss color="#ffa1a1" size={24} />}
-        {!isLike && <AiOutlineHeartCss color="#ffa1a1" size={24} />}
-      </button>
+      {isWriter === false && (
+        <HeartCSS>
+          <LikePost id={post.id} />
+        </HeartCSS>
+      )}
     </ListItemBox>
   );
 }

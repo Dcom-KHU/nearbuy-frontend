@@ -3,6 +3,8 @@
 import Link from "next/link";
 import styled from "styled-components";
 import CheckIfWriter from "../CheckIfWriter";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const ActiveChatButtonBlock = styled(Link)`
   background-color: var(--background-color);
@@ -39,11 +41,17 @@ export default function ChatButton({
   id: number;
   ongoing: boolean;
 }) {
-  const isWriter = CheckIfWriter({ id });
+  const activeType = useSelector((state: RootState) => state.activePage.active);
+  const isWriter = CheckIfWriter({ id }); // id 는 게시글 id
 
   if (isWriter === true) {
-    // 글작성자일 때
-    return <ActiveChatButtonBlock href="#">채팅 확인</ActiveChatButtonBlock>;
+    if (activeType === "group") {
+      // 글작성자 본인이고, 공구 게시글일 때
+      return <ActiveChatButtonBlock href="#">단체 채팅</ActiveChatButtonBlock>;
+    }
+    // 글작성자이고 공구 게시글 아닐 때
+    else
+      return <ActiveChatButtonBlock href="#">채팅 확인</ActiveChatButtonBlock>;
   } else if (isWriter === false) {
     if (ongoing === true) {
       // 글작성자 아니고 로그인 돼있는데 거래 아직 진행중일 때

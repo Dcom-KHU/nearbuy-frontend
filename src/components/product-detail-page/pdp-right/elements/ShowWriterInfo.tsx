@@ -3,12 +3,12 @@ import axios from "axios";
 import { serverIP } from "@/../secrets.json";
 import UserInfo from "./UserInfo";
 
-interface ShowWriterInfoProps {
-  writer: string | undefined;
-}
-
 // 상세페이지 내 판매자 데이터 불러오기
-export default function ShowWriterInfo({ writer }: ShowWriterInfoProps) {
+export default function ShowWriterInfo({
+  writer,
+}: {
+  writer: string | undefined;
+}) {
   const [userData, setUserData] = useState<any>();
 
   useEffect(() => {

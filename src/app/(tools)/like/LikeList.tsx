@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import List from '@/components/list/List';
-import customAxios from '@/utils/customAxios';
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
+import styled from "styled-components";
+import List from "@/components/list/List";
+import customAxios from "@/utils/customAxios";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
 const LikeListBlock = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ const LikeListBlock = styled.div`
 
 export default function LikeList() {
   const [data, setData] = useState();
-  const userId = Cookies.get('userId');
+  const userId = Cookies.get("userId");
   const getData = async () => {
     const response = await customAxios.get(`/api/user/page/like`, {
       params: { id: userId },
@@ -25,7 +25,8 @@ export default function LikeList() {
   useEffect(() => {
     getData();
   }, []);
-  console.log('res', data);
+
+  //console.log('res', data);
 
   return (
     <LikeListBlock>

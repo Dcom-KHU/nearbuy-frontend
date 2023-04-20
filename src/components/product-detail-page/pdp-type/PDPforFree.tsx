@@ -4,7 +4,6 @@ import PdpLeft from "../pdp-left/PdpLeft";
 import PdpRight from "../pdp-right/PdpRight";
 import PdpBottom from "../pdp-bottom/PdpBottom";
 import styled from "styled-components";
-import { useEffect } from "react";
 import { useGet } from "@/hooks/useHttp";
 import { useSearchParams } from "next/navigation";
 import { DetailPropsInterface } from "./DetailPropsInterface";
@@ -19,7 +18,7 @@ const PdpBox = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 40px;
+  gap: 84px;
   padding: 50px 20px;
 `;
 
@@ -46,7 +45,7 @@ export default function PDPforFree() {
   return (
     <Box>
       <PdpBox>
-        <PdpLeft />
+        <PdpLeft imageData={getData?.image} />
         <PdpRight getData={getData} />
       </PdpBox>
       <PdpBottom detail={getData?.detail!} />

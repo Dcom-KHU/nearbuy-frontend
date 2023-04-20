@@ -66,7 +66,7 @@ interface Itemp {
   ];
 }
 
-const List = ({ dataList }) => {
+const List = ({ dataList }: { dataList: any }) => {
   let myPageList = false;
   myPageList = (dataList ?? true) === dataList;
 
@@ -87,13 +87,6 @@ const List = ({ dataList }) => {
     postDatas = dataList;
   }
 
-  /*
-  useEffect(() => {
-    // console.log(getData, getIsLoading, getError);
-    console.log('포데: ', postDatas);
-  }, [postDatas]);
-  */
-
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);
   // Redux 라이브러리 사용하여 상태 관리 하고, useSelector hook을 사용하여 Redux store에서 상태 가져옴.
@@ -102,6 +95,7 @@ const List = ({ dataList }) => {
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
+  // console.log("포데: ", postDatas);
   const isBoard = nowState === "board";
 
   return (

@@ -9,6 +9,7 @@ const TagList = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
   gap: 10px;
   text-align: center;
+  overflow: hidden;
 `;
 
 // *******************************
