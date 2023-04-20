@@ -8,6 +8,7 @@ import ListItem from "./ListItem";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { serverIP } from "@/../secrets.json";
+import { PaginationBox, PaginationButton } from "./Pagination";
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -29,32 +30,6 @@ const ListItemBox = styled.div`
       justify-items: center;
     `;
   }}
-`;
-
-const PaginationBox = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 10px;
-`;
-
-const PaginationButton = styled.button`
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-  ${(props) =>
-    props.disabled &&
-    css`
-      cursor: default;
-      opacity: 0.5;
-      pointer-events: none;
-    `}
 `;
 
 // ************************************************************************************************
@@ -111,9 +86,9 @@ const List = ({ dataList }: { dataList?: any }) => {
     try {
       const typeParam = nowState === "board" ? "all" : nowState;
       const response = await axios.get(`${serverIP}/api/post/board`, {
-        params: { type: typeParam, page: newPage, size: 12 },
+        params: { type: typeParam, page: newPage - 1, size: 12 },
       });
-      console.log("ㅇㅇㅇㅇ:::", response.data.post);
+      // console.log("데이타:::", response.data.post);
       const newPostDatas = response.data.post;
       if (myPageList) {
         dataList = newPostDatas;
@@ -121,7 +96,7 @@ const List = ({ dataList }: { dataList?: any }) => {
         setPostDatas(newPostDatas);
       }
     } catch (error) {
-      console.log("Error occurred while getting post/board datas");
+      console.log("Error occurred while getting post/board datas", error);
     }
   };
 
@@ -154,14 +129,15 @@ const List = ({ dataList }: { dataList?: any }) => {
         try {
           const typeParam = nowState === "board" ? "all" : nowState;
           const response = await axios.get(`${serverIP}/api/post/board`, {
-            params: { type: typeParam, page: page, size: 12 },
+            params: { type: typeParam, page: page - 1, size: 12 },
           });
-          console.log("데타:::", response.data.post);
+          // console.log("데타:::", response.data.post);
         } catch (error) {
-          console.log("Error occurred while getting post/board datas");
+          console.log("Error occurred while getting post/board datas", error);
         }
       };
       getDataAgain();
+      console.log(nowState);
     }
   }, [page, nowState]);
 
