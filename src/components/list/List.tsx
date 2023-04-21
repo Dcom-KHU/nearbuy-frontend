@@ -58,11 +58,13 @@ interface Itemp {
       target: string | null;
     }
   ];
+  total: number;
 }
 
 const List = ({ dataList }: { dataList?: any }) => {
   const [page, setPage] = useState(1);
   const [postDatas, setPostDatas] = useState<Itemp["post"]>();
+  const [totalPosts, setTotalPosts] = useState(0);
   const [startIndex, setStartIndex] = useState(1);
   const [endIndex, setEndIndex] = useState(8);
 
@@ -88,7 +90,8 @@ const List = ({ dataList }: { dataList?: any }) => {
       const response = await axios.get(`${serverIP}/api/post/board`, {
         params: { type: typeParam, page: newPage - 1, size: 12 },
       });
-      // console.log("데이타:::", response.data.post);
+      console.log("데이타:::", response.data.total);
+      setTotalPosts(response.data.total);
       const newPostDatas = response.data.post;
       if (myPageList) {
         dataList = newPostDatas;
@@ -104,25 +107,6 @@ const List = ({ dataList }: { dataList?: any }) => {
 
   const isBoard = nowState === "board";
 
-  const totalPages = Math.ceil(185 / 12); // 페이지당 12개 게시글
-  // FIXME : 추후 totalPages를  Math.ceil([전체 포스트 개수]/ 12); 로 바꿔야함
-
-  const renderPageButtons = () => {
-    const buttons = [];
-    for (let i = startIndex; i <= endIndex; i++) {
-      buttons.push(
-        <PaginationButton
-          key={i}
-          onClick={() => handlePageChange(i)}
-          disabled={i === page}
-        >
-          {i}
-        </PaginationButton>
-      );
-    }
-    return buttons;
-  };
-
   useEffect(() => {
     if (page) {
       const getDataAgain = async () => {
@@ -131,6 +115,7 @@ const List = ({ dataList }: { dataList?: any }) => {
           const response = await axios.get(`${serverIP}/api/post/board`, {
             params: { type: typeParam, page: page - 1, size: 12 },
           });
+          setTotalPosts(response.data.total);
           // console.log("데타:::", response.data.post);
         } catch (error) {
           console.log("Error occurred while getting post/board datas", error);
@@ -139,6 +124,26 @@ const List = ({ dataList }: { dataList?: any }) => {
       getDataAgain();
     }
   }, [page, nowState]);
+
+  const totalPages = Math.ceil(totalPosts / 12); // 페이지당 12개 게시글
+  // FIXME : 추후 totalPages를  Math.ceil(totalPosts/ 12); 로 바꿔야함
+
+  const renderPageButtons = () => {
+    const buttons = [];
+    for (let i = startIndex; i <= endIndex; i++) {
+      buttons.push(
+        <PaginationButton
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={i === page || i > totalPages}
+          style={{ backgroundColor: i === page ? "lavender" : "transparent" }}
+        >
+          {i}
+        </PaginationButton>
+      );
+    }
+    return buttons;
+  };
 
   return (
     <>
