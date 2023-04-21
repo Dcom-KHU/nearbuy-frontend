@@ -90,7 +90,7 @@ const List = ({ dataList }: { dataList?: any }) => {
       const response = await axios.get(`${serverIP}/api/post/board`, {
         params: { type: typeParam, page: newPage - 1, size: 12 },
       });
-      console.log("데이타:::", response.data.total);
+      console.log("데이타:::", response.data);
       setTotalPosts(response.data.total);
       const newPostDatas = response.data.post;
       if (myPageList) {
@@ -116,7 +116,7 @@ const List = ({ dataList }: { dataList?: any }) => {
             params: { type: typeParam, page: page - 1, size: 12 },
           });
           setTotalPosts(response.data.total);
-          // console.log("데타:::", response.data.post);
+          console.log("데타:::", response.data);
         } catch (error) {
           console.log("Error occurred while getting post/board datas", error);
         }
@@ -126,7 +126,6 @@ const List = ({ dataList }: { dataList?: any }) => {
   }, [page, nowState]);
 
   const totalPages = Math.ceil(totalPosts / 12); // 페이지당 12개 게시글
-  // FIXME : 추후 totalPages를  Math.ceil(totalPosts/ 12); 로 바꿔야함
 
   const renderPageButtons = () => {
     const buttons = [];
@@ -159,7 +158,18 @@ const List = ({ dataList }: { dataList?: any }) => {
         ) : (
           /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
             -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
-          <EachList dataList={dataList} />
+          // <EachList dataList={dataList} />
+          <>
+            {postDatas?.map((post) => {
+              // postDatas 받아오고.. nowState 일치하는 애들만 렌더링
+              if (post.type === nowState) {
+                return (
+                  <ListItem key={post.id} nowState={post.type} post={post} />
+                );
+              }
+              return null;
+            })}
+          </>
         )}
       </ListItemBox>
       <PaginationBox>
