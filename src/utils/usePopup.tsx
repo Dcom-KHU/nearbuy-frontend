@@ -61,7 +61,7 @@ export const usePopup = () => {
             overflowX: "hidden",
             padding: 40,
           }}
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-end  ">
             <button

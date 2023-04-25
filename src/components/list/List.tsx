@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import EachList from "./EachList";
 import ListItem from "./ListItem";
-import { useEffect } from "react";
-import { useGet } from "@/hooks/useHttp";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { serverIP } from "@/../secrets.json";
+import { PaginationBox, PaginationButton } from "./Pagination";
 
 const ListItemBox = styled.div`
   width: 80%;
@@ -37,21 +39,13 @@ const ListItemBox = styled.div`
 // ************************************************************************************************
 // 해당 오류는 nowState 프로퍼티에 keyof DetailPageState 타입을 지정해두었지만, DUMMY_DATA 배열의 nowState 값은 string 형태이기 때문에 발생하는 오류입니다.
 // 해결 방법으로는 nowState 프로퍼티의 타입을 string으로 지정하거나, DUMMY_DATA의 nowState 값을 DetailPageState 타입의 enum 값으로 변경하는 방법이 있습니다.
-enum NowState {
-  Board = "board",
-  Sale = "sale",
-  Exchange = "exchange",
-  Free = "free",
-  Auction = "auction",
-  Group = "group",
-}
 
 interface Itemp {
   post: [
     {
       title: string;
       id: number;
-      image: string[];
+      image: string;
       location: string;
       type: string;
       salePrice: number | null;
@@ -64,28 +58,19 @@ interface Itemp {
       target: string | null;
     }
   ];
+  total: number;
 }
 
-const List = ({ dataList }: { dataList: any }) => {
-  let myPageList = false;
-  myPageList = (dataList ?? true) === dataList;
+const List = ({ dataList }: { dataList?: any }) => {
+  const [page, setPage] = useState(1);
+  const [postDatas, setPostDatas] = useState<Itemp["post"]>();
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [startIndex, setStartIndex] = useState(1);
+  const [endIndex, setEndIndex] = useState(8);
 
-  const {
-    data: getData,
-    // data를 useGet을 통해서 구조분해할당을 통해 받아옴. data를 getData라는 이름으로 받아옴.
-    isLoading: getIsLoading,
-    error: getError,
-  } = useGet<Itemp>({
-    url: "/api/post/board",
-    params: { type: "all", size: 20 }, // 나머지 파라미터 일단 생략 (default값 있음)
-    // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
-  });
-
-  let postDatas = getData?.post;
-
-  if (myPageList) {
-    postDatas = dataList;
-  }
+  useEffect(() => {
+    handlePageChange(1);
+  }, []);
 
   // RootState는 타입스크립트 에러?땜시 추가했다 함
   const nowState = useSelector((state: RootState) => state.activePage.active);
@@ -95,8 +80,69 @@ const List = ({ dataList }: { dataList: any }) => {
   // state.activePage.active는 RootState의 activePage 속성에 있는 active 속성 참조
   // 리덕스 스토어의 전체 상태 객체에서 activePage 속성에 있는 active 속성을
 
-  // console.log("포데: ", postDatas);
+  let myPageList = false;
+  myPageList = (dataList ?? true) === dataList;
+
+  const handlePageChange = async (newPage: number) => {
+    setPage(newPage);
+    try {
+      const typeParam = nowState === "board" ? "all" : nowState;
+      const response = await axios.get(`${serverIP}/api/post/board`, {
+        params: { type: typeParam, page: newPage - 1, size: 12 },
+      });
+      console.log("데이타:::", response.data);
+      setTotalPosts(response.data.total);
+      const newPostDatas = response.data.post;
+      if (myPageList) {
+        dataList = newPostDatas;
+      } else {
+        setPostDatas(newPostDatas);
+      }
+    } catch (error) {
+      console.log("Error occurred while getting post/board datas", error);
+    }
+  };
+
+  const emptyData = postDatas?.length === 0;
+
   const isBoard = nowState === "board";
+
+  useEffect(() => {
+    if (page) {
+      const getDataAgain = async () => {
+        try {
+          const typeParam = nowState === "board" ? "all" : nowState;
+          const response = await axios.get(`${serverIP}/api/post/board`, {
+            params: { type: typeParam, page: page - 1, size: 12 },
+          });
+          setTotalPosts(response.data.total);
+          console.log("데타:::", response.data);
+        } catch (error) {
+          console.log("Error occurred while getting post/board datas", error);
+        }
+      };
+      getDataAgain();
+    }
+  }, [page, nowState]);
+
+  const totalPages = Math.ceil(totalPosts / 12); // 페이지당 12개 게시글
+
+  const renderPageButtons = () => {
+    const buttons = [];
+    for (let i = startIndex; i <= endIndex; i++) {
+      buttons.push(
+        <PaginationButton
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={i === page || i > totalPages}
+          style={{ backgroundColor: i === page ? "lavender" : "transparent" }}
+        >
+          {i}
+        </PaginationButton>
+      );
+    }
+    return buttons;
+  };
 
   return (
     <>
@@ -112,9 +158,41 @@ const List = ({ dataList }: { dataList: any }) => {
         ) : (
           /* 전체 페이지가 아니라 판매나 교환 등의 페이지일때 
             -> isBoard가 false가 되고 EachList가 화면에 표시됨 */
-          <EachList dataList={dataList} />
+          // <EachList dataList={dataList} />
+          <>
+            {postDatas?.map((post) => {
+              // postDatas 받아오고.. nowState 일치하는 애들만 렌더링
+              if (post.type === nowState) {
+                return (
+                  <ListItem key={post.id} nowState={post.type} post={post} />
+                );
+              }
+              return null;
+            })}
+          </>
         )}
       </ListItemBox>
+      <PaginationBox>
+        <PaginationButton
+          disabled={startIndex === 1}
+          onClick={() => {
+            setStartIndex(startIndex - 8);
+            setEndIndex(endIndex - 8);
+          }}
+        >
+          {"<"}
+        </PaginationButton>
+        {renderPageButtons()}
+        <PaginationButton
+          disabled={endIndex >= totalPages}
+          onClick={() => {
+            setStartIndex(startIndex + 8);
+            setEndIndex(endIndex + 8);
+          }}
+        >
+          {">"}
+        </PaginationButton>
+      </PaginationBox>
     </>
   );
 };
