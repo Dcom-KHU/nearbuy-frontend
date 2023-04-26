@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import LikePost from "../LikePost";
 import { ReportModal } from "../ReportPost";
+import clickShareHandler from "@/utils/clickShareHandler";
 
 const ToolBoxForGuestBox = styled.div`
   display: flex;
@@ -16,7 +17,12 @@ export default function ToolBoxForGuest({ id }: { id: number }) {
     <>
       <ToolBoxForGuestBox>
         <LikePost id={id} />
-        <button title="공유" /*로그인 돼있지만 게시글 작성자가 아닐 때*/>
+        <button
+          title="공유"
+          onClick={() =>
+            clickShareHandler()
+          } /*로그인 돼있지만 게시글 작성자가 아닐 때*/
+        >
           <AiOutlineShareAlt color="dimgray" size={24} />
         </button>
         <ReportModal id={id} />

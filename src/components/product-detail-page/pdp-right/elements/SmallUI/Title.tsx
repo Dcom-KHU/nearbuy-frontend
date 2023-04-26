@@ -5,6 +5,7 @@ import ToolBoxForWriter from "./ToolBoxForWriter";
 import ToolBoxForGuest from "./ToolBoxForGuest";
 import CheckIfWriter from "../CheckIfWriter";
 import { AiOutlineShareAlt } from "react-icons/ai";
+import clickShareHandler from "@/utils/clickShareHandler";
 
 const NameBox = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ export default function Title({ title, id }: { title: string; id: number }) {
         <ToolBoxForGuest id={id} />
       ) : (
         // 로그인 안돼있을 때
-        <button title="공유">
+        <button title="공유" onClick={() => clickShareHandler()}>
           <AiOutlineShareAlt color="dimgray" size={24} />
         </button>
       )}
