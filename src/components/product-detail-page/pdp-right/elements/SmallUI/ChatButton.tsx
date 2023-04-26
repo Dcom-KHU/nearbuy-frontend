@@ -46,6 +46,7 @@ export default function ChatButton({
 }) {
   // 어떤 게시물이냐에 따라, 표시되는 내용 다르게 하기 위한 상태 관리
   const activeType = useSelector((state: RootState) => state.activePage.active);
+  const [tmpActiveType, setTmpActionType] = useState<string>("");
   const isWriter = CheckIfWriter({ id }); // id 는 게시글 id
   const [apiUrl, setApiUrl] = useState<string>(`api/chat/enter`);
   const router = useRouter();
@@ -71,9 +72,24 @@ export default function ChatButton({
           setApiUrl(`api/chat/enter`);
           break;
         // 경매는 낙찰할 유저 이름이 필요... 이 컴포넌트에서 해당 유저에 대한 정보를 가지고 있어야 함
-        // case "auction":
-        //   setApiUrl(`api/post/auction/finish`);
-        //   break;
+        case "auction":
+          setApiUrl(`api/post/auction/finish`);
+          break;
+        case "group":
+          setApiUrl(`api/post/group/finish`);
+          break;
+        default:
+          setApiUrl(`api/chat/enter`);
+      }
+    } else if (tmpActiveType) {
+      switch (tmpActiveType) {
+        case "sale" || "exchange" || "free" || "auction":
+          setApiUrl(`api/chat/enter`);
+          break;
+        // 경매는 낙찰할 유저 이름이 필요... 이 컴포넌트에서 해당 유저에 대한 정보를 가지고 있어야 함
+        case "auction":
+          setApiUrl(`api/post/auction/finish`);
+          break;
         case "group":
           setApiUrl(`api/post/group/finish`);
           break;
@@ -81,20 +97,36 @@ export default function ChatButton({
           setApiUrl(`api/chat/enter`);
       }
     }
+  }, [activeType, tmpActiveType]);
+
+  // 리로딩하면 activeType null되는 문제때문에 임시로 처리..
+  useEffect(() => {
+    if (activeType === undefined || activeType === null) {
+      const url = window.location.href;
+
+      const targetStartIdx = url.indexOf(
+        "/",
+        url.indexOf("/", url.indexOf("/") + 1) + 1
+      );
+      const targetFinishIdx = url.indexOf("/", targetStartIdx + 1);
+      setTmpActionType(url.slice(targetStartIdx + 1, targetFinishIdx));
+    }
   }, [activeType]);
 
+  // 글작성자일 때
   if (isWriter === true) {
-    // 글작성자일 때
-
-    // return (
-    //   <ActiveChatButtonBlock href="/chatting">채팅 확인</ActiveChatButtonBlock>
-    // );
-
-    if (activeType === "group" || activeType === "auction") {
-      // 글작성자 본인이고, 공구 게시글일 때
+    // 글작성자 본인이고, 공구 게시글일 때
+    if (activeType === "group" || tmpActiveType === "group") {
+      return (
+        <ActiveChatButtonBlock href="#" onClick={() => makeChatRoomHandler()}>
+          단체 채팅
+        </ActiveChatButtonBlock>
+      );
+      // 글작성자 본인이고, 경매 게시글일 때
+    } else if (activeType === "auction" || tmpActiveType === "auction") {
       return (
         <ActiveChatButtonBlock href="/chatting">
-          단체 채팅
+          채팅 확인
         </ActiveChatButtonBlock>
       );
     }
