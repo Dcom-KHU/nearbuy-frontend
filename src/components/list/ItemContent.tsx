@@ -29,7 +29,7 @@ export default function ItemContent({
   post: {
     title: string;
     id: number;
-    image: string[];
+    image: string;
     location: string;
     type: string;
     salePrice: number | null;

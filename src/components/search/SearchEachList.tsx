@@ -2,15 +2,14 @@
 
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
-// import { DUMMY_DATA } from "./List";
-import ListItem from "./ListItem";
+import ListItem from "../list/ListItem";
 import { useGet } from "@/hooks/useHttp";
 
 interface Itemp {
   post: [
     {
       id: number;
-      image: string[];
+      image: string;
       location: string;
       type: string;
       title: string;
@@ -26,7 +25,13 @@ interface Itemp {
   ];
 }
 
-export default function EachList({ dataList }) {
+export default function SearchEachList({
+  dataList,
+  searchKey,
+}: {
+  dataList: any;
+  searchKey: string | null;
+}) {
   let myPageList = false;
   myPageList = (dataList ?? true) === dataList;
 
@@ -35,8 +40,8 @@ export default function EachList({ dataList }) {
     isLoading: getIsLoading,
     error: getError,
   } = useGet<Itemp>({
-    url: "/api/post/board",
-    params: { type: "all", size: 20 },
+    url: "/api/post/board/search",
+    params: { type: "all", size: 20, search: searchKey },
     // pagination 구현 안해두니까 size가 post 수보다 적으면 게시글 목록이 제대로 표시 안됨ㅠ
   });
 

@@ -7,9 +7,7 @@ import styled from "styled-components";
 import PageSort from "../../../components/ui/PageSort";
 import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
-import { useEffect } from "react";
 import { useGet, usePatch, usePost } from "@/hooks/useHttp";
-import { AxiosHeaders } from "axios";
 
 const BoardPageBlock = styled.div`
   // background: lavender;

@@ -14,7 +14,7 @@ export default function ShowPrice({ getData }: RightProps) {
   const activeType = useSelector((state: RootState) => state.activePage.active);
 
   if (!getData) {
-    console.log("getData is not present. check PdpLeft");
+    console.log("getData is not present while showing price. check PdpLeft");
     return null;
   }
 
