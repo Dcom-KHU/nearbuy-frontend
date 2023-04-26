@@ -52,6 +52,19 @@ export default function ChatButton({
   const router = useRouter();
 
   const makeChatRoomHandler = async () => {
+    // 공구 채팅방 생성 코드 (api 요청을 get으로 하도록 명세가 작성되어있음. 오류로 보임)
+    // 현재 공구 채팅방 생성 시 해당 채팅방 멤버들의 채팅관련 api 모두 500에러 발생(백엔드 문제로 보임)
+    // if (activeType === "group" || tmpActiveType === "group") {
+    //   await customAxios
+    //     .get(apiUrl, { params: { id: id } })
+    //     .then(data => {
+    //       router.push("/chatting");
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
+
     await customAxios
       .post(apiUrl, {}, { params: { id: id } })
       .then(data => {
