@@ -37,7 +37,7 @@ const User = () => {
   const [userData, setUserData] = useState();
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${serverIP}/api/user/page`, {
+      const response = await axios.get(`${serverIP}/api/user/page/id`, {
         params: { id: userId },
       });
       setUserData(response.data);
