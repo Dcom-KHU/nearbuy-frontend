@@ -52,7 +52,7 @@ const MyPage = () => {
         },
       });
 
-      if (url === '/my') {
+      if (url === '/my/id') {
         setMyPostsData(response.data.post);
         setListItemCount((prevState) => ({
           ...prevState,
@@ -94,7 +94,7 @@ const MyPage = () => {
     }
   };
   useEffect(() => {
-    fetchData('/my');
+    fetchData('/my/id');
     fetchData('/other');
     fetchData('/like');
     fetchData('/review');
