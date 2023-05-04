@@ -12,6 +12,7 @@ import { serverIP } from '@/../secrets.json';
 import { useEffect, useState } from 'react';
 import ReviewModal from './reviews/ReviewModal';
 import Cookie from 'js-cookie';
+import List2 from '../list/List2';
 
 const MyPageBox = styled.div`
   display: flex;
@@ -108,7 +109,7 @@ const MyPage = () => {
       {myPosts && (
         <>
           <ListNav activeType={activeType} setActiveType={setActiveType} />
-          <List dataList={myPostsData} activeType={activeType} />
+          <List2 dataList={myPostsData} />
         </>
       )}
       {posts && (
@@ -116,13 +117,13 @@ const MyPage = () => {
           {/* List에 activeType props로 보내면, 마이페이지 내의 게시글 리스팅. */}
           {/* List에 activeType 없으면, 전체 페이지 내의 게시글 리스팅. */}
           <ListNav activeType={activeType} setActiveType={setActiveType} />
-          <List dataList={postsData} activeType={activeType} />
+          <List2 dataList={postsData} />
         </>
       )}
       {favorites && (
         <>
           <ListNav activeType={activeType} setActiveType={setActiveType} />
-          <List dataList={favoritesData} activeType={activeType} />
+          <List2 dataList={favoritesData} />
         </>
       )}
       {reviews && (
