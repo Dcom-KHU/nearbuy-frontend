@@ -19,10 +19,10 @@
 'NearBuy'는 1인 가구, 자취생들을 위한 혼자 먹고 쓰기에는 많은 양의 상품들의 공동구매 기능을 중심으로, 판매, 교환, 나눔, 경매 기능을 통해 1인 가구, 자취생들끼리 서로 필요한 물품을 구매하고 판매할 수 있게끔 제공합니다. 또한 거래를 위한 사람간의 대면을 통해 1인 가구의 사회적 고립감을 해결할 수 있게끔 하였습니다.
 
 ## 개발 환경 및 사용 기술
-- FrontEnd : Next.js, TypeScript, Styled-Component
+- FrontEnd : React, Next.js, TypeScript, Redux, Styled-Component, Tailwind CSS, Formik
 - BackEnd : Spring Boot, MySQL, MongoDB, Docker, EC2, Route53, CertBot
 - 공통 : Git, Postman
-- 협업툴 : Notion, GitHub
+- 협업툴 : Notion, GitHub, Figma
 
 ## 페이지별 기능
 ### 로그인 페이지
