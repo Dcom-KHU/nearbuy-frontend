@@ -5,7 +5,6 @@ import MenuItem from './MenuItem';
 
 const MenuBox = styled.div`
   width: 100%;
-  height: 100%;
   padding: 0 30px;
   display: grid;
   justify-items: end;
@@ -16,13 +15,19 @@ const MenuBox = styled.div`
 `;
 
 // 마이 페이지 오른쪽 부분 (판내상품 ~ 거래후기)
-const Menu = () => {
+const Menu = ({ count }) => {
+  const { my, other, like, review } = count;
   return (
     <MenuBox>
-      <MenuItem src='menu' title='판매상품' count={32} />
-      <MenuItem src='share' title='같이사요' count={32} />
-      <MenuItem src='shopping' title='구매상품' count={32} />
-      <MenuItem src='comment' title='거래후기' count={32} />
+      <MenuItem src='menu' title='내 게시글' state='myPosts' count={my} />
+      <MenuItem src='share' title='참여 게시글' state='posts' count={other} />
+      <MenuItem
+        src='../header/heart'
+        title='찜'
+        state='favorites'
+        count={like}
+      />
+      <MenuItem src='comment' title='거래후기' state='reviews' count={review} />
     </MenuBox>
   );
 };

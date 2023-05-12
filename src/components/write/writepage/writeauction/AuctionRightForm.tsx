@@ -55,7 +55,7 @@ export default function AuctionRightForm() {
           <Field
             name="price"
             type="number"
-            placeholder="경매 어쩌구"
+            placeholder="경매 어쩌구우"
             className="form-input"
             form={""}
           />

@@ -1,22 +1,53 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled from "styled-components";
+import { serverIP } from "@/../secrets.json";
 
-const ImageDeco = styled(Image)`
-  padding: 0 10px 10px 10px;
+type Props = {
+  size?: number;
+  image?: string;
+};
+
+const DefaultImageDeco = styled(Image)`
+  padding: 8px;
+  margin-right: 10px;
   border-radius: 50%;
   overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const UserPic = () => {
-  return (
-    <ImageDeco
-      src='/images/for-demo/kitty.jpg'
-      alt='kitty'
-      width={150}
-      height={150}
-    />
-  );
-};
-export default UserPic;
+const UserImageDeco = styled.img`
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export default function UserPic({ size = 150, image }: Props) {
+  if (image === null) {
+    return (
+      <DefaultImageDeco
+        src="/images/default/default_user.png"
+        alt="gloves"
+        width={size}
+        height={size}
+        style={{ width: size, height: size }}
+      />
+    );
+  } else {
+    return (
+      <UserImageDeco
+        src={`${serverIP}/api/image/${image}`}
+        alt="image"
+        width={size}
+        height={size}
+      />
+    );
+  }
+}

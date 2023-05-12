@@ -3,8 +3,8 @@
 "use client";
 
 import styled from "styled-components";
-import CardsContainer from "../board/CardsContainer";
-import PageSort from "../board/PageSort";
+import PageSort from "../../../components/ui/PageSort";
+import List from "@/components/list/List";
 import ScrollTop from "@/components/ui/ScrollTop";
 
 const SalePageBlock = styled.div`
@@ -19,10 +19,10 @@ const SalePageBlock = styled.div`
 export default function Sale() {
   return (
     <>
-      <h1>판매 페이지</h1>
+      <h1 className="text-center">판매 페이지</h1>
       <SalePageBlock>
         <PageSort />
-        <CardsContainer />
+        <List />
       </SalePageBlock>
       <ScrollTop />
     </>
